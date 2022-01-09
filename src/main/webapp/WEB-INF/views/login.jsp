@@ -7,10 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<button type="button" onclick="login()">로그인</button>
+<button type="button" onclick="enfp()">enfp</button>
 <script type="text/javascript">
-function login() {
-	location.href = "login.do";
+function enfp() {
+	location.href = "enfp.do";
 }
 </script>
 </body>
