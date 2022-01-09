@@ -7,11 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-<button type="button" onclick="home()">홈으로</button>
-<script type="text/javascript">
-function home() {
-	location.href = "home.do";
-}
-</script>
+<p>isfj 페이지입니다</p>
+
+<form action="home">  <!-- 이제 여기는 homePage.jsp 로 가는 버튼입니다 -->
+
+<input type = "submit" value="홈페이지로 다시 가기">
+
+</form>
 </body>
 </html>

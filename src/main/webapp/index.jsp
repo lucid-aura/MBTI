@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,14 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<p>clone test</p>
-	<h1>Hello HTML</h1>
-	<h2>test helloo</h2>
-	<p>sorry ..</p>
-	<h1>hihihihi</h1>
-	
-	<%
-		response.sendRedirect("home.do");
-	%>
+<%
+response.sendRedirect("login.do");   // 4-0순서   로그인 으로 가라.  
+%>
 </body>
 </html>
