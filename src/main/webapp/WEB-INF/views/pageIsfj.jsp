@@ -7,10 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
+<p>isfj 페이지입니다</p>
 
+<form action="home">  <!-- 이제 여기는 homePage.jsp 로 가는 버튼입니다 -->
 
-<a href="hello">로그인으로 이동</a>
+<input type = "submit" value="홈페이지로 다시 가기">
 
-
+</form>
 </body>
 </html>
