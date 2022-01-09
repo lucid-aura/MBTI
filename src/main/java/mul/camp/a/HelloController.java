@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller 
 public class HelloController {
 	
-	@RequestMapping("hello")
+	@RequestMapping("hello.do")
 	public String helloMethod() {
 		
 		System.out.println("HelloController 로그인 페이지로 이동했습니다()");
@@ -20,7 +20,7 @@ public class HelloController {
 	}
 	
 	
-	@RequestMapping("home")
+	@RequestMapping("home.do")
 	public String home() {
 		
 		System.out.println("HelloController 첫 홈페이지로 이동했습니다()");
@@ -28,7 +28,7 @@ public class HelloController {
 		return "home";
 	}
 	
-	@RequestMapping("pageIsfj")
+	@RequestMapping("pageIsfj.do")
 	public String page() {
 		
 		System.out.println("HelloController에서 설명페이지로 이동했습니다()");
