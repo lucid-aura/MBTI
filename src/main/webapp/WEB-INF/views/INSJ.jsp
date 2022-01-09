@@ -7,8 +7,20 @@
 <title>Insert title here</title>
 </head>
 <body>
+<h1>INSJ입니다.</h1>
 
-<a href="login">login로 이동</a>
+<br><button type="button" onclick="btnClick()">클릭</button>
+
+<script type="text/javascript">
+function btnClick() {
+	
+		location.href ='index.jsp';
+
+}
+
+</script>
+
+</form>
 
 </body>
 </html>

@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+<h1>login입니다.</h1>
 
-<a href="login">login로 이동</a>
-
+<a href="INSJ">INSJ로 이동</a>
 </body>
 </html>

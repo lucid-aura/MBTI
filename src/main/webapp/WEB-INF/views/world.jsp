@@ -8,7 +8,16 @@
 </head>
 <body>
 
-<a href="login">login로 이동</a>
+<h3>여기는 World jsp3입니다.</h3>
+
+<form action ="account" method="post"> 
+name:<input type="text" name="name"><br>
+age:<input type="text" name="age"><br>
+<input type="submit" value="전송">
+</form>
+
+
+
 
 </body>
 </html>
