@@ -19,7 +19,7 @@ public class WorldCupDaoImpl implements WorldCupDao {
 	@Override
 	public List<WorldCupDto> worldcuplist(String topic) {
 		return session.selectList(ns+"worldcuplist", topic);
-	}
+	} 
 
 	@Override
 	public WorldCupDao getWorldCup(int seq) {
