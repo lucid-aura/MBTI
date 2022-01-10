@@ -107,7 +107,7 @@ function select(i) {
 			for (var i =0; i<idx_list.length; i++){
 				new_temp_list.push(temp_list[idx_list[i]]);
 			}
-			idx_list = [];
+			idx_list = []; 
 			console.log(new_temp_list);
 			temp_list = new_temp_list;
 		}
