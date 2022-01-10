@@ -17,7 +17,7 @@
 	</bean>
 		
 	<!-- java 공통 팩키지 -->
-	<context:component-scan base-package="secure.mbti" />
+	<context:component-scan base-package="secure.mbti.a" />
 	
 	
 	<!-- Ajax 주석문을 사용허가 -->
