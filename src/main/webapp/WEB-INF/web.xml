@@ -33,9 +33,8 @@
   	<url-pattern>*.do</url-pattern>		<!-- .do 링크는 controller로 이동 -->
   </servlet-mapping>
   
-  
   <!-- DB 관련 -->
-<!--   <context-param>
+  <context-param>
   	<param-name>contextConfigLocation</param-name>
   	<param-value>
   		/WEB-INF/spring/applicationContext.xml
@@ -44,7 +43,7 @@
   
   <listener>
   	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-  </listener> -->
+  </listener>
   
   
   <!-- 한글설정 -->

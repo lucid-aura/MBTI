@@ -8,9 +8,14 @@
 </head>
 <body>
 <button type="button" onclick="home()">홈으로</button>
+<button type="button" onclick="worldcup()">월드컵</button>
 <script type="text/javascript">
 function home() {
 	location.href = "home.do";
+}
+
+function worldcup() {
+	location.href = "worldcup.do";
 }
 </script>
 </body>
