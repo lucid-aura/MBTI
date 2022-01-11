@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+.box {
+  height: 1000px;
+  background-color: #eee;
+}
+
+#test {
+  margin-top: -56px; /* 고정 요소의 높이의 여백을 설정 */
+  padding-top: 56px; /* 패딩 */
+}
+
+.distance {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.content {
+  font-family: system-ui, serif;
+  font-size: 2rem;
+  padding: 3rem;
+  margin: 0 auto;
+  border-radius: 1rem;
+  background: #0adef5;
+  width: 90%;
+}
+
+.choice {
+  width: 100%;
+  height: 100%;
+}
