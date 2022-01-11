@@ -8,6 +8,6 @@ public interface WorldCupDao {
 
 	List<WorldCupDto> worldcuplist(String param);
 
-	WorldCupDao getWorldCup(int seq);
+	WorldCupDto worldcupresult(int worldcupseq);
 
 }

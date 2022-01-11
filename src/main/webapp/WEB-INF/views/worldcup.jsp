@@ -5,7 +5,9 @@
     pageEncoding="UTF-8"%>
 
 <%
+
 List<WorldCupDto> worldcuplist = (List<WorldCupDto>)request.getAttribute("worldcuplist");
+String topic = worldcuplist.get(0).getTopic();
 Collections.shuffle(worldcuplist);
 
 %>
@@ -13,64 +15,63 @@ Collections.shuffle(worldcuplist);
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
-.wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
-
-.content {
-  font-family: system-ui, serif;
-  font-size: 2rem;
-  padding: 3rem;
-  border-radius: 1rem;
-  background: #ff6e6c;
-}
-
-.choice {
-  width: 100%;
-  height: 100%;
-}
-</style>
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<title>Insert title here</title>
 </head>
 <body>
 
 <div class="wrapper">
-	 
-	<div class="content">
-	<table>
-	<tr>
-	<td colspan="3" align='center'>
-		<span id="round">8강</span>
-	</td>
-	</tr>
-	
-	<tr>
-	<td><img src='image/<%=worldcuplist.get(0).getName() %>.jpg'  id="left" class="choice" onclick="left"/></td>
-	<td>vs</td>
-	<td><img src='image/<%=worldcuplist.get(1).getName() %>.jpg'  id="right" class="choice" onclick="right"/></td>
-	</tr>
-	
-	</table>
-	</div>
-</div>
+	<header>
+		<nav>
+			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
+				<a href="#test" class="text-light distance">유형소개</a>
+				<a href="#test" class="text-light distance">유형별게시판</a>
+				<a href="#test" class="text-light distance">자유게시판</a>
+				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
+				<button>로그아웃</button>
+			</div>
+		</nav>
+	</header>
+	<section>
+		<article>
+			<div class="content">
+			<table>
+			<tr>
+				<td colspan="3" align='center'>
+					<span id="round">8강</span>
+				</td>
+			</tr>
+			<tr>
+				<td><img src='image/<%=worldcuplist.get(0).getWorldcupname() %>.jpg'  id="left" class="choice" onclick="left"/></td>
+				<td>vs</td>
+				<td><img src='image/<%=worldcuplist.get(1).getWorldcupname() %>.jpg'  id="right" class="choice" onclick="right"/></td>
+			</tr>
+			</table>
+			</div>
+		</article>
+	</section>
 
+	<footer>
+	
+	</footer>
+
+</div>
+  
 <script type="text/javascript">
 var idx = 0;
 var idx_list = [];
 var temp_list = [];
-
+var topic = 
 $(document).ready(function () {
 	<%
 	for (int i=0; i < worldcuplist.size(); i++){
 		
 	%>
-		temp_list.push('<%=worldcuplist.get(i).getName()%>')
+		temp_list.push([<%=worldcuplist.get(i).getWorldcupseq()%>, '<%=worldcuplist.get(i).getWorldcupname()%>'])
 	<% 
 	}
 	%>
@@ -89,10 +90,11 @@ function select(i) {
 	console.log(idx_list);
 	idx += 2;
 	if (idx >= temp_list.length){
-		alert("한바퀴 끝");
 		if (temp_list.length == 2){ // 결승전 선택 후
-			alert(temp_list[i] + " 승리");
-			// 결과 창 이동 필요
+			alert(temp_list[i][1] + " 승리");
+			
+			// 결과 창 이동 필요, 시큐어 코딩 적용해야함(vs 민감한 정보가 아니라서 굳이?)
+			location.href  = "worldcup_result.do?worldcupseq=" + temp_list[i][0];
 		}
 		else { // 8, 4 강 종료 후
 			idx = 0;
@@ -112,8 +114,8 @@ function select(i) {
 			temp_list = new_temp_list;
 		}
 	}
-	$('#left').attr('src', 'image/'+temp_list[idx] + '.jpg');
-	$('#right').attr('src', 'image/'+temp_list[idx+1] + '.jpg');		
+	$('#left').attr('src', 'image/'+temp_list[idx][1] + '.jpg');
+	$('#right').attr('src', 'image/'+temp_list[idx+1][1] + '.jpg');		
 }
 
 

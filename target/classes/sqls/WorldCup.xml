@@ -8,9 +8,22 @@
 		this.name = name;
 		this.choiceCount = choiceCount; -->
 <select id="worldcuplist" parameterType="String" resultType="secure.mbti.a.dto.WorldCupDto">
-	SELECT SEQ, TOPIC, NAME, CHOICECOUNT
+	SELECT WORLDCUPSEQ, TOPIC, WORLDCUPNAME, CHOICECOUNT
 	FROM WORLDCUP
 	WHERE TOPIC=#{topic}
+</select>
+
+<update id="worldcupcount" parameterType="Integer" >
+	UPDATE WORLDCUP
+	SET
+	CHOICECOUNT = CHOICECOUNT + 1
+	WHERE WORLDCUPSEQ = #{worldcupseq}
+</update>
+
+<select id="worldcupone" parameterType="Integer" resultType="secure.mbti.a.dto.WorldCupDto">
+	SELECT WORLDCUPSEQ, TOPIC, WORLDCUPNAME, CHOICECOUNT
+	FROM WORLDCUP
+	WHERE WORLDCUPSEQ=#{worldcupseq}
 </select>
 
 
