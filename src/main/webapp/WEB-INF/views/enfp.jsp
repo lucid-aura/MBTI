@@ -15,7 +15,7 @@ function home() {
 }
 
 function worldcup() {
-	location.href = "worldcup.do";
+	location.href = "worldcup_choice.do";
 }
 </script>
 </body>
