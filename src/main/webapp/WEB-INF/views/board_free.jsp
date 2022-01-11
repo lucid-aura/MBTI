@@ -1,5 +1,12 @@
+<%@page import="secure.mbti.a.dto.BoardDto"%>
+<%@page import="java.util.List"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+List<BoardDto> board_free = (List<BoardDto>)request.getAttribute("board_free");
+%>
 
 <!DOCTYPE html>
 <html>
@@ -8,15 +15,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<p>clone test</p>
-	<h1>Hello HTML</h1>
-	<h2>test helloo</h2>
-	<p>sorry ..</p>
-	<h1>hihihihi</h1>
-	<h1>hi222hi</h1>
-	
-	<%
-		response.sendRedirect("home.do");
-	%>
+
+<h1>자유게시판</h1>
+
 </body>
 </html>

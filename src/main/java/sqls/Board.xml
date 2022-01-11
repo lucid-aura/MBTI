@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Board">
+        
+<select id="board_free" parameterType="secure.mbti.a.dto.BoardParam" resultType="secure.mbti.a.dto.BoardDto">
+	SELECT BOARDSEQ, ID, TITLE, CONTENT, READCOUNT, COMMENTCOUNT, WDATE, DEL,
+	FROM BOARDALL
+	<if test="choice != null and choice != '' and search !=null and search !='' "> <!-- 조건문이 들어감 -->
+		<if test="choice == 'title'">
+			WHERE TITLE LIKE '%'||#{search}||'%'      <!-- 어느위치에 있던 단어가 들어있는것을 찾음 ||는 더하기임 -->
+		</if>
+		<if test="choice == 'content'">
+			WHERE CONTENT LIKE '%'||#{search}||'%' 
+		</if>
+		<if test="choice == 'writer'">
+			WHERE ID=#{search}                        <!-- abc를 찾을껀데 abcd도 나와서 -->
+		</if>
+	</if>
+	ORDER BY REF DESC, STEP ASC
+</select>
+
+<insert id="writeboard" parameterType="secure.mbti.a.dto.BoardDto">
+	INSERT INTO BOARDALL(BOARDSEQ, ID, TITLE, CONTENT, COMMENTCOUNT, WDATE, DEL, READCOUNT)
+	VALUES(BOARDSEQ_BOARDALL.NEXTVAL, #{id}, (SELECT NVL(MAX(REF)+1, 0) FROM BOARDALL), 0, 0,       
+											#{title}, #{content}, SYSDATE, 0, 0)
+</insert>
+
+<select id="getBoard" parameterType="java.lang.Integer" resultType="secure.mbti.a.dto.BoardDto">
+	SELECT BOARDSEQ, ID, TITLE, CONTENT, COMMENTCOUNT, WDATE, DEL, READCOUNT
+	FROM BOARDALL
+	WHERE BOARDSEQ=#{boardseq}
+</select>
+        
+        
+        
+        
+     
+     
+     
+
+</mapper>
