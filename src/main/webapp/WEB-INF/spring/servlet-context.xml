@@ -17,9 +17,6 @@
 	</bean>
 		
 	<!-- java 공통 팩키지 -->
-<<<<<<< HEAD
-	<context:component-scan base-package="mul.camp.a" />
-=======
 	<context:component-scan base-package="secure.mbti.a" />
 	
 	
@@ -28,10 +25,8 @@
 	
 	<!-- spring에서 처리할 수 없는 요청은 tomcat에 위임 -->
 	<mvc:default-servlet-handler/>
->>>>>>> main
 			
 </beans>
-
 
 
 
