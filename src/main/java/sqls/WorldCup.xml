@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="WorldCup">
+		<!-- this.seq = seq;
+		this.topic = topic;
+		this.name = name;
+		this.choiceCount = choiceCount; -->
+<select id="worldcuplist" parameterType="String" resultType="secure.mbti.a.dto.WorldCupDto">
+	SELECT SEQ, TOPIC, NAME, CHOICECOUNT
+	FROM WORLDCUP
+	WHERE TOPIC=#{topic}
+</select>
+
+
+
+</mapper>

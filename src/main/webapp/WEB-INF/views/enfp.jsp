@@ -7,17 +7,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-<<<<<<< HEAD
-<h1>login입니다.</h1>
-
-<a href="INSJ">INSJ로 이동</a>
-=======
-<button type="button" onclick="enfp()">enfp</button>
+<button type="button" onclick="home()">홈으로</button>
+<button type="button" onclick="worldcup()">월드컵</button>
 <script type="text/javascript">
-function enfp() {
-	location.href = "enfp.do";
+function home() {
+	location.href = "home.do";
+}
+
+function worldcup() {
+	location.href = "worldcup.do";
 }
 </script>
->>>>>>> main
 </body>
 </html>

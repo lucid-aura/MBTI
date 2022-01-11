@@ -7,8 +7,20 @@
 <title>Insert title here</title>
 </head>
 <body>
+<<<<<<< HEAD
 
 <a href="login">login로 이동</a>
 
+=======
+	<p>clone test</p>
+	<h1>Hello HTML</h1>
+	<h2>test helloo</h2>
+	<p>sorry ..</p>
+	<h1>hihihihi</h1>
+	
+	<%
+		response.sendRedirect("home.do");
+	%>
+>>>>>>> main
 </body>
 </html>
