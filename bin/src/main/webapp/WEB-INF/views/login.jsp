@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,15 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<p>clone test</p>
-	<h1>Hello HTML</h1>
-	<h2>test helloo</h2>
-	<p>sorry ..</p>
-	<h1>hihihihi</h1>
-	<h1>hi222hi</h1>
-	
-	<%
-		response.sendRedirect("home.do");
-	%>
+<button type="button" onclick="enfp()">enfp</button>
+<script type="text/javascript">
+function enfp() {
+	location.href = "enfp.do";
+}
+</script>
 </body>
 </html>
