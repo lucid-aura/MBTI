@@ -22,9 +22,9 @@ public class WorldCupDaoImpl implements WorldCupDao {
 	}
 
 	@Override
-	public WorldCupDao getWorldCup(int seq) {
-		// TODO Auto-generated method stub
-		return null;
+	public WorldCupDto worldcupresult(int worldcupseq) {
+		session.update(ns + "worldcupcount", worldcupseq);
+		return session.selectOne(ns + "worldcupone", worldcupseq );
 	}
 
 }

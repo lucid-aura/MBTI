@@ -7,15 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<button type="button" onclick="home()">홈으로</button>
-<button type="button" onclick="worldcup()">월드컵</button>
+<button type="button" onclick="login()">로그인</button>
 <script type="text/javascript">
-function home() {
-	location.href = "home.do";
-}
-
-function worldcup() {
-	location.href = "worldcup_choice.do";
+function login() {
+	location.href = "login.do";
 }
 </script>
 </body>

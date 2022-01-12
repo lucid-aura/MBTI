@@ -19,4 +19,9 @@ public class WorldCupServiceImpl implements WorldCupService {
 		return dao.worldcuplist(topic);
 	}
 
+	@Override
+	public WorldCupDto worldcupresult(int worldcupseq) {
+		return dao.worldcupresult(worldcupseq);
+	}
+
 }
