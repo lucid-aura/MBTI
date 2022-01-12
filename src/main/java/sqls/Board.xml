@@ -3,9 +3,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Board">
+
+<!-- 
+boardlist
+boardwrite
+getboard
+boardcountup
+boardupdate
+boarddelete 
+-->
         
-<select id="board_free" parameterType="secure.mbti.a.dto.BoardParam" resultType="secure.mbti.a.dto.BoardDto">
-	SELECT BOARDSEQ, ID, TITLE, CONTENT, READCOUNT, COMMENTCOUNT, WDATE, DEL,
+<select id="boardlist" parameterType="secure.mbti.a.dto.BoardParam" resultType="secure.mbti.a.dto.BoardDto">
+	SELECT BOARDSEQ, ID, BOARDTYPE, TITLE, CONTENT, READCOUNT, COMMENTCOUNT, WDATE, DEL,
 	FROM BOARDALL
 	<if test="choice != null and choice != '' and search !=null and search !='' "> <!-- 조건문이 들어감 -->
 		<if test="choice == 'title'">
@@ -21,20 +30,28 @@
 	ORDER BY REF DESC, STEP ASC
 </select>
 
-<insert id="writeboard" parameterType="secure.mbti.a.dto.BoardDto">
-	INSERT INTO BOARDALL(BOARDSEQ, ID, TITLE, CONTENT, COMMENTCOUNT, WDATE, DEL, READCOUNT)
-	VALUES(BOARDSEQ_BOARDALL.NEXTVAL, #{id}, (SELECT NVL(MAX(REF)+1, 0) FROM BOARDALL), 0, 0,       
-											#{title}, #{content}, SYSDATE, 0, 0)
+<insert id="boardwrite" parameterType="secure.mbti.a.dto.BoardDto">
+	INSERT INTO BOARDALL(BOARDSEQ, ID, BOARDTYPE, COMMENTCOUNT, TITLE, CONTENT, WDATE, DEL, READCOUNT)
+	VALUES(
+	BOARDSEQ_BOARDALL.NEXTVAL,
+	 #{id},
+	 #{boardtype},
+	 0,
+	  #{title},
+	  #{content},
+	  SYSDATE, 
+	  0, 
+	  0,
+	);
 </insert>
 
-<select id="getBoard" parameterType="java.lang.Integer" resultType="secure.mbti.a.dto.BoardDto">
-	SELECT BOARDSEQ, ID, TITLE, CONTENT, COMMENTCOUNT, WDATE, DEL, READCOUNT
+<select id="getboard" resultType="secure.mbti.a.dto.BoardDto">
+	SELECT BOARDSEQ, ID, BOARDTYPE, COMMENTCOUNT, TITLE, CONTENT, WDATE, DEL, READCOUNT
 	FROM BOARDALL
 	WHERE BOARDSEQ=#{boardseq}
 </select>
         
-        
-        
+                
         
      
      

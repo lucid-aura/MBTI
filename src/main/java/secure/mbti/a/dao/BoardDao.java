@@ -5,14 +5,16 @@ import java.util.List;
 import secure.mbti.a.dto.BoardDto;
 import secure.mbti.a.dto.BoardParam;
 
-public interface BoardDao {
 
-	List<BoardDao> boardlist(BoardParam param);
+public interface BoardDao {
+	List<BoardDto> board_list(BoardParam param);
 	
-	int writeboard(BoardDto dto);
+	int board_write(BoardDto Board);
 	
-	BoardDao getBoard(int boardseq);
-	
-	int replyBoardUpdate(BoardDto dto);
-	int replyBoardInsert(BoardDto dto);
+	get_board()
+	void board_countUp()
+	void board_update()
+	void board_delete()
+
+
 }

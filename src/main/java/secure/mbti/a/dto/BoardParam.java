@@ -3,8 +3,19 @@ package secure.mbti.a.dto;
 import java.io.Serializable;
 
 public class BoardParam implements Serializable{
+	
 		private String choice;
 		private String search;
+		
+		public BoardParam() {
+			
+		}
+		
+		public BoardParam(String choice, String search) {
+			super();
+			this.choice = choice;
+			this.search = search;
+		}
 		
 		
 		public String getChoice() {
@@ -24,11 +35,7 @@ public class BoardParam implements Serializable{
 		public String toString() {
 			return "BoardParam [choice=" + choice + ", search=" + search + "]";
 		}
-		public BoardParam(String choice, String search) {
-			super();
-			this.choice = choice;
-			this.search = search;
-		}
+		
 		
 		
 		
