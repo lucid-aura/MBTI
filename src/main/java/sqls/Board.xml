@@ -29,7 +29,7 @@
   
 </insert>
 
-<select id="getBbs" parameterType="java.lang.Integer" resultType="mul.camp.a.dto.BbsDto">
+<select id="getBbs" parameterType="java.lang.Integer" resultType="secure.mbti.a.dto.BoardDto">
 	SELECT BOARDSEQ, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT
 	FROM BOARDALL
 	WHERE BOARDSEQ=#{seq}
