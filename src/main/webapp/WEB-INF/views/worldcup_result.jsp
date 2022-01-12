@@ -1,3 +1,5 @@
+<%@page import="secure.mbti.a.dto.CommentDto"%>
+<%@page import="java.util.List"%>
 <%@page import="secure.mbti.a.dto.WorldCupDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -6,8 +8,7 @@
 <%
 
 WorldCupDto worldcupresult = (WorldCupDto)request.getAttribute("worldcupresult");
-
-
+List<CommentDto> comments = (List<CommentDto>)request.getAttribute("comments");
 %>
 
 <!DOCTYPE html>
@@ -40,6 +41,10 @@ WorldCupDto worldcupresult = (WorldCupDto)request.getAttribute("worldcupresult")
 				<%=worldcupresult.getWorldcupname() %>
 				<%=worldcupresult.getTopic() %>
 				<%=worldcupresult.getChoicecount() %>
+				<%=comments.get(0).getAlias() %>
+				<%=comments.get(0).getContent() %>
+				<%=comments.get(1).getAlias() %>
+				<%=comments.get(1).getContent() %>
 	</article>
 	</section>
 	<footer>

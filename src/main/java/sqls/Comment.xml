@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="Comment">
+
+<!-- 	 
+	private int commentseq;
+	 private String alias;
+	 private int boardseq;
+	 private String content;
+	 private String wdate;
+	 private int del; 
+ -->
+<select id="commentlist" parameterType="Integer" resultType="secure.mbti.a.dto.CommentDto">
+	SELECT COMMENTSEQ,ALIAS,CONTENT,WDATE,DEL
+	FROM COMMENTMBTI
+	WHERE BOARDSEQ=#{boardseq}
+</select>
+
+<select id="commentcount" parameterType="Integer" resultType="Integer">
+	SELECT COUNT(*)
+	FROM COMMENTMBTI
+	WHERE BOARDSEQ=#{boardseq}
+</select>
+
+<insert id="commentwrite" parameterType="secure.mbti.a.dto.CommentDto">
+	INSERT INTO COMMENTMBTI( COMMENTSEQ,ALIAS,BOARDSEQ,CONTENT,WDATE,DEL)
+	VALUES(
+		SEQ_COMMENT.NEXTVAL, 
+		#{alias},
+		#{boardseq},
+		#{content}, 
+		SYSDATE, 
+		0, 
+	);
+</insert>
+
+
+<update id="commentupdate" parameterType="secure.mbti.a.dto.CommentDto">
+	UPDATE COMMENTMBTI
+	SET CONTENT=#{content},
+			WDATE=SYSDATE
+	WHERE COMMENTSEQ=#{commentseq}
+</update>
+
+<update id="commentdelete" parameterType="Integer" >
+	UPDATE COMMENTMBTI
+	SET DEL=1
+	WHERE COMMENTSEQ=#{commentseq}
+</update>
+
+</mapper>
