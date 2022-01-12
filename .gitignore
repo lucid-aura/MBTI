@@ -3,3 +3,4 @@
 .settings
 pom.properties
 /*target/*
+src/main/webapp/META-INF/maven/MBTI/MBTI/pom.properties
