@@ -4,11 +4,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+
 <mapper namespace="Board">
-<select id="board_list" parameterType="secure.mbti.a.dto.BoardParam" resultType="secure.mbti.a.dto.BoardDto">
-		SELECT BOARDSEQ, ID, REF, STEP, DEPTH, TITLE, CONTENT, WDATE, DEL, READCOUNT
+
+<select id="boardlist" parameterType="secure.mbti.a.dto.BoardParam" resultType="secure.mbti.a.dto.BoardDto">
+	SELECT BOARDSEQ, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT
 	FROM BOARDALL
-	<if test="choice != null and choice != ''  and search != null and search != '' ">
+ 	<if test="choice != null and choice != ''  and search != null and search != '' ">
 		<if test="choice == 'title'">
 			WHERE TITLE LIKE '%' || #{search} || '%'
 		</if>
@@ -18,22 +20,44 @@
 		<if test="choice == 'writer'">
 			WHERE ID=#{search}
 		</if>
-	</if>
-
-
+	</if> 
 </select>
-<insert id="board_write" parameterType="secure.mbti.a.dto.BoardDto">
-  INSERT INTO BOARDALL(BOARDSEQ, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT)
-  VALUES(SEQ_BBS.NEXTVAL, #{id} FROM BBS), 0, 0,
-  	#{title}, #{content}, SYSDATE, 0, 0 )    <!-- INSERT 쿼리문 -->
-  
+
+<insert id="boardwrite" parameterType="secure.mbti.a.dto.BoardDto" >
+	INSERT INTO BOARDALL(BOARDSEQ, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT)
+	VALUES(BOARDSEQ.NEXTVAL, #{id} FROM BOARDALL), 
+	0, 0, #{title}, #{content}, SYSDATE, 0, 0)
 </insert>
 
-<select id="getBbs" parameterType="java.lang.Integer" resultType="secure.mbti.a.dto.BoardDto">
+<select id="getboard" resultType="secure.mbti.a.dto.BoardDto">
 	SELECT BOARDSEQ, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT
 	FROM BOARDALL
-	WHERE BOARDSEQ=#{seq}
+	WHERE BOARDSEQ=#{ boardseq }
 </select>
+
+
+<select id="boardcountup" parameterType="Integer" resultType="Integer">
+	SELECT *
+	FROM BOARDALL
+	WHERE BOARDSEQ=#{ boardseq }
+</select>
+
+<update id="boardupdate" parameterType="secure.mbti.a.dto.BoardDto" >
+	UPDATE BOARDALL
+	SET TITLE = #{title}, CONTENT=#{content}
+	WHERE BOARDSEQ=#{ boardseq }
+</update>
+
+<update id="boarddelete" parameterType="Integer" >
+	UPDATE BOARDALL
+	SET DEL=1
+	WHERE BOARDSEQ=#{ boardseq }
+</update>
+
+
+
+
+
 
 
 

@@ -9,6 +9,9 @@
 <body>
 <button type="button" onclick="home()">홈으로</button>
 <button type="button" onclick="worldcup()">월드컵</button>
+
+
+<button type="button" onclick="board_free()">자유게시판</button>
 <script type="text/javascript">
 function home() {
 	location.href = "home.do";
@@ -16,6 +19,11 @@ function home() {
 
 function worldcup() {
 	location.href = "worldcup_choice.do";
+	
+	
+}
+function board_free() {
+	location.href = "board_free.do";
 }
 </script>
 </body>

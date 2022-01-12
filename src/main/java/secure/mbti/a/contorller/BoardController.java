@@ -13,16 +13,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import secure.mbti.a.dto.BoardDto;
 import secure.mbti.a.dto.BoardParam;
+import secure.mbti.a.dto.CommentDto;
 import secure.mbti.a.service.BoardService;
+import secure.mbti.a.service.CommentService;
 
 @Controller
 public class BoardController {
 	private static Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
+
+//	+board_update
+//	+comment
+
 	@Autowired
 	BoardService service;
 	
-	@RequestMapping(value = "Board_free.do", method = RequestMethod.GET)
+	@RequestMapping(value = "board_free.do", method = RequestMethod.GET)
 	public String board_list(Model model, BoardParam param) {
 		logger.info("BoardController board_list()" + new Date());
 		
@@ -32,24 +38,60 @@ public class BoardController {
 		return "board_free";
 	}
 	
-	@RequestMapping(value = "Board_write.do", method = RequestMethod.GET)
+	@RequestMapping(value = "board_write.do", method = RequestMethod.GET)
 	public String board_write() {
 		logger.info("BoardController board_write()" + new Date());
-		
 		
 		return "board_write";
 	}
 	
-	@RequestMapping(value = "Board_writeAf.do", method = RequestMethod.POST)
-	public String board_writeAf(BoardDto dto) {
+	//글쓰기 후 다시 자유게시판 시작점으로
+	@RequestMapping(value = "board_writeAf.do", method = RequestMethod.POST)
+	public String board_writeAf(Model model, BoardDto dto) {
 		logger.info("BoardController board_write()" + new Date());
+		System.out.println(dto.toString());
 		
-		boolean b = service.board_write(dto); 	// 서비스에서도 만들어줘라
-		if(b == true){// board_list에 list를 넘겨주자
-			System.out.println("성공적으로 추가 되었습니다");
-		}
-		return "board_list";
+		int result = service.board_write(dto);
+		model.addAttribute("result",result);
+		
+		return "redirect:/board_free.do";
+
 	}
+	@RequestMapping(value = "board_detail.do", method = RequestMethod.GET)
+	public String board_detail(Model model, int boardseq) {
+		logger.info("BoardController board_detail()" + new Date());
+		
+		BoardDto board = service.get_board(boardseq);
+		model.addAttribute("board", board);
+		
+		return "board_detail";
+	}
+	
+	@RequestMapping(value = "board_update.do", method = RequestMethod.GET)
+	public String board_update(Model model, int boardseq) {
+		logger.info("BbsController board_update() " + new Date());
+		BoardDto board = service.get_board(boardseq);
+		
+		model.addAttribute("board", board);
+		return "board_update";
+		
+		
+	}
+	
+	/*  댓글부분
+	@RequestMapping(value = "comment.do", method = RequestMethod.GET)
+	public String comment(Model model, int boardseq) {
+		logger.info("BbsController comment() " + new Date());
+		
+		List<CommentDto> commentdto = CommentService.comment_list(comment.getBoardseq());
+		
+		model.addAttribute("board", board);
+		model.addAttribute("comments", commentdto);
+		return "board_detail";
+		
+		
+	}*/
+	
 	
 	
 	

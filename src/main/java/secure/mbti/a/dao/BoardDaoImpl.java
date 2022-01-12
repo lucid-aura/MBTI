@@ -15,21 +15,41 @@ public class BoardDaoImpl implements BoardDao{
 	SqlSession session;		// mybatis 사용하기 위해
 	
 	String ns = "Board.";   // namespace ns
+
+	@Override
+	public List<BoardDto> board_list(BoardParam param) {
 	
-	@Override
-	public List<BoardDto> board_list(BoardParam param){
-		return session.selectList(ns + "board_list", param);
+		return session.selectList(ns+"boardlist", param);  // mybatis를 이용할때 dao + 무조건 xml 과 연동된다 이건 id와 같다. xml
 	}
 
 	@Override
-	public int board_write(BoardDto dto) {
+	public int board_write(BoardDto dto) {   // dto > bbs였었음(강의자료)
 		
-		int count = session.insert(ns + "board_write", dto);
-		return count;
+		return session.insert(ns+"boardwrite", dto);
 	}
 
 	@Override
-	public BoardDto getBoard(int seq) {
-		return session.selectOne(ns + "getBoard", seq);
+	public BoardDto get_board(int boardseq) {
+		
+		return session.selectOne(ns + "getboard", boardseq);
 	}
+
+	@Override
+	public int board_countUp(int boardseq) {
+		return session.update(ns+"boardcountUp", boardseq);
+	}
+
+	@Override
+	public void board_update(BoardDto dto) {
+		session.update(ns+ "boardupdate", dto);
+		
+	}
+
+	@Override
+	public void board_delete(int boardseq) {
+		session.delete(ns+"boarddelete", boardseq);
+		
+	}
+	
+	
 }
