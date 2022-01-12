@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /*CREATE TABLE WORLDCUP(
         WORLDCUPSEQ NUMBER(8) PRIMARY KEY,
+        BOARDSEQ NUMBER(8) NOT NULL,
         TOPIC VARCHAR2(50) NOT NULL, 
         WORLDCUPNAME VARCHAR2(50) NOT NULL,
         CHOICECOUNT NUMBER(8) NOT NULL
@@ -11,6 +12,7 @@ import java.io.Serializable;
 */
 public class WorldCupDto implements Serializable{	// = 직렬화
 	private int worldcupseq;
+	private int boardseq;
 	private String topic;
 	private String worldcupname;
 	private int choicecount;
@@ -18,9 +20,10 @@ public class WorldCupDto implements Serializable{	// = 직렬화
 	public WorldCupDto() {
 	}
 	
-	public WorldCupDto(int worldcupseq, String topic, String worldcupname, int choicecount) {
+	public WorldCupDto(int worldcupseq, int boardseq, String topic, String worldcupname, int choicecount) {
 		super();
 		this.worldcupseq = worldcupseq;
+		this.boardseq = boardseq;
 		this.topic = topic;
 		this.worldcupname = worldcupname;
 		this.choicecount = choicecount;
@@ -37,6 +40,15 @@ public class WorldCupDto implements Serializable{	// = 직렬화
 	public void setWorldcupseq(int worldcupseq) {
 		this.worldcupseq = worldcupseq;
 	}
+	
+	public int getBoardseq() {
+		return boardseq;
+	}
+
+	public void setBoardseq(int boardseq) {
+		this.boardseq = boardseq;
+	}
+
 	public String getTopic() {
 		return topic;
 	}
@@ -58,7 +70,8 @@ public class WorldCupDto implements Serializable{	// = 직렬화
 
 	@Override
 	public String toString() {
-		return "WorldCupDto [seq=" + worldcupseq + ", topic=" + topic + ", worldcupname=" + worldcupname + ", choiceCount=" + choicecount + "]";
+		return "WorldCupDto [worldcupseq=" + worldcupseq + ", boardseq=" + boardseq + ", topic=" + topic
+				+ ", worldcupname=" + worldcupname + ", choicecount=" + choicecount + "]";
 	}
-	
+
 }

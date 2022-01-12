@@ -24,9 +24,7 @@ public class WorldCupDaoImpl implements WorldCupDao {
 	@Override
 	public WorldCupDto worldcupresult(int worldcupseq) {
 		session.update(ns + "worldcupcount", worldcupseq);
-		System.out.println(worldcupseq);
 		return session.selectOne(ns + "worldcupone", worldcupseq );
-		
 	}
 
 }

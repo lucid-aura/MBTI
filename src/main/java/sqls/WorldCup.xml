@@ -8,7 +8,7 @@
 		this.name = name;
 		this.choiceCount = choiceCount; -->
 <select id="worldcuplist" parameterType="String" resultType="secure.mbti.a.dto.WorldCupDto">
-	SELECT WORLDCUPSEQ, TOPIC, WORLDCUPNAME, CHOICECOUNT
+	SELECT WORLDCUPSEQ, BOARDSEQ, TOPIC, WORLDCUPNAME, CHOICECOUNT
 	FROM WORLDCUP
 	WHERE TOPIC=#{topic}
 </select>
@@ -21,11 +21,10 @@
 </update>
 
 <select id="worldcupone" parameterType="Integer" resultType="secure.mbti.a.dto.WorldCupDto">
-	SELECT WORLDCUPSEQ, TOPIC, WORLDCUPNAME, CHOICECOUNT
+	SELECT WORLDCUPSEQ, BOARDSEQ, TOPIC, WORLDCUPNAME, CHOICECOUNT
 	FROM WORLDCUP
 	WHERE WORLDCUPSEQ=#{worldcupseq}
 </select>
-
 
 
 </mapper>

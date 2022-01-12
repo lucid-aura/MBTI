@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import secure.mbti.a.dto.CommentDto;
 import secure.mbti.a.dto.WorldCupDto;
+import secure.mbti.a.service.CommentService;
 import secure.mbti.a.service.WorldCupService;
 
 
@@ -22,7 +24,11 @@ public class WorldCupController {
 	private static Logger logger = LoggerFactory.getLogger(WorldCupController.class);
 
 	@Autowired
-	WorldCupService service;
+	WorldCupService worldcupservice;
+	
+	@Autowired
+	CommentService commentservice;
+	
 	/* 임시 controller */
 
 	
@@ -48,7 +54,7 @@ public class WorldCupController {
 	@RequestMapping(value = "worldcup.do", method = RequestMethod.GET)
 	public String worldcup(Model model){ 
 		logger.info("WorldCupController worldcup() " + new Date());
-		List<WorldCupDto> list = service.worldcuplist("food");
+		List<WorldCupDto> list = worldcupservice.worldcuplist("food");
 		model.addAttribute("worldcuplist", list);
 		return "worldcup";
 	}
@@ -56,9 +62,11 @@ public class WorldCupController {
 	@RequestMapping(value = "worldcup_result.do", method = RequestMethod.GET)
 	public String worldcup_result(Model model, int worldcupseq){ 
 		logger.info("WorldCupController worldcup_result() " + new Date());
-		System.out.println(worldcupseq);
-		WorldCupDto result =  service.worldcupresult(worldcupseq);
+		WorldCupDto result =  worldcupservice.worldcupresult(worldcupseq);		
+		List<CommentDto> commentdto = commentservice.comment_list(result.getBoardseq());
 		model.addAttribute("worldcupresult", result);
+		model.addAttribute("comments", commentdto);
+		result.getBoardseq();
 		return "worldcup_result";
 	}
 	
