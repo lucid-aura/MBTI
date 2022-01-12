@@ -4,21 +4,22 @@ import java.io.Serializable;
 
 /*
 CREATE TABLE BOARDALL(
-	    BOARDSEQ NUMBER(8) PRIMARY KEY,
-	    ID VARCHAR2(50) UNIQUE,
-	    TITLE VARCHAR2(200) NOT NULL,
-	    CONTENT VARCHAR2(4000) NOT NULL,
-	    READCOUNT NUMBER(8)  NOT NULL,
-	    COMMENTCOUNT NUMBER(8) NOT NULL,
-	    WDATE DATE  NOT NULL,  
-	    DEL NUMBER(1)  NOT NULL
-	);
+    BOARDSEQ NUMBER(8) PRIMARY KEY,
+    ID VARCHAR2(50) UNIQUE,
+    BOARDTYPE NUMBER(2) NOT NULL,
+    TITLE VARCHAR2(200) NOT NULL,
+    CONTENT VARCHAR2(4000) NOT NULL,
+    READCOUNT NUMBER(8)  NOT NULL,
+    COMMENTCOUNT NUMBER(8) NOT NULL,
+    WDATE DATE  NOT NULL,  
+    DEL NUMBER(1)  NOT NULL
+);
 */
 public class BoardDto implements Serializable{
 	
 	private int boardseq;		// 글의 번호	-> sequence
 	private String id;		// 작성자
-	
+	private int boardtype;	// 게시판 종류
 	private String title;	// 제목
 	private String content;	// 내용
 	private int readcount;	// 조회수
@@ -41,6 +42,14 @@ public class BoardDto implements Serializable{
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public int getBoardtype() {
+		return boardtype;
+	}
+
+	public void setBoardtype(int boardtype) {
+		this.boardtype = boardtype;
 	}
 
 	public String getTitle() {
@@ -91,11 +100,19 @@ public class BoardDto implements Serializable{
 		this.del = del;
 	}
 
-	public BoardDto(int boardseq, String id, String title, String content, int readcount, int commentcount,
-			String wdate, int del) {
+	@Override
+	public String toString() {
+		return "BoardDto [boardseq=" + boardseq + ", id=" + id + ", boardtype=" + boardtype + ", title=" + title
+				+ ", content=" + content + ", readcount=" + readcount + ", commentcount=" + commentcount + ", wdate="
+				+ wdate + ", del=" + del + "]";
+	}
+
+	public BoardDto(int boardseq, String id, int boardtype, String title, String content, int readcount,
+			int commentcount, String wdate, int del) {
 		super();
 		this.boardseq = boardseq;
 		this.id = id;
+		this.boardtype = boardtype;
 		this.title = title;
 		this.content = content;
 		this.readcount = readcount;
@@ -103,19 +120,11 @@ public class BoardDto implements Serializable{
 		this.wdate = wdate;
 		this.del = del;
 	}
+	
 	public BoardDto(String id, String title, String content) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.content = content;
 	}
-
-	@Override
-	public String toString() {
-		return "BoardDto [boardseq=" + boardseq + ", id=" + id + ", title=" + title + ", content=" + content
-				+ ", readcount=" + readcount + ", commentcount=" + commentcount + ", wdate=" + wdate + ", del=" + del
-				+ "]";
-	}
-	
-	
 }
