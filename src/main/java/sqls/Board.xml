@@ -1,1 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 도큐먼트로 mapper쓴다는 명시  -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Board">
+<select id="board_list" parameterType="secure.mbti.a.dto.BoardParam" resultType="secure.mbti.a.dto.BoardDto">
+		SELECT BOARDSEQ, ID, REF, STEP, DEPTH, TITLE, CONTENT, WDATE, DEL, READCOUNT
+	FROM BOARDALL
+	<if test="choice != null and choice != ''  and search != null and search != '' ">
+		<if test="choice == 'title'">
+			WHERE TITLE LIKE '%' || #{search} || '%'
+		</if>
+		<if test="choice == 'content'">
+			WHERE CONTENT LIKE '%' || #{search} || '%'
+		</if>
+		<if test="choice == 'writer'">
+			WHERE ID=#{search}
+		</if>
+	</if>
+
+
+</select>
+<insert id="board_write" parameterType="secure.mbti.a.dto.BoardDto">
+  INSERT INTO BOARDALL(BOARDSEQ, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT)
+  VALUES(SEQ_BBS.NEXTVAL, #{id} FROM BBS), 0, 0,
+  	#{title}, #{content}, SYSDATE, 0, 0 )    <!-- INSERT 쿼리문 -->
+  
+</insert>
+
+<select id="getBbs" parameterType="java.lang.Integer" resultType="mul.camp.a.dto.BbsDto">
+	SELECT BOARDSEQ, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT
+	FROM BOARDALL
+	WHERE BOARDSEQ=#{seq}
+</select>
+
+
+
+
+
+
+
+
+
+
+</mapper>

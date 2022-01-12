@@ -29,7 +29,7 @@ public class BoardController {
 		List<BoardDto> list = service.board_list(param);
 		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
 		
-		return "board_list";
+		return "board_free";
 	}
 	
 	@RequestMapping(value = "Board_write.do", method = RequestMethod.GET)

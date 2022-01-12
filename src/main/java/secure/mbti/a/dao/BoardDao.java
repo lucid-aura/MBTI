@@ -10,5 +10,8 @@ public interface BoardDao {
 	
 	int board_write(BoardDto dto);
 	
+	BoardDto getBoard(int seq);
+	
+	
 	
 }
