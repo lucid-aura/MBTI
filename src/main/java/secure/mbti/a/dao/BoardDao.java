@@ -7,14 +7,24 @@ import secure.mbti.a.dto.BoardParam;
 
 
 public interface BoardDao {
+	
 	List<BoardDto> board_list(BoardParam param);
 	
-	int board_write(BoardDto Board);
+	int board_write(BoardDto boardall);
 	
-	get_board()
-	void board_countUp()
-	void board_update()
-	void board_delete()
+	BoardDto get_board(int boardseq);
+	int board_countUp(int boardseq);
+	
+	int board_update(BoardDto boardall);
+	int board_delete(int boardseq);
+
+	
+/*	+board_list
+	+board_write
+	+get_board
+	+board_countUp
+	+board_update
+	+board_delete*/
 
 
 }

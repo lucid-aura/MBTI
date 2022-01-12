@@ -51,8 +51,25 @@ boarddelete
 	WHERE BOARDSEQ=#{boardseq}
 </select>
         
-                
-        
+<update id="boardcountup" parameterType="Integer" >
+	UPDATE BOARDALL
+	SET
+	READCOUNT = READCOUNT + 1
+	WHERE BOARDSEQ = #{ boardseq }
+</update>                
+
+
+<update id="boardupdate" parameterType="secure.mbti.a.dto.BoardDto">
+	UPDATE BOARDALL
+	SET TITLE = #{title}, CONTENT=#{content}
+	WHERE BOARDSEQ=#{boardseq}
+</update>
+
+<update id="boarddelete" parameterType="Integer" >
+	UPDATE BOARDALL
+	SET DEL=1
+	WHERE BOARDSEQ=#{boardseq}
+</update>
      
      
      
