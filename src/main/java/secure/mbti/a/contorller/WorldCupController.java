@@ -30,12 +30,7 @@ public class WorldCupController {
 	CommentService commentservice;
 	
 	/* 임시 controller */
-	
-	@RequestMapping(value = "home.do", method = RequestMethod.GET)
-	public String home(){ 
-		logger.info("WorldCupController home() " + new Date());
-		return "home";
-	}
+
 	
 	@RequestMapping(value = "login.do", method = RequestMethod.GET)
 	public String login(){ 

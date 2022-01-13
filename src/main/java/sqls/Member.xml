@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace = "Membermbti">
+
+<insert id = "addmember" parameterType="secure.mbti.a.dto.MemberDto">
+	INSERT INTO MEMBERMBTI(ID,PWD,ALIAS,NAME,EMAIL,MBTI,AUTH)
+	VALUES(#{id}, #{pwd}, #{alias}, #{name}, #{email}, #{mbti}, 3)
+</insert>
+
+<select id="login" parameterType="secure.mbti.a.dto.MemberDto"
+resultType ="secure.mbti.a.dto.MemberDto">
+	SELECT ID, PWD, ALIAS, NAME, EMAIL, MBTI, AUTH
+	FROM MEMBERMBTI
+	WHERE ID=#{id} AND PWD=#{pwd}
+</select>
+
+<select id="getId" parameterType ="String"
+resultType ="Integer">
+	SELECT COUNT(*)
+	FROM MEMBERMBTI
+	WHERE ID=#{id}
+</select>
+
+
+</mapper>
