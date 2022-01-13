@@ -1,17 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="css/loginStyle.css" rel="stylesheet" />
+
 </head>
 <body>
-<button type="button" onclick="enfp()">enfp</button>
-<script type="text/javascript">
-function enfp() {
-	location.href = "enfp.do";
-}
+<div class="sidenav">
+         <div class="login-main-text">
+            <h2>Application<br> Login Page</h2>
+            <p>Login or register from here to access.</p>
+         </div>
+      </div>
+      <div class="main">
+         <div class="col-md-6 col-sm-12">
+            <div class="login-form">
+               <form id="frm" action="loginAf.do" method = "post">
+                  <div class="form-group">
+                     <label>ID</label>
+                     <input type="text" class="form-control" placeholder="ID" name = "id" id="id">
+                  </div>
+                  <div class="form-group">
+                     <label>Password</label>
+                     <input type="password" class="form-control" placeholder="Password" name = "pwd" id="pwd">
+                  </div>
+                  <button type="button" class="btn btn-black" onclick = "login()">Login</button>
+                  <button type="button" class="btn btn-secondary" onclick="register()">Register</button>
+               </form>
+            </div>
+         </div>
+      </div>
+      
+      
+      <script type="text/javascript">
+	function register() {
+	location.href = "regi.do";	
+	}
+	
+	function login() {
+		
+		if($("#id").val().trim() == ""){
+			alert("아이디를 입력해 주세요");
+		}else if($("#pwd").val().trim() == ""){
+			alert("비밀번호를 입력해 주세요");
+		}else{ 
+			$("#frm").submit();
+		}
+	}
 </script>
 </body>
 </html>
