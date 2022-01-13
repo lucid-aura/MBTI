@@ -20,7 +20,7 @@ public class BoardDto implements Serializable{
 	private String title; // 제목
 	private String content; // 내용
 	private String wdate; // 작성일
-	
+
 	private int del;		// 삭제
 	private int readcount;  // 조회수
 	private int commentcount; // 댓글수

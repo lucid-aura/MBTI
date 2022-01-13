@@ -16,7 +16,7 @@
 	<h1>hi222h2323i</h1>
 	
 	<%
-		response.sendRedirect("home.do");
+		response.sendRedirect("board_free.do");
 	%>
 </body>
 </html>

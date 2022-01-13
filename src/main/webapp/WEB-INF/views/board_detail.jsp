@@ -1,11 +1,20 @@
+<%@page import="secure.mbti.a.dto.CommentDto"%>
+<%@page import="secure.mbti.a.dto.MemberDto"%>
 <%@page import="secure.mbti.a.dto.BoardDto"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="/css/bootstrap.css"> <!--지워도됨 -->
     
-    <%
+<%
 BoardDto board = (BoardDto)request.getAttribute("board");
+%>
+<%
+MemberDto dto = (MemberDto)request.getAttribute("dto");
+%>
+
+<%
+List<CommentDto> comments =(List<CommentDto>)request.getAttribute("comments");
 %>
 <!DOCTYPE html>
 
@@ -21,30 +30,30 @@ BoardDto board = (BoardDto)request.getAttribute("board");
 
 </head>
 <body>
-	<header>
-		<nav>
-			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
-				<a href="#test" class="text-light distance">유형소개</a>
-				<a href="#test" class="text-light distance">유형별게시판</a>
-				<a href="board_free.do" class="text-light distance">자유게시판</a>
-				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
-				<button>로그아웃</button>
-			</div>
-		</nav>
-	</header>
-	
-	<div class="wrapper">
+<header>
+	<nav>
+		<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
+			<a href="#test" class="text-light distance">유형소개</a> <a href="#test"
+				class="text-light distance">유형별게시판</a> <a href="board_free.do"
+				class="text-light distance">자유게시판</a> <a href="worldcup_choice.do"
+				class="text-light distance">월드컵</a>
+			<button>로그아웃</button>
+		</div>
+	</nav>
+</header>
+<br><hr><br><br><br><br><br>
 
-
+<div class="wrapper" style="width:1000px" align="center">
+<section>
 
 <p>여긴 댓글이 있는 곳입니다</p>
 
-<div align="center">
+<div>
 <!--    attribute property -->
-	<table class="table table-bordered" style="width:1000px">
+	<table class="table table-bordered">
 	<!-- <col width="30"><col width="200"><col width="80"> -->
 <%
-if(bbs == null){	
+if(board == null){	
 %>
 	<tr>
 		<td colspan="3">글을 읽어올 수 없습니다..</td>
@@ -55,68 +64,87 @@ else{
 %>
 	<tr>
 	<th>작성자</th>
-	<td><%=bbs.getId() %></td>
+	<td><%=board.getId() %></td>
 	</tr>
 	<tr>
 		<th>제목</th>
-		<td><%=bbs.getTitle() %></td>
+		<td><%=board.getTitle() %></td>
 	</tr>
 		<tr>
 		<th>작성일</th>
-		<td><%=bbs.getWdate() %></td>
+		<td><%=board.getWdate() %></td>
 	</tr>
 	<tr>
 		<th>조회수</th>
-		<td><%=bbs.getReadcount() %></td>
-	</tr>
-	<tr>
-		<th>정보</th>
-		<td><%=bbs.getRef() %>-<%=bbs.getStep() %>-<%=bbs.getDepth() %></td>
+		<td><%=board.getReadcount() %></td>
 	</tr>
 	<tr>
 		<th>내용</th>
-		<td><textarea rows="15" cols="100" name="content" readonly><%=bbs.getContent() %></textarea></td>
+		<td><textarea rows="15" cols="100" name="content" readonly><%=board.getContent() %></textarea></td>
 	</tr>
 
 <%
 }
 %>
-			
-	</table>
 
+
+
+<!-- 댓글리스트 부분 -->
+<br><br><br><br><br>
+<div>
 <%
-MemberDto mem = (MemberDto)request.getSession().getAttribute("login");
-
-%>
-<button type="button" onclick="answer( <%=bbs.getSeq() %> )">답글</button>
-
-<%
-if (mem.getId().equals(bbs.getId())){
+if(comments == null || comments.size() == 0){	
 %>
 
-<button type="button" onclick="updatebbs( <%=bbs.getSeq() %>)">수정</button>
-
-<button type="button" onclick="deletebbs(<%=bbs.getSeq() %>)">삭제</button>
-	
+	<tr>
+		<td colspan="4">작성된 댓글이 없습니다.</td>
+	</tr>
 <%
 }
+else{
+	for(int i=0; i< comments.size(); i++) {
+		CommentDto comment = comments.get(i);	
+		
 %>
+		<%
+			if (board.getDel() == 1) {
+		%>
+		<tr>
+			<td colspan="4">삭제된 댓글입니다.</td>
+		</tr>
+		<%
+		}
+			else{			
+		%>
+		<tr><!-- 한 줄 -->
+			<th><%=i+1%></th> <!-- 댓글번호 -->
+			<td><!-- 한 칸 -->
+				<!-- 작성자 -->
+				<%=comment.getAlias()%>
+			</td>
+			<td>
+				<%=comment.getContent()%>
+			</td>
+			<td>
+				<%=comment.getWdate()%>
+			</td>
+		</tr>
+
+<%
+		}
+	}
+}
+%>
+</table>
 </div>
 
-<script type="text/javascript">
-function answer( seq ){
-	location.href = "answer.do?seq=" + seq;
-}
-function updatebbs( seq ){
-	location.href = "updatebbs.do?seq=" + seq;
-}
-function deletebbs( seq ){
-	location.href = "deletebbs.do?seq=" + seq;
-}
 
+<!-- 댓글적는 부분 -->
+<div>
 <div class="card mb-2">
+
 	<div class="card-header bg-light">
-	        <i class="fa fa-comment fa"></i> REPLY
+	        <i class="fa fa-comment fa">댓글</i>
 	</div>
 	<div class="card-body">
 		<ul class="list-group list-group-flush">
@@ -124,23 +152,36 @@ function deletebbs( seq ){
 			<div class="form-inline mb-2">
 				<label for="replyId"><i class="fa fa-user-circle-o fa-2x"></i></label>
 				<input type="text" class="form-control ml-2" placeholder="Enter yourId" id="replyId">
-				<label for="replyPassword" class="ml-4"><i class="fa fa-unlock-alt fa-2x"></i></label>
-				<input type="password" class="form-control ml-2" placeholder="Enter password" id="replyPassword">
+
 			</div>
 			<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-			<button type="button" class="btn btn-dark mt-3" onClick="javascript:addReply();">post reply</button>
+			<button type="button" class="btn btn-dark mt-3" onClick="javascript:addReply();">댓글 등록</button>
 		    </li>
 		</ul>
 	</div>
 </div>
+</div>
+</section>
+
 </div><!-- wrapper마감 -->
-<footer>
-	<p>저작권표시</p>
-</footer>
+
+<script type="text/javascript">
+function answer( boardseq ){
+	location.href = "answer.do?seq=" + seq;
+}
+function updatebbs( boardseq ){
+	location.href = "updatebbs.do?seq=" + seq;
+}
+function deletebbs( boardseq ){
+	location.href = "deletebbs.do?seq=" + seq;
+}
+
+
 <script type="text/javascript">
 function writeAf() {
 	location.href = "board_detail.do";
 }
+
 </script>
 </body>
 </html>

@@ -27,6 +27,8 @@ public class BoardController {
 
 	@Autowired
 	BoardService service;
+	@Autowired
+	CommentService commentService;
 	
 	@RequestMapping(value = "board_free.do", method = RequestMethod.GET)
 	public String board_list(Model model, BoardParam param) {
@@ -60,10 +62,14 @@ public class BoardController {
 	@RequestMapping(value = "board_detail.do", method = RequestMethod.GET)
 	public String board_detail(Model model, int boardseq) {
 		logger.info("BoardController board_detail()" + new Date());
+		System.out.println(boardseq);
 		int readup = service.board_countUp(boardseq);
 		
 		BoardDto board = service.get_board(boardseq);
+		List<CommentDto> commments = commentService.comment_list(boardseq);
+		
 		model.addAttribute("board", board);
+		model.addAttribute("comments", commments);
 		
 		return "board_detail";
 	}

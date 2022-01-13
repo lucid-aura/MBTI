@@ -18,7 +18,6 @@ public class CommentDaoImpl implements CommentDao {
 	
 	@Override
 	public List<CommentDto> comment_list(int boardseq) {
-		System.out.println(boardseq);
 		return session.selectList(ns+"commentlist", boardseq);
 	}
 
@@ -39,12 +38,17 @@ public class CommentDaoImpl implements CommentDao {
 
 	@Override
 	public void comment_update(CommentDto dto) {
-		session.update(ns + "comment_update", dto);
+		session.update(ns + "commentupdate", dto);
 	}
 
 	@Override
 	public void comment_delete(int commentseq) {
 		session.delete(ns + "commentdelete", commentseq);
+	}
+
+	@Override
+	public void comment_reply(CommentDto dto) {
+		session.insert(ns + "commentreply", dto);
 	}
 	
 }
