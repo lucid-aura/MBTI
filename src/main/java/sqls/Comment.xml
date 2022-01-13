@@ -13,9 +13,10 @@
 	 private int del; 
  -->
 <select id="commentlist" parameterType="Integer" resultType="secure.mbti.a.dto.CommentDto">
-	SELECT COMMENTSEQ,ALIAS,CONTENT,WDATE,DEL
+	SELECT COMMENTSEQ,ALIAS,BOARDSEQ,CONTENT,WDATE,DEL
 	FROM COMMENTMBTI
 	WHERE BOARDSEQ=#{boardseq}
+	ORDER BY COMMENTSEQ DESC
 </select>
 
 <select id="commentcount" parameterType="Integer" resultType="Integer">
@@ -32,8 +33,8 @@
 		#{boardseq},
 		#{content}, 
 		SYSDATE, 
-		0, 
-	);
+		0
+	)
 </insert>
 
 

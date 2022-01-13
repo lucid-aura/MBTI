@@ -22,7 +22,6 @@ import secure.mbti.a.service.WorldCupService;
 public class WorldCupController {
 
 	private static Logger logger = LoggerFactory.getLogger(WorldCupController.class);
-
 	@Autowired
 	WorldCupService worldcupservice;
 	
@@ -73,6 +72,26 @@ public class WorldCupController {
 		model.addAttribute("comments", commentdto);
 		result.getBoardseq();
 		return "worldcup_result";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "worldcup_result.do", method = RequestMethod.POST)
+	public List<CommentDto> worldcup_comment(CommentDto comment){ 
+		logger.info("WorldCupController worldcup_comment() " + new Date());
+		commentservice.comment_write(comment);
+
+		return commentservice.comment_list(comment.getBoardseq());
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "worldcup_detele_comment.do", method = RequestMethod.POST)
+	public List<CommentDto> worldcup_detele_comment(Model model, int commentseq, int boardseq){ 
+
+		logger.info("WorldCupController worldcup_detele_comment() " + new Date());
+		commentservice.comment_delete(commentseq);
+		List<CommentDto> comments =  commentservice.comment_list(boardseq);
+		model.addAttribute("comments", comments);
+		return comments;
 	}
 	
 	@ResponseBody
