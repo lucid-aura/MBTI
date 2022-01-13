@@ -14,7 +14,7 @@ boarddelete
 -->
         
 <select id="boardlist" parameterType="secure.mbti.a.dto.BoardParam" resultType="secure.mbti.a.dto.BoardDto">
-	SELECT BOARDSEQ, ID, BOARDTYPE, TITLE, CONTENT, READCOUNT, COMMENTCOUNT, WDATE, DEL,
+	SELECT BOARDSEQ, ID, BOARDTYPE, TITLE, CONTENT, READCOUNT, COMMENTCOUNT, WDATE, DEL
 	FROM BOARDALL
 	<if test="choice != null and choice != '' and search !=null and search !='' "> <!-- 조건문이 들어감 -->
 		<if test="choice == 'title'">
@@ -27,7 +27,7 @@ boarddelete
 			WHERE ID=#{search}                        <!-- abc를 찾을껀데 abcd도 나와서 -->
 		</if>
 	</if>
-	ORDER BY REF DESC, STEP ASC
+	ORDER BY BOARDSEQ DESC
 </select>
 
 <insert id="boardwrite" parameterType="secure.mbti.a.dto.BoardDto">

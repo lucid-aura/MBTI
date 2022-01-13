@@ -4,7 +4,7 @@
     pageEncoding="UTF-8"%>
     
 <%
-List<BoardDto> board_free = (List<BoardDto>)request.getAttribute("board_free");
+List<BoardDto> board_list = (List<BoardDto>)request.getAttribute("board_list");
 %>
 <!DOCTYPE html>
 <html>

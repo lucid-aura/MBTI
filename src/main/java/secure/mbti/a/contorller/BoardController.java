@@ -29,19 +29,20 @@ public class BoardController {
 		logger.info("BoardController ENFJ() " + new Date());
 		return "board_ENFJ";
 	}
-	
+	/*
 	@RequestMapping(value = "board_free.do", method = RequestMethod.GET)
 	public String board_free(){ 
 		logger.info("BoardController board_free() " + new Date());
 		return "board_free";
 	}
+	*/
 	@RequestMapping(value = "board_list.do", method = RequestMethod.GET)
 	public String board_list(Model model, BoardParam param){ 
 		logger.info("BoardController board_list() " + new Date());
 		
 		List<BoardDto> list = service.board_list(param);
 		model.addAttribute("board_list",list);
-		return "board_list";
+		return "board_free";
 	}
 	
 	@RequestMapping(value = "board_detail.do", method = RequestMethod.GET)

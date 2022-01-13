@@ -19,12 +19,12 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public List<BoardDto> board_list(BoardParam param) {
-		return session.selectList(ns+"board_list", param);
+		return session.selectList(ns+"boardlist", param);
 	}
 
 	@Override
 	public int board_write(BoardDto boardall) {		
-		return session.insert(ns+"board_list", boardall);
+		return session.insert(ns+"boardlist", boardall);
 	}
 
 	@Override
