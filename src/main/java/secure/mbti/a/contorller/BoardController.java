@@ -1,14 +1,18 @@
 package secure.mbti.a.contorller;
 
 import java.util.Date;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import secure.mbti.a.dto.BoardDto;
+import secure.mbti.a.dto.BoardParam;
 import secure.mbti.a.service.BoardService;
 
 @Controller
@@ -17,7 +21,7 @@ public class BoardController {
 	private static Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	@Autowired
-	BoardService Boardservice;
+	BoardService service;
 	
 	/* 임시 controller */
 	@RequestMapping(value = "board_ENFJ.do", method = RequestMethod.GET)
@@ -25,9 +29,18 @@ public class BoardController {
 		logger.info("BoardController ENFJ() " + new Date());
 		return "board_ENFJ";
 	}
+	
+	@RequestMapping(value = "board_free.do", method = RequestMethod.GET)
+	public String board_free(){ 
+		logger.info("BoardController board_free() " + new Date());
+		return "board_free";
+	}
 	@RequestMapping(value = "board_list.do", method = RequestMethod.GET)
-	public String board_list(){ 
+	public String board_list(Model model, BoardParam param){ 
 		logger.info("BoardController board_list() " + new Date());
+		
+		List<BoardDto> list = service.board_list(param);
+		model.addAttribute("board_list",list);
 		return "board_list";
 	}
 	

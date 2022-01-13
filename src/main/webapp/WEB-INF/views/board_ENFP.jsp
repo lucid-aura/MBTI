@@ -118,7 +118,7 @@
 	<footer>
 
         <div align="center">
-	<a href = "bbswrite.do">글쓰기</a>
+	<a href="board_write.jsp" class="btn btn-primary pull-right">글쓰기</a>	
 </div>
 	</footer>
     <script type="text/javascript">
