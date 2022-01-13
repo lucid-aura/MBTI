@@ -21,11 +21,98 @@ BoardDto board = (BoardDto)request.getAttribute("board");
 
 </head>
 <body>
-
+	<header>
+		<nav>
+			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
+				<a href="#test" class="text-light distance">유형소개</a>
+				<a href="#test" class="text-light distance">유형별게시판</a>
+				<a href="board_free.do" class="text-light distance">자유게시판</a>
+				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
+				<button>로그아웃</button>
+			</div>
+		</nav>
+	</header>
+	
+	<div class="wrapper">
 
 
 
 <p>여긴 댓글이 있는 곳입니다</p>
+
+<div align="center">
+<!--    attribute property -->
+	<table class="table table-bordered" style="width:1000px">
+	<!-- <col width="30"><col width="200"><col width="80"> -->
+<%
+if(bbs == null){	
+%>
+	<tr>
+		<td colspan="3">글을 읽어올 수 없습니다..</td>
+	</tr>
+<%
+}
+else{
+%>
+	<tr>
+	<th>작성자</th>
+	<td><%=bbs.getId() %></td>
+	</tr>
+	<tr>
+		<th>제목</th>
+		<td><%=bbs.getTitle() %></td>
+	</tr>
+		<tr>
+		<th>작성일</th>
+		<td><%=bbs.getWdate() %></td>
+	</tr>
+	<tr>
+		<th>조회수</th>
+		<td><%=bbs.getReadcount() %></td>
+	</tr>
+	<tr>
+		<th>정보</th>
+		<td><%=bbs.getRef() %>-<%=bbs.getStep() %>-<%=bbs.getDepth() %></td>
+	</tr>
+	<tr>
+		<th>내용</th>
+		<td><textarea rows="15" cols="100" name="content" readonly><%=bbs.getContent() %></textarea></td>
+	</tr>
+
+<%
+}
+%>
+			
+	</table>
+
+<%
+MemberDto mem = (MemberDto)request.getSession().getAttribute("login");
+
+%>
+<button type="button" onclick="answer( <%=bbs.getSeq() %> )">답글</button>
+
+<%
+if (mem.getId().equals(bbs.getId())){
+%>
+
+<button type="button" onclick="updatebbs( <%=bbs.getSeq() %>)">수정</button>
+
+<button type="button" onclick="deletebbs(<%=bbs.getSeq() %>)">삭제</button>
+	
+<%
+}
+%>
+</div>
+
+<script type="text/javascript">
+function answer( seq ){
+	location.href = "answer.do?seq=" + seq;
+}
+function updatebbs( seq ){
+	location.href = "updatebbs.do?seq=" + seq;
+}
+function deletebbs( seq ){
+	location.href = "deletebbs.do?seq=" + seq;
+}
 
 <div class="card mb-2">
 	<div class="card-header bg-light">
@@ -46,7 +133,10 @@ BoardDto board = (BoardDto)request.getAttribute("board");
 		</ul>
 	</div>
 </div>
-
+</div><!-- wrapper마감 -->
+<footer>
+	<p>저작권표시</p>
+</footer>
 <script type="text/javascript">
 function writeAf() {
 	location.href = "board_detail.do";

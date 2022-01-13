@@ -36,11 +36,11 @@
 </select>
 
 
-<select id="boardcountup" parameterType="Integer" resultType="Integer">
-	SELECT *
-	FROM BOARDALL
+<update id="boardcountup" parameterType="Integer">
+	UPDATE BOARDALL
+	SET READCOUNT = READCOUNT + 1
 	WHERE BOARDSEQ=#{ boardseq }
-</select>
+</update>
 
 <update id="boardupdate" parameterType="secure.mbti.a.dto.BoardDto" >
 	UPDATE BOARDALL

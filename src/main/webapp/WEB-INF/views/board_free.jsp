@@ -13,11 +13,25 @@ List<BoardDto> board_list = (List<BoardDto>)request.getAttribute("board_list");
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+
 <body>
+<div class="wrapper">
+	<header>
+		<nav>
+			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
+				<a href="#test" class="text-light distance">유형소개</a>
+				<a href="#test" class="text-light distance">유형별게시판</a>
+				<a href="board_free.do" class="text-light distance">자유게시판</a>
+				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
+				<button>로그아웃</button>
+			</div>
+		</nav>
+	</header>
 <p>여긴 자유게시판입니다</p>
 <div align="center">
 
 <hr>
+
 <select id="choice">
 	<option value="title">제목</option>
 	<option value="content">내용</option>
@@ -91,7 +105,11 @@ else{
 location.href = "bbslist.do"; -> GET
 </script>
  -->
-
+ </div>
+ 
+	<footer>
+	<p>저작권표시</p>
+	</footer>
 <script type="text/javascript">
 function searchBbs(){
 	let choice = document.getElementById("choice").value;

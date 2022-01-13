@@ -29,8 +29,22 @@ List<CommentDto> comments = (List<CommentDto>)request.getAttribute("comments");
 <title>Insert title here</title>
 </head>
 <body>
+<div class="wrapper">
 
 <p align="center">이곳은 글쓰기 영역(board_write.do)</p>
+<!-- 고정바 -->
+	<header>
+		<nav>
+			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
+				<a href="#test" class="text-light distance">유형소개</a>
+				<a href="#test" class="text-light distance">유형별게시판</a>
+				<a href="board_free.do" class="text-light distance">자유게시판</a>
+				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
+				<button>로그아웃</button>
+			</div>
+		</nav>
+	</header>
+<!-- 고정바 -->
 
 	<section>
 		<article style="margin: 250px" padding="50px">
@@ -48,32 +62,13 @@ List<CommentDto> comments = (List<CommentDto>)request.getAttribute("comments");
 				<button type="button" class="btn btn-dark mt-3" onclick="location.href='board_free.do'">취소</button>
 	
 			</form>
-			
-				<div class="card mb-2">
-					<div class="card-header bg-light">
-						<i class="fa fa-comment fa"></i> 댓글
-					</div>
-					<div class="card-body">
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item">
-								<div class="form-inline mb-2">
-									<label for="replyId"><i
-										class="fa fa-user-circle-o fa-2x"></i></label> <input type="text"
-										class="form-control ml-2" placeholder="Enter yourId"
-										id="replyId">
-
-								</div> <textarea class="form-control" id="exampleFormControlTextarea1"
-									rows="3"></textarea>
-								<button type="button" class="btn btn-dark mt-3"
-									onClick="javascript:addReply();">post reply</button>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
 
 		</article>
 	</section>
+	<footer>
+	<p>저작권표시</p>
+	</footer>
+	</div>
 	
 	<script type="text/javascript">
 

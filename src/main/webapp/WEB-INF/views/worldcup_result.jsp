@@ -23,13 +23,14 @@ List<CommentDto> comments = (List<CommentDto>)request.getAttribute("comments");
 <title>결과창</title>
 </head>
 <body>
+
 <div class="wrapper">
 	<header>
 		<nav>
 			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
 				<a href="#test" class="text-light distance">유형소개</a>
 				<a href="#test" class="text-light distance">유형별게시판</a>
-				<a href="#test" class="text-light distance">자유게시판</a>
+				<a href="board_free.do" class="text-light distance">자유게시판</a>
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
 				<button>로그아웃</button>
 			</div>

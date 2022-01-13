@@ -36,18 +36,18 @@ public class BoardDaoImpl implements BoardDao{
 
 	@Override
 	public int board_countUp(int boardseq) {
-		return session.update(ns+"boardcountUp", boardseq);
+		return session.update(ns+"boardcountup", boardseq);
 	}
 
 	@Override
-	public void board_update(BoardDto dto) {
-		session.update(ns+ "boardupdate", dto);
+	public int board_update(BoardDto dto) {
+		return session.update(ns+ "boardupdate", dto);
 		
 	}
 
 	@Override
-	public void board_delete(int boardseq) {
-		session.delete(ns+"boarddelete", boardseq);
+	public int board_delete(int boardseq) {
+		return session.delete(ns+"boarddelete", boardseq);
 		
 	}
 	
