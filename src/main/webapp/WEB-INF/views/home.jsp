@@ -27,7 +27,7 @@
                     <!--  중가 -->
                         <h1 class="mx-auto my-0 text-uppercase">PLAN/16</h1>				
                         <h2 class="text-white-50 mx-auto mt-2 mb-5">A free, responsive, one page Bootstrap theme created by Start Bootstrap.</h2>
-                        <a class="btn btn-primary" href="#about">Get Started</a>
+                        <a class="btn btn-primary" href="login.do">Get Started</a>
                     </div>
                 </div>
             </div>
