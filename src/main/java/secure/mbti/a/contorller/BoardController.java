@@ -20,7 +20,11 @@ public class BoardController {
 	BoardService Boardservice;
 	
 	/* 임시 controller */
-	
+	@RequestMapping(value = "board_ENFJ.do", method = RequestMethod.GET)
+	public String board_ENFJ(){ 
+		logger.info("BoardController ENFJ() " + new Date());
+		return "board_ENFJ";
+	}
 	@RequestMapping(value = "board_list.do", method = RequestMethod.GET)
 	public String board_list(){ 
 		logger.info("BoardController board_list() " + new Date());
