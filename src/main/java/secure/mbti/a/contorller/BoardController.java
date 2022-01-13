@@ -60,6 +60,7 @@ public class BoardController {
 	@RequestMapping(value = "board_detail.do", method = RequestMethod.GET)
 	public String board_detail(Model model, int boardseq) {
 		logger.info("BoardController board_detail()" + new Date());
+		int readup = service.board_countUp(boardseq);
 		
 		BoardDto board = service.get_board(boardseq);
 		model.addAttribute("board", board);
@@ -77,6 +78,25 @@ public class BoardController {
 		
 		
 	}
+	/*
+	@RequestMapping(value = "board_updateAf.do", method = RequestMethod.POST)
+	public String board_updateAf(Model model, BoardDto dto) {
+		logger.info("BbsController board_updateAf() " + new Date());
+		int result = service.board_update(dto);
+		
+		model.addAttribute("result", result);
+		return "redirect:/board_free.do";
+		
+		
+	}
+	@RequestMapping(value = "board_delete.do", method = RequestMethod.GET)
+	public String board_delete(Model model, int boardseq) {
+		logger.info("BbsController board_delete() " + new Date());
+		int result = service.board_delete(boardseq);
+		
+		model.addAttribute("result", result);
+		return "redirect:/board_free.do";
+	}*/
 	
 	/*  댓글부분
 	@RequestMapping(value = "comment.do", method = RequestMethod.GET)

@@ -26,6 +26,7 @@ public interface BoardDao {
 	int board_countUp(int boardseq); // 조회수 증가
 	
 	void board_update(BoardDto dto);
+	
 	void board_delete(int boardseq);
 	
 	
