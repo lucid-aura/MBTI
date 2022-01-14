@@ -139,7 +139,7 @@ padding: 6px 12px;
     				//	alert(msg);
     				
     					if(msg == "YES"){
-    						$("#idcheck").css("color", "#0000ff");
+    						$("#idcheck").css("color", "#808080");
     						$("#idcheck").html("사용 가능한 아이디입니다.");
     					}else{
     						$("#idcheck").css("color", "#ff0000");
