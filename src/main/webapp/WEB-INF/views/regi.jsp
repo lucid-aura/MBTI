@@ -86,6 +86,9 @@ padding: 6px 12px;
                      <label>Email</label>
                      <input type="text" class="form-control" placeholder="Email" name = "email" id="email">
                   </div>
+                  <div>
+                  <input type="hidden" id="chcheck" value="0">
+                  </div>
                   
                              
                   <button type="button" class="btn btn-secondary register-btn" onclick="account()">회원가입</button>
@@ -118,7 +121,16 @@ padding: 6px 12px;
     			alert('MBTI를 입력해 주십시오');
     		}
     		else{
-    			$("#frm").submit();
+    			if($("#chcheck").val() == '0'){
+    				alert('ID 중복확인을 해주세요.');
+    			}
+    			else if($("#chcheck").val() == '2'){
+    				alert('중복된 ID 입니다.');
+    			}
+    			else if($("#chcheck").val() == '1'){
+    				$("#frm").submit();
+    			}
+    			
     		}
     	}
       
@@ -141,10 +153,12 @@ padding: 6px 12px;
     					if(msg == "YES"){
     						$("#idcheck").css("color", "#808080");
     						$("#idcheck").html("사용 가능한 아이디입니다.");
+    						$("#chcheck").val("1");
     					}else{
     						$("#idcheck").css("color", "#ff0000");
     						$("#idcheck").html("사용중인 아이디입니다.");
     						$("#id").val("");
+    						$("#chcheck").val("2");
     					}			
     				},
     				error:function(){
