@@ -77,7 +77,7 @@ else{
 </div>
 <br>
 <div align="center">
-	<a href="board_write.jsp" class="btn btn-primary pull-right">글쓰기</a>	
+	<a href="board_write.do" class="btn btn-primary pull-right">글쓰기</a>	
 </div>
 
 <!-- 

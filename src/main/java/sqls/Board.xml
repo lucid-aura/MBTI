@@ -25,7 +25,7 @@
 
 <insert id="boardwrite" parameterType="secure.mbti.a.dto.BoardDto" >
 	INSERT INTO BOARDALL(BOARDSEQ, ID, BOARDTYPE, TITLE, CONTENT, WDATE, DEL, READCOUNT,COMMENTCOUNT)
-	VALUES(BOARDSEQ.NEXTVAL, #{id} , 0,#{title}, #{content}, SYSDATE, 0, 0,0)
+	VALUES(BOARDSEQ.NEXTVAL, #{id} , #{boardtype},#{title}, #{content}, SYSDATE, 0, 0,0)
 </insert>
 
 <select id="getboard" resultType="secure.mbti.a.dto.BoardDto">

@@ -1,14 +1,21 @@
-	
-	/* 임시 controller  끝*/
-	/*
-	+board_list
-	+board_detail
-	+board_write
-	+board_writeAf
-	+board_update
-	+comment
-	*/
+package secure.mbti.a.contorller;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import secure.mbti.a.dto.BoardDto;
+import secure.mbti.a.dto.BoardParam;
 import secure.mbti.a.dto.CommentDto;
+import secure.mbti.a.dto.MemberDto;
 import secure.mbti.a.service.BoardService;
 import secure.mbti.a.service.CommentService;
 
@@ -107,8 +114,10 @@ public class BoardController {
 		return "board_ENTP";
 	}
 	@RequestMapping(value = "board_ENFJ.do", method = RequestMethod.GET)
-	public String board_ENFJ(){ 
-		logger.info("BoardController board_ENFJ() " + new Date());
+	public String board_ENFJ(Model model,BoardParam param){ 
+		logger.info("BoardController board_ENFJ() " + new Date());		
+		List<BoardDto> list = service.board_list(param);
+		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
 		return "board_ENFJ";
 	}
 	@RequestMapping(value = "board_ENTJ.do", method = RequestMethod.GET)
@@ -125,14 +134,32 @@ public class BoardController {
 	
 	//글쓰기 후 다시 자유게시판 시작점으로
 	@RequestMapping(value = "board_writeAf.do", method = RequestMethod.POST)
-	public String board_writeAf(Model model, BoardDto dto) {
+	public String board_writeAf(Model model, BoardDto dto ,HttpServletRequest request) {
 		logger.info("BoardController board_write()" + new Date());
 		System.out.println(dto.toString());
 		
 		int result = service.board_write(dto);
-		model.addAttribute("result",result);
+		model.addAttribute("result",result);		
+		String mbtiType[] = {
+				"istj", "isfj", "istp", "isfp",
+				"infj", "intj", "infp", "intp",
+				"estp", "esfp", "estj", "esfj",
+				"enfp", "entp", "enfj", "entj"
+				}; 
+		MemberDto mem = (MemberDto)request.getSession().getAttribute("login");
+		String Type =mem.getMbti().toLowerCase();
 		
-		return "redirect:/board_free.do";
+		int index = -1;
+		for (int i=0;i<mbtiType.length;i++) {
+		    if (mbtiType[i].equals(Type)) {
+		        index = i;
+		        break;
+		    }
+		}	
+		dto.setBoardtype(index);
+		System.out.println(dto.toString());
+		String type = mbtiType[dto.getBoardtype()].toUpperCase();
+		return "redirect:/board_"+type+".do";
 
 	}
 	@RequestMapping(value = "board_detail.do", method = RequestMethod.GET)
