@@ -65,7 +65,7 @@ MemberDto mem = (MemberDto)request.getSession().getAttribute("login");
 				<button type="button" name="btn_cancle" class="btn btn-dark mt-3" onclick="location.href='board_free.do'">취소</button>
 	
 			</form>
-			</div>>
+			</div>
 		</article>
 	</section>
 	<footer>

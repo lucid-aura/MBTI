@@ -21,6 +21,7 @@
 			WHERE ID=#{search}
 		</if>
 	</if> 
+	ORDER BY BOARDSEQ DESC
 </select>
 
 <insert id="boardwrite" parameterType="secure.mbti.a.dto.BoardDto" >

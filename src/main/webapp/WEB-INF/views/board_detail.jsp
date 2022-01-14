@@ -59,7 +59,7 @@ List<CommentDto> comments = (List<CommentDto>) request.getAttribute("comments");
 	<section>
 		<div class="wrapper" align="center">
 			<!--    attribute property -->
-			<table class="table table-bordered" style="width: 1000px">
+			<table class="table table-bordered" border="0" style="width: 1000px">
 				<!-- <col width="30"><col width="200"><col width="80"> -->
 				<%
 				if (board == null) {
@@ -88,7 +88,7 @@ List<CommentDto> comments = (List<CommentDto>) request.getAttribute("comments");
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td><textarea rows="15" cols="100" name="content" readonly><%=board.getContent()%></textarea></td>
+					<td><textarea rows="15" cols="100" name="content" style="border: none" readonly><%=board.getContent()%></textarea></td>
 				</tr>
 
 				<%
@@ -107,6 +107,8 @@ List<CommentDto> comments = (List<CommentDto>) request.getAttribute("comments");
 			
 			<!-- 아래에 있는 함수 이름 : board_delete -->
 			<button type="button" onclick="board_delete(<%=board.getBoardseq()%>)">삭제</button>
+			
+			<button type="button" onclick="board_free(<%=board.getBoardseq()%>)">목록</button>
 
 			<%
 			}
@@ -144,7 +146,6 @@ List<CommentDto> comments = (List<CommentDto>) request.getAttribute("comments");
 					<tr>
 						<!-- 한 줄 -->
 						<th><%=i + 1%><hr></th>
-						<td><%=comment.get()%></td>
 						<td>&nbsp<hr></td>
 						<!-- 댓글번호 -->
 						<td>
@@ -160,12 +161,13 @@ List<CommentDto> comments = (List<CommentDto>) request.getAttribute("comments");
 					%>
 
 		</table>
+		<form action="board_writeAf.do" method="post">
 		<div style="width: 1000px">	<!-- 댓글적는 부분 -->
 			<table>
 
 				<div class="card mb-2">
 
-					<div class="card-header bg-light">
+					<div class="card-header bg-light" style="align-content: left">
 						<i class="fa fa-comment fa">댓글</i>
 					</div>
 					<div class="card-body">
@@ -179,14 +181,16 @@ List<CommentDto> comments = (List<CommentDto>) request.getAttribute("comments");
 
 								</div> <textarea class="form-control" id="exampleFormControlTextarea1"
 									rows="3"></textarea>
-								<button type="button" class="btn btn-dark mt-3"
-									onClick="javascript:addReply();">댓글 등록</button>
+								<button type="button" class="btn btn-dark mt-3">댓글 등록</button><!-- onClick="javascript:addReply();" -->
 							</li>
 						</ul>
 					</div>
 				</div>
-			</table>
+
 		</div>	<!-- 댓글적는 부분 끝 -->
+		</table>
+		</form>
+
 	</div>
 </section>
 		<!-- wrapper마감 -->
@@ -200,11 +204,13 @@ List<CommentDto> comments = (List<CommentDto>) request.getAttribute("comments");
 			function board_update( boardseq ){
 				location.href = "board_update.do?boardseq=" + boardseq;
 			}
-			function board_update( boardseq ){
+			function board_delete( boardseq ){
 				location.href = "board_delete.do?boardseq=" + boardseq;
 			}
-			
-			
+			function board_free( boardseq ){
+				location.href = "board_free.do?boardseq=" + boardseq;
+			}
+
 </script>
 </body>
 </html>

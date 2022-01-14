@@ -91,7 +91,7 @@ public class BoardController {
 		service.board_update(dto);
 		
 		model.addAttribute("result");
-		return "redirect:/board_detail.do";   // 강의때 bbslist.do였음
+		return "redirect:/board_free.do";   // 강의때 bbslist.do였음
 		
 		
 	}
@@ -104,7 +104,6 @@ public class BoardController {
 		return "redirect:/board_free.do";
 	}
 	
-	/*  댓글부분
 	@RequestMapping(value = "comment.do", method = RequestMethod.GET)
 	public String comment(Model model, int boardseq) {
 		logger.info("BbsController comment() " + new Date());
@@ -116,7 +115,7 @@ public class BoardController {
 		return "board_detail";
 		
 		
-	}*/
+	}
 	
 	
 	
