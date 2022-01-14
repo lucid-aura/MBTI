@@ -24,10 +24,85 @@ public class BoardController {
 	BoardService service;
 	
 	/* 임시 controller */
+	@RequestMapping(value = "board_ISTJ.do", method = RequestMethod.GET)
+	public String board_ISTJ(){ 
+		logger.info("BoardController board_ISTJ()" + new Date());
+		return "board_ISTJ";
+	}
+	@RequestMapping(value = "board_ISFJ.do", method = RequestMethod.GET)
+	public String board_ISFJ(){ 
+		logger.info("BoardController board_ISFJ()" + new Date());
+		return "board_ISFJ";
+	}
+	@RequestMapping(value = "board_ISTP.do", method = RequestMethod.GET)
+	public String board_ISTP(){ 
+		logger.info("BoardController board_ISTP() " + new Date());
+		return "board_ISTP";
+	}
+	@RequestMapping(value = "board_ISFP.do", method = RequestMethod.GET)
+	public String board_ISFP(){ 
+		logger.info("BoardController board_ISFP() " + new Date());
+		return "board_ISFP";
+	}
+	@RequestMapping(value = "board_INFJ.do", method = RequestMethod.GET)
+	public String board_INFJ(){ 
+		logger.info("BoardController board_INFJ() " + new Date());
+		return "board_INFJ";
+	}
+	@RequestMapping(value = "board_INTJ.do", method = RequestMethod.GET)
+	public String board_INTJ(){ 
+		logger.info("BoardController board_INTJ() " + new Date());
+		return "board_INTJ";
+	}
+	@RequestMapping(value = "board_INFP.do", method = RequestMethod.GET)
+	public String board_INFP(){ 
+		logger.info("BoardController board_INFP() " + new Date());
+		return "board_INFP";
+	}
+	@RequestMapping(value = "board_INTP.do", method = RequestMethod.GET)
+	public String board_INTP(){ 
+		logger.info("BoardController board_INTP() " + new Date());
+		return "board_INTP";
+	}
+	@RequestMapping(value = "board_ESTP.do", method = RequestMethod.GET)
+	public String board_ESTP(){ 
+		logger.info("BoardController board_ESTP() " + new Date());
+		return "board_ESTP";
+	}
+	@RequestMapping(value = "board_ESFP.do", method = RequestMethod.GET)
+	public String board_ESFP(){ 
+		logger.info("BoardController board_ESFP() " + new Date());
+		return "board_ESFP";
+	}
+	@RequestMapping(value = "board_ESTJ.do", method = RequestMethod.GET)
+	public String board_ESTJ(){ 
+		logger.info("BoardController board_ESTJ() " + new Date());
+		return "board_ESTJ";
+	}
+	@RequestMapping(value = "board_ESFJ.do", method = RequestMethod.GET)
+	public String board_ESFJ(){ 
+		logger.info("BoardController board_ESFJ() " + new Date());
+		return "board_ESFJ";
+	}
+	@RequestMapping(value = "board_ENFP.do", method = RequestMethod.GET)
+	public String board_ENFP(){ 
+		logger.info("BoardController board_ENFP() " + new Date());
+		return "board_ENFP";
+	}
+	@RequestMapping(value = "board_ENTP.do", method = RequestMethod.GET)
+	public String board_ENTP(){ 
+		logger.info("BoardController board_ENTP() " + new Date());
+		return "board_ENTP";
+	}
 	@RequestMapping(value = "board_ENFJ.do", method = RequestMethod.GET)
 	public String board_ENFJ(){ 
-		logger.info("BoardController ENFJ() " + new Date());
+		logger.info("BoardController board_ENFJ() " + new Date());
 		return "board_ENFJ";
+	}
+	@RequestMapping(value = "board_ENTJ.do", method = RequestMethod.GET)
+	public String board_ENTJ(){ 
+		logger.info("BoardController board_ENTJ() " + new Date());
+		return "board_ENTJ";
 	}
 	//임시임!
 	@RequestMapping(value = "board_free.do", method = RequestMethod.GET)
@@ -48,12 +123,6 @@ public class BoardController {
 	public String board_detail(){ 
 		logger.info("BoardController board_detail() " + new Date());
 		return "board_detail";
-	}
-	// 임시니까 삭세해야함
-	@RequestMapping(value = "introMBTI.do", method = RequestMethod.GET)
-	public String introMBTI(){ 
-		logger.info("BoardController introMBTI() " + new Date());
-		return "introMBTI";
 	}
 	@RequestMapping(value = "board_write.do", method = RequestMethod.GET)
 	public String board_write(){ 

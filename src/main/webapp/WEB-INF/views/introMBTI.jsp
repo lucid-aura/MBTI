@@ -1,5 +1,11 @@
+<%@page import="secure.mbti.a.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+//session에서 사용자 정보를 산출
+MemberDto mem = (MemberDto)request.getSession().getAttribute("login");
+System.out.println(mem.toString());
+%>
 <!DOCTYPE html>
 
 <html>
@@ -57,10 +63,9 @@
     <form id="frm" action="detailMBTI.do" method="post">
     	<input type="hidden" id="filename" name="filename" value="">
     </form>
-    
-	
+ 
 	<script>
-	
+		
 	    $(document).ready(function() {
 		    $(".image").click(function(){
 	            let index = $(".image").index(this);
@@ -87,6 +92,7 @@
             		});
 		    
 		});
+	    
 	</script>
 	
 	
