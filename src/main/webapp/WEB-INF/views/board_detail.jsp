@@ -144,7 +144,6 @@ List<CommentDto> comments = (List<CommentDto>) request.getAttribute("comments");
 					<tr>
 						<!-- 한 줄 -->
 						<th><%=i + 1%><hr></th>
-						<td><%=comment.get()%></td>
 						<td>&nbsp<hr></td>
 						<!-- 댓글번호 -->
 						<td>
