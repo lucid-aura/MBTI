@@ -29,13 +29,12 @@ public class BoardController {
 		logger.info("BoardController ENFJ() " + new Date());
 		return "board_ENFJ";
 	}
-	/*
+	//임시임!
 	@RequestMapping(value = "board_free.do", method = RequestMethod.GET)
 	public String board_free(){ 
 		logger.info("BoardController board_free() " + new Date());
 		return "board_free";
 	}
-	*/
 	@RequestMapping(value = "board_list.do", method = RequestMethod.GET)
 	public String board_list(Model model, BoardParam param){ 
 		logger.info("BoardController board_list() " + new Date());
@@ -50,7 +49,12 @@ public class BoardController {
 		logger.info("BoardController board_detail() " + new Date());
 		return "board_detail";
 	}
-
+	// 임시니까 삭세해야함
+	@RequestMapping(value = "introMBTI.do", method = RequestMethod.GET)
+	public String introMBTI(){ 
+		logger.info("BoardController introMBTI() " + new Date());
+		return "introMBTI";
+	}
 	@RequestMapping(value = "board_write.do", method = RequestMethod.GET)
 	public String board_write(){ 
 		logger.info("BoardController board_write() " + new Date());
