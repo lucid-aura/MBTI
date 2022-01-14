@@ -7,13 +7,26 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="css/regiStyle.css" rel="stylesheet" />
+<link href="css/bootstrap.css" rel="stylesheet" />
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<style type="text/css">
+
+.check-btn{
+padding: 0px 15px;
+}
+
+.register-btn{
+padding: 6px 12px;
+}
+</style>
 </head>
 <body>
 <div class="sidenav">
          <div class="login-main-text">
-            <h2>Application<br> Register Page</h2>
-            <p>Login or register from here to access.</p>
+            <h2>MBTI<br> 회원가입을 환영합니다</h2>
+            <p>register from here to access.</p>
          </div>
       </div>
       <div class="main">
@@ -22,13 +35,41 @@
                <form id="frm" action="regiAf.do" method = "post">
                
                   <div class="form-group">
-                     <label>ID</label>
-                     <input type="text" class="form-control" placeholder="ID" name = "id">
-                  </div>  
+                  
+                     <label>MBTI</label><br>
+                    <select name="mbti" id ="mbti" class="form-select" aria-label="Default select example" onfocus='this.size=5;'
+                    onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+                    <option value="ENFJ">ENFJ</option>
+                    <option value="ENFP">ENFP</option>
+                    <option value="ENTJ">ENTJ</option>
+                    <option value="ENTP">ENTP</option>
+                    <option value="ESFJ">ESFJ</option> 
+                    <option value="ESFP">ESFP</option>
+                    <option value="ESTJ">ESTJ</option>
+                    <option value="ESTP">ESTP</option>
+                    <option value="INFJ">INFJ</option>
+                    <option value="INFP">INFP</option>
+                    <option value="INTJ">INTJ</option>
+                    <option value="INTP">INTP</option>
+                    <option value="ISFJ">ISFJ</option>
+                    <option value="ISFP">ISFP</option>
+                    <option value="ISTJ">ISTJ</option>
+                    <option value="ISTP">ISTP</option>                            
+                    </select>
+                  </div>
+                  <label>ID</label>
+                  <div class="form-group" style="display :flex;">
+                     
+                     <input type="text" class="form-control" placeholder="ID" name = "id" id="id" style="margin-right :10px;">                  
+                     <button type="button" class="btn btn-dark check-btn" id="btn" onclick="idcheck()">확인</button>
+                                                                                       
+                   </div>    
+                     <p id="idcheck" style="font-size: 14px"></p>	
+                 
                                
                   <div class="form-group">
                      <label>Password</label>
-                     <input type="password" class="form-control" placeholder="Password" name = "pwd">
+                     <input type="password" class="form-control" placeholder="Password" name = "pwd" id="pwd">
                   </div>
                   
                   <div class="form-group">
@@ -46,29 +87,8 @@
                      <input type="text" class="form-control" placeholder="Email" name = "email" id="email">
                   </div>
                   
-                  <div class="form-group">
-                     <label>MBTI</label>
-                    <select name="mbti" id ="mbti">
-                    <option value="ENFJ">ENFJ</option>
-                    <option value="ENFP">ENFP</option>
-                    <option value="ENTJ">ENTJ</option>
-                    <option value="ENTP">ENTP</option>
-                    <option value="ESFJ">ESFJ</option>
-                    <option value="ESFP">ESFP</option>
-                    <option value="ESTJ">ESTJ</option>
-                    <option value="ESTP">ESTP</option>
-                    <option value="INFJ">INFJ</option>
-                    <option value="INFP">INFP</option>
-                    <option value="INTJ">INTJ</option>
-                    <option value="INTP">INTP</option>
-                    <option value="ISFJ">ISFJ</option>
-                    <option value="ISFP">ISFP</option>
-                    <option value="ISTJ">ISTJ</option>
-                    <option value="ISTP">ISTP</option>                            
-                    </select>
-                  </div>
                              
-                  <button type="button" class="btn btn-secondary" onclick="account()">Register</button>
+                  <button type="button" class="btn btn-secondary register-btn" onclick="account()">회원가입</button>
                </form>
             </div>
          </div>
@@ -102,6 +122,38 @@
     		}
     	}
       
+      $(document).ready(function () {
+    		
+    		$("#btn").click(function () {
+    		//	alert('btn click');
+    		//	let id = $("#id").val();
+    		//	alert(id);
+    			
+    			// id 확인 -> ajax
+    			$.ajax({
+    				url:"idcheck.do",
+    				type:"post",
+    				data:{ id:$("#id").val() },
+    				success:function( msg ){
+    				//	alert('success');
+    				//	alert(msg);
+    				
+    					if(msg == "YES"){
+    						$("#idcheck").css("color", "#0000ff");
+    						$("#idcheck").html("사용 가능한 아이디입니다.");
+    					}else{
+    						$("#idcheck").css("color", "#ff0000");
+    						$("#idcheck").html("사용중인 아이디입니다.");
+    						$("#id").val("");
+    					}			
+    				},
+    				error:function(){
+    					alert('error');
+    				}
+    			});
+    		});	
+    	});
+
     
 </script>
 </body>

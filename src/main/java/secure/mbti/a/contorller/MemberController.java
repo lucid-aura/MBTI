@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import secure.mbti.a.dto.MemberDto;
 import secure.mbti.a.service.MemberService;
@@ -21,6 +22,8 @@ import secure.mbti.a.service.MemberService;
 @Controller
 public class MemberController {
 	private static Logger logger = LoggerFactory.getLogger(MemberController.class);
+	
+	
 	
 	@Autowired
 	MemberService service;
@@ -73,6 +76,21 @@ public class MemberController {
 	//	return "login.do"; // login.do.jsp
 		
 		return "redirect:/login.do";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "idcheck.do", method = RequestMethod.POST)
+	public String idcheck(String id) {
+		logger.info("MemberController idcheck() " + new Date());		
+		System.out.println("id:" + id);
+		
+		int count = service.getId(id);
+		System.out.println("count:" + count);		
+		if(count > 0) {	// 아이디가 있음
+			return "NO";
+		}else {			// 아이디가 없음
+			return "YES";
+		}		
 	}
 	
 }
