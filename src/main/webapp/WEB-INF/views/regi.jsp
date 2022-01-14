@@ -86,6 +86,7 @@ padding: 6px 12px;
                      <label>Email</label>
                      <input type="text" class="form-control" placeholder="Email" name = "email" id="email">
                   </div>
+                  <!-- ID중복체크 했는지 안했는지 확인을 위해 만듬 -->
                   <div>
                   <input type="hidden" id="chcheck" value="0">
                   </div>

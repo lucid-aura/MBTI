@@ -41,6 +41,13 @@
 	location.href = "regi.do";	
 	}
 	
+	//로그인 화면에서 ID PWD 입력 후 엔터 누르면 login()실행
+	$("#frm").keypress(function(e) {
+		if(e.keyCode === 13){
+			login();
+		}
+	});
+	
 	function login() {
 		
 		if($("#id").val().trim() == ""){
