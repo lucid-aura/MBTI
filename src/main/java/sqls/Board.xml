@@ -12,15 +12,20 @@
 	FROM BOARDALL
  	<if test="choice != null and choice != ''  and search != null and search != '' ">
 		<if test="choice == 'title'">
-			WHERE TITLE LIKE '%' || #{search} || '%'
+			WHERE TITLE LIKE '%' || #{search} || '%' AND BOARDTYPE=#{boardtype}
 		</if>
 		<if test="choice == 'content'">
-			WHERE CONTENT LIKE '%' || #{search} || '%'
+			WHERE CONTENT LIKE '%' || #{search} || '%' AND BOARDTYPE=#{boardtype}
+			
 		</if>
 		<if test="choice == 'writer'">
-			WHERE ID=#{search}
+			WHERE ID=#{search} AND BOARDTYPE=#{boardtype}
 		</if>
+		
 	</if> 
+		<if test="choice == null and search == null ">	
+		WHERE BOARDTYPE=#{boardtype}
+		</if>
 </select>
 
 <insert id="boardwrite" parameterType="secure.mbti.a.dto.BoardDto" >

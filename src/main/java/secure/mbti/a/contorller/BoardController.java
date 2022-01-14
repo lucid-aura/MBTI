@@ -35,7 +35,7 @@ public class BoardController {
 	@RequestMapping(value = "board_free.do", method = RequestMethod.GET)
 	public String board_list(Model model, BoardParam param) {
 		logger.info("BoardController board_list()" + new Date());
-		
+		param.setBoardtype(16);
 		List<BoardDto> list = service.board_list(param);
 		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
 		
@@ -115,9 +115,11 @@ public class BoardController {
 	}
 	@RequestMapping(value = "board_ENFJ.do", method = RequestMethod.GET)
 	public String board_ENFJ(Model model,BoardParam param){ 
-		logger.info("BoardController board_ENFJ() " + new Date());		
+		logger.info("BoardController board_ENFJ() " + new Date());	
+		param.setBoardtype(14); //이것 주의!
 		List<BoardDto> list = service.board_list(param);
 		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
+		
 		return "board_ENFJ";
 	}
 	@RequestMapping(value = "board_ENTJ.do", method = RequestMethod.GET)
@@ -126,17 +128,19 @@ public class BoardController {
 		return "board_ENTJ";
 	}
 	@RequestMapping(value = "board_write.do", method = RequestMethod.GET)
-	public String board_write() {
+	public String board_write(Model model,int boardtype) {
 		logger.info("BoardController board_write()" + new Date());
-		
+		model.addAttribute("boardtype",boardtype);	
+		System.out.println(boardtype+"ZXZXZXZ");
+							//키        밸류 
 		return "board_write";
 	}
 	
 	//글쓰기 후 다시 자유게시판 시작점으로
 	@RequestMapping(value = "board_writeAf.do", method = RequestMethod.POST)
 	public String board_writeAf(Model model, BoardDto dto ,HttpServletRequest request) {
-		logger.info("BoardController board_write()" + new Date());
-		System.out.println(dto.toString());
+		logger.info("BoardController board_writeAf()" + new Date());
+		System.out.println(dto.toString()+"ASASAXA");
 		
 		int result = service.board_write(dto);
 		model.addAttribute("result",result);		
@@ -144,7 +148,8 @@ public class BoardController {
 				"istj", "isfj", "istp", "isfp",
 				"infj", "intj", "infp", "intp",
 				"estp", "esfp", "estj", "esfj",
-				"enfp", "entp", "enfj", "entj"
+				"enfp", "entp", "enfj", "entj",
+				"free",
 				}; 
 		MemberDto mem = (MemberDto)request.getSession().getAttribute("login");
 		String Type =mem.getMbti().toLowerCase();
@@ -160,8 +165,22 @@ public class BoardController {
 		System.out.println(dto.toString());
 		String type = mbtiType[dto.getBoardtype()].toUpperCase();
 		return "redirect:/board_"+type+".do";
-
+		
 	}
+	@RequestMapping(value = "board_cancle.do", method = RequestMethod.GET)
+	public String board_cancle(int boardtype){ 
+		logger.info("BoardController board_cancle() " + new Date());
+		String mbtiType[] = {
+				"istj", "isfj", "istp", "isfp",
+				"infj", "intj", "infp", "intp",
+				"estp", "esfp", "estj", "esfj",
+				"enfp", "entp", "enfj", "entj",
+				"free"
+				}; 
+		return "redirect:/board_"+mbtiType[boardtype].toUpperCase()+".do";
+	}
+	
+	
 	@RequestMapping(value = "board_detail.do", method = RequestMethod.GET)
 	public String board_detail(Model model, int boardseq) {
 		logger.info("BoardController board_detail()" + new Date());
@@ -194,7 +213,7 @@ public class BoardController {
 		service.board_update(dto);
 		
 		model.addAttribute("result");
-		return "redirect:/board_detail.do";   // 강의때 bbslist.do였음
+		return "redirect:/board_detail.do?boardseq="+dto.getBoardseq();   // 강의때 bbslist.do였음 문자열(상수)+문자열(변수)임
 		
 		
 	}
@@ -202,9 +221,17 @@ public class BoardController {
 	public String board_delete(Model model, int boardseq) {
 		logger.info("BbsController board_delete() " + new Date());
 		service.board_delete(boardseq);
-		
+		String mbtiType[] = {
+				"istj", "isfj", "istp", "isfp",
+				"infj", "intj", "infp", "intp",
+				"estp", "esfp", "estj", "esfj",
+				"enfp", "entp", "enfj", "entj",
+				"free"
+				}; 
+		                                  //char[]=문자배열(문자열) String
+		String boardtype = mbtiType[service.get_board(boardseq).getBoardtype()];
 		model.addAttribute("result");
-		return "redirect:/board_free.do";
+		return "redirect:/board_"+boardtype.toUpperCase()+".do";
 	}
 	
 	/*  댓글부분

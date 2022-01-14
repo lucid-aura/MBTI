@@ -11,6 +11,12 @@ List<BoardDto> board_list = (List<BoardDto>)request.getAttribute("board_list");
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <title>Insert title here</title>
 </head>
 
@@ -19,15 +25,17 @@ List<BoardDto> board_list = (List<BoardDto>)request.getAttribute("board_list");
 	<header>
 		<nav>
 			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
-				<a href="#test" class="text-light distance">유형소개</a>
-				<a href="#test" class="text-light distance">유형별게시판</a>
+				<a href="introMBTI.do" class="text-light distance">유형소개</a>
+				<a href="#board_writeAf.do" class="text-light distance">유형별게시판</a>
 				<a href="board_free.do" class="text-light distance">자유게시판</a>
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
 				<button>로그아웃</button>
 			</div>
 		</nav>
 	</header>
-<p>여긴 자유게시판입니다</p>
+<h1></h1>	<br><br>
+	<br>
+<h1>자유게시판</h1>
 <div align="center">
 
 <hr>
@@ -44,7 +52,6 @@ List<BoardDto> board_list = (List<BoardDto>)request.getAttribute("board_list");
 </div>
 <br><hr><br>
 
-		<article>
 <table class="table">
   <thead class="thead-light">
     <tr>
@@ -55,32 +62,7 @@ List<BoardDto> board_list = (List<BoardDto>)request.getAttribute("board_list");
       <th scope="col">조회횟수</th>
       <th scope="col">댓글개수</th>
     </tr>
-  </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Markadsssssssssssdazxc</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-    </tr>
   <%
 if(board_list == null || board_list.size() == 0){	
 %>
@@ -113,7 +95,19 @@ else{
 				</a>
 			</td>
 			
-			<td align="center"><%=board.getId() %></td>
+			<td ><%=board.getId() %></td>
+			
+			</td>
+			
+			<td ><%=board.getWdate() %></td>
+			
+			</td>
+			
+			<td ><%=board.getReadcount() %></td>
+			
+			</td>
+			
+			<td ><%=board.getCommentcount() %></td>
 		</tr>
 
 <%
@@ -121,22 +115,21 @@ else{
 	}
 }
 %>  
-    
+    </thead>
   </tbody>
 </table>
 </article>
 </section>
 <div align="center">
-<div class="pagination" >
-  <a href="#">&laquo;</a>
-  <a href="#">1</a>
-  <a class="active" href="#">2</a>
-  <a href="#">3</a>
-  <a href="#">4</a>
-  <a href="#">5</a>
-  <a href="#">6</a>
-  <a href="#">&raquo;</a>
-</div>
+<nav aria-label="Page navigation example">
+  <ul class="pagination" >
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
 </div>
 
 	<footer>

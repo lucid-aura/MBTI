@@ -199,7 +199,7 @@ List<CommentDto> comments = (List<CommentDto>) request.getAttribute("comments");
 			function board_update( boardseq ){
 				location.href = "board_update.do?boardseq=" + boardseq;
 			}
-			function board_update( boardseq ){
+			function board_delete( boardseq ){
 				location.href = "board_delete.do?boardseq=" + boardseq;
 			}
 			

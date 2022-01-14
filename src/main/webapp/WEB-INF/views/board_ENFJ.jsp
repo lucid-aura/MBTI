@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-List<BoardDto> bbslist = (List<BoardDto>)request.getAttribute("bbslist");
+	List<BoardDto> board_list = (List<BoardDto>)request.getAttribute("board_list");
 %>
 <!DOCTYPE html>
 <html>
@@ -20,7 +20,20 @@ List<BoardDto> bbslist = (List<BoardDto>)request.getAttribute("bbslist");
 <body>
 
 <h1>게시판</h1>
-
+<div class="wrapper">
+	<header>
+		<nav>
+			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
+				<a href="#test" class="text-light distance">유형소개</a>
+				<a href="#test" class="text-light distance">유형별게시판</a>
+				<a href="board_free.do" class="text-light distance">자유게시판</a>
+				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
+				<button>로그아웃</button>
+			</div>
+		</nav>
+	</header>
+<br><br>
+<h1>ENFJ게시판</h1>
 <div align="center">
 
 <hr>
@@ -45,7 +58,7 @@ List<BoardDto> bbslist = (List<BoardDto>)request.getAttribute("bbslist");
 	</thead>
 	<tbody>
 <%
-if(bbslist == null || bbslist.size() == 0){	
+if(board_list == null || board_list.size() == 0){	
 %>
 	<tr>
 		<td colspan="4">작성된 글이 없습니다.</td>
@@ -53,12 +66,12 @@ if(bbslist == null || bbslist.size() == 0){
 <%
 }
 else{
-	for(int i=0; i< bbslist.size(); i++) {
-		BoardDto bbs = bbslist.get(i);	
+	for(int i=0; i< board_list.size(); i++) {
+		BoardDto board = board_list.get(i);	
 		
 %>
 		<%
-			if (bbs.getDel() == 1) {
+			if (board.getDel() == 1) {
 		%>
 		<tr>
 			<td colspan="4">삭제된 글입니다.</td>
@@ -66,20 +79,44 @@ else{
 		<%
 		}
 			else{			
-		%>
-<%
+				%>
+				<tr>
+					<th><%=i+1%></th>
+					<td>
+						
+						<a href="board_detail.do?boardseq=<%=board.getBoardseq() %>">
+							<%=board.getTitle() %>
+						</a>
+					</td>
+					
+					<td ><%=board.getId() %></td>
+					
+					</td>
+					
+					<td ><%=board.getWdate() %></td>
+					
+					</td>
+					
+					<td ><%=board.getReadcount() %></td>
+					
+					</td>
+					
+					<td ><%=board.getCommentcount() %></td>
+				</tr>
+
+		<%
+				}
+			}
 		}
-	}
-}
-%>
+		%>  
 		</tbody>	
 	</table>
 </div>
 <br>
 <div align="center">
-	<a href="board_write.do" class="btn btn-primary pull-right">글쓰기</a>	
+	<a href="board_write.do?boardtype=14" class="btn btn-primary pull-right">글쓰기</a>	
 </div>
-
+<!--  117 131 제목 바꾸기-->
 <!-- 
 <script type="text/javascript">
 location.href = "bbslist.do"; -> GET
@@ -87,7 +124,7 @@ location.href = "bbslist.do"; -> GET
  -->
 
 <script type="text/javascript">
-function searchBbs(){
+function searchBoard(){
 	let choice = document.getElementById("choice").value;
 	let search = document.getElementById("search").value;
 	

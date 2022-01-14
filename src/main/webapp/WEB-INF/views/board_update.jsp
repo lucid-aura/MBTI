@@ -50,9 +50,11 @@ MemberDto dto = (MemberDto) request.getAttribute("dto");
 		<article style="margin: 250px" padding="50px">
 			<div id="containerAll"> 
 			<form action="board_updateAf.do" method="post">
+			<input type="hidden" name="boardseq" value="<%=board.getBoardseq()%>">
 				<input type="text" name="id" class="form-control mt-4 mb-2" size="70px" value=<%=board.getId()%> readonly>	
 				<input type="text" name="title" class="form-control mt-4 mb-2"
-					placeholder="제목을 입력해주세요." required><%=board.getTitle()%>
+					placeholder="제목을 입력해주세요." value="<%=board.getTitle()%>" required>
+					<br>
 				<div class="form-group">
 					<textarea class="form-control" rows="10" name="content"
 						placeholder="내용을 입력해주세요" required><%=board.getContent()%></textarea>
@@ -60,7 +62,7 @@ MemberDto dto = (MemberDto) request.getAttribute("dto");
 				<input type="submit" value="수정하기">
 	
 			</form>
-			</div>>
+			</div>
 		</article>
 	</section>
 	<footer>
