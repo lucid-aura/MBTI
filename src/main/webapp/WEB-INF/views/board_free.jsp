@@ -104,6 +104,47 @@ List<BoardDto> board_list = (List<BoardDto>)request.getAttribute("board_list");
       <td>@mdo</td>
       <td>@mdo</td>
     </tr>
+  <%
+if(board_list == null || board_list.size() == 0){	
+%>
+	<tr>
+		<td colspan="4">작성된 글이 없습니다.</td>
+	</tr>
+<%
+}
+else{
+	for(int i=0; i< board_list.size(); i++) {
+		BoardDto board = board_list.get(i);	
+		
+%>
+		<%
+			if (board.getDel() == 1) {
+		%>
+		<tr>
+			<td colspan="4">삭제된 글입니다.</td>
+		</tr>
+		<%
+		}
+			else{			
+		%>
+		<tr>
+			<th><%=i+1%></th>
+			<td>
+				
+				<a href="board_detail.do?boardseq=<%=board.getBoardseq() %>">
+					<%=board.getTitle() %>
+				</a>
+			</td>
+			
+			<td align="center"><%=board.getId() %></td>
+		</tr>
+
+<%
+		}
+	}
+}
+%>  
+    
   </tbody>
 </table>
 </article>
