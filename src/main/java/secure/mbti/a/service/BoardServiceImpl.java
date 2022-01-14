@@ -11,7 +11,6 @@ import secure.mbti.a.dto.BoardParam;
 
 @Service
 public class BoardServiceImpl implements BoardService {
-
 	@Autowired
 	BoardDao dao;
 
@@ -21,8 +20,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int board_write(BoardDto boardall) {
-		return dao.board_write(boardall);
+	public int board_write(BoardDto dto) {
+		return dao.board_write(dto);
 	}
 
 	@Override
@@ -32,18 +31,21 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int board_countUp(int boardseq) {
+		
 		return dao.board_countUp(boardseq);
-
 	}
 
 	@Override
-	public int board_update(BoardDto boardall) {
-		return dao.board_update(boardall);
+	public void board_update(BoardDto dto) {
+		dao.board_update(dto);
+		
 	}
 
 	@Override
-	public int board_delete(int boardseq) {
-		return dao.board_delete(boardseq);
-
+	public void board_delete(int boardseq) {
+		dao.board_delete(boardseq);
+		
 	}
+	
+	
 }

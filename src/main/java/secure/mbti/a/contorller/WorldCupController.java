@@ -17,7 +17,7 @@ import secure.mbti.a.dto.WorldCupDto;
 import secure.mbti.a.service.CommentService;
 import secure.mbti.a.service.WorldCupService;
 
-
+//월드컵 + 댓글로 합쳐진것. 따로 댓글뺴야된다
 @Controller
 public class WorldCupController {
 

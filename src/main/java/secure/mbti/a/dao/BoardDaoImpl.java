@@ -10,48 +10,46 @@ import secure.mbti.a.dto.BoardDto;
 import secure.mbti.a.dto.BoardParam;
 
 @Repository
-public class BoardDaoImpl implements BoardDao {
-
+public class BoardDaoImpl implements BoardDao{
 	@Autowired
-	SqlSession session;
-
-	String ns = "Board.";
+	SqlSession session;		// mybatis 사용하기 위해
+	
+	String ns = "Board.";   // namespace ns
 
 	@Override
 	public List<BoardDto> board_list(BoardParam param) {
-		return session.selectList(ns+"boardlist", param);
+	
+		return session.selectList(ns+"boardlist", param);  // mybatis를 이용할때 dao + 무조건 xml 과 연동된다 이건 id와 같다. xml
 	}
 
 	@Override
-	public int board_write(BoardDto boardall) {		
-		return session.insert(ns+"boardlist", boardall);
+	public int board_write(BoardDto dto) {   // dto > bbs였었음(강의자료)
+		
+		return session.insert(ns+"boardwrite", dto);
 	}
 
 	@Override
 	public BoardDto get_board(int boardseq) {
-		return session.selectOne(ns+ "get_board", boardseq);
-
+		
+		return session.selectOne(ns + "getboard", boardseq);
 	}
 
 	@Override
 	public int board_countUp(int boardseq) {
-		return session.update(ns+ "board_countUp", boardseq);
-
+		return session.update(ns+"boardcountup", boardseq);
 	}
 
 	@Override
-	public int board_update(BoardDto boardall) {
-		return session.update(ns + "board_update", boardall);
+	public void board_update(BoardDto dto) {
+		session.update(ns+ "boardupdate", dto);
+		
 	}
 
 	@Override
-	public int board_delete(int boardseq) {
-		return session.delete(ns + "board_delete", boardseq);
-
+	public void board_delete(int boardseq) {
+		session.delete(ns+"boarddelete", boardseq);
+		
 	}
 	
-
-
-
-
+	
 }

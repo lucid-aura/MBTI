@@ -53,7 +53,7 @@ public class MemberController {
 			// login 정보를 저장 -> session 
 			req.getSession().setAttribute("login", mem);			
 			
-			return "redirect:/introMBTI.do";
+			return "redirect:/board_free.do";   // intro로 교체해야됩니다 22 01 14
 		}
 		else {		// 회원정보에 없음
 			

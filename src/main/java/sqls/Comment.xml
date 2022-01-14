@@ -5,17 +5,21 @@
 <mapper namespace="Comment">
 
 <!-- 	 
-	private int commentseq;
+	 private int commentseq;
 	 private String alias;
 	 private int boardseq;
+	 private int ref;
+	 private int step;
+	 private int depth;
 	 private String content;
 	 private String wdate;
-	 private int del; 
+	 private int del;
  -->
 <select id="commentlist" parameterType="Integer" resultType="secure.mbti.a.dto.CommentDto">
-	SELECT COMMENTSEQ,ALIAS,CONTENT,WDATE,DEL
+	SELECT COMMENTSEQ,ALIAS,REF, STEP, DEPTH,BOARDSEQ,CONTENT,WDATE,DEL
 	FROM COMMENTMBTI
 	WHERE BOARDSEQ=#{boardseq}
+	ORDER BY REF ASC, STEP ASC
 </select>
 
 <select id="commentcount" parameterType="Integer" resultType="Integer">
@@ -25,15 +29,34 @@
 </select>
 
 <insert id="commentwrite" parameterType="secure.mbti.a.dto.CommentDto">
-	INSERT INTO COMMENTMBTI( COMMENTSEQ,ALIAS,BOARDSEQ,CONTENT,WDATE,DEL)
+	INSERT INTO COMMENTMBTI(COMMENTSEQ,ALIAS,REF, STEP, DEPTH,BOARDSEQ,CONTENT,WDATE,DEL)
 	VALUES(
 		SEQ_COMMENT.NEXTVAL, 
 		#{alias},
+		 (SELECT NVL(MAX(REF)+1, 0) FROM COMMENTMBTI WHERE BOARDSEQ=#{boardseq}),
+		 0,
+		 0,
+		#{boardseq},
+		#{content}, 
+		SYSDATE, 
+		0
+	)
+</insert>
+
+<insert id="commentreply" parameterType= "secure.mbti.a.dto.CommentDto">
+	INSERT INTO COMMENTMBTI( COMMENTSEQ,ALIAS,REF, STEP, DEPTH,BOARDSEQ,CONTENT,WDATE,DEL)
+	VALUES(
+		SEQ_BBS.NEXTVAL,	<!-- seq -->
+		#{alias}, 
+		(SELECT REF FROM COMMENTMBTI WHERE COMMENTSEQ=#{commentseq}), <!-- ref --> 
+		(SELECT STEP FROM COMMENTMBTI WHERE COMMENTSEQ=#{commentseq}) + 1, <!-- step --> 
+		(SELECT DEPTH FROM COMMENTMBTI WHERE COMMENTSEQ=#{commentseq}) + 1, <!-- depth --> 
 		#{boardseq},
 		#{content}, 
 		SYSDATE, 
 		0, 
-	);
+		0
+	)
 </insert>
 
 

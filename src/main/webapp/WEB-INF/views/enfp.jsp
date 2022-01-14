@@ -17,6 +17,11 @@ function home() {
 
 function worldcup() {
 	location.href = "worldcup_choice.do";
+	
+	
+}
+function board_free() {
+	location.href = "board_free.do";
 }
 function board_ENFJ() {
 	location.href = "board_ENFJ.do";

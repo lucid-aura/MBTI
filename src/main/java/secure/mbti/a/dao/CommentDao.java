@@ -11,5 +11,5 @@ public interface CommentDao {
 	void comment_write(CommentDto dto);
 	void comment_update(CommentDto dto);
 	void comment_delete(int commentseq);
-
+	void comment_reply(CommentDto dto);
 }
