@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
+</head>	
 <body>
 	<p>clone test</p>
 	<h1>Hello HTML</h1>
@@ -16,7 +16,7 @@
 	<h1>hi222h2323i</h1>
 	
 	<%
-		response.sendRedirect("board_free.do");
+		response.sendRedirect("login.do");
 	%>
 </body>
 </html>

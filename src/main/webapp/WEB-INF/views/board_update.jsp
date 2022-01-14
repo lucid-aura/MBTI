@@ -14,16 +14,12 @@
 
 
 <%
-List<BoardDto> board_list = (List<BoardDto>)request.getAttribute("board_list");
+BoardDto board = (BoardDto) request.getAttribute("board");
+%>
+<%
+MemberDto dto = (MemberDto) request.getAttribute("dto");
 %>
 
-<%
-List<CommentDto> comments = (List<CommentDto>)request.getAttribute("comments"); 
-%>
-    
-<%
-MemberDto mem = (MemberDto)request.getSession().getAttribute("login");
-%>
 <!DOCTYPE html>
 
 <html>
@@ -53,16 +49,15 @@ MemberDto mem = (MemberDto)request.getSession().getAttribute("login");
 	<section>
 		<article style="margin: 250px" padding="50px">
 			<div id="containerAll"> 
-			<form action="board_writeAf.do" method="post">
-				<input type="text" name="id" class="form-control mt-4 mb-2" size="70px" value="<%=mem.getId()%>" readonly>	
+			<form action="board_updateAf.do" method="post">
+				<input type="text" name="id" class="form-control mt-4 mb-2" size="70px" value=<%=board.getId()%> readonly>	
 				<input type="text" name="title" class="form-control mt-4 mb-2"
-					placeholder="제목을 입력해주세요." required>
+					placeholder="제목을 입력해주세요." required><%=board.getTitle()%>
 				<div class="form-group">
 					<textarea class="form-control" rows="10" name="content"
-						placeholder="내용을 입력해주세요" required></textarea>
+						placeholder="내용을 입력해주세요" required><%=board.getContent()%></textarea>
 				</div>
-				<button type="submit" name="btn_check" class="btn btn-dark mt-3"">등록</button>
-				<button type="button" name="btn_cancle" class="btn btn-dark mt-3" onclick="location.href='board_free.do'">취소</button>
+				<input type="submit" value="수정하기">
 	
 			</form>
 			</div>>

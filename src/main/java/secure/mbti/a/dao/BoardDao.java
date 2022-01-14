@@ -25,9 +25,9 @@ public interface BoardDao {
 	// cud = int 로 반환되고 void로 반환 안되는경우도있다 마
 	int board_countUp(int boardseq); // 조회수 증가
 	
-	int board_update(BoardDto dto);
+	void board_update(BoardDto dto);
 	
-	int board_delete(int boardseq);
+	void board_delete(int boardseq);
 	
 	
 	

@@ -8,7 +8,7 @@
 <mapper namespace="Board">
 
 <select id="boardlist" parameterType="secure.mbti.a.dto.BoardParam" resultType="secure.mbti.a.dto.BoardDto">
-	SELECT BOARDSEQ, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT
+	SELECT BOARDSEQ, BOARDTYPE, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT,COMMENTCOUNT
 	FROM BOARDALL
  	<if test="choice != null and choice != ''  and search != null and search != '' ">
 		<if test="choice == 'title'">
@@ -24,13 +24,12 @@
 </select>
 
 <insert id="boardwrite" parameterType="secure.mbti.a.dto.BoardDto" >
-	INSERT INTO BOARDALL(BOARDSEQ, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT)
-	VALUES(BOARDSEQ.NEXTVAL, #{id} FROM BOARDALL), 
-	0, 0, #{title}, #{content}, SYSDATE, 0, 0)
+	INSERT INTO BOARDALL(BOARDSEQ, ID, BOARDTYPE, TITLE, CONTENT, WDATE, DEL, READCOUNT,COMMENTCOUNT)
+	VALUES(BOARDSEQ.NEXTVAL, #{id} , 0,#{title}, #{content}, SYSDATE, 0, 0,0)
 </insert>
 
 <select id="getboard" resultType="secure.mbti.a.dto.BoardDto">
-	SELECT BOARDSEQ, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT
+	SELECT BOARDSEQ, ID, BOARDTYPE, TITLE, CONTENT, WDATE, DEL, READCOUNT,COMMENTCOUNT
 	FROM BOARDALL
 	WHERE BOARDSEQ=#{ boardseq }
 </select>
@@ -44,7 +43,7 @@
 
 <update id="boardupdate" parameterType="secure.mbti.a.dto.BoardDto" >
 	UPDATE BOARDALL
-	SET TITLE = #{title}, CONTENT=#{content}
+	SET TITLE=#{title}, CONTENT=#{content}
 	WHERE BOARDSEQ=#{ boardseq }
 </update>
 

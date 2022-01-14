@@ -105,22 +105,22 @@ else{
 location.href = "bbslist.do"; -> GET
 </script>
  -->
- </div>
+</div>
  
-	<footer>
+<footer>
 	<p>저작권표시</p>
-	</footer>
+</footer>
+	
 <script type="text/javascript">
+
 function searchBbs(){
 	let choice = document.getElementById("choice").value;
 	let search = document.getElementById("search").value;
 	
-	location.href="boardlist.do?choice=" + choice + "&search=" + search;
+	location.href="board_free.do?choice=" + choice + "&search=" + search;
 }
 
+
 </script>
-
-
- </script>
 </body>
 </html>

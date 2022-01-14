@@ -84,25 +84,25 @@ public class BoardController {
 		
 		
 	}
-	/*
+	
 	@RequestMapping(value = "board_updateAf.do", method = RequestMethod.POST)
 	public String board_updateAf(Model model, BoardDto dto) {
 		logger.info("BbsController board_updateAf() " + new Date());
-		int result = service.board_update(dto);
+		service.board_update(dto);
 		
-		model.addAttribute("result", result);
-		return "redirect:/board_free.do";
+		model.addAttribute("result");
+		return "redirect:/board_detail.do";   // 강의때 bbslist.do였음
 		
 		
 	}
 	@RequestMapping(value = "board_delete.do", method = RequestMethod.GET)
 	public String board_delete(Model model, int boardseq) {
 		logger.info("BbsController board_delete() " + new Date());
-		int result = service.board_delete(boardseq);
+		service.board_delete(boardseq);
 		
-		model.addAttribute("result", result);
+		model.addAttribute("result");
 		return "redirect:/board_free.do";
-	}*/
+	}
 	
 	/*  댓글부분
 	@RequestMapping(value = "comment.do", method = RequestMethod.GET)
