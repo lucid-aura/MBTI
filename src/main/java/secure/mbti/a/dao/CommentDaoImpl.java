@@ -38,13 +38,22 @@ public class CommentDaoImpl implements CommentDao {
 
 	@Override
 	public void comment_update(CommentDto dto) {
-		session.update(ns + "comment_update", dto);
+		session.update(ns + "commentupdate", dto);
 	}
 
 	@Override
 	public void comment_delete(int commentseq) {
-		System.out.println(commentseq + " dao delete");
 		session.delete(ns + "commentdelete", commentseq);
+	}
+
+	@Override
+	public void comment_reply(CommentDto dto) {
+		session.insert(ns + "commentreply", dto);
+	}
+
+	@Override
+	public void comment_reply_update(CommentDto comment) {
+		session.update(ns + "commentreplyupdate", comment);
 	}
 	
 }
