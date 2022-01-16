@@ -12,4 +12,6 @@ public interface CommentService {
 	void comment_update(CommentDto dto);
 	void comment_delete(int commentseq);
 	void comment_reply(CommentDto dto);
+	
+	CommentDto get_comment(int commentseq);
 }

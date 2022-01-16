@@ -50,6 +50,13 @@ public class CommentDaoImpl implements CommentDao {
 	public void comment_reply(CommentDto dto) {
 		session.insert(ns + "commentreply", dto);
 	}
+
+	@Override
+	public CommentDto get_comment(int commentseq) {
+		
+		return session.selectOne(ns + "commentseq", commentseq);
+
+	}
 	
 }
 

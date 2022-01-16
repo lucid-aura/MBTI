@@ -49,4 +49,9 @@ public class CommentServiceImpl implements CommentService {
 		dao.comment_reply(dto);
 	}
 
+	@Override
+	public CommentDto get_comment(int commentseq) {
+		return dao.get_comment(commentseq);
+	}
+
 }

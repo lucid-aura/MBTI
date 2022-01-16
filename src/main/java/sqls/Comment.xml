@@ -25,7 +25,7 @@
 <select id="commentcount" parameterType="Integer" resultType="Integer">
 	SELECT COUNT(*)
 	FROM COMMENTMBTI
-	WHERE BOARDSEQ=#{boardseq}
+	WHERE BOARDSEQ=#{boardseq} AND DEL=0
 </select>
 
 <insert id="commentwrite" parameterType="secure.mbti.a.dto.CommentDto">
@@ -72,5 +72,16 @@
 	SET DEL=1
 	WHERE COMMENTSEQ=#{commentseq}
 </update>
+
+
+<select id="commentseq" parameterType="Integer" resultType="secure.mbti.a.dto.CommentDto">
+	SELECT COMMENTSEQ,ALIAS,REF, STEP, DEPTH,BOARDSEQ,CONTENT,WDATE,DEL
+	FROM COMMENTMBTI
+	WHERE COMMENTSEQ=#{commentseq}
+</select>
+
+
+
+
 
 </mapper>

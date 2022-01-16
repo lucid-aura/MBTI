@@ -16,10 +16,7 @@ MemberDto dto = (MemberDto) request.getSession().getAttribute("login");
 %>
 
 <%
-List<CommentDto> comments = (List<CommentDto>) request.getAttribute("comments");
-%>
-<%
-int comment_count = (Integer)request.getAttribute("comment_count");
+CommentDto commentDto = (CommentDto) request.getAttribute("comment_update");  // 콘트롤 키값
 %>
 
 <!DOCTYPE html>
@@ -132,60 +129,16 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 	</div>
 	  
 <section>
-
 	<div id="comment_list" align="center">
-	<!-- 댓글개수 -->
-		<div>
-		<p>댓글갯수<%= comment_count%></p>
-		</div>
-		<table>
-					<%
-					if (comments == null || comments.size() == 0) {
-					%>
-					<tr>
-						<td colspan="4">작성된 댓글이 없습니다.</td>
-					</tr>
-					<%
-					} else {
-					for (int i = 0; i < comments.size(); i++) {
-						CommentDto comment = comments.get(i);
-					%>
-					<%
-					if (comment.getDel() == 1) {
-					%>
-					<tr>
-						<td colspan="4">삭제된 댓글입니다.</td>
-					</tr>
-					<%
-					} else {
-					%>
-					
-					<tr onClick="location.href='comment_update.do?commentseq=<%=comment.getCommentseq() %>'" style = "cursor:pointer;">
 
-						<!-- 한 줄 -->
-						<th><%=i + 1%><hr></th>
-						<td>&nbsp<hr></td>
-						<!-- 댓글번호 -->
-						<td>
-							<!-- 한 칸 --> <!-- 작성자 --> <%=comment.getAlias()%><hr>
-						</td>
-						<td><%=comment.getContent()%><hr></td>
-						<td><%=comment.getWdate()%><hr></td>
-						
-					</tr>
-					<%
-					}
-					}
-					}
-					%>
-
-		</table>
-		<form action="comment.do" method="post">
+		<!-- 수정부분 -->
+		<form action="comment_updateAf.do" method="post">
 		<div style="overflow: auto">
-		<input type="hidden" name="boardseq" value="<%=board.getBoardseq()%>">
-		<input type="hidden" name="alias" value="<%=dto.getAlias()%>">
+		<input type="hidden" name="commentseq" value="<%=commentDto.getCommentseq()%>">
+		<input type="hidden" name="boardseq" value="<%=commentDto.getBoardseq()%>">
+		<input type="hidden" name="alias" value="<%=commentDto.getAlias()%>">
 		</div>
-
+		
 		<div style="width: 1000px">	<!-- 댓글적는 부분 -->
 			<table>
 				<div class="card mb-2">
@@ -202,8 +155,10 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 										id="replyId"> -->
 
 								</div> <textarea class="form-control" id="exampleFormControlTextarea1" name="content"
-									rows="3"></textarea>
-								<button type="submit" class="btn btn-dark mt-3">댓글 등록</button><!-- onClick="javascript:addReply();" -->
+									rows="3"><%=commentDto.getContent()%></textarea>
+								<button type="submit" class="btn btn-dark mt-3">댓글 수정</button><!-- onClick="javascript:addReply();" -->
+								
+								<button type="button" onclick="location.href='comment_delete.do?commentseq=<%=commentDto.getCommentseq()%>'">댓글 삭제</button>
 							</li>
 						</ul>
 					</div>
@@ -235,18 +190,7 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 				location.href = "board_detail.do?boardseq=" + boardseq;
 			}*/
 			
-/*댓글 수정 버튼
-$("#btn_commentUp").click(function(){
-	var commentupdate = $("#commentupdate").val();
-	$.ajax({
-		type:"put",
-		url:"${path}/comment/comment_update/${dto.boardseq}",
-		header:{
-			"Content-Type":"application/json"
-		}
-	})
-}
-*/
+
 			
 			
 
