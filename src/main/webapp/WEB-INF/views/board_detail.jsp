@@ -61,7 +61,7 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 	<br>
 	<br>
 
-	<p>글 디테일부분과 댓글이 있는 곳</p>
+	
 	<!-- 본문 글 디테일 부분(댓글부분 제외) -->
 	<section>
 		<div class="wrapper" align="center">
@@ -110,16 +110,17 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 			if (mem.getId().equals(board.getId())) {
 			%>
 			<!-- 아래에 있는 함수 이름 : board_update -->
-			<button type="button" onclick="board_update(<%=board.getBoardseq()%>)">수정</button>
+			<button type="button" class="btn btn-dark" onclick="board_update(<%=board.getBoardseq()%>)">수정</button>
 			
 			<!-- 아래에 있는 함수 이름 : board_delete -->
-			<button type="button" onclick="board_delete(<%=board.getBoardseq()%>)">삭제</button>
+			<button type="button" class="btn btn-danger" onclick="board_delete(<%=board.getBoardseq()%>)">삭제</button>
 			
-			<button type="button" onclick="board_free(<%=board.getBoardseq()%>)">목록</button>
+			<button type="button" class="btn btn-dark" onclick="board_free(<%=board.getBoardseq()%>)">목록</button>
 
 			<%
 			}
 			%>
+			
 
 		</div>
 	</section>
@@ -132,13 +133,14 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 	</div>
 	  
 <section>
-
 	<div id="comment_list" align="center">
-	<!-- 댓글개수 -->
-		<div>
-		<p>댓글갯수<%= comment_count%></p>
-		</div>
+
 		<table>
+			<!-- 댓글개수 -->
+		<div align="center">
+		<br><br><br>
+		<button type="button" class="btn btn-light">댓글 수 <%= comment_count%></button><br><br>
+		</div>
 					<%
 					if (comments == null || comments.size() == 0) {
 					%>
@@ -154,7 +156,7 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 					if (comment.getDel() == 1) {
 					%>
 					<tr>
-						<td colspan="4">삭제된 댓글입니다.</td>
+						<td colspan="4" align="center">삭제된 댓글입니다.</td>
 					</tr>
 					<%
 					} else {
@@ -163,13 +165,13 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 					<tr onClick="location.href='comment_update.do?commentseq=<%=comment.getCommentseq() %>'" style = "cursor:pointer;">
 
 						<!-- 한 줄 -->
-						<th><%=i + 1%><hr></th>
+						<th><%=i + 1%>&nbsp&nbsp&nbsp<hr></th>
 						<td>&nbsp<hr></td>
 						<!-- 댓글번호 -->
 						<td>
-							<!-- 한 칸 --> <!-- 작성자 --> <%=comment.getAlias()%><hr>
+							<!-- 한 칸 --> <!-- 작성자 --> <%=comment.getAlias()%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<hr>
 						</td>
-						<td><%=comment.getContent()%><hr></td>
+						<td><%=comment.getContent()%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<hr></td>
 						<td><%=comment.getWdate()%><hr></td>
 						
 					</tr>
@@ -202,8 +204,9 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 										id="replyId"> -->
 
 								</div> <textarea class="form-control" id="exampleFormControlTextarea1" name="content"
-									rows="3"></textarea>
-								<button type="submit" class="btn btn-dark mt-3">댓글 등록</button><!-- onClick="javascript:addReply();" -->
+									rows="3"></textarea><br>
+								<button type="submit" class="btn btn-danger">댓글 등록</button><!-- onClick="javascript:addReply();" -->
+
 							</li>
 						</ul>
 					</div>

@@ -33,8 +33,10 @@ CommentDto commentDto = (CommentDto) request.getAttribute("comment_update");  //
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
+	
+<!-- 강사님 부트스트렙 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
 </head>
@@ -107,12 +109,12 @@ CommentDto commentDto = (CommentDto) request.getAttribute("comment_update");  //
 			if (mem.getId().equals(board.getId())) {
 			%>
 			<!-- 아래에 있는 함수 이름 : board_update -->
-			<button type="button" onclick="board_update(<%=board.getBoardseq()%>)">수정</button>
+			<button type="button" class="btn btn-dark" onclick="board_update(<%=board.getBoardseq()%>)">수정</button>
 			
 			<!-- 아래에 있는 함수 이름 : board_delete -->
-			<button type="button" onclick="board_delete(<%=board.getBoardseq()%>)">삭제</button>
+			<button type="button" class="btn btn-danger" onclick="board_delete(<%=board.getBoardseq()%>)">삭제</button>
 			
-			<button type="button" onclick="board_free(<%=board.getBoardseq()%>)">목록</button>
+			<button type="button" class="btn btn-dark" onclick="board_free(<%=board.getBoardseq()%>)">목록</button>
 
 			<%
 			}
@@ -143,7 +145,7 @@ CommentDto commentDto = (CommentDto) request.getAttribute("comment_update");  //
 			<table>
 				<div class="card mb-2">
 					<div class="card-header bg-light" style="align-content: left">
-						<i class="fa fa-comment fa">댓글</i>
+						<i class="fa fa-comment fa">수정 중인 댓글</i>
 					</div>
 					<div class="card-body">
 						<ul class="list-group list-group-flush">
@@ -157,8 +159,7 @@ CommentDto commentDto = (CommentDto) request.getAttribute("comment_update");  //
 								</div> <textarea class="form-control" id="exampleFormControlTextarea1" name="content"
 									rows="3"><%=commentDto.getContent()%></textarea>
 								<button type="submit" class="btn btn-dark mt-3">댓글 수정</button><!-- onClick="javascript:addReply();" -->
-								
-								<button type="button" onclick="location.href='comment_delete.do?commentseq=<%=commentDto.getCommentseq()%>'">댓글 삭제</button>
+								<button type="button" class="btn btn-danger" onclick="location.href='comment_delete.do?commentseq=<%=commentDto.getCommentseq()%>'">댓글 삭제</button>
 							</li>
 						</ul>
 					</div>

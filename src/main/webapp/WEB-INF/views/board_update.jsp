@@ -59,11 +59,11 @@ MemberDto dto = (MemberDto) request.getAttribute("dto");
 					<textarea class="form-control" rows="10" name="content"
 						placeholder="내용을 입력해주세요" required><%=board.getContent()%></textarea>
 				</div>
-				<input type="submit" value="수정하기">
+				<input type="submit" class="btn btn-dark" value="수정">
 			</form>
 			
 			<form action="board_free.do" method="post">
-				<button type="button" name="btn_cancle"onclick="location.href='board_free.do'">취소하기</button>
+				<button type="button" class="btn btn-dark" onclick="location.href='board_free.do'">취소</button>
 			</form>
 			
 			
