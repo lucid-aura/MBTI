@@ -33,7 +33,7 @@ public class IntroController {
 	public String board_type(HttpServletRequest request){ 
 		System.out.println("IntroController board_type() " + new Date());
 		MemberDto mem = (MemberDto)request.getSession().getAttribute("login");
-		return "redirect:/board_"+mem.getMbti()+".do";
+		return "redirect:/board_"+mem.getMbti()+".do?page=0";
 	}
 	
 	

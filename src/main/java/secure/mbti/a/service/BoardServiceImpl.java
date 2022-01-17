@@ -46,6 +46,11 @@ public class BoardServiceImpl implements BoardService {
 		dao.board_delete(boardseq);
 		
 	}
+
+	@Override
+	public List<BoardDto> board_list_page(BoardParam param) {
+		return dao.board_list_page(param);
+	}
 	
 	
 }

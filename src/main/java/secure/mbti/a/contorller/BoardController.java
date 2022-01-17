@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import secure.mbti.a.dto.BoardDto;
 import secure.mbti.a.dto.BoardParam;
 import secure.mbti.a.dto.CommentDto;
+import secure.mbti.a.dto.Criteria;
 import secure.mbti.a.dto.MemberDto;
 import secure.mbti.a.service.BoardService;
 import secure.mbti.a.service.CommentService;
@@ -114,13 +115,26 @@ public class BoardController {
 		return "board_ENTP";
 	}
 	@RequestMapping(value = "board_ENFJ.do", method = RequestMethod.GET)
-	public String board_ENFJ(Model model,BoardParam param){ 
-		logger.info("BoardController board_ENFJ() " + new Date());	
+	public String board_ENFJ(Model model,BoardParam param, int page){ 
+		logger.info("BoardController board_ENFJ() " + new Date());
 		param.setBoardtype(14); //이것 주의!
-		List<BoardDto> list = service.board_list(param);
-		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
+		if(param.getCriteria()==null) {
+			Criteria criteria =new Criteria(14); // 이것주의!
+			param.setCriteria(criteria);
+			}
+		if(page == 0 ) {
+			page = 1;
+		}
+		param.getCriteria().setPage(page);
 		
-		return "board_ENFJ";
+		System.out.println(param.toString());
+		List<BoardDto> list = service.board_list(param);
+		int list_size = list.size();
+		list=service.board_list_page(param);
+		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
+		model.addAttribute("board_size", list_size);
+		model.addAttribute("board_page", page); // 페이지넘길빼번호
+		return "board_ENFJ"; //이것주의!
 	}
 	@RequestMapping(value = "board_ENTJ.do", method = RequestMethod.GET)
 	public String board_ENTJ(){ 
@@ -164,7 +178,7 @@ public class BoardController {
 		dto.setBoardtype(index);
 		System.out.println(dto.toString());
 		String type = mbtiType[dto.getBoardtype()].toUpperCase();
-		return "redirect:/board_"+type+".do";
+		return "redirect:/board_"+type+".do?page=1";
 		
 	}
 	@RequestMapping(value = "board_cancle.do", method = RequestMethod.GET)
@@ -177,7 +191,7 @@ public class BoardController {
 				"enfp", "entp", "enfj", "entj",
 				"free"
 				}; 
-		return "redirect:/board_"+mbtiType[boardtype].toUpperCase()+".do";
+		return "redirect:/board_"+mbtiType[boardtype].toUpperCase()+".do?page=1";
 	}
 	
 	
@@ -231,7 +245,7 @@ public class BoardController {
 		                                  //char[]=문자배열(문자열) String
 		String boardtype = mbtiType[service.get_board(boardseq).getBoardtype()];
 		model.addAttribute("result");
-		return "redirect:/board_"+boardtype.toUpperCase()+".do";
+		return "redirect:/board_"+boardtype.toUpperCase()+".do?page=1";
 	}
 	
 	/*  댓글부분

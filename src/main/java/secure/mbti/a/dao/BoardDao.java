@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import secure.mbti.a.dto.BoardDto;
 import secure.mbti.a.dto.BoardParam;
+import secure.mbti.a.dto.Criteria;
 
 public interface BoardDao {
 //	
@@ -29,7 +30,8 @@ public interface BoardDao {
 	
 	void board_delete(int boardseq);
 	
-	
+	List<BoardDto> board_list_page(BoardParam param);
+
 	
 	
 }

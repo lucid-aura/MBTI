@@ -3,8 +3,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	List<BoardDto> board_list = (List<BoardDto>)request.getAttribute("board_list");
+	List<BoardDto> board_list = (List<BoardDto>)request.getAttribute("board_list"); // list 가져오기
 %>
+<%
+	int board_size = (int)request.getAttribute("board_size"); //int 가져오기
+%>
+<%
+	int board_page = (int)request.getAttribute("board_page"); //페이지 가져오기
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +22,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+
+<style>
+.pagination{
+	display: block;
+	text-align: center;
+}
+
+.search-box {
+    margin: 100px auto;
+}
+.search-box .btn-light {
+    border: 1px solid #ced4da;
+}
+</style>
 <title>Insert title here</title>
 </head>
 <body>
@@ -24,32 +45,45 @@
 	<header>
 		<nav>
 			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
-				<a href="#test" class="text-light distance">유형소개</a>
-				<a href="#test" class="text-light distance">유형별게시판</a>
+				<a href="introMBTI.do" class="text-light distance">유형소개</a>
+				<a href="board_ENFJ.do?page=1" class="text-light distance">유형별게시판</a>
 				<a href="board_free.do" class="text-light distance">자유게시판</a>
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
 				<button>로그아웃</button>
 			</div>
 		</nav>
 	</header>
+</div>
 <br><br>
 <h1>ENFJ게시판</h1>
-<div align="center">
 
+<div>
 <hr>
-<select id="choice">
-	<option value="title">제목</option>
-	<option value="content">내용</option>
-	<option value="writer">작성자</option>
-</select>
 
-<input type="text" id="search" value="">
+<div class="search-box col-md-5">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown" 
+            aria-haspopup="true" aria-expanded="false" id="choice" value="">제목</button>                        
+            <div class="dropdown-menu">
+              <a href="javascript:void(0);" class="dropdown-item" onclick="func('title')">제목</a>
+              <a href="javascript:void(0);" class="dropdown-item" onclick="func('content')">내용</a>
+              <a href="javascript:void(0);" class="dropdown-item" onclick="func('writer')">작성자</a>              
+            </div>           
+        </div>
+        <input type="text" class="form-control" aria-label="Search input with dropdown button" id="search" value="">
+        <div class="input-group-append">
+            <button class="btn btn-success" type="button"  onclick="searchBoard()" >Search</button>
+        </div>
+    </div>
+</div>
 
-<button type="button" onclick="searchBoard()">검색</button>
 
-<br><hr><br>
+
+
+
 <!--    attribute property -->
-	<table class="table table-hover" style="width:1000px">
+	<table class="table table-hover" style="width:1300px" align="center">
 	<!-- <col width="30"><col width="200"><col width="80"> -->
 	<thead>
 	<tr>
@@ -61,7 +95,7 @@
 if(board_list == null || board_list.size() == 0){	
 %>
 	<tr>
-		<td colspan="4">작성된 글이 없습니다.</td>
+		<td colspan="6">작성된 글이 없습니다.</td>
 	</tr>
 <%
 }
@@ -74,14 +108,14 @@ else{
 			if (board.getDel() == 1) {
 		%>
 		<tr>
-			<td colspan="4">삭제된 글입니다.</td>
+			<td colspan="6">삭제된 글입니다.</td>
 		</tr>
 		<%
 		}
 			else{			
 				%>
 				<tr>
-					<th><%=i+1%></th>
+					<th><%=(board_page-1)*20+1+i%></th>
 					<td>
 						
 						<a href="board_detail.do?boardseq=<%=board.getBoardseq() %>">
@@ -91,16 +125,11 @@ else{
 					
 					<td ><%=board.getId() %></td>
 					
-					</td>
 					
-					<td ><%=board.getWdate() %></td>
-					
-					</td>
+					<td ><%=board.getWdate() %></td>					
 					
 					<td ><%=board.getReadcount() %></td>
-					
-					</td>
-					
+										
 					<td ><%=board.getCommentcount() %></td>
 				</tr>
 
@@ -110,8 +139,18 @@ else{
 		}
 		%>  
 		</tbody>	
+		
 	</table>
+<div align="center">
+<% for(int i=0; i< (int)((board_size-1)/20)+1; i++){
+	%>	
+<a href="board_ENFJ.do?page=<%=i+1%>"><%=i+1%></a>
+<%
+}
+%>
 </div>
+</div>
+
 <br>
 <div align="center">
 	<a href="board_write.do?boardtype=14" class="btn btn-primary pull-right">글쓰기</a>	
@@ -122,17 +161,28 @@ else{
 location.href = "bbslist.do"; -> GET
 </script>
  -->
-
 <script type="text/javascript">
+function func(num) {	
+	var ti ="";
+	if(num =="title"){ 
+		ti="제목"; 				
+	}
+	else if(num =="content"){
+		ti="내용";
+	}else{
+		ti="작성자"
+	}
+	document.getElementById("choice").innerText = ti + "";	
+	document.getElementById("choice").value = num + "";	
+}
+
 function searchBoard(){
 	let choice = document.getElementById("choice").value;
 	let search = document.getElementById("search").value;
 	
-	location.href="board_ENFJ.do?choice=" + choice + "&search=" + search;
+	location.href="board_ENFJ.do?page=1&choice=" + choice + "&search=" + search;
 }
 </script>
 
-</body>
-</html>
 </body>
 </html>

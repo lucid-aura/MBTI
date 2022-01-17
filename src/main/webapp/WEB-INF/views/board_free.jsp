@@ -26,7 +26,7 @@ List<BoardDto> board_list = (List<BoardDto>)request.getAttribute("board_list");
 		<nav>
 			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
 				<a href="introMBTI.do" class="text-light distance">유형소개</a>
-				<a href="#board_writeAf.do" class="text-light distance">유형별게시판</a>
+				<a href="board_type.do" class="text-light distance">유형별게시판</a>
 				<a href="board_free.do" class="text-light distance">자유게시판</a>
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
 				<button>로그아웃</button>
