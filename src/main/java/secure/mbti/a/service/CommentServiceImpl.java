@@ -44,4 +44,14 @@ public class CommentServiceImpl implements CommentService {
 		dao.comment_delete(commentseq);
 	}
 
+	@Override
+	public void comment_reply(CommentDto dto) {
+		dao.comment_reply(dto);
+	}
+
+	@Override
+	public void comment_reply_update(CommentDto comment) {
+		dao.comment_reply_update(comment);
+	}
+
 }
