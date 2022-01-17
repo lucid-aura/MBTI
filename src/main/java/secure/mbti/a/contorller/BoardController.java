@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import secure.mbti.a.dto.BoardDto;
 import secure.mbti.a.dto.BoardParam;
 import secure.mbti.a.dto.CommentDto;
+import secure.mbti.a.dto.Criteria;
 import secure.mbti.a.service.BoardService;
 import secure.mbti.a.service.CommentService;
 
@@ -35,16 +36,27 @@ public class BoardController {
 	CommentService commentService;
 	
 	@RequestMapping(value = "board_free.do", method = RequestMethod.GET)
-	public String board_list(Model model, BoardParam param) {
+	public String board_list(Model model, BoardParam param, int page) {
 		logger.info("BoardController board_list()" + new Date());
 		
-		List<BoardDto> list = service.board_list(param);
-		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
+		//자유게시판 페이징
+		if(param.getCriteria()==null) {
+			Criteria criteria =new Criteria(16);
+			param.setCriteria(criteria);
+		}
+		param.getCriteria().setPage(page);
 		
-		//리스트부분 댓글 개수 상의
-		/*
-		int getcount=commentService.comment_getcount(boardseq);
-		model.addAttribute("comment_count",getcount);*/
+		System.out.println(param.toString());
+		List<BoardDto> list = service.board_list(param);
+		
+		int list_size = list.size(); //자유게시판 페이징
+		list = service.board_list_page(param); //자유게시판 페이징
+		
+		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
+	
+		model.addAttribute("board_size",list_size);//자유게시판 페이징
+		
+		model.addAttribute("board_page", page); // 페이지넘길때 번호도 함께 연결  자유게시판 페이징
 		
 		return "board_free";
 	}
@@ -65,7 +77,7 @@ public class BoardController {
 		int result = service.board_write(dto);// 결과 확인값
 		model.addAttribute("result",result);
 		
-		return "redirect:/board_free.do";
+		return "redirect:/board_free.do?page=1";
 
 	}
 	
@@ -119,7 +131,7 @@ public class BoardController {
 		logger.info("BoardController board_delete() " + new Date());
 		service.board_delete(boardseq);
 		
-		return "redirect:/board_free.do";
+		return "redirect:/board_free.do?page=1";
 	}
 	
 	//댓글 리스트등록 가능
@@ -137,8 +149,7 @@ public class BoardController {
 	
 	
 
-	//댓글수정
-	// 22-01-16 오전 1시 지워도됨
+	// 댓글수정
 	@RequestMapping(value = "comment_update.do", method = RequestMethod.GET)
 	public String comment_update(Model model, int commentseq) {
 		logger.info("BoardController comment_update() " + new Date());
@@ -152,7 +163,7 @@ public class BoardController {
 		return "comment_update"; 
 	}
 	
-	//댓글 수정 후
+	// 댓글 수정 후
 	@RequestMapping(value = "comment_updateAf.do", method = RequestMethod.POST)
 	public String comment_updateAf(CommentDto dto) {
 		logger.info("BoardController comment_updateAf() " + new Date());
@@ -173,7 +184,7 @@ public class BoardController {
 		
 		return "redirect:/board_detail.do?boardseq="+comment_delete;
 	}
-
 	
+
 	
 }

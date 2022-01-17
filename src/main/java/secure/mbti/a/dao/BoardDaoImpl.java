@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import secure.mbti.a.dto.BoardDto;
 import secure.mbti.a.dto.BoardParam;
+import secure.mbti.a.dto.Criteria;
 
 @Repository
 public class BoardDaoImpl implements BoardDao{
@@ -49,6 +50,11 @@ public class BoardDaoImpl implements BoardDao{
 	public void board_delete(int boardseq) {
 		session.delete(ns+"boarddelete", boardseq);
 		
+	}
+
+	@Override
+	public List<BoardDto> board_list_page(BoardParam param) {
+		return session.selectList(ns+"listPage", param);
 	}
 	
 	

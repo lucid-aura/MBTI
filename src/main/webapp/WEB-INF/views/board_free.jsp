@@ -7,6 +7,14 @@
 <%
 List<BoardDto> board_list = (List<BoardDto>)request.getAttribute("board_list");
 %>
+<%
+int board_size = (int)request.getAttribute("board_size");
+%>
+<%
+int board_page = (int)request.getAttribute("board_page");
+%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,7 +90,7 @@ else{
 			else{			
 		%>
 		<tr>
-			<th><%=i+1%></th>
+			<th><%=(board_page-1)*20+1+i%></th>
 			<td>
 				
 				<a href="board_detail.do?boardseq=<%=board.getBoardseq() %>">
@@ -98,9 +106,23 @@ else{
 	}
 }
 %>
-		</tbody>	
+		</tbody>
+
 	</table>
+			<div>
+	<%for(int i=0; i< (int)((board_size-1)/20)+1; i++) {
+		
+		%>
+		
+		<a href="board_free.do?page=<%=i+1%>"><%=i+1 %></a>
+		
+	<%
+	}
+	%>
+	
+</div>	
 </div>
+
 <br>
 <div align="center">
 	<a href = "board_write.do">글쓰기</a>

@@ -139,7 +139,7 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 			<!-- 댓글개수 -->
 		<div align="center">
 		<br><br><br>
-		<button type="button" class="btn btn-light">댓글 수 <%= comment_count%></button><br><br>
+		<button type="button" class="btn btn-light"><p style="font-weight:bold; margin: 10px 15px;">댓글 <%= comment_count%></p></button><br><br>
 		</div>
 					<%
 					if (comments == null || comments.size() == 0) {
@@ -162,7 +162,8 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 					} else {
 					%>
 					
-					<tr onClick="location.href='comment_update.do?commentseq=<%=comment.getCommentseq() %>'" style = "cursor:pointer;">
+					<%-- <tr onClick="location.href='comment_update.do?commentseq=<%=comment.getCommentseq() %>'" style = "cursor:pointer;"> --%>
+					<tr id="btn_updateid" onClick="location.href='comment_update.do?commentseq=<%=comment.getCommentseq() %>'" style = "cursor:pointer;">
 
 						<!-- 한 줄 -->
 						<th><%=i + 1%>&nbsp&nbsp&nbsp<hr></th>
@@ -182,11 +183,10 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 					%>
 
 		</table>
-		<form action="comment.do" method="post">
-		<div style="overflow: auto">
+		<form action="comment.do" method="post" id="btn_check">
+
 		<input type="hidden" name="boardseq" value="<%=board.getBoardseq()%>">
 		<input type="hidden" name="alias" value="<%=dto.getAlias()%>">
-		</div>
 
 		<div style="width: 1000px">	<!-- 댓글적는 부분 -->
 			<table>
@@ -205,7 +205,8 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 
 								</div> <textarea class="form-control" id="exampleFormControlTextarea1" name="content"
 									rows="3"></textarea><br>
-								<button type="submit" class="btn btn-danger">댓글 등록</button><!-- onClick="javascript:addReply();" -->
+									
+								<button type="button" onClick="comment_check()" class="btn btn-danger">댓글 등록</button><!-- onClick="javascript:addReply();" -->
 
 							</li>
 						</ul>
@@ -231,27 +232,35 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 				location.href = "board_free.do?boardseq=" + boardseq;
 			}
 			
+			//댓글등록 빈값을 넣어 오류날때
+			function comment_check(){ 
+				var check = $("#exampleFormControlTextarea1").val();
+				check.trim();
+				if( check=="" || check == null || check == undefined ){ 
+					alert("내용을 입력하세요.");
+				}
+				else{
+					$("#btn_check").submit();
+					
+				}
+			};
 			
-			
-			/*
-			function comment_update( boardseq ){
-				location.href = "board_detail.do?boardseq=" + boardseq;
-			}*/
-			
-/*댓글 수정 버튼
-$("#btn_commentUp").click(function(){
-	var commentupdate = $("#commentupdate").val();
-	$.ajax({
-		type:"put",
-		url:"${path}/comment/comment_update/${dto.boardseq}",
-		header:{
-			"Content-Type":"application/json"
-		}
-	})
-}
-*/
-			
-			
+<%-- 			function comment_updateid(){ 
+				var check = $("#btn_updateid").val();
+				CommentDto comment = comments.get(i);
+				
+				if( check == "location.href='comment_update.do?commentseq=<%=comment.getCommentseq() %>'" ){ 
+					
+				}
+					$("#btn_updateid").submit();
+				else{
+					
+				}
+			};
+ --%>
+		
+
+
 
 </script>
 </body>

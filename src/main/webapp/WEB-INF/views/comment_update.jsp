@@ -6,7 +6,7 @@
 	pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="/css/bootstrap.css">
 <!--지워도됨 -->
-
+<!-- 댓글삭제부분 : style 마진 16px 추가 -->
 
 <%
 BoardDto board = (BoardDto) request.getAttribute("board");
@@ -38,6 +38,11 @@ CommentDto commentDto = (CommentDto) request.getAttribute("comment_update");  //
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+#btn btn-dark mt-3{
+<style type="text/css"></style>
+ }
+
+
 
 </head>
 <body>
@@ -60,7 +65,6 @@ CommentDto commentDto = (CommentDto) request.getAttribute("comment_update");  //
 	<br>
 	<br>
 
-	<p>글 디테일부분과 댓글이 있는 곳</p>
 	<!-- 본문 글 디테일 부분(댓글부분 제외) -->
 	<section>
 		<div class="wrapper" align="center">
@@ -158,8 +162,8 @@ CommentDto commentDto = (CommentDto) request.getAttribute("comment_update");  //
 
 								</div> <textarea class="form-control" id="exampleFormControlTextarea1" name="content"
 									rows="3"><%=commentDto.getContent()%></textarea>
-								<button type="submit" class="btn btn-dark mt-3">댓글 수정</button><!-- onClick="javascript:addReply();" -->
-								<button type="button" class="btn btn-danger" onclick="location.href='comment_delete.do?commentseq=<%=commentDto.getCommentseq()%>'">댓글 삭제</button>
+								<button type="submit" class="btn btn-dark mt-3 center">댓글 수정</button><!-- onClick="javascript:addReply();" -->
+								<button type="button" class="btn btn-danger center" onclick="location.href='comment_delete.do?commentseq=<%=commentDto.getCommentseq()%>'" style="margin-top: 16px">댓글 삭제</button>
 							</li>
 						</ul>
 					</div>
