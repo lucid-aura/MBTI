@@ -50,7 +50,7 @@ CommentDto commentDto = (CommentDto) request.getAttribute("comment_update");  //
 		<nav>
 			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
 				<a href="#test" class="text-light distance">유형소개</a> <a href="#test"
-					class="text-light distance">유형별게시판</a> <a href="board_free.do"
+					class="text-light distance">유형별게시판</a> <a href="board_free.do?page=1"
 					class="text-light distance">자유게시판</a> <a href="worldcup_choice.do"
 					class="text-light distance">월드컵</a>
 				<button>로그아웃</button>
@@ -123,7 +123,7 @@ CommentDto commentDto = (CommentDto) request.getAttribute("comment_update");  //
 			<%
 			}
 			%>
-
+<br><br>
 		</div>
 	</section>
 	
@@ -185,7 +185,7 @@ CommentDto commentDto = (CommentDto) request.getAttribute("comment_update");  //
 				location.href = "board_delete.do?boardseq=" + boardseq;
 			}
 			function board_free( boardseq ){
-				location.href = "board_free.do?boardseq=" + boardseq;
+				location.href = "board_free.do?boardseq=" + boardseq + "&page=1";
 			}
 			
 			

@@ -58,6 +58,7 @@ public class BoardController {
 		
 		model.addAttribute("board_page", page); // 페이지넘길때 번호도 함께 연결  자유게시판 페이징
 		
+		
 		return "board_free";
 	}
 	
