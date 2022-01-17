@@ -55,7 +55,7 @@
 	</header>
 </div>
 <br><br>
-<h1>ENFJ게시판</h1>
+<h1>ENFJ게시판</h1> <!-- 바꿔야함 -->
 
 <div>
 <hr>
@@ -118,7 +118,7 @@ else{
 					<th><%=(board_page-1)*20+1+i%></th>
 					<td>
 						
-						<a href="board_detail.do?boardseq=<%=board.getBoardseq() %>">
+						<a href="board_detail.do?boardseq=<%=board.getBoardseq() %>"> 
 							<%=board.getTitle() %>
 						</a>
 					</td>
@@ -144,7 +144,7 @@ else{
 <div align="center">
 <% for(int i=0; i< (int)((board_size-1)/20)+1; i++){
 	%>	
-<a href="board_ENFJ.do?page=<%=i+1%>"><%=i+1%></a>
+<a href="board_ENFJ.do?page=<%=i+1%>"><%=i+1%></a> <!-- 바꿔야함 EX)board_free.do?page -->
 <%
 }
 %>
@@ -153,7 +153,7 @@ else{
 
 <br>
 <div align="center">
-	<a href="board_write.do?boardtype=14" class="btn btn-primary pull-right">글쓰기</a>	
+	<a href="board_write.do?boardtype=14" class="btn btn-primary pull-right">글쓰기</a>	<!-- 각자의 넘버로 바꾸기 -->
 </div>
 <!--  117 131 제목 바꾸기-->
 <!-- 
@@ -180,7 +180,7 @@ function searchBoard(){
 	let choice = document.getElementById("choice").value;
 	let search = document.getElementById("search").value;
 	
-	location.href="board_ENFJ.do?page=1&choice=" + choice + "&search=" + search;
+	location.href="board_ENFJ.do?page=1&choice=" + choice + "&search=" + search; //각자의 컨트롤러로 바꾸기
 }
 </script>
 

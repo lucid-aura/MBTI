@@ -1,12 +1,17 @@
-<%@page import="secure.mbti.a.dto.BoardDto"%>
 <%@page import="java.util.List"%>
+<%@page import="secure.mbti.a.dto.BoardDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-        
 <%
-List<BoardDto> board_list = (List<BoardDto>)request.getAttribute("board_list");
+	List<BoardDto> board_list = (List<BoardDto>)request.getAttribute("board_list"); // list 가져오기
 %>
+<%
+	int board_size = (int)request.getAttribute("board_size"); //int 가져오기
+%>
+<%
+	int board_page = (int)request.getAttribute("board_page"); //페이지 가져오기
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,57 +22,80 @@ List<BoardDto> board_list = (List<BoardDto>)request.getAttribute("board_list");
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+
+<style>
+.pagination{
+	display: block;
+	text-align: center;
+}
+
+.search-box {
+    margin: 100px auto;
+}
+.search-box .btn-light {
+    border: 1px solid #ced4da;
+}
+</style>
 <title>Insert title here</title>
 </head>
-
 <body>
+
+<h1>게시판</h1>
 <div class="wrapper">
 	<header>
 		<nav>
 			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
 				<a href="introMBTI.do" class="text-light distance">유형소개</a>
-				<a href="board_type.do" class="text-light distance">유형별게시판</a>
+				<a href="redirect:/board_"+mem.getMbti()+".do?page=0" class="text-light distance">유형별게시판</a>
 				<a href="board_free.do" class="text-light distance">자유게시판</a>
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
 				<button>로그아웃</button>
 			</div>
 		</nav>
 	</header>
-<h1></h1>	<br><br>
-	<br>
-<h1>자유게시판</h1>
-<div align="center">
+</div>
+<br><br>
+<h1>자유게시판</h1> <!-- 바꿔야함 -->
 
+<div>
 <hr>
 
-<select id="choice">
-	<option value="title">제목</option>
-	<option value="content">내용</option>
-	<option value="writer">작성자</option>
-</select>
-
-<input type="text" id="search" value="">
-
-<button type="button" onclick="searchBbs()">검색</button>
+<div class="search-box col-md-5">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown" 
+            aria-haspopup="true" aria-expanded="false" id="choice" value="">제목</button>                        
+            <div class="dropdown-menu">
+              <a href="javascript:void(0);" class="dropdown-item" onclick="func('title')">제목</a>
+              <a href="javascript:void(0);" class="dropdown-item" onclick="func('content')">내용</a>
+              <a href="javascript:void(0);" class="dropdown-item" onclick="func('writer')">작성자</a>              
+            </div>           
+        </div>
+        <input type="text" class="form-control" aria-label="Search input with dropdown button" id="search" value="">
+        <div class="input-group-append">
+            <button class="btn btn-success" type="button"  onclick="searchBoard()" >Search</button>
+        </div>
+    </div>
 </div>
-<br><hr><br>
 
-<table class="table">
-  <thead class="thead-light">
-    <tr>
-      <th scope="col">번호</th>
-      <th scope="col"> 제목</th>
-      <th scope="col">글쓴이</th>
-      <th scope="col">작성날짜</th>
-      <th scope="col">조회횟수</th>
-      <th scope="col">댓글개수</th>
-    </tr>
-  <tbody>
-  <%
+
+
+
+
+<!--    attribute property -->
+	<table class="table table-hover" style="width:1300px" align="center">
+	<!-- <col width="30"><col width="200"><col width="80"> -->
+	<thead>
+	<tr>
+	<th>번호</th><th>제목</th><th>글쓴이</th><th>작성날짜</th><th>조회횟수</th><th>댓글개수</th>
+	</tr>
+	</thead>
+	<tbody>
+<%
 if(board_list == null || board_list.size() == 0){	
 %>
 	<tr>
-		<td colspan="4">작성된 글이 없습니다.</td>
+		<td colspan="6">작성된 글이 없습니다.</td>
 	</tr>
 <%
 }
@@ -80,71 +108,82 @@ else{
 			if (board.getDel() == 1) {
 		%>
 		<tr>
-			<td colspan="4">삭제된 글입니다.</td>
+			<td colspan="6">삭제된 글입니다.</td>
 		</tr>
 		<%
 		}
 			else{			
-		%>
-		<tr>
-			<th><%=i+1%></th>
-			<td>
-				
-				<a href="board_detail.do?boardseq=<%=board.getBoardseq() %>">
-					<%=board.getTitle() %>
-				</a>
-			</td>
-			
-			<td ><%=board.getId() %></td>
-			
-			</td>
-			
-			<td ><%=board.getWdate() %></td>
-			
-			</td>
-			
-			<td ><%=board.getReadcount() %></td>
-			
-			</td>
-			
-			<td ><%=board.getCommentcount() %></td>
-		</tr>
+				%>
+				<tr>
+					<th><%=(board_page-1)*20+1+i%></th>
+					<td>
+						
+						<a href="board_detail.do?boardseq=<%=board.getBoardseq() %>"> 
+							<%=board.getTitle() %>
+						</a>
+					</td>
+					
+					<td ><%=board.getId() %></td>
+					
+					
+					<td ><%=board.getWdate() %></td>					
+					
+					<td ><%=board.getReadcount() %></td>
+										
+					<td ><%=board.getCommentcount() %></td>
+				</tr>
 
-<%
+		<%
+				}
+			}
 		}
-	}
-}
-%>  
-    </thead>
-  </tbody>
-</table>
-</article>
-</section>
+		%>  
+		</tbody>	
+		
+	</table>
 <div align="center">
-<nav aria-label="Page navigation example">
-  <ul class="pagination" >
-    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-  </ul>
-</nav>
+<% for(int i=0; i< (int)((board_size-1)/20)+1; i++){
+	%>	
+<a href="board_free.do?page=<%=i+1%>"><%=i+1%></a> <!-- 바꿔야함 EX)board_free.do?page -->
+<%
+}
+%>
+</div>
 </div>
 
-	<footer>
-
-        <div align="center">
-	<a href="board_write.do" class="btn btn-primary pull-right">글쓰기</a>	
+<br>
+<div align="center">
+	<a href="board_write.do?boardtype=16" class="btn btn-primary pull-right">글쓰기</a>	<!-- 각자의 넘버로 바꾸기 -->
 </div>
-	</footer>
-    <script type="text/javascript">
-        function searchBbs(){
-            let choice = document.getElementById("choice").value;
-            let search = document.getElementById("search").value;
-            
-            location.href="board_list.do?choice=" + choice + "&search=" + search;
-        }
-        </script>
+<!--  117 131 제목 바꾸기-->
+<!-- 
+<script type="text/javascript">
+location.href = "bbslist.do"; -> GET
+</script>
+ -->
+<script type="text/javascript">
+function func(num) {	
+	var ti ="";
+	if(num =="title"){ 
+		ti="제목"; 				
+	}
+	else if(num =="content"){
+		ti="내용";
+	}else{
+		ti="작성자"
+	}
+	document.getElementById("choice").innerText = ti + "";	
+	document.getElementById("choice").value = num + "";	
+}
+
+function searchBoard(){
+	let choice = document.getElementById("choice").value;
+	let search = document.getElementById("search").value;
+	
+	location.href="board_free.do?page=1&choice=" + choice + "&search=" + search; //각자의 컨트롤러로 바꾸기
+}
+</script>
+
 </body>
 </html>
+
