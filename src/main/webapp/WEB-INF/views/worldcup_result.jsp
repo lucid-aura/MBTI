@@ -1,13 +1,33 @@
+<%@page import="secure.mbti.a.dto.MemberDto"%>
 <%@page import="secure.mbti.a.dto.CommentDto"%>
 <%@page import="java.util.List"%>
 <%@page import="secure.mbti.a.dto.WorldCupDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%!
+public String arrow(int depth){
+	String res = "<img src='image/arrow.png' width='20px' height='20px' />";
+	String nbsp = "&nbsp;&nbsp;&nbsp;&nbsp;"; // 여백
+	
+	String ts = "";
+	for(int i = 0; i<depth; i++){
+		ts += nbsp;
+	}
+	
+	return depth==0?"":ts+res;
+}
+%>
+
 <%
 WorldCupDto worldcupresult = (WorldCupDto)request.getAttribute("worldcupresult");
 List<CommentDto> comments = (List<CommentDto>)request.getAttribute("comments");
+MemberDto member = (MemberDto)request.getSession().getAttribute("login");
+/* if (session.){
+	response.sendRedirect("home.do");
+} */
 // Member 가져와야함
+
 %>
 
 <!DOCTYPE html>
@@ -33,7 +53,7 @@ List<CommentDto> comments = (List<CommentDto>)request.getAttribute("comments");
 					<a href="#test" class="text-light distance">유형별게시판</a> 
 						<a href="#test" class="text-light distance">자유게시판</a> 
 						<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
-					<button>로그아웃</button>
+					<button onclick="location.href='logout.do'"><%=member.getAlias() %>님 로그아웃</button>
 				</div>
 			</nav>
 		</header>
@@ -75,11 +95,11 @@ List<CommentDto> comments = (List<CommentDto>)request.getAttribute("comments");
 								
 								<%
 									// member에서 alias를 받아와서 비교
-									if (comments.get(i).getAlias().equals("hsh")){
+									if (comments.get(i).getAlias().equals(member.getAlias())){
 								%>
 										<%-- <td width="500px" style="word-break:break-all"><input class="form-control"  type="text" style="width:500px;"  value="<%=comments.get(i).getContent()%>" ></td> --%>
 										<td width="410px" style="word-break:break-all" >
-											<span style="cursor:pointer"title="대댓창 열기" onclick="toggle_reply(<%=i%>)"><%=comments.get(i).getContent()%></span>
+											<span style="cursor:pointer"title="대댓창 열기" onclick="toggle_reply(<%=i%>)"><%=arrow(comments.get(i).getDepth()) %><%=comments.get(i).getContent()%></span>
 											<span style="display:none"><br>
 												<input type="text" size="42%" value="">
 												<button type="button" onclick="worldcup_reply_comment(<%=i%>)" class="btn btn-success" style="float:right;"><i class="bi bi-check-circle"   style="float:right;"></i></button>
@@ -151,7 +171,7 @@ $(document).ready(function () {
 			type: "POST",
 			data: { // ----------- 보낼 데이터 세팅 alias 변경 필요
 				/* alias: member.getAlias()*/
-				alias: "hsh",
+				alias: "<%=member.getAlias()%>",
 				boardseq : "<%=worldcupresult.getBoardseq()%>",
 				content : $("#worldcup_input").val()
 			},
@@ -185,7 +205,7 @@ function update_worldcup_comment(seq, idx){
 function undo_change(i, query, before){
 	document.querySelector(query).innerHTML =
 		'<td width="410px" style="word-break:break-all">' + 
-		'<span style="cursor:pointer"title="대댓창 열기" onclick="toggle_reply(' + i + ')">' + comment_list[i]['content'] +'</span>' + 
+		'<span style="cursor:pointer"title="대댓창 열기" onclick="toggle_reply(' + i + ')">'  + arrow( comment_list[i].depth  ) + comment_list[i]['content'] +'</span>' + 
 		'<span style="display:none"><br><input type="text" size="42%" value="">' + 
 		'<button type="button" onclick="worldcup_reply_comment(' + i + ')" class="btn btn-success" style="float:right;">' +
 		'<i class="bi bi-check-circle"   style="float:right;"></i></button></span></td>';
@@ -217,18 +237,16 @@ function update_change(idx){
 }
 
 function delete_worldcup_comment(seq, list_idx){
-	console.log(list_idx);
 	$.ajax({
 		url:"worldcup_delete_comment.do",
 		type: "POST",
 		data: { // ----------- 보낼 데이터 세팅 Alias 변경 필요
-			/* alias: member.getAlias()*/
+			alias: <%=member.getAlias()%>,
 			commentseq: seq,
 			boardseq : <%=worldcupresult.getBoardseq()%>
 		},
 		success:function( rep ){
 			comment_list = rep;
-			console.log(comment_list);
 			comment_page(list_idx);
 		},
 		error:function(){
@@ -249,13 +267,13 @@ function comment_page(index) {
 			var show_delete = '';
 			
 			show_content = '<td width="410px" style="word-break:break-all">' + 
-			'<span style="cursor:pointer"title="대댓창 열기" onclick="toggle_reply(' + i + ')">' + comment_list[i]['content'] +'</span>' + 
+			'<span style="cursor:pointer"title="대댓창 열기" onclick="toggle_reply(' + i + ')">' + arrow(comment_list[i].depth) +  comment_list[i]['content'] + '</span>' + 
 			'<span style="display:none"><br><input type="text" size="42%" value="">' + 
 			'<button type="button" onclick="worldcup_reply_comment(' + i + ')" class="btn btn-success" style="float:right;">' +
 			'<i class="bi bi-check-circle"   style="float:right;"></i></button></span></td>';
 			
 			// member의 alias를 가져와서 비교해야함. 변경 필요
-			if (comment_list[i]['alias'] == 'hsh'){
+			if (comment_list[i]['alias'] == '<%=member.getAlias()%>'){
 
 				show_update = '<td><i class="bi bi-pencil-square" style="cursor:pointer" aria-hidden="true" onclick="update_worldcup_comment(' + comment_list[i]['commentseq'] +', ' + i +')"></i></td>';
 				show_delete = '<td><button type="button" class="btn-close" onclick="delete_worldcup_comment(' + comment_list[i]['commentseq'] +', ' + parseInt(i/8) +')"></button></td>';	
@@ -295,7 +313,6 @@ function toggle_reply(index) {
 	// 댓글창 클릭시 토글 부분
 	for (var i = 1; i < rows.length+1; i++){
 		var display = document.querySelector("tbody tr:nth-child("+ i + ") td:nth-child(3) span:nth-child(2)");
-		console.log(i + " " + (index))
 		if (display === null){
 			//console.log(i);
 		}
@@ -317,14 +334,10 @@ function worldcup_reply_comment(idx){
 	var index = parseInt(idx%8);
 	index += 1;
 	var query = "tbody tr:nth-child(" + index + ") td:nth-child(3) span:nth-child(2)";
-	console.log(document.querySelector(query));
-	console.log(document.querySelector(query).querySelector('input').value);
-
-	alert(reply.ref +" " + reply.content);
+	
 	// 새로운 comment 생성, alias 수정 필요
-	reply.alias = "hsh";
+	reply.alias = "<%=member.getAlias()%>";
 	reply.content = document.querySelector(query).querySelector('input').value;
-	console.log(reply);
  	$.ajax({
 		url:"worldcup_reply_comment.do",
 		type: "POST",
@@ -339,13 +352,24 @@ function worldcup_reply_comment(idx){
 					break;
 				}
 			}
-			console.log(new_comment_idx);
 			comment_page(parseInt(new_comment_idx/8));
 		},
 		error:function(){
 			alert('error_reply');
 		}
 	}); 
+}
+
+function arrow(depth){
+	var res = "<img src='image/arrow.png' width='20px' height='20px' />";
+	var nbsp = "&nbsp;&nbsp;&nbsp;&nbsp;"; // 여백
+	
+	var ts = "";
+	for(var i = 0; i<depth; i++){
+		ts += nbsp;
+	}
+	
+	return depth==0?"":ts+res;
 }
 </script>
 </body>

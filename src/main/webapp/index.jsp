@@ -16,7 +16,7 @@
 	<h1>hi222hi</h1>
 	
 	<%
-		response.sendRedirect("worldcup_choice.do");
+		response.sendRedirect("home.do");
 	%>
 </body>
 </html>
