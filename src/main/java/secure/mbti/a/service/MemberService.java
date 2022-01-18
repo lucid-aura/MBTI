@@ -10,4 +10,8 @@ public interface MemberService {
 	MemberDto login(MemberDto mem);
 	
 	 int getId(String id);
+	 
+	 int getEmail(String email);
+	 
+	 int getAlias(String alias);
 }

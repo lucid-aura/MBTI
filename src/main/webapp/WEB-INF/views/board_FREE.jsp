@@ -22,20 +22,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-
-<style>
-.pagination{
-	display: block;
-	text-align: center;
-}
-
-.search-box {
-    margin: 100px auto;
-}
-.search-box .btn-light {
-    border: 1px solid #ced4da;
-}
-</style>
 <title>Insert title here</title>
 </head>
 <body>

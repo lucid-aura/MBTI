@@ -29,4 +29,16 @@ public class MemberDaoImpl implements MemberDao {
 		return session.selectOne(ns+"login", mem);
 	}
 
+	@Override
+	public int getEmail(String email) {
+		// TODO Auto-generated method stub
+		return session.selectOne(ns+"getEmail", email);
+	}
+
+	@Override
+	public int getAlias(String alias) {
+		// TODO Auto-generated method stub
+		return session.selectOne(ns+"getAlias", alias);
+	}
+
 }

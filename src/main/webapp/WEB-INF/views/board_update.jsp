@@ -49,19 +49,24 @@ MemberDto dto = (MemberDto) request.getAttribute("dto");
 	<section>
 		<article style="margin: 250px" padding="50px">
 			<div id="containerAll"> 
+			<p>수정 페이지</p>
 			<form action="board_updateAf.do" method="post">
-			<input type="hidden" name="boardseq" value="<%=board.getBoardseq()%>">
+			<input type="hidden" name="boardseq" value="<%=board.getBoardseq()%>"> <!-- name 컨트롤러 키값, value value값 -->
 				<input type="text" name="id" class="form-control mt-4 mb-2" size="70px" value=<%=board.getId()%> readonly>	
 				<input type="text" name="title" class="form-control mt-4 mb-2"
 					placeholder="제목을 입력해주세요." value="<%=board.getTitle()%>" required>
-					<br>
 				<div class="form-group">
 					<textarea class="form-control" rows="10" name="content"
 						placeholder="내용을 입력해주세요" required><%=board.getContent()%></textarea>
 				</div>
-				<input type="submit" value="수정하기">
-	
+				<input type="submit" class="btn btn-dark" value="수정">
 			</form>
+			
+			<form action="board_free.do" method="post">
+				<button type="button" class="btn btn-dark" onclick="location.href='board_free.do'">취소</button>
+			</form>
+			
+			
 			</div>
 		</article>
 	</section>
