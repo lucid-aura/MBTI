@@ -23,5 +23,19 @@ resultType ="Integer">
 	WHERE ID=#{id}
 </select>
 
+<select id="getEmail" parameterType ="String"
+resultType ="Integer">
+	SELECT COUNT(*)
+	FROM MEMBERMBTI
+	WHERE EMAIL=#{email}
+</select>
+
+<select id="getAlias" parameterType ="String"
+resultType ="Integer">
+	SELECT COUNT(*)
+	FROM MEMBERMBTI
+	WHERE ALIAS=#{alias}
+</select>
+
 
 </mapper>

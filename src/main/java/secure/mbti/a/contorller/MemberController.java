@@ -93,4 +93,38 @@ public class MemberController {
 		}		
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "emailcheck.do", method = RequestMethod.POST)
+	public String emailcheck(String email) {
+		logger.info("MemberController emailcheck() " + new Date());	
+		System.out.println("email : "+email);
+		
+		int count = service.getEmail(email);
+		
+		if(count > 0) {
+			return "NO";
+		}
+		else {
+			return "YES";
+		}
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "aliascheck.do", method = RequestMethod.POST)
+	public String aliascheck(String alias) {
+		logger.info("MemberController aliascheck() " + new Date());	
+		System.out.println("alias : "+alias);
+		
+		int count = service.getAlias(alias);
+		
+		if(count > 0) {
+			return "NO";
+		}
+		else {
+			return "YES";
+		}
+		
+	}
+	
 }
