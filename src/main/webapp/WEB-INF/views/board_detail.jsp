@@ -61,7 +61,7 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 
 
 </head>
-<body>
+<body onunload="close_popup()">
 	<header>
 		<nav>
 			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
@@ -186,16 +186,15 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 					<tr id="btn_comment_check">
 <%-- "location.href='comment_update.do?commentseq=<%=comment.getCommentseq() %>'" --%>
 						<!-- 한 줄 -->
-						<th onClick="comment_check(<%=comment.getCommentseq()%>)" style = "cursor:pointer;"><%=i + 1%>&nbsp&nbsp&nbsp<hr></th>
+						<th onClick="comment_check(<%=comment.getCommentseq()%>)" style = "cursor:pointer;"><%=i + 1%>&nbsp&nbsp&nbsp</th>
 						<td>&nbsp<hr></td>
 						<!-- 댓글번호 --> 
 						<td onClick="comment_check(<%=comment.getCommentseq()%>)" style = "cursor:pointer;">
-							<!-- 한 칸 --> <!-- 작성자 --> <%=comment.getAlias()%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<hr>
+							<!-- 한 칸 --> <!-- 작성자 --> <%=comment.getAlias()%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 						</td>
-						<td onClick="comment_check(<%=comment.getCommentseq()%>)" style = "cursor:pointer;"><%=arrow(comment.getDepth()) %><%=comment.getContent()%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<hr></td>
-						<td onClick="comment_check(<%=comment.getCommentseq()%>)" style = "cursor:pointer;"><%=comment.getWdate()%><hr></td>
-						<td><button onClick="comment_replycontent(<%=comment.getCommentseq()%>)">답글
-						</button><hr>
+						<td onClick="comment_check(<%=comment.getCommentseq()%>)" style = "cursor:pointer; width: 650px; word-break:break-all;"><%=arrow(comment.getDepth()) %>&nbsp&nbsp<%=comment.getContent()%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+						<td onClick="comment_check(<%=comment.getCommentseq()%>)" style = "cursor:pointer;"><%=comment.getWdate()%></td>
+						<td>&nbsp&nbsp&nbsp&nbsp<button class="btn btn-light" onClick="comment_replycontent(<%=comment.getCommentseq()%>)">답글</button>
 						</td>
 						
 					</tr>
@@ -208,6 +207,7 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 					%>
 
 		</table>
+		<br>
 		<form action="comment.do" method="post" id="btn_check">
 
 		<input type="hidden" name="boardseq" value="<%=board.getBoardseq()%>">
@@ -290,13 +290,19 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 				}
 			
 				let link = 'comment_replycontent.do?commentseq='+commentseq;
-				commentshow = window.open(link, 'replywindow', 'width=1000, height=600, resizable=no');
+				commentshow = window.open(link,'','width=1000, height=600, resizable=no');
 				commentshow.focus();
+				
+				
+				
+				//window.close();
 			}
-
-		
-
-
+			function close_popup(){
+				if(commentshow !=null){
+					commentshow.close();
+				}
+				location.href="board_detail.do";
+			}
 
 </script>
 </body>

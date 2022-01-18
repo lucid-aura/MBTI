@@ -108,7 +108,8 @@ else{
 					<td>
 						
 						<a href="board_detail.do?boardseq=<%=board.getBoardseq() %>"> 
-							<%=board.getTitle() %><span style="color: red">(<%=board.getCommentcount() %>)</span>
+							<%=board.getTitle() %><%if(board.getCommentcount() > 0){ %><span style="color: red">(<%=board.getCommentcount() %>)</span>
+							<%} %>
 						</a>
 					</td>
 					

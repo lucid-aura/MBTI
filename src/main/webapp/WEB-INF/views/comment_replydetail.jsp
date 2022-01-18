@@ -14,39 +14,46 @@ MemberDto dto = (MemberDto) request.getSession().getAttribute("login");
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
 
-<form action="comment_replydetailAf.do" method="post" id="replywindow">
-
+<form action="comment_replydetailAf.do" id="replywindow" method="post">
+<br><br><br><br>
+		<div align="center" style="text-decoration: underline;">
 		<input type="hidden" name="commentseq" value="<%=comment.getCommentseq()%>">
 		<input type="hidden" name="ref" value="<%=comment.getRef()%>">
 		<input type="hidden" name="step" value="<%=comment.getStep()%>">
 		<input type="hidden" name="depth" value="<%=comment.getDepth()%>">
 		<input type="hidden" name="alias" value="<%=dto.getAlias()%>">
 		<input type="hidden" name="boardseq" value="<%=comment.getBoardseq()%>">
-		<%=dto.getAlias()%>
+		<%=dto.getAlias()%>&nbsp&nbsp&nbsp&nbsp
 		<%=comment.getContent()%>
+		</div>
+		<br><br><br><br>
 
 		<div style="width: 1000px">	<!-- 댓글적는 부분 -->
 			<table>
 				<div class="card mb-2">
-					<div class="card-header bg-light" style="align-content: left">
+					<div class="card-header bg-light" align="center">
 						<i class="fa fa-comment fa">댓글 (위 댓글의 답글을 작성하세요.)</i>
 					</div>
 					<div class="card-body">
 						<ul class="list-group list-group-flush">
-							<li class="list-group-item">
+							<li class="list-group-item" align="center">
 								<div class="form-inline mb-2">
-									<!--아이디 입력부분 일시삭제 <label for="replyId"><i
-										class="fa fa-user-circle-o fa-2x"></i></label> <input type="text"
-										class="form-control ml-2" placeholder="Enter yourId"
-										id="replyId"> -->
 
 								</div> <textarea class="form-control" id="commentcontentform" name="content"
 									rows="3"></textarea><br>
 									
-								<button type="button" onclick="replyclose()" class="btn btn-danger">댓글 등록</button><!-- onClick="javascript:addReply();" --> <!--onClick="comment_check()"  -->
+								<button type="button" onclick="replyclose()" class="btn btn-danger">답글 등록</button><!-- onClick="javascript:addReply();" --> <!--onClick="comment_check()"  -->
 
 							</li>
 						</ul>
@@ -60,15 +67,17 @@ MemberDto dto = (MemberDto) request.getSession().getAttribute("login");
 			/* window.opener.name = "parentPage"; // 부모창의 이름 설정 */
 			
 			var replycommentwindow=document.getElementById('replywindow');
-			opener.parent.location='board_detail.do?boardseq=<%=comment.getBoardseq()%>';//부모창에 호출될 url 
 			
-			opener.parent.location.reload();
 			replycommentwindow.submit();
-		    self.close();
+			
+ 			<%-- opener.window.location.href='board_detail.do?boardseq=<%=comment.getBoardseq()%>'; --%>  //부모창에 호출될 url 
+ 		 	opener.window.location.reload();
 
+			
+		   
 
-		   /*  self.close();
- */
+		    //self.close();
+
 		}
 		</script>
 </body>

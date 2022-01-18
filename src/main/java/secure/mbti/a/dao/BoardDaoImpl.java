@@ -62,6 +62,12 @@ public class BoardDaoImpl implements BoardDao{
 		session.update(ns+"boardcommentcountup", boardseq);
 		
 	}
+
+	@Override
+	public void board_commentcountdown(int boardseq) {
+		session.update(ns+"boardcommentcountdown", boardseq);
+		
+	}
 	
 	
 }

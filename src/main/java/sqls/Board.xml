@@ -96,6 +96,12 @@ parameterType="secure.mbti.a.dto.BoardParam">
 	WHERE BOARDSEQ=#{ boardseq }
 </update>
 
+<update id="boardcommentcountdown" parameterType="Integer">
+	UPDATE BOARDALL
+	SET COMMENTCOUNT = COMMENTCOUNT -1
+	WHERE BOARDSEQ=#{ boardseq }
+</update>
+
 
 <!--  
 select BOARDSEQ, BOARDTYPE, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT,COMMENTCOUNT,RNUM

@@ -56,6 +56,12 @@ public class BoardServiceImpl implements BoardService {
 	public void board_commentcountup(int boardseq) {
 		dao.board_commentcountup(boardseq);
 	}
+
+	@Override
+	public void board_commentcountdown(int boardseq) {
+		dao.board_commentcountdown(boardseq);
+		
+	}
 	
 	
 }

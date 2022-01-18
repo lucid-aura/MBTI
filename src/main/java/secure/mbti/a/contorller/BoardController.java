@@ -589,10 +589,12 @@ public class BoardController {
 	@RequestMapping(value = "comment_delete.do", method = RequestMethod.GET) // jsp파일에서 컨트롤러 찾을때 쓰임 requestmapping
 	public String comment_delete(int commentseq) {
 		logger.info("BoardController comment_delete() " + new Date());
-		
+	
 		int comment_delete = commentService.get_comment(commentseq).getBoardseq();  //삭제하고자하는 댓글 가져와라 > 보드시퀀스와 함께
 		
-		commentService.comment_delete(commentseq);//get방식으로 시퀀스 넘겨줌
+		service.board_commentcountdown(comment_delete); // del==1로바꿈
+		commentService.comment_delete(commentseq);	//get방식으로 시퀀스 넘겨줌
+		
 		
 		return "redirect:/board_detail.do?boardseq="+comment_delete;
 	}
@@ -613,14 +615,18 @@ public class BoardController {
 	@RequestMapping(value = "comment_replydetailAf.do", method = RequestMethod.POST)
 	public String comment_replydetailAf(CommentDto dto) {
 		logger.info("BoardController comment_replydetailAf() " + new Date());
+		System.out.println("7777777");
 		System.out.println(dto.toString());
-//		CommentDto parentsDto = commentService.get_comment(dto.getCommentseq());
-//		commentService.comment_write(dto);
 		
-//		List<CommentDto> commentdto = commentService.comment_list(dto.getBoardseq());
-//		BoardDto board = service.get_board(dto.getBoardseq()); // 게시글 가져오기
 		
-//		service.board_commentcountup(dto.getBoardseq()); //게시판 댓글개수 하나 늘린것
+		
+		commentService.comment_reply_update(dto);
+		commentService.comment_reply(dto);
+		
+		List<CommentDto> commentdto = commentService.comment_list(dto.getBoardseq());
+		// BoardDto board = service.get_board(dto.getBoardseq()); // 게시글 가져오기
+		
+		service.board_commentcountup(dto.getBoardseq()); //db의 게시판 댓글개수 하나 늘린것 db에 알려줌
 		
 		
 		
