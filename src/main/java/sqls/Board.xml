@@ -12,21 +12,24 @@
 	FROM BOARDALL
  	<if test="choice != null and choice != ''  and search != null and search != '' ">
 		<if test="choice == 'title'">
-			WHERE TITLE LIKE '%' || #{search} || '%'
+			WHERE TITLE LIKE '%' || #{search} || '%' AND BOARDTYPE=#{boardtype}
 		</if>
 		<if test="choice == 'content'">
-			WHERE CONTENT LIKE '%' || #{search} || '%'
+			WHERE CONTENT LIKE '%' || #{search} || '%' AND BOARDTYPE=#{boardtype}
+			
 		</if>
 		<if test="choice == 'writer'">
-			WHERE ID=#{search}
+			WHERE ID=#{search} AND BOARDTYPE=#{boardtype}
 		</if>
 	</if> 
-	ORDER BY BOARDSEQ DESC
+		<if test="choice == null and search == null ">	
+		WHERE BOARDTYPE=#{boardtype}
+		</if>
 </select>
 
 <insert id="boardwrite" parameterType="secure.mbti.a.dto.BoardDto" >
 	INSERT INTO BOARDALL(BOARDSEQ, ID, BOARDTYPE, TITLE, CONTENT, WDATE, DEL, READCOUNT,COMMENTCOUNT)
-	VALUES(BOARDSEQ.NEXTVAL, #{id} , 0,#{title}, #{content}, SYSDATE, 0, 0,0)
+	VALUES(BOARDSEQ.NEXTVAL, #{id} , #{boardtype},#{title}, #{content}, SYSDATE, 0, 0,0)
 </insert>
 
 <select id="getboard" resultType="secure.mbti.a.dto.BoardDto">
@@ -54,57 +57,47 @@
 	WHERE BOARDSEQ=#{ boardseq }
 </update>
 
-
-
-
-
-
-
-
 <select id="listPage" resultType="secure.mbti.a.dto.BoardDto"
 parameterType="secure.mbti.a.dto.BoardParam">
-	select BOARDSEQ, BOARDTYPE, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT,COMMENTCOUNT
-	from (
-   		 select RNUM, BOARDSEQ, BOARDTYPE, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT, COMMENTCOUNT 
-        
-   		 from (  SELECT row_number() over(order by BOARDSEQ desc) as RNUM, BOARDSEQ, BOARDTYPE, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT,COMMENTCOUNT
-            	FROM BOARDALL
-            
-            
+			select BOARDSEQ, BOARDTYPE, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT,COMMENTCOUNT
+			from (
+		 select RNUM, BOARDSEQ, BOARDTYPE, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT, COMMENTCOUNT 
+		        
+		 from (  SELECT row_number() over(order by BOARDSEQ desc) as RNUM, BOARDSEQ, BOARDTYPE, ID, TITLE, 
+		CONTENT, WDATE, DEL, READCOUNT,COMMENTCOUNT
+		FROM BOARDALL
+
           		 <if test="choice != null and choice != ''  and search != null and search != '' ">
-						<if test="choice == 'title'">
-							WHERE TITLE LIKE '%' || #{search} || '%' AND BOARDTYPE=#{boardtype}
-						</if>
-						<if test="choice == 'content'">
-							WHERE CONTENT LIKE '%' || #{search} || '%' AND BOARDTYPE=#{boardtype}
+			<if test="choice == 'title'">
+			WHERE TITLE LIKE '%' || #{search} || '%' AND BOARDTYPE=#{boardtype}
+		</if>
+		<if test="choice == 'content'">
+			WHERE CONTENT LIKE '%' || #{search} || '%' AND BOARDTYPE=#{boardtype}
 							
-						</if>
-						<if test="choice == 'writer'">
-							WHERE ID=#{search} AND BOARDTYPE=#{boardtype}
-						</if>
+		</if>
+		<if test="choice == 'writer'">
+			WHERE ID=#{search} AND BOARDTYPE=#{boardtype}
+		</if>
 					
-					</if> 
+		</if> 
 					<if test="choice == null and search == null ">	
 						WHERE BOARDTYPE=#{boardtype}
 					</if> 
-            
-            
             
             ) 
     where RNUM BETWEEN #{criteria.rowStart} and #{criteria.rowEnd})
 	order by BOARDSEQ desc
 </select>
-
-
-<!-- select BOARDSEQ, BOARDTYPE, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT,COMMENTCOUNT,RNUM
+<!--  
+select BOARDSEQ, BOARDTYPE, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT,COMMENTCOUNT,RNUM
 from (
     select RNUM, BOARDSEQ, BOARDTYPE, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT, COMMENTCOUNT 
         
-    from (  SELECT row_number() over(order by BOARDSEQ desc) as RNUM, BOARDSEQ, BOARDTYPE, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT,COMMENTCOUNT
+    from (  SELECT row_number() over(order by BOARDSEQ desc) as RNUM, BOARDSEQ, BOARDTYPE, ID, TITLE, CONTENT, 
+    WDATE, DEL, READCOUNT,COMMENTCOUNT
             FROM BOARDALL
             
-            
-            <if test="choice != null and choice != ''  and search != null and search != '' ">
+            	<if test="choice != null and choice != ''  and search != null and search != '' ">
 						<if test="choice == 'title'">
 							WHERE TITLE LIKE '%' || #{search} || '%' AND BOARDTYPE=#{boardtype}
 						</if>
@@ -120,19 +113,10 @@ from (
 					<if test="choice == null and search == null ">	
 						WHERE BOARDTYPE=#{boardtype}
 					</if>
-            
-            
-            
+            	  
             ) 
-    where RNUM BETWEEN #{criteria.rowStart} and #{criteria.rowEnd})
-order by BOARDSEQ desc; -->
+    where RNUM BETWEEN  #{criteria.rowStart} and #{criteria.rowEnd} )
+	order by BOARDSEQ desc
 
-
-
-
-
-
-
-
-
+-->
 </mapper>

@@ -17,4 +17,5 @@ public interface CommentService {
 	
 	CommentDto get_comment(int commentseq);
 	
+	void comment_reply_update(CommentDto comment);
 }

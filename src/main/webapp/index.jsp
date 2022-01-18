@@ -16,7 +16,7 @@
 	<h1>hi222h2323i</h1>
 	
 	<%
-		response.sendRedirect("login.do");
+		response.sendRedirect("home.do");
 	%>
 </body>
 </html>

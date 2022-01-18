@@ -14,4 +14,5 @@ public interface CommentDao {
 	void comment_reply(CommentDto dto);
 	
 	CommentDto get_comment(int commentseq);
+	void comment_reply_update(CommentDto comment);
 }

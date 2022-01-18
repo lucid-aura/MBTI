@@ -9,5 +9,9 @@ public interface MemberDao {
 	
 	MemberDto login(MemberDto mem);
 	
+	int getEmail(String email);
+	
+	int getAlias(String alias);
+	
 
 }

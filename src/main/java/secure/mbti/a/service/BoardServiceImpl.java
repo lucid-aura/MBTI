@@ -49,7 +49,6 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<BoardDto> board_list_page(BoardParam param) {
-		// TODO Auto-generated method stub
 		return dao.board_list_page(param);
 	}
 	

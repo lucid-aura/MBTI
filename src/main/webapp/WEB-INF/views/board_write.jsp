@@ -16,6 +16,9 @@
 <%
 List<BoardDto> board_list = (List<BoardDto>)request.getAttribute("board_list");
 %>
+<%
+int board_write = (int)request.getAttribute("boardtype");
+%>
 
 <%
 List<CommentDto> comments = (List<CommentDto>)request.getAttribute("comments"); 
@@ -38,9 +41,9 @@ MemberDto mem = (MemberDto)request.getSession().getAttribute("login");
 	<header>
 		<nav>
 			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
-				<a href="#test" class="text-light distance">유형소개</a>
-				<a href="#test" class="text-light distance">유형별게시판</a>
-				<a href="board_free.do" class="text-light distance">자유게시판</a>
+				<a href="introMBTI.do" class="text-light distance">유형소개</a>
+				<a href="board_type.do?page=1" class="text-light distance">유형별게시판</a>
+				<a href="board_free.do?page=1" class="text-light distance">자유게시판</a>
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
 				<button>로그아웃</button>
 			</div>
@@ -54,6 +57,7 @@ MemberDto mem = (MemberDto)request.getSession().getAttribute("login");
 		<article style="margin: 250px" padding="50px">
 			<div id="containerAll"> 
 			<form action="board_writeAf.do" method="post">
+				<input type="hidden" name="boardtype" value="<%=board_write%>">
 				<input type="text" name="id" class="form-control mt-4 mb-2" size="70px" value="<%=mem.getId()%>" readonly>	
 				<input type="text" name="title" class="form-control mt-4 mb-2"
 					placeholder="제목을 입력해주세요." required>
@@ -62,7 +66,7 @@ MemberDto mem = (MemberDto)request.getSession().getAttribute("login");
 						placeholder="내용을 입력해주세요" required></textarea>
 				</div>
 				<button type="submit" name="btn_check" class="btn btn-dark mt-3"">등록</button>
-				<button type="button" name="btn_cancle" class="btn btn-dark mt-3" onclick="location.href='board_free.do'">취소</button>
+				<button type="button" name="btn_cancle" class="btn btn-dark mt-3" onclick="location.href='board_cancle.do?boardtype=<%=board_write%>'">취소</button>
 	
 			</form>
 			</div>

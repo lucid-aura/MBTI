@@ -20,7 +20,7 @@ public class BoardDto implements Serializable{
 	private String title; // 제목
 	private String content; // 내용
 	private String wdate; // 작성일
-
+	private int boardtype; 
 	private int del;		// 삭제
 	private int readcount;  // 조회수
 	private int commentcount; // 댓글수
@@ -90,6 +90,14 @@ public class BoardDto implements Serializable{
 		this.wdate = wdate;
 	}
 
+	public int getBoardtype() {
+		return boardtype;
+	}
+
+	public void setBoardtype(int boardtype) {
+		this.boardtype = boardtype;
+	}
+
 	public int getDel() {
 		return del;
 	}
@@ -114,12 +122,28 @@ public class BoardDto implements Serializable{
 		this.commentcount = commentcount;
 	}
 
+	public BoardDto(int boardseq, String id, String title, String content, String wdate, int boardtype, int del,
+			int readcount, int commentcount) {
+		super();
+		this.boardseq = boardseq;
+		this.id = id;
+		this.title = title;
+		this.content = content;
+		this.wdate = wdate;
+		this.boardtype = boardtype;
+		this.del = del;
+		this.readcount = readcount;
+		this.commentcount = commentcount;
+	}
+
 	@Override
 	public String toString() {
 		return "BoardDto [boardseq=" + boardseq + ", id=" + id + ", title=" + title + ", content=" + content
-				+ ", wdate=" + wdate + ", del=" + del + ", readcount=" + readcount + ", commentcount=" + commentcount
-				+ "]";
+				+ ", wdate=" + wdate + ", boardtype=" + boardtype + ", del=" + del + ", readcount=" + readcount
+				+ ", commentcount=" + commentcount + "]";
 	}
+	
+
 
 
 	

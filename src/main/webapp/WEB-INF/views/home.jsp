@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -15,19 +16,24 @@
         <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="resources/homeBoot/css/styles.css" rel="stylesheet" />
+        <link href="resources/homeBoot/css/styles.css?version=5" rel="stylesheet" />
+        
+        <style type="text/css">
+        .deepblue {color:#004176 !important;}
+        
+        </style>
     </head>
     <body id="page-top">
-        
+        <img alt="" src="">
         <!-- Masthead-->
-        <header class="masthead">
+        <header class="masthead"  style="background:url(./resources/homeBoot/assets/img/MBTI_BACK.jpg)">
             <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
                 <div class="d-flex justify-content-center">
                     <div class="text-center">
                     <!--  중가 -->
-                        <h1 class="mx-auto my-0 text-uppercase">PLAN/16</h1>				
-                        <h2 class="text-white-50 mx-auto mt-2 mb-5">A free, responsive, one page Bootstrap theme created by Start Bootstrap.</h2>
-                        <a class="btn btn-primary" href="login.do">Get Started</a>
+                        <h1 class="bg-deepblue mx-auto my-0 text-uppercase" >PLAN/16</h1>	
+                        <h2 class="text-black-50 mx-auto mt-2 mb-5">인생을 살아가는 16가지 방법들,<br> 다같이 모여 서로의 이야기를 들려주세요!</h2>
+                        <a class="btn btn-yellow" href="login.do">Get Started</a>
                     </div>
                 </div>
             </div>

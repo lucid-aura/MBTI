@@ -56,6 +56,8 @@ public class CommentDaoImpl implements CommentDao {
 		
 		return session.selectOne(ns + "commentseq", commentseq);
 
+	public void comment_reply_update(CommentDto comment) {
+		session.update(ns + "commentreplyupdate", comment);
 	}
 	
 }

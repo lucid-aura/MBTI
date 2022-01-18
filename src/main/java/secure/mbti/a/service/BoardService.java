@@ -20,8 +20,5 @@ public interface BoardService {
 	
 	void board_delete(int boardseq);
 	
-	//페이징
 	List<BoardDto> board_list_page(BoardParam param);
-	
-	
 }

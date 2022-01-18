@@ -50,7 +50,7 @@ public class Criteria {
 	 {
 	  if (perPageNum <= 0 || perPageNum > 100)
 	  {
-	   this.perPageNum = 10;
+	   this.perPageNum = 20;
 	   return;
 	  }
 	  this.perPageNum = perPageNum;

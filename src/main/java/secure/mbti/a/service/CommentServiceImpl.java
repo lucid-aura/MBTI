@@ -57,4 +57,8 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 
+	public void comment_reply_update(CommentDto comment) {
+		dao.comment_reply_update(comment);
+	}
+
 }
