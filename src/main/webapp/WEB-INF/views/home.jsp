@@ -32,7 +32,7 @@
                     <div class="text-center">
                     <!--  중가 -->
                         <h1 class="bg-deepblue mx-auto my-0 text-uppercase" >PLAN/16</h1>	
-                        <h2 class="text-black-50 mx-auto mt-2 mb-5">A free, responsive, one page Bootstrap theme created by Start Bootstrap.</h2>
+                        <h2 class="text-black-50 mx-auto mt-2 mb-5">인생을 살아가는 16가지 방법들,<br> 다같이 모여 서로의 이야기를 들려주세요!</h2>
                         <a class="btn btn-yellow" href="login.do">Get Started</a>
                     </div>
                 </div>

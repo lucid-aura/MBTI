@@ -22,7 +22,7 @@
 				<a href="#test" class="text-light distance">유형별게시판</a>
 				<a href="#test" class="text-light distance">자유게시판</a>
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
-				<button>로그아웃</button>
+				<button type="button" onclick="outbtn()">로그아웃</button>
 			</div>
 		</nav>
 	</header>
@@ -89,6 +89,12 @@
             		});
 		    
 		});
+	    
+	    function outbtn(){
+	    	location.href = "logout.do";
+	    }
+	    
+	    
 	</script>
 	
 	

@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,8 @@ import secure.mbti.a.service.MemberService;
 public class MemberController {
 	private static Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
-	
+	@Autowired
+	SqlSession session;
 	
 	@Autowired
 	MemberService service;
@@ -125,6 +127,14 @@ public class MemberController {
 			return "YES";
 		}
 		
+	}
+	
+	@RequestMapping(value = "logout.do", method = RequestMethod.GET)
+	public String logout(HttpServletRequest req) {
+		System.out.println("도착");
+		req.getSession().invalidate();
+		req.getSession(true);
+		return  "redirect:/login.do";
 	}
 	
 }

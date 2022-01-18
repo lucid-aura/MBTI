@@ -6,11 +6,11 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link href="css/loginStyle.css" rel="stylesheet" />
+<link href="css/loginStyle.css?version=3" rel="stylesheet" />
 
 </head>
 <body>
-<div class="sidenav" style="background:#004176">
+<div class="sidenav" style="background:#004176; background-image : url(./resources/homeBoot/assets/img/bg-login.jpg)">
          <div class="login-main-text" >
             <h2>Application<br> Login Page</h2>
             <p>Login or register from here to access.</p>
