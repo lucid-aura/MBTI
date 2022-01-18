@@ -36,3 +36,8 @@ commit;
 -- 전체 댓글 출력
 SELECT *
 FROM COMMENTMBTI;
+
+-- 한 게시판 글에 대한 댓글 개수 출력
+SELECT *
+FROM COMMENTMBTI;
+WHERE BOARDSEQ=23;
