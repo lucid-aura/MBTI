@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,15 +7,20 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<p>clone test</p>
-	<h1>Hello HTML</h1>
-	<h2>test helloo</h2>
-	<p>sorry ..</p>
-	<h1>hihihihi</h1>
-	<h1>hi222hi</h1>
+<h1>INSJ입니다.</h1>
+
+<br><button type="button" onclick="btnClick()">클릭</button>
+
+<script type="text/javascript">
+function btnClick() {
 	
-	<%
-		response.sendRedirect("home.do");
-	%>
+		location.href ='index.jsp';
+
+}
+
+</script>
+
+</form>
+
 </body>
 </html>
