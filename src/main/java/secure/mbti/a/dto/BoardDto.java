@@ -36,6 +36,19 @@ public class BoardDto implements Serializable{
 		this.title = title;
 		this.content = content;
 	}
+	
+	public BoardDto(int boardseq, String id, String title, String content, String wdate, int del, int readcount,
+			int commentcount) {
+		super();
+		this.boardseq = boardseq; // 키값, 벨류값
+		this.id = id;
+		this.title = title;
+		this.content = content;
+		this.wdate = wdate;
+		this.del = del;
+		this.readcount = readcount;
+		this.commentcount = commentcount;
+	}
 
 	public int getBoardseq() {
 		return boardseq;

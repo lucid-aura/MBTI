@@ -6,7 +6,7 @@
 	pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="/css/bootstrap.css">
 <!--지워도됨 -->
-
+<!-- 댓글삭제부분 : style 마진 16px 추가 -->
 
 <%
 BoardDto board = (BoardDto) request.getAttribute("board");
@@ -16,24 +16,13 @@ MemberDto dto = (MemberDto) request.getSession().getAttribute("login");
 %>
 
 <%
-List<CommentDto> comments = (List<CommentDto>) request.getAttribute("comments");
-%>
-<%
-int comment_count = (Integer)request.getAttribute("comment_count");
+CommentDto commentDto = (CommentDto) request.getAttribute("comment_update");  // 콘트롤 키값
 %>
 
 <!DOCTYPE html>
 
 <html>
-
 <head>
-<style type="text/css">
-#table_detail{
-	 border-collapse:collapse;
-}
-
-</style>
-
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet"
@@ -44,7 +33,14 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	
+<!-- 강사님 부트스트렙 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+#btn btn-dark mt-3{
+<style type="text/css"></style>
+ }
 
 
 
@@ -53,10 +49,10 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 	<header>
 		<nav>
 			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
-				<a href="#test" class="text-light distance">유형소개</a> 
-				<a href="#test" class="text-light distance">유형별게시판</a> 
-				<a href="board_free.do?page=1" class="text-light distance">자유게시판</a> 
-				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
+				<a href="#test" class="text-light distance">유형소개</a> <a href="#test"
+					class="text-light distance">유형별게시판</a> <a href="board_free.do?page=1"
+					class="text-light distance">자유게시판</a> <a href="worldcup_choice.do"
+					class="text-light distance">월드컵</a>
 				<button>로그아웃</button>
 			</div>
 		</nav>
@@ -69,12 +65,11 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 	<br>
 	<br>
 
-	
 	<!-- 본문 글 디테일 부분(댓글부분 제외) -->
 	<section>
 		<div class="wrapper" align="center">
 			<!--    attribute property -->
-			<table id="table_detail" class="table " style="width: 1000px">
+			<table class="table table-bordered" border="0" style="width: 1000px">
 				<!-- <col width="30"><col width="200"><col width="80"> -->
 				<%
 				if (board == null) {
@@ -128,8 +123,7 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 			<%
 			}
 			%>
-			
-
+<br><br>
 		</div>
 	</section>
 	
@@ -143,64 +137,19 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 <section>
 	<div id="comment_list" align="center">
 
-		<table>
-			<!-- 댓글개수 -->
-		<div align="center">
-		<br><br><br>
-		<button type="button" class="btn btn-light"><p style="font-weight:bold; margin: 10px 15px;">댓글 <%= comment_count%></p></button><br><br>
+		<!-- 수정부분 -->
+		<form action="comment_updateAf.do" method="post">
+		<div style="overflow: auto">
+		<input type="hidden" name="commentseq" value="<%=commentDto.getCommentseq()%>">
+		<input type="hidden" name="boardseq" value="<%=commentDto.getBoardseq()%>">
+		<input type="hidden" name="alias" value="<%=commentDto.getAlias()%>">
 		</div>
-					<%
-					if (comments == null || comments.size() == 0) {
-					%>
-					<tr>
-						<td colspan="4">작성된 댓글이 없습니다.<br><br></td>
-					</tr>
-					<%
-					} else {
-					for (int i = 0; i < comments.size(); i++) {
-						CommentDto comment = comments.get(i);
-					%>
-					<%
-					if (comment.getDel() == 1) {
-					%>
-					<tr>
-						<td colspan="4" align="center">삭제된 댓글입니다.<br><br></td>
-					</tr>
-					<%
-					} else {
-					%>
-					
-					<%-- <tr onClick="location.href='comment_update.do?commentseq=<%=comment.getCommentseq() %>'" style = "cursor:pointer;"> --%>
-					<tr id="btn_comment_check" onClick="comment_check(<%=comment.getCommentseq()%>)" style = "cursor:pointer;">
-<%-- "location.href='comment_update.do?commentseq=<%=comment.getCommentseq() %>'" --%>
-						<!-- 한 줄 -->
-						<th><%=i + 1%>&nbsp&nbsp&nbsp<hr></th>
-						<td>&nbsp<hr></td>
-						<!-- 댓글번호 -->
-						<td>
-							<!-- 한 칸 --> <!-- 작성자 --> <%=comment.getAlias()%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<hr>
-						</td>
-						<td><%=comment.getContent()%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<hr></td>
-						<td><%=comment.getWdate()%><hr></td>
-						
-					</tr>
-					<%
-					}
-					}
-					}
-					%>
-
-		</table>
-		<form action="comment.do" method="post" id="btn_check">
-
-		<input type="hidden" name="boardseq" value="<%=board.getBoardseq()%>">
-		<input type="hidden" name="alias" value="<%=dto.getAlias()%>">
-
+		
 		<div style="width: 1000px">	<!-- 댓글적는 부분 -->
 			<table>
 				<div class="card mb-2">
 					<div class="card-header bg-light" style="align-content: left">
-						<i class="fa fa-comment fa">댓글 (위 댓글 클릭시 수정/삭제가 가능합니다.)</i>
+						<i class="fa fa-comment fa">수정 중인 댓글</i>
 					</div>
 					<div class="card-body">
 						<ul class="list-group list-group-flush">
@@ -212,10 +161,9 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 										id="replyId"> -->
 
 								</div> <textarea class="form-control" id="exampleFormControlTextarea1" name="content"
-									rows="3"></textarea><br>
-									
-								<button type="button" onClick="comment_checkcomment()" class="btn btn-danger">댓글 등록</button><!-- onClick="javascript:addReply();" --> <!--onClick="comment_check()"  -->
-
+									rows="3"><%=commentDto.getContent()%></textarea>
+								<button type="submit" class="btn btn-dark mt-3 center">댓글 수정</button><!-- onClick="javascript:addReply();" -->
+								<button type="button" class="btn btn-danger center" onclick="location.href='comment_delete.do?commentseq=<%=commentDto.getCommentseq()%>'" style="margin-top: 16px">댓글 삭제</button>
 							</li>
 						</ul>
 					</div>
@@ -226,7 +174,7 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 
 <script type="text/javascript">
 
-	/* 		답글	일단 제외
+/* 		답글	일단 제외
 			function answer( boardseq ){
 				location.href = "answer.do?seq=" + seq;
 			} */
@@ -236,38 +184,20 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 			function board_delete( boardseq ){
 				location.href = "board_delete.do?boardseq=" + boardseq;
 			}
-			function board_free(boardseq){
-				location.href = "board_free.do?boardseq= + " + boardseq + "&page=1";
+			function board_free( boardseq ){
+				location.href = "board_free.do?boardseq=" + boardseq + "&page=1";
 			}
 			
-			//댓글등록 빈값을 넣어 오류날때
-			function comment_checkcomment(){ 
-				var check = $("#exampleFormControlTextarea1").val();
-				check.trim();
-				if( check=="" || check == null || check == undefined ){ 
-					alert("내용을 입력하세요.");
-				}
-				else{
-					$("#btn_check").submit();
-					
-				}
-			};
 			
-			function comment_check(commentseq){
-				var ff =$("#btn_comment_check").children('td').eq(1).text().trim();
-				console.log(ff);
-				if(ff == "<%=dto.getAlias()%>"){
-					location.href="comment_update.do?commentseq=" + commentseq;
-				} else{
-					alert("댓글작성자가 아닙니다.")
-				}
 			
-				<%-- "location.href='comment_update.do?commentseq=<%=comment.getCommentseq() %>'" --%>
-			}
+			/*
+			function comment_update( boardseq ){
+				location.href = "board_detail.do?boardseq=" + boardseq;
+			}*/
+			
 
-		
-
-
+			
+			
 
 </script>
 </body>

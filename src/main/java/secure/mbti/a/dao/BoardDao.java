@@ -30,8 +30,8 @@ public interface BoardDao {
 	
 	void board_delete(int boardseq);
 	
-	List<BoardDto> board_list_page(BoardParam param);
-
 	
+	//페이징
+	List<BoardDto> board_list_page(BoardParam param);
 	
 }
