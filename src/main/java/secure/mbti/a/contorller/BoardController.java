@@ -433,7 +433,7 @@ public class BoardController {
 				"free",
 				}; 
 		MemberDto mem = (MemberDto)request.getSession().getAttribute("login");
-		String Type =mem.getMbti().toLowerCase();
+		String Type = mbtiType[dto.getBoardtype()].toLowerCase(); //mem.getMbti().toLowerCase();
 		
 		int index = -1;
 		for (int i=0;i<mbtiType.length;i++) {
