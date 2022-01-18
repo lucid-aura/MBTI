@@ -13,5 +13,7 @@ public interface MemberDao {
 	
 	int getAlias(String alias);
 	
+	int getIdpwdcheck(MemberDto mem);
+	
 
 }

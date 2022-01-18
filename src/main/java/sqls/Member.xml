@@ -37,5 +37,12 @@ resultType ="Integer">
 	WHERE ALIAS=#{alias}
 </select>
 
+<select id="getIdpwdcheck" parameterType ="secure.mbti.a.dto.MemberDto"
+resultType ="Integer">
+	SELECT COUNT(*)
+	FROM MEMBERMBTI
+	WHERE ID=#{id} AND PWD=#{pwd}
+</select>
+
 
 </mapper>

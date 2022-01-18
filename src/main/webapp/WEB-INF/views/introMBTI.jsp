@@ -6,6 +6,9 @@
 MemberDto mem = (MemberDto)request.getSession().getAttribute("login");
 System.out.println(mem.toString());
 %>
+
+
+
 <!DOCTYPE html>
 
 <html>
