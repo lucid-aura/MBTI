@@ -27,11 +27,11 @@
 	<header>
 		<nav>
 			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
-				<a href="#test" class="text-light distance">유형소개</a>
-				<a href="#test" class="text-light distance">유형별게시판</a>
-				<a href="#test" class="text-light distance">자유게시판</a>
+				<a href="introMBTI.do" class="text-light distance">유형소개</a>
+				<a href="board_type.do?page=1" class="text-light distance">유형별게시판</a>
+				<a href="board_FREE.do?page=1" class="text-light distance">자유게시판</a>
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
-				<button>로그아웃</button>
+				<button type="button" onclick="outbtn()">로그아웃</button>
 			</div>
 		</nav>
 	</header>
@@ -136,13 +136,11 @@
 					 function(){$(this).parents().children("img").addClass("imghover");},
 					 function(){$(this).parents().children("img").removeClass("imghover");}
 		    );
-
             $(".hoverText").mouseover(
             		function(){
             			$(this).parents().children("img").css("opacity","1");
             			$(this).parents().children("img").css("filter","saturate(1.0)");          		
             		}); 
-
             $(".hoverText").mouseleave(
             		function(){
             			$(this).parents().children("img").css("opacity","0.5");
@@ -161,6 +159,7 @@
             	});
 		    
 		});
+	    
 	</script>
 </body>
 </html>

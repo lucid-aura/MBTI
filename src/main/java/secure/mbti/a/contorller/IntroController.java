@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +26,8 @@ import secure.mbti.a.dto.MemberDto;
 import secure.mbti.a.service.MbtiDetailService;
 import secure.mbti.a.service.MbtiReviewService;
 
+
+import secure.mbti.a.dto.MemberDto;
 
 @Controller
 public class IntroController {
@@ -140,9 +145,9 @@ public class IntroController {
 	
 	/* 본인의 MBTI게시판으로 이동 */
 	@RequestMapping(value = "board_type.do", method = RequestMethod.GET)
-	public String board_type(String mbtiBoard){ 
+	public String board_type(String type){ 
 		System.out.println("IntroController board_type() " + new Date());
-		return "redirect:/board_"+mbtiBoard+".do";
+		return "redirect:/board_"+type+".do";
 	}
 	
 	
@@ -191,6 +196,7 @@ public class IntroController {
 		}
 		return "redirect:/mbtiReview.do";
 	}
+	
 	
 	
 }

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,12 +18,11 @@ import secure.mbti.a.dto.WorldCupDto;
 import secure.mbti.a.service.CommentService;
 import secure.mbti.a.service.WorldCupService;
 
-
+//월드컵 + 댓글로 합쳐진것. 따로 댓글뺴야된다
 @Controller
 public class WorldCupController {
 
 	private static Logger logger = LoggerFactory.getLogger(WorldCupController.class);
-
 	@Autowired
 	WorldCupService worldcupservice;
 	
@@ -68,6 +68,52 @@ public class WorldCupController {
 		model.addAttribute("comments", commentdto);
 		result.getBoardseq();
 		return "worldcup_result";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "worldcup_result.do", method = RequestMethod.POST)
+	public List<CommentDto> worldcup_comment(CommentDto comment){ 
+		logger.info("WorldCupController worldcup_comment() " + new Date());
+		if (comment.getStep() > 0) {
+			commentservice.comment_reply(comment);
+		}
+		else {
+			commentservice.comment_write(comment);
+		}
+		return commentservice.comment_list(comment.getBoardseq());
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "worldcup_delete_comment.do", method = RequestMethod.POST)
+	public List<CommentDto> worldcup_delete_comment(Model model, int commentseq, int boardseq){ 
+		logger.info("WorldCupController worldcup_delete_comment() " + new Date());
+		commentservice.comment_delete(commentseq);
+		List<CommentDto> comments =  commentservice.comment_list(boardseq);
+		model.addAttribute("comments", comments);
+		return comments;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "worldcup_update_comment.do", method = RequestMethod.POST)
+	public List<CommentDto> worldcup_update_comment(Model model, CommentDto comment){ 
+		logger.info("WorldCupController worldcup_update_comment() " + new Date());
+		commentservice.comment_update(comment);
+		List<CommentDto> comments =  commentservice.comment_list(comment.getBoardseq());
+		model.addAttribute("comments", comments);
+		return comments;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "worldcup_reply_comment.do", method = RequestMethod.POST)
+	public List<CommentDto> worldcup_reply_comment(Model model, @ModelAttribute("CommentDto") CommentDto comment){ 
+		System.out.println(comment.toString());
+		logger.info("WorldCupController worldcup_reply_comment() " + new Date());
+		commentservice.comment_reply_update(comment);
+		commentservice.comment_reply(comment);
+
+		List<CommentDto> comments =  commentservice.comment_list(comment.getBoardseq());
+		model.addAttribute("comments", comments);
+		return comments;
 	}
 	
 	@ResponseBody

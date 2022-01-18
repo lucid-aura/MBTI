@@ -2,10 +2,25 @@ package secure.mbti.a.dto;
 
 import java.io.Serializable;
 
+/*CREATE TABLE COMMENTMBTI(
+        COMMENTSEQ NUMBER(8) PRIMARY KEY,
+        ALIAS VARCHAR2(50) NOT NULL, 
+        BOARDSEQ NUMBER(8) NOT NULL,
+        REF NUMBER(8) NOT NULL,
+        STEP NUMBER(8) NOT NULL,
+        DEPTH NUMBER(8) NOT NULL,
+        CONTENT VARCHAR2(4000) NOT NULL,
+        WDATE DATE NOT NULL,
+        DEL NUMBER(1) NOT NULL
+);*/
+
 public class CommentDto implements Serializable {
 	 private int commentseq;
 	 private String alias;
 	 private int boardseq;
+	 private int ref;
+	 private int step;
+	 private int depth;
 	 private String content;
 	 private String wdate;
 	 private int del;
@@ -14,15 +29,21 @@ public class CommentDto implements Serializable {
 	 public CommentDto() {
 	}
 	 
-	public CommentDto(int commentseq, String alias, int boardseq, String content, String wdate, int del) {
+	public CommentDto(int commentseq, String alias, int boardseq, int ref, int step, int depth, String content,
+			String wdate, int del) {
 		super();
 		this.commentseq = commentseq;
 		this.alias = alias;
 		this.boardseq = boardseq;
+		this.ref = ref;
+		this.step = step;
+		this.depth = depth;
 		this.content = content;
 		this.wdate = wdate;
 		this.del = del;
 	}
+
+
 
 	public CommentDto(String content) {
 		super();
@@ -53,6 +74,30 @@ public class CommentDto implements Serializable {
 	public void setBoardseq(int boardseq) {
 		this.boardseq = boardseq;
 	}
+	
+	public int getRef() {
+		return ref;
+	}
+
+	public void setRef(int ref) {
+		this.ref = ref;
+	}
+
+	public int getStep() {
+		return step;
+	}
+
+	public void setStep(int step) {
+		this.step = step;
+	}
+
+	public int getDepth() {
+		return depth;
+	}
+
+	public void setDepth(int depth) {
+		this.depth = depth;
+	}
 
 	public String getContent() {
 		return content;
@@ -80,11 +125,12 @@ public class CommentDto implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CommentDto [commentseq=" + commentseq + ", alias=" + alias + ", boardseq=" + boardseq + ", content="
-				+ content + ", wdate=" + wdate + ", del=" + del + "]";
+		return "CommentDto [commentseq=" + commentseq + ", alias=" + alias + ", boardseq=" + boardseq + ", ref=" + ref
+				+ ", step=" + step + ", depth=" + depth + ", content=" + content + ", wdate=" + wdate + ", del=" + del
+				+ "]";
 	}
-	
-	
+
+
 	
 
 

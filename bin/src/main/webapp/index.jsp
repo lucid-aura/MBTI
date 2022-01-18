@@ -13,6 +13,7 @@
 	<h2>test helloo</h2>
 	<p>sorry ..</p>
 	<h1>hihihihi</h1>
+	<h1>hi222hi</h1>
 	
 	<%
 		response.sendRedirect("home.do");

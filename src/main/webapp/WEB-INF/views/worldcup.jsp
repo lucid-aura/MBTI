@@ -28,9 +28,9 @@ Collections.shuffle(worldcuplist);
 	<header>
 		<nav>
 			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
-				<a href="#test" class="text-light distance">유형소개</a>
-				<a href="#test" class="text-light distance">유형별게시판</a>
-				<a href="#test" class="text-light distance">자유게시판</a>
+				<a href="introMBTI.do" class="text-light distance">유형소개</a>
+				<a href="board_type.do?page=1" class="text-light distance">유형별게시판</a>
+				<a href="board_FREE.do?page=1" class="text-light distance">자유게시판</a>
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
 				<button>로그아웃</button>
 			</div>
@@ -38,17 +38,17 @@ Collections.shuffle(worldcuplist);
 	</header>
 	<section>
 		<article>
-			<div class="content">
-			<table>
+			<div class="content" style="width: 1680px;	height:720px;">
+			<table style="text-align:center">
 			<tr>
 				<td colspan="3" align='center'>
 					<span id="round">8강</span>
 				</td>
 			</tr>
 			<tr>
-				<td><img src='image/<%=worldcuplist.get(0).getWorldcupname() %>.jpg'  id="left" class="choice" onclick="left"/></td>
-				<td>vs</td>
-				<td><img src='image/<%=worldcuplist.get(1).getWorldcupname() %>.jpg'  id="right" class="choice" onclick="right"/></td>
+				<td ><img src='image/<%=worldcuplist.get(0).getWorldcupname() %>.jpg'  id="left" class="choice" onclick="left"/></td>
+				<td id="vs">vs</td>
+				<td><img src='image/<%=worldcuplist.get(1).getWorldcupname() %>.jpg'  id="right"  class="choice" onclick="right"/></td>
 			</tr>
 			</table>
 			</div>
@@ -75,19 +75,51 @@ $(document).ready(function () {
 	<% 
 	}
 	%>
-	console.log(temp_list);
+
 	$("#left").click(function () {
-		select(0);
+		$("#right").hide();
+		$("#vs").hide();
+		$("#left").width('50%');
+		$("#left").height('50%'); 
+		$("#left").animate({
+	        width: '+=25%',
+	        height: '+=25%'
+	    }, 2300);
+		//$("#right").show();
+
+		setTimeout(function() {
+			select(0);
+			}, 2500);
+
 	});	
 	
 	$("#right").click(function () {
-		select(1);
+		$("#left").hide();
+		$("#vs").hide();
+		$("#right").width('50%');
+		$("#right").height('50%'); 
+		$("#right").animate({
+	        width: '+=25%',
+	        height: '+=25%'
+	    }, 2300);
+		setTimeout(function() {
+			select(1);
+			}, 2500);
+
 	});
 });
 
 function select(i) {
+		$("#left").width('100%');
+		$("#left").height('100%'); 
+		$("#right").width('100%');
+		$("#right").height('100%'); 
+		
+ 		$("#left").show();
+ 		$("#vs").show();
+ 		$("#right").show();
 	idx_list.push(idx+i);
-	console.log(idx_list);
+
 	idx += 2;
 	if (idx >= temp_list.length){
 		if (temp_list.length == 2){ // 결승전 선택 후

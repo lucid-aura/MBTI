@@ -6,12 +6,12 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link href="css/loginStyle.css" rel="stylesheet" />
+<link href="css/loginStyle.css?version=3" rel="stylesheet" />
 
 </head>
 <body>
-<div class="sidenav">
-         <div class="login-main-text">
+<div class="sidenav" style="background:#004176; background-image : url(./resources/homeBoot/assets/img/bg-login.jpg)">
+         <div class="login-main-text" >
             <h2>Application<br> Login Page</h2>
             <p>Login or register from here to access.</p>
          </div>
@@ -28,7 +28,7 @@
                      <label>Password</label>
                      <input type="password" class="form-control" placeholder="Password" name = "pwd" id="pwd">
                   </div>
-                  <button type="button" class="btn btn-black" onclick = "login()">Login</button>
+                  <button type="button" class="btn"  style="background-color:#004176; color:white" onclick = "login()">Login</button>
                   <button type="button" class="btn btn-secondary" onclick="register()">Register</button>
                </form>
             </div>
@@ -40,6 +40,13 @@
 	function register() {
 	location.href = "regi.do";	
 	}
+	
+	//로그인 화면에서 ID PWD 입력 후 엔터 누르면 login()실행
+	$("#frm").keypress(function(e) {
+		if(e.keyCode === 13){
+			login();
+		}
+	});
 	
 	function login() {
 		
