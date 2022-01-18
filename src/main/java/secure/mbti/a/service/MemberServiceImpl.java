@@ -15,13 +15,25 @@ public class MemberServiceImpl implements MemberService {
 	public int addmember(MemberDto mem) {
 		return dao.addmember(mem);
 	}
-	
+	@Override
 	public MemberDto login(MemberDto mem) {
 		return dao.login(mem);
 	}
-	
+	@Override
 	public int getId(String id) {
 		return dao.getId(id);
+	}
+
+	@Override
+	public int getEmail(String email) {
+		// TODO Auto-generated method stub
+		return dao.getEmail(email);
+	}
+
+	@Override
+	public int getAlias(String alias) {
+		// TODO Auto-generated method stub
+		return dao.getAlias(alias);
 	}
 
 }

@@ -28,7 +28,7 @@ System.out.println(mem.toString());
 				<a href="board_type.do?page=1" class="text-light distance">유형별게시판</a>
 				<a href="board_free.do?page=1" class="text-light distance">자유게시판</a>
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
-				<button>로그아웃</button>
+				<button type="button" onclick="outbtn()">로그아웃</button>
 			</div>
 		</nav>
 	</header>
