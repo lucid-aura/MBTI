@@ -58,7 +58,7 @@ public class MemberController {
 			// login 정보를 저장 -> session 
 			req.getSession().setAttribute("login", mem);			
 			
-			return "redirect:/introMBTI.do";
+			return "redirect:/introMBTI.do";   
 		}
 		else {		// 회원정보에 없음
 			

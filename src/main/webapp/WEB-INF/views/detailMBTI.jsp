@@ -1,10 +1,14 @@
+<%@page import="secure.mbti.a.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
     
 <%
 	String selectname = (String)request.getAttribute("filename");
-%>    
+//session에서 사용자 정보를 산출
+MemberDto mem = (MemberDto)request.getSession().getAttribute("login");
+System.out.println(mem.toString());
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,9 +27,9 @@
 	<header>
 		<nav>
 			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
-				<a href="#test" class="text-light distance">유형소개</a>
-				<a href="#test" class="text-light distance">유형별게시판</a>
-				<a href="#test" class="text-light distance">자유게시판</a>
+				<a href="introMBTI.do" class="text-light distance">유형소개</a>
+				<a href="board_type.do?page=1" class="text-light distance">유형별게시판</a>
+				<a href="board_free.do?page=1" class="text-light distance">자유게시판</a>
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
 				<button>로그아웃</button>
 			</div>
@@ -73,8 +77,8 @@
 				<article></article>
 			</section>
 			<section class="wrapButton">
-				<form id="frm" action="board_type.do" method="get">
-					<button id="boardMoveBtn"></button>
+				<form id="frm" action="board_type.do?type=<%=mem.getMbti()%>" method="get">
+					<button id="boardMoveBtn" name="type"></button>
 				</form>
 			</section>
 		</main>

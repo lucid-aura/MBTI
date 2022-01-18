@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 도큐먼트로 mapper쓴다는 명시  -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="Board">
+
+<select id="boardlist" parameterType="secure.mbti.a.dto.BoardParam" resultType="secure.mbti.a.dto.BoardDto">
+	SELECT BOARDSEQ, BOARDTYPE, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT,COMMENTCOUNT
+	FROM BOARDALL
+ 	<if test="choice != null and choice != ''  and search != null and search != '' ">
+		<if test="choice == 'title'">
+			WHERE TITLE LIKE '%' || #{search} || '%' AND BOARDTYPE=#{boardtype}
+		</if>
+		<if test="choice == 'content'">
+			WHERE CONTENT LIKE '%' || #{search} || '%' AND BOARDTYPE=#{boardtype}
+			
+		</if>
+		<if test="choice == 'writer'">
+			WHERE ID=#{search} AND BOARDTYPE=#{boardtype}
+		</if>
+	</if> 
+		<if test="choice == null and search == null ">	
+		WHERE BOARDTYPE=#{boardtype}
+		</if>
+</select>
+
+<insert id="boardwrite" parameterType="secure.mbti.a.dto.BoardDto" >
+	INSERT INTO BOARDALL(BOARDSEQ, ID, BOARDTYPE, TITLE, CONTENT, WDATE, DEL, READCOUNT,COMMENTCOUNT)
+	VALUES(BOARDSEQ.NEXTVAL, #{id} , #{boardtype},#{title}, #{content}, SYSDATE, 0, 0,0)
+</insert>
+
+<select id="getboard" resultType="secure.mbti.a.dto.BoardDto">
+	SELECT BOARDSEQ, ID, BOARDTYPE, TITLE, CONTENT, WDATE, DEL, READCOUNT,COMMENTCOUNT
+	FROM BOARDALL
+	WHERE BOARDSEQ=#{ boardseq }
+</select>
+
+
+<update id="boardcountup" parameterType="Integer">
+	UPDATE BOARDALL
+	SET READCOUNT = READCOUNT + 1
+	WHERE BOARDSEQ=#{ boardseq }
+</update>
+
+<update id="boardupdate" parameterType="secure.mbti.a.dto.BoardDto" >
+	UPDATE BOARDALL
+	SET TITLE=#{title}, CONTENT=#{content}
+	WHERE BOARDSEQ=#{ boardseq }
+</update>
+
+<update id="boarddelete" parameterType="Integer" >
+	UPDATE BOARDALL
+	SET DEL=1
+	WHERE BOARDSEQ=#{ boardseq }
+</update>
+
+<select id="listPage" resultType="secure.mbti.a.dto.BoardDto"
+parameterType="secure.mbti.a.dto.BoardParam">
+			select BOARDSEQ, BOARDTYPE, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT,COMMENTCOUNT
+			from (
+		 select RNUM, BOARDSEQ, BOARDTYPE, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT, COMMENTCOUNT 
+		        
+		 from (  SELECT row_number() over(order by BOARDSEQ desc) as RNUM, BOARDSEQ, BOARDTYPE, ID, TITLE, 
+		CONTENT, WDATE, DEL, READCOUNT,COMMENTCOUNT
+		FROM BOARDALL
+
+          		 <if test="choice != null and choice != ''  and search != null and search != '' ">
+			<if test="choice == 'title'">
+			WHERE TITLE LIKE '%' || #{search} || '%' AND BOARDTYPE=#{boardtype}
+		</if>
+		<if test="choice == 'content'">
+			WHERE CONTENT LIKE '%' || #{search} || '%' AND BOARDTYPE=#{boardtype}
+							
+		</if>
+		<if test="choice == 'writer'">
+			WHERE ID=#{search} AND BOARDTYPE=#{boardtype}
+		</if>
+					
+		</if> 
+					<if test="choice == null and search == null ">	
+						WHERE BOARDTYPE=#{boardtype}
+					</if> 
+            
+            ) 
+    where RNUM BETWEEN #{criteria.rowStart} and #{criteria.rowEnd})
+	order by BOARDSEQ desc
+</select>
+<!--  
+select BOARDSEQ, BOARDTYPE, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT,COMMENTCOUNT,RNUM
+from (
+    select RNUM, BOARDSEQ, BOARDTYPE, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT, COMMENTCOUNT 
+        
+    from (  SELECT row_number() over(order by BOARDSEQ desc) as RNUM, BOARDSEQ, BOARDTYPE, ID, TITLE, CONTENT, 
+    WDATE, DEL, READCOUNT,COMMENTCOUNT
+            FROM BOARDALL
+            
+            	<if test="choice != null and choice != ''  and search != null and search != '' ">
+						<if test="choice == 'title'">
+							WHERE TITLE LIKE '%' || #{search} || '%' AND BOARDTYPE=#{boardtype}
+						</if>
+						<if test="choice == 'content'">
+							WHERE CONTENT LIKE '%' || #{search} || '%' AND BOARDTYPE=#{boardtype}
+							
+						</if>
+						<if test="choice == 'writer'">
+							WHERE ID=#{search} AND BOARDTYPE=#{boardtype}
+						</if>
+					
+					</if> 
+					<if test="choice == null and search == null ">	
+						WHERE BOARDTYPE=#{boardtype}
+					</if>
+            	  
+            ) 
+    where RNUM BETWEEN  #{criteria.rowStart} and #{criteria.rowEnd} )
+	order by BOARDSEQ desc
+
+-->
+</mapper>
