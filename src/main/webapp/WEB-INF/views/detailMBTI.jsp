@@ -7,6 +7,7 @@
 <%
 	List<Object> selectInfo = (List<Object>)request.getAttribute("selectMbti");
 	MemberDto mem =(MemberDto)request.getSession().getAttribute("login");
+	String selectname = (String)request.getAttribute("filename");
 %>
 <!DOCTYPE html>
 <html>
@@ -114,7 +115,7 @@
 			</section>
 			<section class="wrapButton">
 				<form id="frm" action="board_type.do" method="get">
-					<button id="boardMoveBtn" name="mbtiBoard" value="<%=mbtiContent.getMbti()%>"><%=mbtiContent.getMbti() %> 게시판으로 이동</button>
+					<button id="boardMoveBtn" name="type" value="<%=mbtiContent.getMbti()%>"><%=mbtiContent.getMbti() %> 게시판으로 이동</button>
 				</form>
 				
 			</section>
