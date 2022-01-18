@@ -16,6 +16,7 @@ import secure.mbti.a.dto.BoardDto;
 import secure.mbti.a.dto.BoardParam;
 import secure.mbti.a.dto.CommentDto;
 import secure.mbti.a.dto.Criteria;
+import secure.mbti.a.dto.MemberDto;
 import secure.mbti.a.service.BoardService;
 import secure.mbti.a.service.CommentService;
 

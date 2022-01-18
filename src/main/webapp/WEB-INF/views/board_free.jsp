@@ -11,13 +11,6 @@
 <%
 	int board_page = (int)request.getAttribute("board_page"); //페이지 가져오기
 %>
-<%
-int board_size = (int)request.getAttribute("board_size");
-%>
-<%
-int board_page = (int)request.getAttribute("board_page");
-%>
-
 
 <!DOCTYPE html>
 <html>

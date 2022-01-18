@@ -8,18 +8,7 @@ public class BoardParam implements Serializable{
 	private String search;
 	private Criteria criteria;
 	private int boardtype;
-	
-	public int getBoardtype() {
-		return boardtype;
-	}
 
-	public void setBoardtype(int boardtype) {
-		this.boardtype = boardtype;
-	}
-
-	public BoardParam() {
-
-	}
 
 	public String getChoice() {
 		
