@@ -386,9 +386,9 @@ public class BoardController {
 		model.addAttribute("board_page", page); // 페이지넘길빼번호
 		return "board_ENTJ"; //이것주의!
 	}
-	@RequestMapping(value = "board_free.do", method = RequestMethod.GET)
-	public String board_free(Model model,BoardParam param, int page){ 
-		logger.info("BoardController board_free() " + new Date());
+	@RequestMapping(value = "board_FREE.do", method = RequestMethod.GET)
+	public String board_FREE(Model model,BoardParam param, int page){ 
+		logger.info("BoardController board_FREE() " + new Date());
 		param.setBoardtype(16);
 		if(param.getCriteria()==null) {
 			Criteria criteria =new Criteria(16); // 이것주의!
@@ -406,7 +406,7 @@ public class BoardController {
 		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
 		model.addAttribute("board_size", list_size);
 		model.addAttribute("board_page", page); // 페이지넘길빼번호
-		return "board_free"; //이것주의!
+		return "board_FREE"; //이것주의!
 	}
 	@RequestMapping(value = "board_write.do", method = RequestMethod.GET)
 	public String board_write(Model model,int boardtype) {
@@ -461,6 +461,23 @@ public class BoardController {
 		return "redirect:/board_"+mbtiType[boardtype].toUpperCase()+".do?page=1";
 	}
 	
+	//목록 클릭시 해당 게시판리스트로(220118)
+	@RequestMapping(value = "board_backlist.do", method = RequestMethod.GET)
+	public String board_backlist(int boardtype){ 
+		logger.info("BoardController board_backlist() " + new Date());
+		String mbtiType[] = {
+				"istj", "isfj", "istp", "isfp",
+				"infj", "intj", "infp", "intp",
+				"estp", "esfp", "estj", "esfj",
+				"enfp", "entp", "enfj", "entj",
+				"free"
+				}; 
+		
+		return "redirect:/board_"+mbtiType[boardtype].toUpperCase()+".do?page=1";
+	}
+	
+	
+	
 	
 	@RequestMapping(value = "board_detail.do", method = RequestMethod.GET)
 	public String board_detail(Model model, int boardseq) {
@@ -468,18 +485,27 @@ public class BoardController {
 		System.out.println(boardseq);
 		int readup = service.board_countUp(boardseq);
 		
+		
+		
 		BoardDto board = service.get_board(boardseq);
 		List<CommentDto> commments = commentService.comment_list(boardseq);
+		
 		
 		model.addAttribute("board", board);
 		model.addAttribute("comments", commments);
 		
+		//댓글 개수 표시
+		int getcount=commentService.comment_getcount(boardseq);
+		model.addAttribute("comment_count",getcount);  // 키값은 무조건 jsp에 넣을거니 꼭 기억해라
+		
+		
 		return "board_detail";
+		
 	}
 	
 	@RequestMapping(value = "board_update.do", method = RequestMethod.GET)
 	public String board_update(Model model, int boardseq) {
-		logger.info("BbsController board_update() " + new Date());
+		logger.info("BoardController board_update() " + new Date());
 		BoardDto board = service.get_board(boardseq);
 		
 		model.addAttribute("board", board);
@@ -490,17 +516,17 @@ public class BoardController {
 	
 	@RequestMapping(value = "board_updateAf.do", method = RequestMethod.POST)
 	public String board_updateAf(Model model, BoardDto dto) {
-		logger.info("BbsController board_updateAf() " + new Date());
+		logger.info("BoardController board_updateAf() " + new Date());
 		service.board_update(dto);
 		
 		model.addAttribute("result");
-		return "redirect:/board_detail.do?boardseq="+dto.getBoardseq();   // 강의때 bbslist.do였음 문자열(상수)+문자열(변수)임
+		return "redirect:/board_detail.do?boardseq="+dto.getBoardseq();   // 강의때 bbslist.do였음 상수+문자열
 		
 		
 	}
 	@RequestMapping(value = "board_delete.do", method = RequestMethod.GET)
 	public String board_delete(Model model, int boardseq) {
-		logger.info("BbsController board_delete() " + new Date());
+		logger.info("BoardController board_delete() " + new Date());
 		service.board_delete(boardseq);
 		String mbtiType[] = {
 				"istj", "isfj", "istp", "isfp",
@@ -515,21 +541,98 @@ public class BoardController {
 		return "redirect:/board_"+boardtype.toUpperCase()+".do?page=1";
 	}
 	
-	/*  댓글부분
-	@RequestMapping(value = "comment.do", method = RequestMethod.GET)
-	public String comment(Model model, int boardseq) {
-		logger.info("BbsController comment() " + new Date());
+	//댓글 리스트등록 가능
+	@RequestMapping(value = "comment.do", method = RequestMethod.POST)
+	public String comment(CommentDto dto) {
+		logger.info("BoardController comment() " + new Date());
 		
-		List<CommentDto> commentdto = CommentService.comment_list(comment.getBoardseq());
+		commentService.comment_write(dto);
 		
-		model.addAttribute("board", board);
-		model.addAttribute("comments", commentdto);
-		return "board_detail";
+//		List<CommentDto> commentdto = commentService.comment_list(dto.getBoardseq());
+//		BoardDto board = service.get_board(dto.getBoardseq()); // 게시글 가져오기
+		
+		service.board_commentcountup(dto.getBoardseq()); //게시판 댓글개수 하나 늘린것
 		
 		
-	}*/
+		
+		return "redirect:/board_detail.do?boardseq="+dto.getBoardseq();
+	}
 	
 	
 	
+
+	// 댓글수정
+	@RequestMapping(value = "comment_update.do", method = RequestMethod.GET)
+	public String comment_update(Model model, int commentseq) {
+		logger.info("BoardController comment_update() " + new Date());
+		
+		CommentDto commentDto = commentService.get_comment(commentseq); //클릭한 댓글을 가져올수있다
+		service.get_board(commentDto.getBoardseq()); 
+
+		model.addAttribute("board", service.get_board(commentDto.getBoardseq()));  // 게시글 가져온다
+		model.addAttribute("comment_update", commentDto);  //모델 : jsp에게 넘겨주기위한 class,  dto정보담음
+		
+		return "comment_update"; 
+	}
+	
+	// 댓글 수정 후
+	@RequestMapping(value = "comment_updateAf.do", method = RequestMethod.POST)
+	public String comment_updateAf(CommentDto dto) {
+		logger.info("BoardController comment_updateAf() " + new Date());
+		System.out.println(dto.toString());
+		commentService.comment_update(dto);
+		
+		return "redirect:/board_detail.do?boardseq="+dto.getBoardseq();
+	}
+	
+	
+	@RequestMapping(value = "comment_delete.do", method = RequestMethod.GET) // jsp파일에서 컨트롤러 찾을때 쓰임 requestmapping
+	public String comment_delete(int commentseq) {
+		logger.info("BoardController comment_delete() " + new Date());
+	
+		int comment_delete = commentService.get_comment(commentseq).getBoardseq();  //삭제하고자하는 댓글 가져와라 > 보드시퀀스와 함께
+		
+		service.board_commentcountdown(comment_delete); // del==1로바꿈
+		commentService.comment_delete(commentseq);	//get방식으로 시퀀스 넘겨줌
+		
+		
+		return "redirect:/board_detail.do?boardseq="+comment_delete;
+	}
+	
+	
+	@RequestMapping(value = "comment_replycontent.do", method = RequestMethod.GET) // jsp파일에서 컨트롤러 찾을때 쓰임 requestmapping
+	public String comment_replycontent(Model model,  int commentseq) {
+		logger.info("BoardController comment_replycontent() " + new Date());
+
+		CommentDto commentdto= commentService.get_comment(commentseq);
+		model.addAttribute("comment",commentdto);
+		
+		return "comment_replydetail";
+	}
+	
+	
+	//대댓글 컨트롤러
+	@RequestMapping(value = "comment_replydetailAf.do", method = RequestMethod.POST)
+	public String comment_replydetailAf(CommentDto dto) {
+		logger.info("BoardController comment_replydetailAf() " + new Date());
+		System.out.println("7777777");
+		System.out.println(dto.toString());
+		
+		
+		
+		commentService.comment_reply_update(dto);
+		commentService.comment_reply(dto);
+		
+		List<CommentDto> commentdto = commentService.comment_list(dto.getBoardseq());
+		// BoardDto board = service.get_board(dto.getBoardseq()); // 게시글 가져오기
+		
+		service.board_commentcountup(dto.getBoardseq()); //db의 게시판 댓글개수 하나 늘린것 db에 알려줌
+		
+		
+		
+		return "redirect:/board_detail.do?boardseq="+dto.getBoardseq();
+	}
+	
+
 	
 }

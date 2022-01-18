@@ -6,9 +6,10 @@ public class BoardParam implements Serializable{
 	
 	private String choice;
 	private String search;
-	private int boardtype;
 	private Criteria criteria;
-	
+	private int boardtype;
+
+
 	public String getChoice() {
 		
 		return choice;
@@ -50,6 +51,7 @@ public class BoardParam implements Serializable{
 		return "BoardParam [choice=" + choice + ", search=" + search + ", boardtype=" + boardtype + ", criteria="
 				+ criteria.toString() + "]";
 	}
+
 	
 	
 	
