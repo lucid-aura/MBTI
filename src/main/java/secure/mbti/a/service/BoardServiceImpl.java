@@ -51,6 +51,11 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardDto> board_list_page(BoardParam param) {
 		return dao.board_list_page(param);
 	}
+
+	@Override
+	public void board_commentcountup(int boardseq) {
+		dao.board_commentcountup(boardseq);
+	}
 	
 	
 }

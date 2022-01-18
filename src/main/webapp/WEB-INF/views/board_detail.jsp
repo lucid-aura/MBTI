@@ -7,7 +7,19 @@
 <link rel="stylesheet" href="/css/bootstrap.css">
 <!--지워도됨 -->
 
-
+<%!
+public String arrow(int depth){
+	String res = "<img src='image/arrow.png' width='20px' height='20px' />";
+	String nbsp = "&nbsp;&nbsp;&nbsp;&nbsp;"; // 여백
+	
+	String ts = "";
+	for(int i = 0; i<depth; i++){
+		ts += nbsp;
+	}
+	
+	return depth==0?"":ts+res;
+}
+%>
 <%
 BoardDto board = (BoardDto) request.getAttribute("board");
 %>
@@ -123,7 +135,7 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 			<!-- 아래에 있는 함수 이름 : board_delete -->
 			<button type="button" class="btn btn-danger" onclick="board_delete(<%=board.getBoardseq()%>)">삭제</button>
 			
-			<button type="button" class="btn btn-dark" onclick="board_free(<%=board.getBoardseq()%>)">목록</button>
+			<button type="button" class="btn btn-dark" onclick="location.href='board_backlist.do?boardtype=<%=board.getBoardtype()%>'">목록</button>
 
 			<%
 			}
@@ -176,14 +188,15 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 						<!-- 한 줄 -->
 						<th><%=i + 1%>&nbsp&nbsp&nbsp<hr></th>
 						<td>&nbsp<hr></td>
-						<!-- 댓글번호 -->
+						<!-- 댓글번호 --> 
 						<td>
 							<!-- 한 칸 --> <!-- 작성자 --> <%=comment.getAlias()%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<hr>
 						</td>
-						<td><%=comment.getContent()%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<hr></td>
+						<td><%=arrow(comment.getDepth()) %><%=comment.getContent()%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<hr></td>
 						<td><%=comment.getWdate()%><hr></td>
 						
 					</tr>
+					
 					<%
 					}
 					}

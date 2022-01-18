@@ -386,7 +386,7 @@ public class BoardController {
 		model.addAttribute("board_page", page); // 페이지넘길빼번호
 		return "board_ENTJ"; //이것주의!
 	}
-	@RequestMapping(value = "board_free.do", method = RequestMethod.GET)
+	@RequestMapping(value = "board_FREE.do", method = RequestMethod.GET)
 	public String board_free(Model model,BoardParam param, int page){ 
 		logger.info("BoardController board_free() " + new Date());
 		param.setBoardtype(16);
@@ -406,7 +406,7 @@ public class BoardController {
 		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
 		model.addAttribute("board_size", list_size);
 		model.addAttribute("board_page", page); // 페이지넘길빼번호
-		return "board_free"; //이것주의!
+		return "board_FREE"; //이것주의!
 	}
 	@RequestMapping(value = "board_write.do", method = RequestMethod.GET)
 	public String board_write(Model model,int boardtype) {
@@ -460,6 +460,23 @@ public class BoardController {
 				}; 
 		return "redirect:/board_"+mbtiType[boardtype].toUpperCase()+".do?page=1";
 	}
+	
+	//목록 클릭시 해당 게시판리스트로(220118)
+	@RequestMapping(value = "board_backlist.do", method = RequestMethod.GET)
+	public String board_backlist(int boardtype){ 
+		logger.info("BoardController board_backlist() " + new Date());
+		String mbtiType[] = {
+				"istj", "isfj", "istp", "isfp",
+				"infj", "intj", "infp", "intp",
+				"estp", "esfp", "estj", "esfj",
+				"enfp", "entp", "enfj", "entj",
+				"free"
+				}; 
+		
+		return "redirect:/board_"+mbtiType[boardtype].toUpperCase()+".do?page=1";
+	}
+	
+	
 	
 	
 	@RequestMapping(value = "board_detail.do", method = RequestMethod.GET)
@@ -531,7 +548,12 @@ public class BoardController {
 		
 		commentService.comment_write(dto);
 		
-		List<CommentDto> commentdto = commentService.comment_list(dto.getBoardseq());
+//		List<CommentDto> commentdto = commentService.comment_list(dto.getBoardseq());
+//		BoardDto board = service.get_board(dto.getBoardseq()); // 게시글 가져오기
+		
+		service.board_commentcountup(dto.getBoardseq()); //게시판 댓글개수 하나 늘린것
+		
+		
 		
 		return "redirect:/board_detail.do?boardseq="+dto.getBoardseq();
 	}

@@ -21,4 +21,6 @@ public interface BoardService {
 	void board_delete(int boardseq);
 	
 	List<BoardDto> board_list_page(BoardParam param);
+
+	void board_commentcountup(int boardseq);
 }

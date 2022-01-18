@@ -33,5 +33,6 @@ public interface BoardDao {
 	
 	//페이징
 	List<BoardDto> board_list_page(BoardParam param);
+	void board_commentcountup(int boardseq);
 	
 }
