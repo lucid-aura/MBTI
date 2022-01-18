@@ -241,7 +241,7 @@ function delete_worldcup_comment(seq, list_idx){
 		url:"worldcup_delete_comment.do",
 		type: "POST",
 		data: { // ----------- 보낼 데이터 세팅 Alias 변경 필요
-			alias: <%=member.getAlias()%>,
+			alias: '<%=member.getAlias()%>',
 			commentseq: seq,
 			boardseq : <%=worldcupresult.getBoardseq()%>
 		},
