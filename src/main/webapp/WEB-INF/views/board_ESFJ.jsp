@@ -64,7 +64,7 @@
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown" 
-            aria-haspopup="true" aria-expanded="false" id="choice" value="">제목</button>                        
+            aria-haspopup="true" aria-expanded="false" id="choice" value="title">제목</button>                        
             <div class="dropdown-menu">
               <a href="javascript:void(0);" class="dropdown-item" onclick="func('title')">제목</a>
               <a href="javascript:void(0);" class="dropdown-item" onclick="func('content')">내용</a>
