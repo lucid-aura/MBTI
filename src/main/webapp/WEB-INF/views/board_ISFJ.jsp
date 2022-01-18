@@ -47,7 +47,7 @@
 			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
 				<a href="introMBTI.do" class="text-light distance">유형소개</a>
 				<a href="board_ISFJ.do?page=1" class="text-light distance">유형별게시판</a> <!-- 바꿔야함 -->
-				<a href="board_free.do?page=1" class="text-light distance">자유게시판</a>
+				<a href="board_FREE.do?page=1" class="text-light distance">자유게시판</a>
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
 				<button>로그아웃</button>
 			</div>
