@@ -50,6 +50,11 @@ public class CommentDaoImpl implements CommentDao {
 	public void comment_reply(CommentDto dto) {
 		session.insert(ns + "commentreply", dto);
 	}
+
+	@Override
+	public void comment_reply_update(CommentDto comment) {
+		session.update(ns + "commentreplyupdate", comment);
+	}
 	
 }
 

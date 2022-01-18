@@ -125,11 +125,12 @@ public class CommentDto implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CommentDto [commentseq=" + commentseq + ", alias=" + alias + ", boardseq=" + boardseq + ", content="
-				+ content + ", wdate=" + wdate + ", del=" + del + "]";
+		return "CommentDto [commentseq=" + commentseq + ", alias=" + alias + ", boardseq=" + boardseq + ", ref=" + ref
+				+ ", step=" + step + ", depth=" + depth + ", content=" + content + ", wdate=" + wdate + ", del=" + del
+				+ "]";
 	}
-	
-	
+
+
 	
 
 

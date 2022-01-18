@@ -43,6 +43,7 @@
   --bs-dark: #212529;
   --bs-black: #000;
   --bs-white: #fff;
+  --bs-deepblue: #004176;
   --bs-primary-rgb: 100, 161, 157;
   --bs-secondary-rgb: 116, 100, 161;
   --bs-success-rgb: 103, 194, 156;
@@ -3042,6 +3043,11 @@ textarea.form-control-lg {
   color: #fff;
   background-color: #558985;
   border-color: #50817e;
+}
+.btn-yellow {
+	color: #fff;
+	background-color: #F4BC19;
+	border-color: #F4BC19;
 }
 .btn-check:focus + .btn-primary, .btn-primary:focus {
   color: #fff;
@@ -7963,6 +7969,10 @@ textarea.form-control-lg {
   color: rgba(255, 255, 255, 0.5) !important;
 }
 
+.text-deepblue-50 {
+ --bs-text-opacity: 1;
+  color: rgba(65,118,1,1) !important;
+}
 .text-reset {
   --bs-text-opacity: 1;
   color: inherit !important;
@@ -8033,7 +8043,10 @@ textarea.form-control-lg {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-white-rgb), var(--bs-bg-opacity)) !important;
 }
-
+.bg-deepblue {
+ --bs-bg-opacity: 1;
+  background-color: rgba(0, 65, 118, 1) !important;
+}
 .bg-body {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-body-bg-rgb), var(--bs-bg-opacity)) !important;
@@ -11563,7 +11576,8 @@ body {
   height: auto;
   min-height: 35rem;
   padding: 15rem 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%), url("../assets/img/bg-masthead.jpg");
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%);
+  background-image: url(./resources/homeBoot/assets/img/bg-mbti.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
@@ -11574,7 +11588,7 @@ body {
   font-size: 2.5rem;
   line-height: 2.5rem;
   letter-spacing: 0.8rem;
-  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  background-color: linear-gradient(rgba(0, 65, 118, 0.5), rgba(0, 65, 118, 1)) ;
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
           background-clip: text;

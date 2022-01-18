@@ -15,6 +15,7 @@
 	 private String wdate;
 	 private int del;
  -->
+ 
 <select id="commentlist" parameterType="Integer" resultType="secure.mbti.a.dto.CommentDto">
 	SELECT COMMENTSEQ,ALIAS,REF, STEP, DEPTH,BOARDSEQ,CONTENT,WDATE,DEL
 	FROM COMMENTMBTI
@@ -29,7 +30,7 @@
 </select>
 
 <insert id="commentwrite" parameterType="secure.mbti.a.dto.CommentDto">
-	INSERT INTO COMMENTMBTI(COMMENTSEQ,ALIAS,REF, STEP, DEPTH,BOARDSEQ,CONTENT,WDATE,DEL)
+	INSERT INTO COMMENTMBTI( COMMENTSEQ,ALIAS,REF, STEP, DEPTH,BOARDSEQ,CONTENT,WDATE,DEL)
 	VALUES(
 		SEQ_COMMENT.NEXTVAL, 
 		#{alias},
@@ -46,19 +47,35 @@
 <insert id="commentreply" parameterType= "secure.mbti.a.dto.CommentDto">
 	INSERT INTO COMMENTMBTI( COMMENTSEQ,ALIAS,REF, STEP, DEPTH,BOARDSEQ,CONTENT,WDATE,DEL)
 	VALUES(
-		SEQ_BBS.NEXTVAL,	<!-- seq -->
+		SEQ_COMMENT.NEXTVAL,	<!-- seq -->
 		#{alias}, 
-		(SELECT REF FROM COMMENTMBTI WHERE COMMENTSEQ=#{commentseq}), <!-- ref --> 
-		(SELECT STEP FROM COMMENTMBTI WHERE COMMENTSEQ=#{commentseq}) + 1, <!-- step --> 
+		(SELECT REF FROM COMMENTMBTI WHERE COMMENTSEQ=#{commentseq}), <!-- ref -->
+		(SELECT DISTINCT
+			NVL(
+				(SELECT MIN(STEP)-1 FROM COMMENTMBTI WHERE REF = #{ref} AND STEP > #{step} AND #{depth} >= DEPTH AND BOARDSEQ = #{boardseq}),
+				(NVL(
+					(SELECT MAX(STEP)+1 FROM COMMENTMBTI WHERE BOARDSEQ = #{boardseq} AND REF = #{ref}),
+						 (SELECT MAX(STEP)+1 FROM COMMENTMBTI WHERE BOARDSEQ = #{boardseq} AND REF = #{ref})
+					)
+				)		
+			) FROM COMMENTMBTI WHERE BOARDSEQ = #{boardseq} AND REF = #{ref}), <!-- step --> 
+		
 		(SELECT DEPTH FROM COMMENTMBTI WHERE COMMENTSEQ=#{commentseq}) + 1, <!-- depth --> 
 		#{boardseq},
 		#{content}, 
 		SYSDATE, 
-		0, 
 		0
 	)
 </insert>
 
+<update id="commentreplyupdate" parameterType="secure.mbti.a.dto.CommentDto" >
+	UPDATE COMMENTMBTI
+	SET
+	STEP = STEP + 1
+	WHERE BOARDSEQ = #{boardseq} AND REF = #{ref} AND STEP >= NVL(
+		(SELECT MIN(STEP) FROM COMMENTMBTI WHERE REF = #{ref} AND STEP > #{step} AND #{depth} >= DEPTH AND BOARDSEQ = #{boardseq}),
+		(SELECT MAX(STEP) FROM COMMENTMBTI WHERE BOARDSEQ = #{boardseq} AND REF = #{ref})+1 )
+</update>
 
 <update id="commentupdate" parameterType="secure.mbti.a.dto.CommentDto">
 	UPDATE COMMENTMBTI
