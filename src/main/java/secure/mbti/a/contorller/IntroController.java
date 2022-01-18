@@ -147,7 +147,7 @@ public class IntroController {
 	@RequestMapping(value = "board_type.do", method = RequestMethod.GET)
 	public String board_type(String type){ 
 		System.out.println("IntroController board_type() " + new Date());
-		return "redirect:/board_"+type+".do";
+		return "redirect:/board_"+type+".do?page=0";
 	}
 	
 	
