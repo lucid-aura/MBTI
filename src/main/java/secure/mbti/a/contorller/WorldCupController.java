@@ -29,22 +29,6 @@ public class WorldCupController {
 	@Autowired
 	CommentService commentservice;
 	
-	/* 임시 controller */
-
-	
-	@RequestMapping(value = "login.do", method = RequestMethod.GET)
-	public String login(){ 
-		logger.info("WorldCupController login() " + new Date());
-		return "login";
-	}
-
-	@RequestMapping(value = "enfp.do", method = RequestMethod.GET)
-	public String enfp(){ 
-		logger.info("WorldCupController enfp() " + new Date());
-		return "enfp";
-	}
-	/* 임시 controller  끝*/
-	
 	@RequestMapping(value = "worldcup_choice.do", method = RequestMethod.GET)
 	public String worldcup_choice(){ 
 		logger.info("WorldCupController worldcup_choice() " + new Date());
@@ -52,9 +36,10 @@ public class WorldCupController {
 	}
 
 	@RequestMapping(value = "worldcup.do", method = RequestMethod.GET)
-	public String worldcup(Model model){ 
+	public String worldcup(Model model /* , String topic */){ 
 		logger.info("WorldCupController worldcup() " + new Date());
 		List<WorldCupDto> list = worldcupservice.worldcuplist("food");
+		/* List<WorldCupDto> list = worldcupservice.worldcuplist("topic"); */
 		model.addAttribute("worldcuplist", list);
 		return "worldcup";
 	}

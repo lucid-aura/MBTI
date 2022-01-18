@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?version=3">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -15,10 +15,11 @@
 <div class="wrapper">
 	<header>
 		<nav>
-			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
-				<a href="#test" class="text-light distance">유형소개</a>
-				<a href="#test" class="text-light distance">유형별게시판</a>
-				<a href="#test" class="text-light distance">자유게시판</a>
+			<div class="fixed-top py-3 px-3 text-center deepblue" id="nav">
+				<img class="nav_bar_logo" src='image/PLAN16_LOGO.png' />
+				<a href="#" class="text-light distance">유형소개</a>
+				<a href="#" class="text-light distance">유형별게시판</a>
+				<a href="#" class="text-light distance">자유게시판</a>
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
 				<button>로그아웃</button>
 			</div>
@@ -34,7 +35,7 @@
 	</footer>
 </div>
 <script type="text/javascript">
-function choice() {
+function choice(/* topic */) {
 	location.href = "worldcup.do";
 }
 </script>

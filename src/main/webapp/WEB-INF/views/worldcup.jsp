@@ -16,21 +16,22 @@ Collections.shuffle(worldcuplist);
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?version=3">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 </head>
-<body>
+<body style="background-color:rgba(0, 28, 51, 1)">
 
 <div class="wrapper">
 	<header>
 		<nav>
-			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
+			<div class="fixed-top py-3 px-3 text-center deepblue"  id="nav">
+				<img class="nav_bar_logo" src='image/PLAN16_LOGO.png' />
 				<a href="#test" class="text-light distance">유형소개</a>
 				<a href="#test" class="text-light distance">유형별게시판</a>
-				<a href="#test" class="text-light distance">자유게시판</a>
+				<a href="board_free.do?page=1" class="text-light distance">자유게시판</a>
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
 				<button>로그아웃</button>
 			</div>
@@ -38,16 +39,16 @@ Collections.shuffle(worldcuplist);
 	</header>
 	<section>
 		<article>
-			<div class="content" style="width: 1680px;	height:720px;">
+			<div class="content">
 			<table style="text-align:center">
 			<tr>
-				<td colspan="3" align='center'>
-					<span id="round">8강</span>
+				<td  id="round_tag" colspan="3" align='center'>
+					<span id="round" style="color:white">8강</span>
 				</td>
 			</tr>
 			<tr>
-				<td ><img src='image/<%=worldcuplist.get(0).getWorldcupname() %>.jpg'  id="left" class="choice" onclick="left"/></td>
-				<td id="vs">vs</td>
+				<td><img src='image/<%=worldcuplist.get(0).getWorldcupname() %>.jpg'  id="left" class=" choice" onclick="left"/></td>
+				<td id="vs" style="color:white">vs</td>
 				<td><img src='image/<%=worldcuplist.get(1).getWorldcupname() %>.jpg'  id="right"  class="choice" onclick="right"/></td>
 			</tr>
 			</table>
@@ -77,47 +78,41 @@ $(document).ready(function () {
 	%>
 
 	$("#left").click(function () {
+		$("#round_tag").hide();
 		$("#right").hide();
 		$("#vs").hide();
 		$("#left").width('50%');
 		$("#left").height('50%'); 
 		$("#left").animate({
-	        width: '+=25%',
-	        height: '+=25%'
-	    }, 2300);
+	        width: '+=30%',
+	        height: '+=30%'
+	    }, 2000);
 		//$("#right").show();
 
 		setTimeout(function() {
 			select(0);
-			}, 2500);
+			}, 2020);
 
 	});	
 	
 	$("#right").click(function () {
+		$("#round_tag").hide();
 		$("#left").hide();
 		$("#vs").hide();
 		$("#right").width('50%');
 		$("#right").height('50%'); 
 		$("#right").animate({
-	        width: '+=25%',
-	        height: '+=25%'
-	    }, 2300);
+	        width: '+=30%',
+	        height: '+=30%'
+	    }, 2000);
 		setTimeout(function() {
 			select(1);
-			}, 2500);
+			}, 2020);
 
 	});
 });
 
 function select(i) {
-		$("#left").width('100%');
-		$("#left").height('100%'); 
-		$("#right").width('100%');
-		$("#right").height('100%'); 
-		
- 		$("#left").show();
- 		$("#vs").show();
- 		$("#right").show();
 	idx_list.push(idx+i);
 
 	idx += 2;
@@ -148,6 +143,14 @@ function select(i) {
 	}
 	$('#left').attr('src', 'image/'+temp_list[idx][1] + '.jpg');
 	$('#right').attr('src', 'image/'+temp_list[idx+1][1] + '.jpg');		
+	$("#round_tag").show();
+	$("#left").show();
+	$("#vs").show();
+	$("#right").show();
+	$("#left").width('100%');
+	$("#left").height('100%'); 
+	$("#right").width('100%');
+	$("#right").height('100%'); 
 }
 
 

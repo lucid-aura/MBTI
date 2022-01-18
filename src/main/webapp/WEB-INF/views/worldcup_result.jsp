@@ -35,7 +35,7 @@ MemberDto member = (MemberDto)request.getSession().getAttribute("login");
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?version=3">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -48,12 +48,13 @@ MemberDto member = (MemberDto)request.getSession().getAttribute("login");
 	<div class="wrapper">
 		<header>
 			<nav>
-				<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
+				<div class="fixed-top py-3 px-3 text-center deepblue" id="nav">
+					<img class="nav_bar_logo" src='image/PLAN16_LOGO.png' />
 					<a href="#test" class="text-light distance">유형소개</a> 
 					<a href="#test" class="text-light distance">유형별게시판</a> 
-						<a href="#test" class="text-light distance">자유게시판</a> 
-						<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
-					<button onclick="location.href='logout.do'"><%=member.getAlias() %>님 로그아웃</button>
+					<a href="board_free.do?page=1" class="text-light distance">자유게시판</a> 
+					<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
+					<button><%=member.getAlias() %>님 로그아웃</button>
 				</div>
 			</nav>
 		</header>
@@ -62,20 +63,20 @@ MemberDto member = (MemberDto)request.getSession().getAttribute("login");
 			<div class="worldcup_result">
 				<article>
 					<div>
-						<%=worldcupresult.getTopic()%>에서 당신의 선택은
-						<%=worldcupresult.getWorldcupname()%>입니다.
-						<br>
-						전체 선택 횟수 : <%=worldcupresult.getChoicecount()%>
+						<h1><%=worldcupresult.getTopic()%>에서 당신의 선택은
+						<%=worldcupresult.getWorldcupname()%>입니다.</h1>
+						<h4>
+						전체 선택 횟수 : <%=worldcupresult.getChoicecount()%></h4>
 
 					</div>
 					<div  class="worldcup_result_left">
 						<img src='image/<%=worldcupresult.getWorldcupname()%>.jpg' class="choice" />
 					</div>
-					<div class="worldcup_result_right">			
+					<div class="worldcup_result_right">
 						<table class="table table-hover">
 							<thead>
 							<tr bgcolor="#d3d3d3">
-								<th width="50px">번호</th><th width="150px">닉네임</th><th width="410px">내용</th><th>날짜</th><th width="50px">수정</th><th width="50px">삭제</th>
+								<th width="50px">번호</th><th width="100px">닉네임</th><th width="400px">내용</th><th width="100px">날짜</th><th width="50px">수정</th><th width="50px">삭제</th>
 							</tr>
 							</thead>
 							<tbody  id="worldcup_table">
@@ -84,25 +85,24 @@ MemberDto member = (MemberDto)request.getSession().getAttribute("login");
 							for (int i = 8*idx ; i < idx*8 + Math.min(8, (int)comments.size() - idx*8); i++) {
 								if (comments.get(i).getDel() == 1){
 							%>
-								<tr><td colspan=6>삭제된 댓글입니다.</td></tr>
+								<tr><td width="400px" colspan=6>삭제된 댓글입니다.</td></tr>
 							<%
 								}
 								else{
 							%>
 								<tr>
 								<td><%=i+1 %></td>
-								<td width="150px" ><%=comments.get(i).getAlias()%></td>
+								<td width="100px" ><%=comments.get(i).getAlias()%></td>
 								
 								<%
 									// member에서 alias를 받아와서 비교
 									if (comments.get(i).getAlias().equals(member.getAlias())){
 								%>
-										<%-- <td width="500px" style="word-break:break-all"><input class="form-control"  type="text" style="width:500px;"  value="<%=comments.get(i).getContent()%>" ></td> --%>
-										<td width="410px" style="word-break:break-all" >
+										<td width="400px" style="word-break:break-all" >
 											<span style="cursor:pointer"title="대댓창 열기" onclick="toggle_reply(<%=i%>)"><%=arrow(comments.get(i).getDepth()) %><%=comments.get(i).getContent()%></span>
-											<span style="display:none"><br>
-												<input type="text" size="42%" value="">
-												<button type="button" onclick="worldcup_reply_comment(<%=i%>)" class="btn btn-success" style="float:right;"><i class="bi bi-check-circle"   style="float:right;"></i></button>
+											<span style="display:none; width:400px"><br>
+												<input type="text" size="35%" value="">
+												<button type="button" onclick="worldcup_reply_comment(<%=i%>)" class="btn btn-success"><i class="bi bi-check-circle"   style="float:right;"></i></button>
 											</span>
 										</td>
 										<td><%=comments.get(i).getWdate().substring(0, comments.get(i).getWdate().length() - 2)%></td>
@@ -112,10 +112,10 @@ MemberDto member = (MemberDto)request.getSession().getAttribute("login");
 									}
 									else{
 								%>
-										<td width="410px" style="word-break:break-all"><%=comments.get(i).getContent()%></td>
-										<td><%=comments.get(i).getWdate().substring(0, comments.get(i).getWdate().length() - 2)%></td>
-										<td><i  style="display: none;" class="bi bi-pencil-square"></i></td>
-										<td><button type="button" style="display: none;" class="btn-close"></button></td>
+										<td width="400px" style="word-break:break-all"><%=comments.get(i).getContent()%></td>
+										<td width="100px"><%=comments.get(i).getWdate().substring(0, comments.get(i).getWdate().length() - 2)%></td>
+										<td width="50px"><i  style="display: none;" class="bi bi-pencil-square"></i></td>
+										<td width="50px"><button type="button" style="display: none;" class="btn-close"></button></td>
 								<%
 									}
 								}
@@ -132,7 +132,7 @@ MemberDto member = (MemberDto)request.getSession().getAttribute("login");
 						<%} %>
 						</div>
 						<div style="">
-						<input type="text" id="worldcup_input" size="90%" style="vertical-align:middle;"><button type="button" id="worldcup_submit" class="btn btn-dark float-right" >댓글달기</button>
+						<input type="text" id="worldcup_input" size="78%" style="vertical-align:middle;"><button type="button" id="worldcup_submit" class="btn btn-dark float-right" >댓글달기</button>
 						</div>
 
 					</div>
@@ -194,20 +194,20 @@ function update_worldcup_comment(seq, idx){
 	var update_content = document.querySelector(query).textContent;
 	update_content = update_content.trim();
 	document.querySelector(query).innerHTML = 
-		'<td width="410px" style="word-break:break-all; display:inline;"> ' +
-			'<input class="form-control" type="text" style="width:76%; float:left"  value="' + update_content + '" >' +
+		'<td width="400px" style="word-break:break-all; display:inline;"> ' +
+			'<input class="form-control" type="text" style="width:70%; float:left"  value="' + update_content + '" >' +
 			'<button type="button" class="btn btn-danger" onclick="undo_change(`'+ idx +'`, `'+query+'`, `'+ update_content + '`)" style="float:right;">' +
 				'<i class="bi bi-arrow-counterclockwise"  style="float:right;"></i></button>' +
 			'<button type="button" onclick="update_change(`'+idx+'`)" class="btn btn-success" style="float:right;">' +
-				'<i class="bi bi-check-circle" font-size="1.25em"  style="float:right;"></i></button></td>'
+				'<i class="bi bi-check-circle" font-size="1.1em"  style="float:right;"></i></button></td>'
 }
 
 function undo_change(i, query, before){
 	document.querySelector(query).innerHTML =
-		'<td width="410px" style="word-break:break-all">' + 
+		'<td width="400px" style="word-break:break-all">' + 
 		'<span style="cursor:pointer"title="대댓창 열기" onclick="toggle_reply(' + i + ')">'  + arrow( comment_list[i].depth  ) + comment_list[i]['content'] +'</span>' + 
-		'<span style="display:none"><br><input type="text" size="42%" value="">' + 
-		'<button type="button" onclick="worldcup_reply_comment(' + i + ')" class="btn btn-success" style="float:right;">' +
+		'<span style="display:none"><br><input type="text" size="35%" value="">' + 
+		'<button type="button" onclick="worldcup_reply_comment(' + i + ')" class="btn btn-success">' +
 		'<i class="bi bi-check-circle"   style="float:right;"></i></button></span></td>';
 }
 
@@ -266,28 +266,27 @@ function comment_page(index) {
 		else {
 			var show_delete = '';
 			
-			show_content = '<td width="410px" style="word-break:break-all">' + 
+			show_content = '<td width="400px" style="word-break:break-all">' + 
 			'<span style="cursor:pointer"title="대댓창 열기" onclick="toggle_reply(' + i + ')">' + arrow(comment_list[i].depth) +  comment_list[i]['content'] + '</span>' + 
-			'<span style="display:none"><br><input type="text" size="42%" value="">' + 
+			'<span style="display:none"><br><input type="text" size="35%" value="">' + 
 			'<button type="button" onclick="worldcup_reply_comment(' + i + ')" class="btn btn-success" style="float:right;">' +
 			'<i class="bi bi-check-circle"   style="float:right;"></i></button></span></td>';
 			
 			// member의 alias를 가져와서 비교해야함. 변경 필요
 			if (comment_list[i]['alias'] == '<%=member.getAlias()%>'){
-
-				show_update = '<td><i class="bi bi-pencil-square" style="cursor:pointer" aria-hidden="true" onclick="update_worldcup_comment(' + comment_list[i]['commentseq'] +', ' + i +')"></i></td>';
-				show_delete = '<td><button type="button" class="btn-close" onclick="delete_worldcup_comment(' + comment_list[i]['commentseq'] +', ' + parseInt(i/8) +')"></button></td>';	
+				show_update = '<td width="50px"><i class="bi bi-pencil-square" style="cursor:pointer" aria-hidden="true" onclick="update_worldcup_comment(' + comment_list[i]['commentseq'] +', ' + i +')"></i></td>';
+				show_delete = '<td width="50px"><button type="button" class="btn-close" onclick="delete_worldcup_comment(' + comment_list[i]['commentseq'] +', ' + parseInt(i/8) +')"></button></td>';	
 			}
 			else{
 				show_update = '<td><i  style="display: none;" class="bi bi-pencil-square"></i></td>'
 				show_delete = '<td><button type="button"  style="display: none;" class="btn-close"></button></td>';
 			}
 			var row = 
-			'<tr>'+
-				'<td>'+ (i+1) +'</td>' +
+			'<tr width="50px">'+
+				'<td width="50px">'+ (i+1) +'</td>' +
 				'<td width="150px">' + comment_list[i]['alias'] +'</td>'+
 				show_content +
-				'<td>' + comment_list[i].wdate.substring(0, comment_list[i].wdate.length - 2)  + '</td>' +
+				'<td width="100px">' + comment_list[i].wdate.substring(0, comment_list[i].wdate.length - 2)  + '</td>' +
 				show_update +
 				show_delete +
 			'</tr>';
