@@ -6,7 +6,7 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link href="css/regiStyle.css" rel="stylesheet" />
+<link href="css/regiStyle.css?version3" rel="stylesheet" />
 <link href="css/bootstrap.css" rel="stylesheet" />
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -20,12 +20,18 @@ padding: 0px 15px;
 .register-btn{
 padding: 6px 12px;
 }
+
+.btn-secondary2 {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
 </style>
 </head>
 <body>
-<div class="sidenav">
+<div class="sidenav" style= "background-image : url(./resources/homeBoot/assets/img/bg-regi.jpg);">
          <div class="login-main-text">
-            <h2>MBTI<br> 회원가입을 환영합니다</h2>
+            <h2>PLAN/16<br>동료가 되어주세요!</h2>
             <p>register from here to access.</p>
          </div>
       </div>
@@ -61,8 +67,8 @@ padding: 6px 12px;
                   <div class="form-group" style="display :flex;">
                      
                      <input type="text" class="form-control" placeholder="ID" name = "id" id="id" style="margin-right :10px;">                  
-                     <button type="button" class="btn btn-dark check-btn" id="btn">확인</button>
-                                                                                       
+                     <button type="button" class="btn btn-dark check-btn" id="btn" style="color: #fff;background-color: #6c757d;border-color: #6c757d;"> 확인</button>
+                                                                   
                    </div>    
                      <p id="idcheck" style="font-size: 12px;"></p>	
                  
@@ -105,7 +111,7 @@ padding: 6px 12px;
                   <input type="hidden" id="nameHidden" value="2">
                   </div>                 
                              
-                  <button type="button" class="btn btn-secondary register-btn" onclick="account()">회원가입</button>
+                  <button type="button" style="background-color:#004176; color:white" class="btn btn-secondary register-btn" onclick="account()">회원가입</button>
                   
                </form>
                

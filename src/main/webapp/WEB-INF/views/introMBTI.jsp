@@ -9,6 +9,9 @@
 	MemberDto mem =(MemberDto)request.getSession().getAttribute("login");
 	List<String> mbtilist = (List<String>)request.getAttribute("mbtilist");
 %>
+
+
+
 <!DOCTYPE html>
 
 <html>
