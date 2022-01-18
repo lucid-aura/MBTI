@@ -1,0 +1,125 @@
+@charset "UTF-8";
+/* 컬러지정 */
+:root{
+	--text-color: rgb(30,63,79);
+	--textInput-color: rgba(244,188,27,0.3);
+	--writeArea-color:rgba(30,63,79,0.5); 
+	--ButtonOff-color: rgba(244,188,27,0.5);
+	--ButtonOn-color: rgba(244,188,27,1);
+	--closeButtonOn-color: rgba(229,70,43,0.5);
+	--closeButtonOff-color: rgba(229,70,43,1);}
+/* 그리드 구성 */
+#wrap{
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(2, minmax(10px, auto)) 300px repeat(2, minmax(10px, auto));
+	gap: 10px 10px;}
+
+/* 타이틀 영역 */
+#wrap header{
+	grid-column: 1 / 3; grid-row: 1 / 2; display: flex;}
+/* 리뷰 영역 (제목) */
+#wrap mainheader{
+	grid-column: 1 / 3; grid-row: 2 / 3; align-items: center;}
+/* 리뷰 영역 (리뷰) */
+#wrap main{
+	grid-column: 1 / 3; grid-row: 3 / 4; overflow: scroll;overflow-x: hidden;}
+/* 리뷰 작성 영역 */
+#write{
+	grid-column: 1 / 3; grid-row: 4 / 5;}
+/* 닫기 */
+#close{
+	margin: 0 auto;
+	grid-column: 1 / 3; grid-row: 5 / 6;}
+/* 테이블 상단 관련 */
+header{
+	color:var(--text-color);
+	margin: 0 auto;}
+/* 테이블 테두리 관련 효과 */
+table {
+	width: 100%;
+	border-top: 1px solid var(--text-color);
+	border-collapse: collapse;}
+th, td {
+	border-bottom: 1px solid var(--text-color);
+	padding: 10px;
+	vertical-align:middle;}
+thead tr td{
+	background-color:var(--text-color);
+	color: white;
+	border-left: 1px solid white;}
+thead tr td:nth-child(1){
+	border-left: none;
+	text-align: center;
+	font-weight: bold;
+	width:10%;}
+thead tr td:nth-child(2){
+	text-align: center;
+	font-weight: bold;
+	width:20%;}
+thead tr td:nth-child(3){
+	text-align: center;
+	font-weight: bold;}
+.tablefirst, .userMbti{
+	border-left: none;
+	text-align: center;
+	margin: 0 auto;
+	width:10%;}
+.tablemiddle, .userAsterion{
+	padding-left:5%;
+	margin: 0 auto;
+	width:20%;}
+.tableend, .userReview{
+	padding-left:5%;
+	border-right: none;}
+.userMbti, .userAsterion, .userReview, .reviewnone{
+	border-top:1px solid white !important;
+	border-bottom:1px solid white !important;
+	margin: 0 auto;
+}
+.reviewnone{
+	font-weight: bold;
+	text-align: center;}
+	
+/* 입력 부분 관련 */
+#write table{
+	background-color: var(--writeArea-color);
+}
+/* 입력 관련 */
+input{border:0 solid black;}
+input:focus{outline:none;}
+#reivew{border:1px solid var(--sideButtonOff-color);}
+.userMbti input{text-align: center}
+
+/* 버튼 관련 */
+.deleteBtn{
+	background-color: var(--ButtonOff-color);
+	border: 1px solid pink;
+	border-radius: 10px;}
+.deleteBtn:hover{
+	background-color: var(--ButtonOn-color);
+	color:white;}
+.updateBtn{
+	background-color: white;
+	border: 1px solid var(--ButtonOff-color);
+	border-radius: 10px;
+	color: var(--ButtonOn-color);}
+.updateBtn:hover{
+	background-color: var(--ButtonOn-color);
+	color:white;}
+.closeBtn{
+	width:100px;
+	height: 30px;
+	background-color: var(--closeButtonOff-color);
+	border: 1px solid white;
+	border-radius: 15px;
+	color: white;
+	font-weight: bold;}
+.closeBtn:hover{
+	background-color: var(--closeButtonOn-color);}
+.writeBtn{
+	background-color: var(--writeArea-color);
+	border: 0px solid var(--text-color);
+	color:white;}
+.writeBtn:hover{
+	border: 1px solid white;}
