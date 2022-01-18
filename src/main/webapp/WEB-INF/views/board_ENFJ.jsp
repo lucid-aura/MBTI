@@ -46,8 +46,8 @@
 		<nav>
 			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
 				<a href="introMBTI.do" class="text-light distance">유형소개</a>
-				<a href="board_ENFJ.do?page=1" class="text-light distance">유형별게시판</a>
-				<a href="board_free.do" class="text-light distance">자유게시판</a>
+				<a href="board_ENFJ.do?page=1" class="text-light distance">유형별게시판</a> <!-- 바꿔야함 -->
+				<a href="board_free.do?page=1" class="text-light distance">자유게시판</a>
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
 				<button>로그아웃</button>
 			</div>
@@ -83,11 +83,11 @@
 
 
 <!--    attribute property -->
-	<table class="table table-hover" style="width:1300px" align="center">
+	<table class="table table-hover" style="width:1200px" align="center">
 	<!-- <col width="30"><col width="200"><col width="80"> -->
 	<thead>
 	<tr>
-	<th>번호</th><th>제목</th><th>글쓴이</th><th>작성날짜</th><th>조회횟수</th><th>댓글개수</th>
+	<th width="100px">번호</th><th width="330px">제목</th><th width="150px">글쓴이</th><th width="200px">작성날짜</th><th width="150px">조회횟수</th><th width="100px">댓글개수</th>
 	</tr>
 	</thead>
 	<tbody>
