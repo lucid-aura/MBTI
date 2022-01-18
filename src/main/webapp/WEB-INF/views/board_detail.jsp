@@ -183,19 +183,23 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 					%>
 					
 					<%-- <tr onClick="location.href='comment_update.do?commentseq=<%=comment.getCommentseq() %>'" style = "cursor:pointer;"> --%>
-					<tr id="btn_comment_check" onClick="comment_check(<%=comment.getCommentseq()%>)" style = "cursor:pointer;">
+					<tr id="btn_comment_check">
 <%-- "location.href='comment_update.do?commentseq=<%=comment.getCommentseq() %>'" --%>
 						<!-- 한 줄 -->
-						<th><%=i + 1%>&nbsp&nbsp&nbsp<hr></th>
+						<th onClick="comment_check(<%=comment.getCommentseq()%>)" style = "cursor:pointer;"><%=i + 1%>&nbsp&nbsp&nbsp<hr></th>
 						<td>&nbsp<hr></td>
 						<!-- 댓글번호 --> 
-						<td>
+						<td onClick="comment_check(<%=comment.getCommentseq()%>)" style = "cursor:pointer;">
 							<!-- 한 칸 --> <!-- 작성자 --> <%=comment.getAlias()%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<hr>
 						</td>
-						<td><%=arrow(comment.getDepth()) %><%=comment.getContent()%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<hr></td>
-						<td><%=comment.getWdate()%><hr></td>
+						<td onClick="comment_check(<%=comment.getCommentseq()%>)" style = "cursor:pointer;"><%=arrow(comment.getDepth()) %><%=comment.getContent()%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<hr></td>
+						<td onClick="comment_check(<%=comment.getCommentseq()%>)" style = "cursor:pointer;"><%=comment.getWdate()%><hr></td>
+						<td><button onClick="comment_replycontent(<%=comment.getCommentseq()%>)">답글
+						</button><hr>
+						</td>
 						
 					</tr>
+					
 					
 					<%
 					}
@@ -238,6 +242,7 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 		</form>
 
 <script type="text/javascript">
+	var commentshow;
 
 	/* 		답글	일단 제외
 			function answer( boardseq ){
@@ -276,6 +281,17 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 				}
 			
 				<%-- "location.href='comment_update.do?commentseq=<%=comment.getCommentseq() %>'" --%>
+			}
+			
+			//리뷰
+			function comment_replycontent(commentseq){
+				if(commentshow !=null){
+					commentshow.close();
+				}
+			
+				let link = 'comment_replycontent.do?commentseq='+commentseq;
+				commentshow = window.open(link, 'replywindow', 'width=1000, height=600, resizable=no');
+				commentshow.focus();
 			}
 
 		

@@ -597,6 +597,36 @@ public class BoardController {
 		return "redirect:/board_detail.do?boardseq="+comment_delete;
 	}
 	
+	
+	@RequestMapping(value = "comment_replycontent.do", method = RequestMethod.GET) // jsp파일에서 컨트롤러 찾을때 쓰임 requestmapping
+	public String comment_replycontent(Model model,  int commentseq) {
+		logger.info("BoardController comment_replycontent() " + new Date());
+
+		CommentDto commentdto= commentService.get_comment(commentseq);
+		model.addAttribute("comment",commentdto);
+		
+		return "comment_replydetail";
+	}
+	
+	
+	//대댓글 컨트롤러
+	@RequestMapping(value = "comment_replydetailAf.do", method = RequestMethod.POST)
+	public String comment_replydetailAf(CommentDto dto) {
+		logger.info("BoardController comment_replydetailAf() " + new Date());
+		System.out.println(dto.toString());
+//		CommentDto parentsDto = commentService.get_comment(dto.getCommentseq());
+//		commentService.comment_write(dto);
+		
+//		List<CommentDto> commentdto = commentService.comment_list(dto.getBoardseq());
+//		BoardDto board = service.get_board(dto.getBoardseq()); // 게시글 가져오기
+		
+//		service.board_commentcountup(dto.getBoardseq()); //게시판 댓글개수 하나 늘린것
+		
+		
+		
+		return "redirect:/board_detail.do?boardseq="+dto.getBoardseq();
+	}
+	
 
 	
 }

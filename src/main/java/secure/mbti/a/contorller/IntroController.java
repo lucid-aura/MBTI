@@ -147,7 +147,7 @@ public class IntroController {
 	@RequestMapping(value = "board_type.do", method = RequestMethod.GET)
 	public String board_type(String type){ 
 		System.out.println("IntroController board_type() " + new Date());
-		return "redirect:/board_"+type+".do";
+		return "redirect:/board_"+type+".do?page=0";
 	}
 	
 	
@@ -175,7 +175,7 @@ public class IntroController {
 		
 		return "mbtiReview";
 	}
-	
+	//대댓글관련
 	@RequestMapping(value = "reviewWriteAf.do", method = RequestMethod.POST)
 	public String reviewWriteAf(MbtiReviewDto dto){
 		System.out.println("IntroController reviewWriteAf() " + new Date());
