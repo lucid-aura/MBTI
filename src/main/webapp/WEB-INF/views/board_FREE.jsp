@@ -133,7 +133,7 @@ else{
 <div align="center">
 <% for(int i=0; i< (int)((board_size-1)/20)+1; i++){
 	%>	
-<a href="board_free.do?page=<%=i+1%>"><%=i+1%></a> <!-- 바꿔야함 EX)board_free.do?page -->
+<a href="board_FREE.do?page=<%=i+1%>"><%=i+1%></a> <!-- 바꿔야함 EX)board_free.do?page -->
 <%
 }
 %>
@@ -169,7 +169,7 @@ function searchBoard(){
 	let choice = document.getElementById("choice").value;
 	let search = document.getElementById("search").value;
 	
-	location.href="board_free.do?page=1&choice=" + choice + "&search=" + search; //각자의 컨트롤러로 바꾸기
+	location.href="board_FREE.do?page=1&choice=" + choice + "&search=" + search; //각자의 컨트롤러로 바꾸기
 }
 </script>
 

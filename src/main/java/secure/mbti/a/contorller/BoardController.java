@@ -387,8 +387,8 @@ public class BoardController {
 		return "board_ENTJ"; //이것주의!
 	}
 	@RequestMapping(value = "board_FREE.do", method = RequestMethod.GET)
-	public String board_free(Model model,BoardParam param, int page){ 
-		logger.info("BoardController board_free() " + new Date());
+	public String board_FREE(Model model,BoardParam param, int page){ 
+		logger.info("BoardController board_FREE() " + new Date());
 		param.setBoardtype(16);
 		if(param.getCriteria()==null) {
 			Criteria criteria =new Criteria(16); // 이것주의!
