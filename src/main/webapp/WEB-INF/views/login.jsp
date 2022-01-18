@@ -10,8 +10,8 @@
 
 </head>
 <body>
-<div class="sidenav">
-         <div class="login-main-text">
+<div class="sidenav" style="background:#004176">
+         <div class="login-main-text" >
             <h2>Application<br> Login Page</h2>
             <p>Login or register from here to access.</p>
          </div>
@@ -28,7 +28,7 @@
                      <label>Password</label>
                      <input type="password" class="form-control" placeholder="Password" name = "pwd" id="pwd">
                   </div>
-                  <button type="button" class="btn btn-black" onclick = "login()">Login</button>
+                  <button type="button" class="btn"  style="background-color:#004176; color:white" onclick = "login()">Login</button>
                   <button type="button" class="btn btn-secondary" onclick="register()">Register</button>
                </form>
             </div>
