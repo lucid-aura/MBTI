@@ -56,6 +56,18 @@ public class BoardDaoImpl implements BoardDao{
 	public List<BoardDto> board_list_page(BoardParam param) {
 		return session.selectList(ns+"listPage", param);
 	}
+
+	@Override
+	public void board_commentcountup(int boardseq) {
+		session.update(ns+"boardcommentcountup", boardseq);
+		
+	}
+
+	@Override
+	public void board_commentcountdown(int boardseq) {
+		session.update(ns+"boardcommentcountdown", boardseq);
+		
+	}
 	
 	
 }

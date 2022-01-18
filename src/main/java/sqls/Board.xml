@@ -88,6 +88,21 @@ parameterType="secure.mbti.a.dto.BoardParam">
     where RNUM BETWEEN #{criteria.rowStart} and #{criteria.rowEnd})
 	order by BOARDSEQ desc
 </select>
+
+<!-- 220118댓글카운트수정 -->
+<update id="boardcommentcountup" parameterType="Integer">
+	UPDATE BOARDALL
+	SET COMMENTCOUNT = COMMENTCOUNT + 1
+	WHERE BOARDSEQ=#{ boardseq }
+</update>
+
+<update id="boardcommentcountdown" parameterType="Integer">
+	UPDATE BOARDALL
+	SET COMMENTCOUNT = COMMENTCOUNT -1
+	WHERE BOARDSEQ=#{ boardseq }
+</update>
+
+
 <!--  
 select BOARDSEQ, BOARDTYPE, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT,COMMENTCOUNT,RNUM
 from (

@@ -7,7 +7,19 @@
 <link rel="stylesheet" href="/css/bootstrap.css">
 <!--지워도됨 -->
 
-
+<%!
+public String arrow(int depth){
+	String res = "<img src='image/arrow.png' width='20px' height='20px' />";
+	String nbsp = "&nbsp;&nbsp;&nbsp;&nbsp;"; // 여백
+	
+	String ts = "";
+	for(int i = 0; i<depth; i++){
+		ts += nbsp;
+	}
+	
+	return depth==0?"":ts+res;
+}
+%>
 <%
 BoardDto board = (BoardDto) request.getAttribute("board");
 %>
@@ -49,7 +61,7 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 
 
 </head>
-<body>
+<body onunload="close_popup()">
 	<header>
 		<nav>
 			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
@@ -123,7 +135,7 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 			<!-- 아래에 있는 함수 이름 : board_delete -->
 			<button type="button" class="btn btn-danger" onclick="board_delete(<%=board.getBoardseq()%>)">삭제</button>
 			
-			<button type="button" class="btn btn-dark" onclick="board_free(<%=board.getBoardseq()%>)">목록</button>
+			<button type="button" class="btn btn-dark" onclick="location.href='board_backlist.do?boardtype=<%=board.getBoardtype()%>'">목록</button>
 
 			<%
 			}
@@ -171,19 +183,23 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 					%>
 					
 					<%-- <tr onClick="location.href='comment_update.do?commentseq=<%=comment.getCommentseq() %>'" style = "cursor:pointer;"> --%>
-					<tr id="btn_comment_check" onClick="comment_check(<%=comment.getCommentseq()%>)" style = "cursor:pointer;">
+					<tr id="btn_comment_check">
 <%-- "location.href='comment_update.do?commentseq=<%=comment.getCommentseq() %>'" --%>
 						<!-- 한 줄 -->
-						<th><%=i + 1%>&nbsp&nbsp&nbsp<hr></th>
+						<th onClick="comment_check(<%=comment.getCommentseq()%>)" style = "cursor:pointer;"><%=i + 1%>&nbsp&nbsp&nbsp</th>
 						<td>&nbsp<hr></td>
-						<!-- 댓글번호 -->
-						<td>
-							<!-- 한 칸 --> <!-- 작성자 --> <%=comment.getAlias()%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<hr>
+						<!-- 댓글번호 --> 
+						<td onClick="comment_check(<%=comment.getCommentseq()%>)" style = "cursor:pointer;">
+							<!-- 한 칸 --> <!-- 작성자 --> <%=comment.getAlias()%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 						</td>
-						<td><%=comment.getContent()%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<hr></td>
-						<td><%=comment.getWdate()%><hr></td>
+						<td onClick="comment_check(<%=comment.getCommentseq()%>)" style = "cursor:pointer; width: 650px; word-break:break-all;"><%=arrow(comment.getDepth()) %>&nbsp&nbsp<%=comment.getContent()%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+						<td onClick="comment_check(<%=comment.getCommentseq()%>)" style = "cursor:pointer;"><%=comment.getWdate()%></td>
+						<td>&nbsp&nbsp&nbsp&nbsp<button class="btn btn-light" onClick="comment_replycontent(<%=comment.getCommentseq()%>)">답글</button>
+						</td>
 						
 					</tr>
+					
+					
 					<%
 					}
 					}
@@ -191,6 +207,7 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 					%>
 
 		</table>
+		<br>
 		<form action="comment.do" method="post" id="btn_check">
 
 		<input type="hidden" name="boardseq" value="<%=board.getBoardseq()%>">
@@ -225,6 +242,7 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 		</form>
 
 <script type="text/javascript">
+	var commentshow;
 
 	/* 		답글	일단 제외
 			function answer( boardseq ){
@@ -264,10 +282,27 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 			
 				<%-- "location.href='comment_update.do?commentseq=<%=comment.getCommentseq() %>'" --%>
 			}
-
-		
-
-
+			
+			//리뷰
+			function comment_replycontent(commentseq){
+				if(commentshow !=null){
+					commentshow.close();
+				}
+			
+				let link = 'comment_replycontent.do?commentseq='+commentseq;
+				commentshow = window.open(link,'','width=1000, height=600, resizable=no');
+				commentshow.focus();
+				
+				
+				
+				//window.close();
+			}
+			function close_popup(){
+				if(commentshow !=null){
+					commentshow.close();
+				}
+				location.href="board_detail.do";
+			}
 
 </script>
 </body>
