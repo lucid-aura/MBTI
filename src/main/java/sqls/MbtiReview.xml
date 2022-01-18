@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+        
+<mapper namespace="MbtiReview">
+	<select id="reviewlist"  parameterType = "java.lang.String" resultType = "secure.mbti.a.dto.MbtiReviewDto">   
+        SELECT a.REVIEWSEQ, a.TARGETMBTI, a.ID, a.ASTERION, a.REVIEW, a.WDATE, a.DEL, b.MBTI AS RECORDMBTI
+		FROM MBTIREVIEW a
+        INNER JOIN (SELECT ID,  MBTI
+                                FROM MEMBERMBTI
+                                WHERE ID IN (SELECT ID FROM MBTIREVIEW WHERE TARGETMBTI = #{targetmbti})) b
+        ON a.TARGETMBTI = #{targetmbti} AND a.ID = b.ID AND a.DEL=0
+        ORDER BY a.REVIEWSEQ DESC
+	</select>
+	
+	<insert id="reviewwrite" parameterType="secure.mbti.a.dto.MbtiReviewDto">
+		INSERT INTO MBTIREVIEW(REVIEWSEQ, TARGETMBTI, ID, ASTERION, REVIEW, WDATE, DEL)
+		VALUES(SEQ_REVIEW.NEXTVAL, #{targetmbti}, #{id}, #{asterion}, #{review}, SYSDATE, 0)
+	</insert>
+	
+	<update id="reviewdelete" parameterType="secure.mbti.a.dto.MbtiReviewDto">
+		UPDATE MBTIREVIEW
+		SET DEL = 1
+		WHERE REVIEWSEQ = #{reviewseq}
+	</update>
+	
+	<update id="reviewupdate" parameterType="secure.mbti.a.dto.MbtiReviewDto">
+		UPDATE MBTIREVIEW
+		SET REVIEW = #{review}, WDATE = SYSDATE
+		WHERE REVIEWSEQ = #{reviewseq}
+	</update>
+	
+	<select id="reviewasterion" parameterType = "java.lang.String" resultType = "java.lang.String">
+        SELECT NVL(ROUND(AVG(ASTERION), 1),0.0)
+        FROM MBTIREVIEW
+        WHERE TARGETMBTI = #{targetmbti} AND DEL=0
+	</select>
+	
+</mapper>

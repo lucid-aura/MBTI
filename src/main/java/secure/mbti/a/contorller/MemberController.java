@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import secure.mbti.a.dto.MemberDto;
 import secure.mbti.a.service.MemberService;
@@ -21,6 +23,9 @@ import secure.mbti.a.service.MemberService;
 @Controller
 public class MemberController {
 	private static Logger logger = LoggerFactory.getLogger(MemberController.class);
+	
+	@Autowired
+	SqlSession session;
 	
 	@Autowired
 	MemberService service;
@@ -53,7 +58,7 @@ public class MemberController {
 			// login 정보를 저장 -> session 
 			req.getSession().setAttribute("login", mem);			
 			
-			return "redirect:/introMBTI.do";
+			return "redirect:/introMBTI.do";   
 		}
 		else {		// 회원정보에 없음
 			
@@ -73,6 +78,63 @@ public class MemberController {
 	//	return "login.do"; // login.do.jsp
 		
 		return "redirect:/login.do";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "idcheck.do", method = RequestMethod.POST)
+	public String idcheck(String id) {
+		logger.info("MemberController idcheck() " + new Date());		
+		System.out.println("id:" + id);
+		
+		int count = service.getId(id);
+		System.out.println("count:" + count);		
+		if(count > 0) {	// 아이디가 있음
+			return "NO";
+		}else {			// 아이디가 없음
+			return "YES";
+		}		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "emailcheck.do", method = RequestMethod.POST)
+	public String emailcheck(String email) {
+		logger.info("MemberController emailcheck() " + new Date());	
+		System.out.println("email : "+email);
+		
+		int count = service.getEmail(email);
+		
+		if(count > 0) {
+			return "NO";
+		}
+		else {
+			return "YES";
+		}
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "aliascheck.do", method = RequestMethod.POST)
+	public String aliascheck(String alias) {
+		logger.info("MemberController aliascheck() " + new Date());	
+		System.out.println("alias : "+alias);
+		
+		int count = service.getAlias(alias);
+		
+		if(count > 0) {
+			return "NO";
+		}
+		else {
+			return "YES";
+		}
+		
+	}
+	
+	@RequestMapping(value = "logout.do", method = RequestMethod.GET)
+	public String logout(HttpServletRequest req) {
+		System.out.println("도착");
+		req.getSession().invalidate();
+		req.getSession(true);
+		return  "redirect:/login.do";
 	}
 	
 }
