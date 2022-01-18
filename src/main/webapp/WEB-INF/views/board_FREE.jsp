@@ -33,7 +33,7 @@
 			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
 				<a href="introMBTI.do" class="text-light distance">유형소개</a>
 				<a href="board_type.do?page=1" class="text-light distance">유형별게시판</a>
-				<a href="board_free.do?page=1" class="text-light distance">자유게시판</a>
+				<a href="board_FREE.do?page=1" class="text-light distance">자유게시판</a>
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
 				<button>로그아웃</button>
 			</div>
@@ -130,7 +130,7 @@ else{
 <div align="center">
 <% for(int i=0; i< (int)((board_size-1)/20)+1; i++){
 	%>	
-<a href="board_free.do?page=<%=i+1%>"><%=i+1%></a> <!-- 바꿔야함 EX)board_free.do?page -->
+<a href="board_FREE.do?page=<%=i+1%>"><%=i+1%></a> <!-- 바꿔야함 EX)board_free.do?page -->
 <%
 }
 %>
@@ -166,7 +166,7 @@ function searchBoard(){
 	let choice = document.getElementById("choice").value;
 	let search = document.getElementById("search").value;
 	
-	location.href="board_free.do?page=1&choice=" + choice + "&search=" + search; //각자의 컨트롤러로 바꾸기
+	location.href="board_FREE.do?page=1&choice=" + choice + "&search=" + search; //각자의 컨트롤러로 바꾸기
 }
 </script>
 

@@ -386,9 +386,9 @@ public class BoardController {
 		model.addAttribute("board_page", page); // 페이지넘길빼번호
 		return "board_ENTJ"; //이것주의!
 	}
-	@RequestMapping(value = "board_free.do", method = RequestMethod.GET)
-	public String board_free(Model model,BoardParam param, int page){ 
-		logger.info("BoardController board_free() " + new Date());
+	@RequestMapping(value = "board_FREE.do", method = RequestMethod.GET)
+	public String board_FREE(Model model,BoardParam param, int page){ 
+		logger.info("BoardController board_FREE() " + new Date());
 		param.setBoardtype(16);
 		if(param.getCriteria()==null) {
 			Criteria criteria =new Criteria(16); // 이것주의!
@@ -406,7 +406,7 @@ public class BoardController {
 		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
 		model.addAttribute("board_size", list_size);
 		model.addAttribute("board_page", page); // 페이지넘길빼번호
-		return "board_free"; //이것주의!
+		return "board_FREE"; //이것주의!
 	}
 	@RequestMapping(value = "board_write.do", method = RequestMethod.GET)
 	public String board_write(Model model,int boardtype) {
