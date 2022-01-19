@@ -38,14 +38,14 @@ MemberDto dto = (MemberDto) request.getAttribute("dto");
 				<a href="board_type.do?page=1" class="text-light distance">유형별게시판</a>
 				<a href="board_FREE.do?page=1" class="text-light distance">자유게시판</a>
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
-				<button onclick="location.href='logout.do'">로그아웃</button>
+				<button type="button" class="btn btn-light btn-default btn-sm" onclick="location.href='logout.do'">로그아웃</button>
 			</div>
 		</nav>
 	</header>
 <!-- 고정바 -->
 
 
-
+<!-- 수정할 댓글 입력창 -->
 	<section>
 		<article style="margin: 250px" padding="50px">
 			<div id="containerAll">
@@ -60,20 +60,13 @@ MemberDto dto = (MemberDto) request.getAttribute("dto");
 				</div>
 				<input type="submit" class="btn btn-dark" value="수정">
 				<button type="button" class="btn btn-dark" onclick="location.href='board_detail.do?boardseq=<%=board.getBoardseq()%>'">취소</button>
-			</form>
-
-			
-			
+			</form>	
 			</div>
 		</article>
 	</section>
-
+<!-- 수정할 댓글 입력창 -->
 	</div>
-	
 	<script type="text/javascript">
-
-
  </script>
-
 </body>
 </html>

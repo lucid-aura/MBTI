@@ -23,9 +23,11 @@
 </head>
 <body>
 	<div id="wrap">
+	<!-- 상단 MBTI 리뷰 제목영역 -->
 		<header>
 			<h1><%=reviewInfo.get("selectmbti") %> 리뷰</h1>
 		</header>
+		<!-- 리뷰 상단 테이블 영역 -->
 		<mainheader>
 			<table>
 				<thead>
@@ -37,6 +39,7 @@
 				</thead>
 			</table>
 		</mainheader>
+		<!-- 리뷰 테이블 영역 -->
 		<main>
 			<table>
 				<tbody>
@@ -74,6 +77,7 @@
 				</tbody>
 			</table>
 		</main>
+		<!-- 리뷰 작성 영역 -->
 		<section id="write">
 			<table>
 				<tr>
@@ -98,9 +102,9 @@
 					</td>
 					</form>
 				</tr>
-			</table>
-			
+			</table>	
 		</section>
+		<!-- 닫기 버튼 영역 -->
 		<section id="close">
 			<button class="closeBtn" type="button">닫기</button>
 		</section>
