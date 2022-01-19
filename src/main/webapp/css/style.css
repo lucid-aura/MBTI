@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+a {text-decoration: none !important;}
+
 .box {
 	height: 1000px;
 	background-color: #eee;
@@ -28,37 +30,50 @@
 	padding: 3rem;
 	margin: 0 auto;
 	border-radius: 1rem;
-	background: #0adef5;
-	width: 1680px;
+	background: rgba(0, 28, 51, 1);
+	width: 1800px;
 	height:720px;
 }
 
+.deepblue {
+	background-color: rgba(0, 28, 51, 1);
+}
+
 .choice {
-	width: 50%;
-	height: 50%;
+	width: 100%;
+	height: 100%;
 }
 
 .worldcup_result{
 	font-family: system-ui, serif;
-	font-size: 2rem;
+	font-size: 14px;
 	padding: 3rem;
 	margin: 0 auto;
 	border-radius: 1rem;
-	width: 90%;
+	width: 100%;
 }
 
 .worldcup_result_left{
-	width: 640px;
+	width: 650px;
 	height: 480px;
+	margin:10px;
 	float: left;
 }
 .worldcup_result_right{
-	width: 640px;
+	width: 680px;
 	height: 480px;
+	margin:10px;
 	float: right;
 }
 
 .worldcup_result_table {
   border-collapse: separate;
   border-spacing: 20px 10px;
+}
+
+.nav_bar_logo{
+	cursor:pointer;
+	position:absolute;margin-left:-680px;
+	margin-top:2px;
+	width:85px; height:30px;
 }
