@@ -6,7 +6,7 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link href="css/loginStyle.css?version=5" rel="stylesheet" />
+<link href="css/loginStyle.css?version=7" rel="stylesheet" />
 
 <style type="text/css">
 .form-group > p > span{
@@ -15,9 +15,10 @@ font-weight : bold;
 </style>
 </head>
 <body>
-<div class="sidenav" style="background:#004176; background-image : url(./resources/homeBoot/assets/img/bg-login.jpg);">
+<div class="sidenav" style="background:#004176; background-image : url(./resources/homeBoot/assets/img/login_final.jpg); background-size : cover;">
          <div class="login-main-text" >
-            <h2>Application<br> Login Page</h2>
+            <h2>PLAN 16<br>여러가지 심리 & 성격 검사를 자유롭게 공유하고 이야기 공간</h2>
+
             <p>Login or register from here to access.</p>
          </div>
       </div>
@@ -35,8 +36,8 @@ font-weight : bold;
                    <p id="logincheck" style="font-size:13px; margin-top:5px;"></p>  
                   </div>
                   
-                  <button type="button" class="btn"  style="background-color:#004176; color:white" onclick = "login()">Login</button>
-                  <button type="button" class="btn btn-secondary" onclick="register()">Register</button>
+                  <button type="button" class="btn"  style="background-color:#004176; color:white" onclick = "login()">로그인</button>
+                  <button type="button" class="btn btn-secondary" onclick="register()">회원가입</button>
                </form>
             </div>
          </div>
