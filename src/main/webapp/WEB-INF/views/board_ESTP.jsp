@@ -159,6 +159,7 @@ else{
 	<a href="board_write.do?boardtype=8" class="btn btn-primary pull-right">글쓰기</a>	
 </div>
 </div>
+<br><br><br><br>
 <script type="text/javascript">
 function func(num) {	
 	var ti ="";
