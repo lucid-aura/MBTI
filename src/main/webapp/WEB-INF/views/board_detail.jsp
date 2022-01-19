@@ -21,17 +21,17 @@ public String arrow(int depth){
 }
 %>
 <%
-BoardDto board = (BoardDto) request.getAttribute("board");
+BoardDto board = (BoardDto) request.getAttribute("board"); //게시판 정보 담는 그릇
 %>
 <%
-MemberDto dto = (MemberDto) request.getSession().getAttribute("login");
+MemberDto dto = (MemberDto) request.getSession().getAttribute("login"); // 로그인한 회원 정보 담는 그릇
 %>
 
 <%
-List<CommentDto> comments = (List<CommentDto>) request.getAttribute("comments");
+List<CommentDto> comments = (List<CommentDto>) request.getAttribute("comments"); // 댓글정보를 리스트화 해서 담는 그릇
 %>
 <%
-int comment_count = (Integer)request.getAttribute("comment_count");
+int comment_count = (Integer)request.getAttribute("comment_count"); // 댓글 갯수 담는 그릇
 %>
 
 <!DOCTYPE html>
@@ -183,9 +183,8 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 					} else {
 					%>
 					
-					<%-- <tr onClick="location.href='comment_update.do?commentseq=<%=comment.getCommentseq() %>'" style = "cursor:pointer;"> --%>
+
 					<tr id="btn_comment_check">
-<%-- "location.href='comment_update.do?commentseq=<%=comment.getCommentseq() %>'" --%>
 						<!-- 한 줄 -->
 						<th onClick="comment_check(<%=comment.getCommentseq()%>)" style = "cursor:pointer; display:none;" ><%=i + 1%>&nbsp&nbsp&nbsp</th>
 						<td>&nbsp<hr></td>
@@ -224,11 +223,6 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 						<ul class="list-group list-group-flush">
 							<li class="list-group-item">
 								<div class="form-inline mb-2">
-									<!--아이디 입력부분 일시삭제 <label for="replyId"><i
-										class="fa fa-user-circle-o fa-2x"></i></label> <input type="text"
-										class="form-control ml-2" placeholder="Enter yourId"
-										id="replyId"> -->
-
 								</div> <textarea class="form-control" id="exampleFormControlTextarea1" name="content"
 									rows="3"></textarea><br>
 									
@@ -244,17 +238,15 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 
 <script type="text/javascript">
 	var commentshow;
-
-	/* 		답글	일단 제외
-			function answer( boardseq ){
-				location.href = "answer.do?seq=" + seq;
-			} */
+			/* 게시물 수정 이동 */
 			function board_update( boardseq ){
 				location.href = "board_update.do?boardseq=" + boardseq;
 			}
+			/* 게시물 삭제 이동 */
 			function board_delete( boardseq ){
 				location.href = "board_delete.do?boardseq=" + boardseq;
 			}
+			/* 게시판 리스트이동 */
 			function board_free(boardseq){
 				location.href = "board_free.do?boardseq= + " + boardseq + "&page=1";
 			}
@@ -262,7 +254,7 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 			//댓글등록 빈값을 넣어 오류날때
 			function comment_checkcomment(){ 
 				var check = $("#exampleFormControlTextarea1").val();
-				check.trim();
+				check.trim(); //빈칸 삭제
 				if( check=="" || check == null || check == undefined ){ 
 					alert("내용을 입력하세요.");
 				}
@@ -272,6 +264,7 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 				}
 			};
 			
+			// 본인 댓글에만 댓글 달 수 있는 함수
 			function comment_check(commentseq){
 				var ff =$("#btn_comment_check").children('td').eq(1).text().trim();
 				console.log(ff);
@@ -280,12 +273,11 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 				} else{
 					alert("댓글작성자가 아닙니다.")
 				}
-			
-				<%-- "location.href='comment_update.do?commentseq=<%=comment.getCommentseq() %>'" --%>
 			}
 			
-			//리뷰
+			//댓글의 댓글달때 대댓글 새창 열기
 			function comment_replycontent(commentseq){
+				//새창 열기
 				if(commentshow !=null){
 					commentshow.close();
 				}
@@ -293,12 +285,11 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 				let link = 'comment_replycontent.do?commentseq='+commentseq;
 				commentshow = window.open(link,'','width=1000, height=600, resizable=no');
 				commentshow.focus();
-				
-				
-				
-				//window.close();
 			}
+			
+			// 대댓글 새창이 닫힌 후 자동으로 게시판 상세 페이지로 이동(대댓글이 자동으로 상세페이지에 등록됨)
 			function close_popup(){
+				
 				if(commentshow !=null){
 					commentshow.close();
 				}
