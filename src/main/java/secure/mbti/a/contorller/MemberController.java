@@ -157,6 +157,11 @@ public class MemberController {
 		System.out.println("id : "+dto.getId());
 		System.out.println("pwd : "+dto.getPwd());
 		String salt=service.getSalt(dto.getId());
+		
+		if(salt == null) {
+			return "NO";
+		}
+		
 		String crypt = BCrypt.hashpw(dto.getPwd(), salt);
 		dto.setPwd(crypt);
 		System.out.println(crypt);

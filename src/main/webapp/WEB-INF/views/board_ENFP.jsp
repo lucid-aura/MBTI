@@ -57,7 +57,7 @@
 <h1>게시판</h1>
 <br><br>
 
-<h1 align="center">ENFP 게시판</h1> <!-- 바꿔야함 -->
+<h1 align="center">ENFP 게시판</h1> 
 
 <div>
 <hr>
@@ -87,10 +87,8 @@
 
 <!--    attribute property -->
 	<table id="board_width" class="table table-hover" style="width:1200px" align="center">
-	<!-- <col width="30"><col width="200"><col width="80"> -->
 	<thead align="center">
 	<tr>
-	<!-- <th width="100px">번호</th><th width="330px">제목</th><th width="150px">작성자</th><th width="200px">작성날짜</th><th width="150px">조회횟수</th><th width="100px">댓글개수</th> -->
 	<th width="80px" align="center">번호</th><th width="480px">제목</th><th width="70px">작성자</th><th width="130px" >작성날짜</th><th width="70">조회횟수</th><th width="70">댓글개수</th>
 	</tr>
 	</thead>
@@ -149,7 +147,7 @@ else{
 <div align="center">
 <% for(int i=0; i< (int)((board_size-1)/20)+1; i++){
 	%>	
-<a href="board_ENFP.do?page=<%=i+1%>"><%=i+1%></a> <!-- 바꿔야함 EX)board_free.do?page -->
+<a href="board_ENFP.do?page=<%=i+1%>"><%=i+1%></a> 
 <%
 }
 %>
@@ -158,10 +156,10 @@ else{
 
 <br>
 <div align="center">
-	<a href="board_write.do?boardtype=12" class="btn btn-primary pull-right">글쓰기</a>	<!-- 각자의 넘버로 바꾸기 -->
+	<a href="board_write.do?boardtype=12" class="btn btn-primary pull-right">글쓰기</a>
 </div>
 </div>
-
+<br><br><br><br>
 <script type="text/javascript">
 function func(num) {	
 	var ti ="";

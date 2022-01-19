@@ -27,21 +27,20 @@ public class BoardController {
 	private static Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 
-//	+board_update
-//	+comment
-
 	@Autowired
 	BoardService service;
 	@Autowired
 	CommentService commentService;
 			
-	/* 임시 controller */
+	/* 각자의 MBTI게시판으로 이동 */
 	@RequestMapping(value = "board_ISTJ.do", method = RequestMethod.GET)
 	public String board_ISTJ(Model model,BoardParam param, int page){ 
 		logger.info("BoardController board_ENFJ() " + new Date());
+		/* 검색 관련 */
 		param.setBoardtype(0);
+		/* 페이지 관련 */
 		if(param.getCriteria()==null) {
-			Criteria criteria =new Criteria(0); // 이것주의!
+			Criteria criteria =new Criteria(0); 
 			param.setCriteria(criteria);
 			}
 		if(page == 0 ) {
@@ -49,21 +48,24 @@ public class BoardController {
 		}
 		param.getCriteria().setPage(page);
 		
-		System.out.println(param.toString());
 		List<BoardDto> list = service.board_list(param);
 		int list_size = list.size();
 		list=service.board_list_page(param);
-		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
+		
+		//list 가져오기
+		model.addAttribute("board_list", list); 
+		//int 가져오기
 		model.addAttribute("board_size", list_size);
-		model.addAttribute("board_page", page); // 페이지넘길빼번호
-		return "board_ISTJ"; //이것주의!
+		//페이지 가져오기
+		model.addAttribute("board_page", page); 
+		return "board_ISTJ"; 
 	}
 	@RequestMapping(value = "board_ISFJ.do", method = RequestMethod.GET)
 	public String board_ISFJ(Model model,BoardParam param, int page){ 
 		logger.info("BoardController board_ENFJ() " + new Date());
 		param.setBoardtype(1);
 		if(param.getCriteria()==null) {
-			Criteria criteria =new Criteria(1); // 이것주의!
+			Criteria criteria =new Criteria(1); 
 			param.setCriteria(criteria);
 			}
 		if(page == 0 ) {
@@ -71,21 +73,20 @@ public class BoardController {
 		}
 		param.getCriteria().setPage(page);
 		
-		System.out.println(param.toString());
 		List<BoardDto> list = service.board_list(param);
 		int list_size = list.size();
 		list=service.board_list_page(param);
-		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
+		model.addAttribute("board_list", list); 
 		model.addAttribute("board_size", list_size);
-		model.addAttribute("board_page", page); // 페이지넘길빼번호
-		return "board_ISFJ"; //이것주의!
+		model.addAttribute("board_page", page); 
+		return "board_ISFJ"; 
 	}
 	@RequestMapping(value = "board_ISTP.do", method = RequestMethod.GET)
 	public String board_ISTP(Model model,BoardParam param, int page){ 
 		logger.info("BoardController board_ENFJ() " + new Date());
 		param.setBoardtype(2);
 		if(param.getCriteria()==null) {
-			Criteria criteria =new Criteria(2); // 이것주의!
+			Criteria criteria =new Criteria(2); 
 			param.setCriteria(criteria);
 			}
 		if(page == 0 ) {
@@ -93,21 +94,20 @@ public class BoardController {
 		}
 		param.getCriteria().setPage(page);
 		
-		System.out.println(param.toString());
 		List<BoardDto> list = service.board_list(param);
 		int list_size = list.size();
 		list=service.board_list_page(param);
-		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
+		model.addAttribute("board_list", list); 
 		model.addAttribute("board_size", list_size);
-		model.addAttribute("board_page", page); // 페이지넘길빼번호
-		return "board_ISTP"; //이것주의!
+		model.addAttribute("board_page", page); 
+		return "board_ISTP"; 
 	}
 	@RequestMapping(value = "board_ISFP.do", method = RequestMethod.GET)
 	public String board_ISFP(Model model,BoardParam param, int page){ 
 		logger.info("BoardController board_ENFJ() " + new Date());
 		param.setBoardtype(3);
 		if(param.getCriteria()==null) {
-			Criteria criteria =new Criteria(3); // 이것주의!
+			Criteria criteria =new Criteria(3); 
 			param.setCriteria(criteria);
 			}
 		if(page == 0 ) {
@@ -115,21 +115,20 @@ public class BoardController {
 		}
 		param.getCriteria().setPage(page);
 		
-		System.out.println(param.toString());
 		List<BoardDto> list = service.board_list(param);
 		int list_size = list.size();
 		list=service.board_list_page(param);
-		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
+		model.addAttribute("board_list", list);
 		model.addAttribute("board_size", list_size);
-		model.addAttribute("board_page", page); // 페이지넘길빼번호
-		return "board_ISFP"; //이것주의!
+		model.addAttribute("board_page", page);
+		return "board_ISFP"; 
 	}
 	@RequestMapping(value = "board_INFJ.do", method = RequestMethod.GET)
 	public String board_INFJ(Model model,BoardParam param, int page){ 
 		logger.info("BoardController board_ENFJ() " + new Date());
 		param.setBoardtype(4);
 		if(param.getCriteria()==null) {
-			Criteria criteria =new Criteria(4); // 이것주의!
+			Criteria criteria =new Criteria(4); 
 			param.setCriteria(criteria);
 			}
 		if(page == 0 ) {
@@ -137,21 +136,20 @@ public class BoardController {
 		}
 		param.getCriteria().setPage(page);
 		
-		System.out.println(param.toString());
 		List<BoardDto> list = service.board_list(param);
 		int list_size = list.size();
 		list=service.board_list_page(param);
-		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
+		model.addAttribute("board_list", list); 
 		model.addAttribute("board_size", list_size);
-		model.addAttribute("board_page", page); // 페이지넘길빼번호
-		return "board_INFJ"; //이것주의!
+		model.addAttribute("board_page", page); 
+		return "board_INFJ"; 
 	}
 	@RequestMapping(value = "board_INTJ.do", method = RequestMethod.GET)
 	public String board_INTJ(Model model,BoardParam param, int page){ 
 		logger.info("BoardController board_ENFJ() " + new Date());
 		param.setBoardtype(5);
 		if(param.getCriteria()==null) {
-			Criteria criteria =new Criteria(5); // 이것주의!
+			Criteria criteria =new Criteria(5); 
 			param.setCriteria(criteria);
 			}
 		if(page == 0 ) {
@@ -159,21 +157,20 @@ public class BoardController {
 		}
 		param.getCriteria().setPage(page);
 		
-		System.out.println(param.toString());
 		List<BoardDto> list = service.board_list(param);
 		int list_size = list.size();
 		list=service.board_list_page(param);
-		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
+		model.addAttribute("board_list", list); 
 		model.addAttribute("board_size", list_size);
-		model.addAttribute("board_page", page); // 페이지넘길빼번호
-		return "board_INTJ"; //이것주의!
+		model.addAttribute("board_page", page); 
+		return "board_INTJ"; 
 	}
 	@RequestMapping(value = "board_INFP.do", method = RequestMethod.GET)
-	public String board_INFP(Model model,BoardParam param, int page){ //이것주의
+	public String board_INFP(Model model,BoardParam param, int page){ 
 		logger.info("BoardController board_ENFJ() " + new Date());
-		param.setBoardtype(6); //이것 주의!
+		param.setBoardtype(6);
 		if(param.getCriteria()==null) {
-			Criteria criteria =new Criteria(6); // 이것주의!
+			Criteria criteria =new Criteria(6); 
 			param.setCriteria(criteria);
 			}
 		if(page == 0 ) {
@@ -181,21 +178,20 @@ public class BoardController {
 		}
 		param.getCriteria().setPage(page);
 		
-		System.out.println(param.toString());
 		List<BoardDto> list = service.board_list(param);
 		int list_size = list.size();
 		list=service.board_list_page(param);
-		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
+		model.addAttribute("board_list", list); 
 		model.addAttribute("board_size", list_size);
-		model.addAttribute("board_page", page); // 페이지넘길빼번호
-		return "board_INFP"; //이것주의!
+		model.addAttribute("board_page", page); 
+		return "board_INFP"; 
 	}
 	@RequestMapping(value = "board_INTP.do", method = RequestMethod.GET)
-	public String board_INTP(Model model,BoardParam param, int page){ //이것주의
+	public String board_INTP(Model model,BoardParam param, int page){ 
 		logger.info("BoardController board_ENFJ() " + new Date());
-		param.setBoardtype(7); //이것 주의!
+		param.setBoardtype(7); 
 		if(param.getCriteria()==null) {
-			Criteria criteria =new Criteria(7); // 이것주의!
+			Criteria criteria =new Criteria(7); 
 			param.setCriteria(criteria);
 			}
 		if(page == 0 ) {
@@ -203,21 +199,20 @@ public class BoardController {
 		}
 		param.getCriteria().setPage(page);
 		
-		System.out.println(param.toString());
 		List<BoardDto> list = service.board_list(param);
 		int list_size = list.size();
 		list=service.board_list_page(param);
-		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
+		model.addAttribute("board_list", list); 
 		model.addAttribute("board_size", list_size);
-		model.addAttribute("board_page", page); // 페이지넘길빼번호
-		return "board_INTP"; //이것주의!
+		model.addAttribute("board_page", page); 
+		return "board_INTP"; 
 	}
 	@RequestMapping(value = "board_ESTP.do", method = RequestMethod.GET)
-	public String board_ESTP(Model model,BoardParam param, int page){ //이것주의
+	public String board_ESTP(Model model,BoardParam param, int page){ 
 		logger.info("BoardController board_ENFJ() " + new Date());
-		param.setBoardtype(8); //이것 주의!
+		param.setBoardtype(8); 
 		if(param.getCriteria()==null) {
-			Criteria criteria =new Criteria(8); // 이것주의!
+			Criteria criteria =new Criteria(8); 
 			param.setCriteria(criteria);
 			}
 		if(page == 0 ) {
@@ -225,21 +220,20 @@ public class BoardController {
 		}
 		param.getCriteria().setPage(page);
 		
-		System.out.println(param.toString());
 		List<BoardDto> list = service.board_list(param);
 		int list_size = list.size();
 		list=service.board_list_page(param);
-		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
+		model.addAttribute("board_list", list);
 		model.addAttribute("board_size", list_size);
-		model.addAttribute("board_page", page); // 페이지넘길빼번호
-		return "board_ESTP"; //이것주의!
+		model.addAttribute("board_page", page); 
+		return "board_ESTP";
 	}
 	@RequestMapping(value = "board_ESFP.do", method = RequestMethod.GET)
-	public String board_ESFP(Model model,BoardParam param, int page){ //이것주의
+	public String board_ESFP(Model model,BoardParam param, int page){ 
 		logger.info("BoardController board_ENFJ() " + new Date());
-		param.setBoardtype(9); //이것 주의!
+		param.setBoardtype(9); 
 		if(param.getCriteria()==null) {
-			Criteria criteria =new Criteria(9); // 이것주의!
+			Criteria criteria =new Criteria(9); 
 			param.setCriteria(criteria);
 			}
 		if(page == 0 ) {
@@ -247,21 +241,20 @@ public class BoardController {
 		}
 		param.getCriteria().setPage(page);
 		
-		System.out.println(param.toString());
 		List<BoardDto> list = service.board_list(param);
 		int list_size = list.size();
 		list=service.board_list_page(param);
-		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
+		model.addAttribute("board_list", list); 
 		model.addAttribute("board_size", list_size);
-		model.addAttribute("board_page", page); // 페이지넘길빼번호
-		return "board_ESFP"; //이것주의!
+		model.addAttribute("board_page", page); 
+		return "board_ESFP"; 
 	}
 	@RequestMapping(value = "board_ESTJ.do", method = RequestMethod.GET)
-	public String board_ESTJ(Model model,BoardParam param, int page){ //이것주의
+	public String board_ESTJ(Model model,BoardParam param, int page){ 
 		logger.info("BoardController board_ENFJ() " + new Date());
-		param.setBoardtype(10); //이것 주의!
+		param.setBoardtype(10); 
 		if(param.getCriteria()==null) {
-			Criteria criteria =new Criteria(10); // 이것주의!
+			Criteria criteria =new Criteria(10); 
 			param.setCriteria(criteria);
 			}
 		if(page == 0 ) {
@@ -269,21 +262,20 @@ public class BoardController {
 		}
 		param.getCriteria().setPage(page);
 		
-		System.out.println(param.toString());
 		List<BoardDto> list = service.board_list(param);
 		int list_size = list.size();
 		list=service.board_list_page(param);
-		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
+		model.addAttribute("board_list", list); 
 		model.addAttribute("board_size", list_size);
-		model.addAttribute("board_page", page); // 페이지넘길빼번호
-		return "board_ESTJ"; //이것주의!
+		model.addAttribute("board_page", page); 
+		return "board_ESTJ"; 
 	}
 	@RequestMapping(value = "board_ESFJ.do", method = RequestMethod.GET)
-	public String board_ESFJ(Model model,BoardParam param, int page){ //이것주의
+	public String board_ESFJ(Model model,BoardParam param, int page){ 
 		logger.info("BoardController board_ENFJ() " + new Date());
-		param.setBoardtype(11); //이것 주의!
+		param.setBoardtype(11); 
 		if(param.getCriteria()==null) {
-			Criteria criteria =new Criteria(11); // 이것주의!
+			Criteria criteria =new Criteria(11); 
 			param.setCriteria(criteria);
 			}
 		if(page == 0 ) {
@@ -291,21 +283,20 @@ public class BoardController {
 		}
 		param.getCriteria().setPage(page);
 		
-		System.out.println(param.toString());
 		List<BoardDto> list = service.board_list(param);
 		int list_size = list.size();
 		list=service.board_list_page(param);
-		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
+		model.addAttribute("board_list", list); 
 		model.addAttribute("board_size", list_size);
-		model.addAttribute("board_page", page); // 페이지넘길빼번호
-		return "board_ESFJ"; //이것주의!
+		model.addAttribute("board_page", page); 
+		return "board_ESFJ"; 
 	}
 	@RequestMapping(value = "board_ENFP.do", method = RequestMethod.GET)
-	public String board_ENFP(Model model,BoardParam param, int page){ //이것주의
+	public String board_ENFP(Model model,BoardParam param, int page){ 
 		logger.info("BoardController board_ENFJ() " + new Date());
-		param.setBoardtype(12); //이것 주의!
+		param.setBoardtype(12); 
 		if(param.getCriteria()==null) {
-			Criteria criteria =new Criteria(12); // 이것주의!
+			Criteria criteria =new Criteria(12); 
 			param.setCriteria(criteria);
 			}
 		if(page == 0 ) {
@@ -313,21 +304,20 @@ public class BoardController {
 		}
 		param.getCriteria().setPage(page);
 		
-		System.out.println(param.toString());
 		List<BoardDto> list = service.board_list(param);
 		int list_size = list.size();
 		list=service.board_list_page(param);
-		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
+		model.addAttribute("board_list", list); 
 		model.addAttribute("board_size", list_size);
-		model.addAttribute("board_page", page); // 페이지넘길빼번호
-		return "board_ENFP"; //이것주의!
+		model.addAttribute("board_page", page); 
+		return "board_ENFP"; 
 	}
 	@RequestMapping(value = "board_ENTP.do", method = RequestMethod.GET)
-	public String board_ENTP(Model model,BoardParam param, int page){ //이것주의
+	public String board_ENTP(Model model,BoardParam param, int page){ 
 		logger.info("BoardController board_ENFJ() " + new Date());
-		param.setBoardtype(13); //이것 주의!
+		param.setBoardtype(13); 
 		if(param.getCriteria()==null) {
-			Criteria criteria =new Criteria(13); // 이것주의!
+			Criteria criteria =new Criteria(13); 
 			param.setCriteria(criteria);
 			}
 		if(page == 0 ) {
@@ -335,21 +325,20 @@ public class BoardController {
 		}
 		param.getCriteria().setPage(page);
 		
-		System.out.println(param.toString());
 		List<BoardDto> list = service.board_list(param);
 		int list_size = list.size();
 		list=service.board_list_page(param);
-		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
+		model.addAttribute("board_list", list); 
 		model.addAttribute("board_size", list_size);
-		model.addAttribute("board_page", page); // 페이지넘길빼번호
-		return "board_ENTP"; //이것주의!
+		model.addAttribute("board_page", page); 
+		return "board_ENTP"; 
 	}
 	@RequestMapping(value = "board_ENFJ.do", method = RequestMethod.GET)
-	public String board_ENFJ(Model model,BoardParam param, int page){ //이것주의
+	public String board_ENFJ(Model model,BoardParam param, int page){ 
 		logger.info("BoardController board_ENFJ() " + new Date());
-		param.setBoardtype(14); //이것 주의!
+		param.setBoardtype(14); 
 		if(param.getCriteria()==null) {
-			Criteria criteria =new Criteria(14); // 이것주의!
+			Criteria criteria =new Criteria(14); 
 			param.setCriteria(criteria);
 			}
 		if(page == 0 ) {
@@ -357,60 +346,55 @@ public class BoardController {
 		}
 		param.getCriteria().setPage(page);
 		
-		System.out.println(param.toString());
 		List<BoardDto> list = service.board_list(param);
 		int list_size = list.size();
 		list=service.board_list_page(param);
-		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
+		model.addAttribute("board_list", list);
 		model.addAttribute("board_size", list_size);
-		model.addAttribute("board_page", page); // 페이지넘길빼번호
-		return "board_ENFJ"; //이것주의!
+		model.addAttribute("board_page", page); 
+		return "board_ENFJ";
 	}
 	@RequestMapping(value = "board_ENTJ.do", method = RequestMethod.GET)
 	public String board_ENTJ(Model model,BoardParam param, int page){ 
 		logger.info("BoardController board_ENFJ() " + new Date());
 		param.setBoardtype(15);
 		if(param.getCriteria()==null) {
-			Criteria criteria =new Criteria(15); // 이것주의!
+			Criteria criteria =new Criteria(15); 
 			param.setCriteria(criteria);
 			}
 		if(page == 0 ) {
 			page = 1;
 		}
 		param.getCriteria().setPage(page);
-		
-		System.out.println(param.toString());
+
 		List<BoardDto> list = service.board_list(param);
 		int list_size = list.size();
 		list=service.board_list_page(param);
-		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
+		model.addAttribute("board_list", list); 
 		model.addAttribute("board_size", list_size);
-		model.addAttribute("board_page", page); // 페이지넘길빼번호
-		return "board_ENTJ"; //이것주의!
+		model.addAttribute("board_page", page); 
+		return "board_ENTJ"; 
 	}
-	
-	//자유게시판 리스트
+	/*자유게시판 이동*/
 	@RequestMapping(value = "board_FREE.do", method = RequestMethod.GET)
 	public String board_FREE(Model model,BoardParam param, int page){ 
 		logger.info("BoardController board_FREE() " + new Date());
 		param.setBoardtype(16);
 		if(param.getCriteria()==null) {
-			Criteria criteria =new Criteria(16); // 이것주의!
+			Criteria criteria =new Criteria(16);
 			param.setCriteria(criteria);
 			}
 		if(page == 0 ) {
 			page = 1;
 		}
 		param.getCriteria().setPage(page);
-		
-//		System.out.println(param.toString());
 		List<BoardDto> list = service.board_list(param);
 		int list_size = list.size();
 		list=service.board_list_page(param);
-		model.addAttribute("board_list", list); // board_list에 list를 넘겨주자
+		model.addAttribute("board_list", list); 
 		model.addAttribute("board_size", list_size);
-		model.addAttribute("board_page", page); // 페이지넘길빼번호
-		return "board_FREE"; //이것주의!
+		model.addAttribute("board_page", page); 
+		return "board_FREE"; 
 	}
 	
 	//자유게시판 글쓰기
@@ -510,7 +494,7 @@ public class BoardController {
 		
 		//댓글 개수 표시
 		int getcount=commentService.comment_getcount(boardseq);
-		model.addAttribute("comment_count",getcount);  // 키값은 무조건 jsp에 넣을거니 꼭 기억해라
+		model.addAttribute("comment_count",getcount);  
 		
 		
 		return "board_detail";
@@ -538,7 +522,6 @@ public class BoardController {
 		//서비스에서 dto 정보가 담긴 게시물 수정을 호출 
 		service.board_update(dto);
 		
-//		model.addAttribute("result");
 		
 		//수정 후 해당 게시물 번호에 상세페이지로 이동
 		return "redirect:/board_detail.do?boardseq="+dto.getBoardseq();
@@ -576,13 +559,8 @@ public class BoardController {
 		//댓글서비스에 담긴 정보가져오기
 		commentService.comment_write(dto);
 		
-//		List<CommentDto> commentdto = commentService.comment_list(dto.getBoardseq());
-//		BoardDto board = service.get_board(dto.getBoardseq()); // 게시글 가져오기
-		
 		service.board_commentcountup(dto.getBoardseq()); //게시판 댓글개수 하나 늘린것
-		
-		
-		
+	
 		return "redirect:/board_detail.do?boardseq="+dto.getBoardseq();
 	}
 	
