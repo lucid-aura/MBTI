@@ -47,15 +47,17 @@ MemberDto member = (MemberDto)request.getSession().getAttribute("login");
 <body>
 	<div class="wrapper">
 		<header>
-			<nav>
-				<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
+		<nav>
+			<div class="fixed-top py-3 px-3 text-center deepblue"  id="nav">
+				<a><img class="nav_bar_logo" src='image/PLAN16_LOGO.png' /></a>
 				<a href="introMBTI.do" class="text-light distance">유형소개</a>
 				<a href="board_type.do?page=1" class="text-light distance">유형별게시판</a>
 				<a href="board_FREE.do?page=1" class="text-light distance">자유게시판</a>
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
-					<button onclick="location.href='logout.do'"><%=member.getAlias() %>님 로그아웃</button>
-				</div>
-			</nav>
+				<button onclick="location.href='logout.do'">로그아웃</button>
+			</div>
+		</nav>
+
 		</header>
 
 		<section>
