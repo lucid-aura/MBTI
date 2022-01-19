@@ -33,7 +33,7 @@ Collections.shuffle(worldcuplist);
 				<a href="board_type.do?page=1" class="text-light distance">유형별게시판</a>
 				<a href="board_FREE.do?page=1" class="text-light distance">자유게시판</a>
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
-				<button>로그아웃</button>
+				<button onclick="location.href='logout.do'">로그아웃</button>
 			</div>
 		</nav>
 	</header>
@@ -87,11 +87,10 @@ $(document).ready(function () {
 	        width: '+=30%',
 	        height: '+=30%'
 	    }, 2000);
-		//$("#right").show();
 
 		setTimeout(function() {
 			select(0);
-			}, 2020);
+			}, 2500);
 
 	});	
 	
@@ -107,7 +106,7 @@ $(document).ready(function () {
 	    }, 2000);
 		setTimeout(function() {
 			select(1);
-			}, 2020);
+			}, 2500);
 
 	});
 });
@@ -118,9 +117,6 @@ function select(i) {
 	idx += 2;
 	if (idx >= temp_list.length){
 		if (temp_list.length == 2){ // 결승전 선택 후
-			alert(temp_list[i][1] + " 승리");
-			
-			// 결과 창 이동 필요, 시큐어 코딩 적용해야함(vs 민감한 정보가 아니라서 굳이?)
 			location.href  = "worldcup_result.do?worldcupseq=" + temp_list[i][0];
 		}
 		else { // 8, 4 강 종료 후
@@ -137,7 +133,6 @@ function select(i) {
 				new_temp_list.push(temp_list[idx_list[i]]);
 			}
 			idx_list = []; 
-			console.log(new_temp_list);
 			temp_list = new_temp_list;
 		}
 	}
