@@ -27,6 +27,62 @@
 	</header>
 	<section>
 		<article>
+		<div class="container">
+		    <div id="carouselSample" class="carousel slide" data-ride="carousel">
+		    
+		      <!-- 인디케이터(바로 이동할수 있는 바) -->       
+		      <ol class="carousel-indicators">
+		        <li data-target="#carouselSample" data-slide-to="0" class="active"></li>
+		        <li data-target="#carouselSample" data-slide-to="1"></li>
+		        <li data-target="#carouselSample" data-slide-to="2"></li>
+		      </ol>
+		      
+		      <!-- 캐러셀 -->
+		      <div class="carousel-inner">
+		        <!-- First slide -->
+		        <div class="carousel-item active">
+		          <img class="d-block w-100" alt="slide" src="./image/food.jpg">
+		          <!-- 캡션 -->
+		          <div class="carousel-caption d-none d-md-block">
+		            <h5>음식</h5>
+		            <p>좋아하는 음식 월드컵</p>
+		          </div>
+		        </div>
+		        <!-- Second slide -->
+		        <div class="carousel-item">          
+		          <img class="d-block w-100" alt="slide" src="https://images.pexels.com/photos/213399/pexels-photo-213399.jpeg?auto=compress&cs=tinysrgb&h=650&w=940">
+		          <!-- 캡션 -->
+		          <div class="carousel-caption d-none d-md-block">
+		            <h5>슬라이드 제목</h5>
+		            <p>슬라이드의 캡션 글</p>
+		          </div>
+		        </div>
+		        <!-- Third slide -->
+		        <div class="carousel-item">
+		          <img class="d-block w-100" alt="slide" src="./Park.jpg">          
+		          <!-- 캡션 -->
+		          <div class="carousel-caption d-none d-md-block">
+		            <h5>슬라이드 제목</h5>
+		            <p>슬라이드의 캡션 글</p>
+		          </div>
+		        </div>
+		      </div>
+		      
+		      <!-- 컨트롤러 부분 -->
+		      <!-- 앞으로 돌아가는 아이콘 -->
+		      <a class="carousel-control-prev" href="#carouselSample" role="button" data-slide="prev">
+		        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		        <span class="sr-only">앞으로</span>
+		      </a>
+		      <!-- 다음으로 이동하는 아이콘 -->
+		      <a class="carousel-control-next" href="#carouselSample" role="button" data-slide="next">
+		        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		        <span class="sr-only">다음으로</span>
+		      </a>
+		      
+		    </div>
+		  </div>
+		  
 			<button type="button" onclick="choice()">음식</button>
 		</article>
 	</section>
