@@ -56,20 +56,21 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+<link rel="stylesheet" href="css/style.css?version=3">
 
 
 
 </head>
 <body onunload="close_popup()">
 	<header>
-		<nav>
-			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
+			<nav>
+			<div class="fixed-top py-3 px-3 text-center deepblue"  id="nav">
+				<a href="introMBTI.do" ><img style="width:80px; heigth:20px;"class="nav_bar_logo" src='image/PLAN16_LOGO.png' /></a>
 				<a href="introMBTI.do" class="text-light distance">유형소개</a>
 				<a href="board_type.do?page=1" class="text-light distance">유형별게시판</a>
 				<a href="board_FREE.do?page=1" class="text-light distance">자유게시판</a>
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
-				<button>로그아웃</button>
+				<button onclick="location.href='logout.do'">로그아웃</button>
 			</div>
 		</nav>
 	</header>
