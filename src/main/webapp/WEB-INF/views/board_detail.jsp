@@ -186,14 +186,14 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 					<tr id="btn_comment_check">
 <%-- "location.href='comment_update.do?commentseq=<%=comment.getCommentseq() %>'" --%>
 						<!-- 한 줄 -->
-						<th onClick="comment_check(<%=comment.getCommentseq()%>)" style = "cursor:pointer;"><%=i + 1%>&nbsp&nbsp&nbsp</th>
+						<th onClick="comment_check(<%=comment.getCommentseq()%>)" style = "cursor:pointer; display:none;" ><%=i + 1%>&nbsp&nbsp&nbsp</th>
 						<td>&nbsp<hr></td>
 						<!-- 댓글번호 --> 
 						<td onClick="comment_check(<%=comment.getCommentseq()%>)" style = "cursor:pointer;">
 							<!-- 한 칸 --> <!-- 작성자 --> <%=comment.getAlias()%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 						</td>
 						<td onClick="comment_check(<%=comment.getCommentseq()%>)" style = "cursor:pointer; width: 650px; word-break:break-all;"><%=arrow(comment.getDepth()) %>&nbsp&nbsp<%=comment.getContent()%>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
-						<td onClick="comment_check(<%=comment.getCommentseq()%>)" style = "cursor:pointer;"><%=comment.getWdate()%></td>
+						<td onClick="comment_check(<%=comment.getCommentseq()%>)" style = "cursor:pointer;"><%=comment.getWdate().substring(0, comment.getWdate().length()-2)%></td>
 						<td>&nbsp&nbsp&nbsp&nbsp<button class="btn btn-light" onClick="comment_replycontent(<%=comment.getCommentseq()%>)">답글</button>
 						</td>
 						
