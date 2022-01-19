@@ -25,19 +25,15 @@ CommentDto commentDto = (CommentDto) request.getAttribute("comment_update");  //
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	
-<!-- 강사님 부트스트렙 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css?version=3">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+<!-- 강사님 부트스트렙 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 #btn btn-dark mt-3{
 <style type="text/css"></style>
  }
@@ -48,12 +44,13 @@ CommentDto commentDto = (CommentDto) request.getAttribute("comment_update");  //
 <body>
 	<header>
 		<nav>
-			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
-				<a href="#test" class="text-light distance">유형소개</a> <a href="#test"
-					class="text-light distance">유형별게시판</a> <a href="board_FREE.do?page=1"
-					class="text-light distance">자유게시판</a> <a href="worldcup_choice.do"
-					class="text-light distance">월드컵</a>
-				<button>로그아웃</button>
+			<div class="fixed-top py-3 px-3 text-center deepblue"  id="nav">
+				<a href="introMBTI.do" ><img style="width:80px; heigth:20px;"class="nav_bar_logo" src='image/PLAN16_LOGO.png' /></a>
+				<a href="introMBTI.do" class="text-light distance">유형소개</a>
+				<a href="board_type.do?page=1" class="text-light distance">유형별게시판</a>
+				<a href="board_FREE.do?page=1" class="text-light distance">자유게시판</a>
+				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
+				<button type="button" class="btn btn-light btn-default btn-sm" onclick="location.href='logout.do'">로그아웃</button>
 			</div>
 		</nav>
 	</header>
