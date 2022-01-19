@@ -47,6 +47,11 @@ public class MemberDaoImpl implements MemberDao {
 		return session.selectOne(ns+"getIdpwdcheck", mem);
 	}
 
+	@Override
+	public String getSalt(String id) {
+		return session.selectOne(ns+"pwdSalt", id);
+	}
+
 
 
 }

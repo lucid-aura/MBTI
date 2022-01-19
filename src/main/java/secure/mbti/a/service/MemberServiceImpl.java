@@ -40,5 +40,10 @@ public class MemberServiceImpl implements MemberService {
 		
 		return dao.getIdpwdcheck(mem);
 	}
+	@Override
+	public String getSalt(String id) {
+
+		return dao.getSalt(id);
+	}
 
 }

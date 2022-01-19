@@ -8,8 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,6 +29,9 @@ public class MemberController {
 	
 	@Autowired
 	MemberService service;
+	
+	@Autowired
+	private static BCrypt bcrypt;
 	
 	@RequestMapping("home.do")
 	public String home() {
@@ -51,8 +54,12 @@ public class MemberController {
 	@RequestMapping(value = "loginAf.do", method = RequestMethod.POST)
 	public String loginAf(MemberDto dto, HttpServletRequest req) { // request == HttpServletRequest
 		logger.info("MemberController loginAf() " + new Date());		
-		
+		String salt=service.getSalt(dto.getId());
+		String playpwd = dto.getPwd();
+		String crypt = BCrypt.hashpw(playpwd, salt);
+		dto.setPwd(crypt);
 		MemberDto mem = service.login(dto);
+		System.out.println(mem.toString());
 		if(mem != null) {	// 정상적인 로그인
 			
 			// login 정보를 저장 -> session 
@@ -68,7 +75,13 @@ public class MemberController {
 	@RequestMapping(value = "regiAf.do", method = RequestMethod.POST)
 	public String regiAf(MemberDto dto) {
 		logger.info("MemberController regiAf() " + new Date());
+		String salt = BCrypt.gensalt();
+		String crypt = BCrypt.hashpw(dto.getPwd(), salt);
 		System.out.println(dto.toString());
+		System.out.println(salt);
+		System.out.println(crypt);
+		dto.setSalt(salt);
+		dto.setPwd(crypt);
 		int b = service.addmember(dto);
 		if(b != 0) {
 			System.out.println("가입되었음");
@@ -142,7 +155,11 @@ public class MemberController {
 	public String idpwdcheck(MemberDto dto) {
 		logger.info("MemberController idpwdcheck() " + new Date());	
 		System.out.println("id : "+dto.getId());
-		System.out.println("id : "+dto.getPwd());
+		System.out.println("pwd : "+dto.getPwd());
+		String salt=service.getSalt(dto.getId());
+		String crypt = BCrypt.hashpw(dto.getPwd(), salt);
+		dto.setPwd(crypt);
+		System.out.println(crypt);
 		int count = service.getIdpwdcheck(dto);
 		
 		if(count > 0) {

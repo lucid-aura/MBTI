@@ -15,5 +15,7 @@ public interface MemberDao {
 	
 	int getIdpwdcheck(MemberDto mem);
 	
+	String getSalt(String id);
+	
 
 }
