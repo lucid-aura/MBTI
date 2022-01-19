@@ -5,13 +5,13 @@
 <mapper namespace = "Membermbti">
 
 <insert id = "addmember" parameterType="secure.mbti.a.dto.MemberDto">
-	INSERT INTO MEMBERMBTI(ID,PWD,ALIAS,NAME,EMAIL,MBTI,AUTH)
-	VALUES(#{id}, #{pwd}, #{alias}, #{name}, #{email}, #{mbti}, 3)
+	INSERT INTO MEMBERMBTI(ID,PWD,ALIAS,NAME,EMAIL,MBTI,AUTH,SALT)
+	VALUES(#{id}, #{pwd}, #{alias}, #{name}, #{email}, #{mbti}, 3, #{salt})
 </insert>
 
 <select id="login" parameterType="secure.mbti.a.dto.MemberDto"
 resultType ="secure.mbti.a.dto.MemberDto">
-	SELECT ID, PWD, ALIAS, NAME, EMAIL, MBTI, AUTH
+	SELECT ID, PWD, ALIAS, NAME, EMAIL, MBTI, AUTH, SALT
 	FROM MEMBERMBTI
 	WHERE ID=#{id} AND PWD=#{pwd}
 </select>
@@ -43,6 +43,14 @@ resultType ="Integer">
 	FROM MEMBERMBTI
 	WHERE ID=#{id} AND PWD=#{pwd}
 </select>
+
+<select id="pwdSalt" parameterType ="String" resultType = "String">
+	SELECT SALT
+	FROM MEMBERMBTI
+	WHERE ID=#{id}
+</select>
+
+
 
 
 </mapper>
