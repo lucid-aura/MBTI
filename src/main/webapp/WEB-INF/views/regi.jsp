@@ -6,8 +6,8 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link href="css/regiStyle.css?version3" rel="stylesheet" />
-<link href="css/bootstrap.css" rel="stylesheet" />
+<link href="css/regiStyle.css?version4" rel="stylesheet" />
+<link href="css/bootstrap.css?version2" rel="stylesheet" />
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -29,7 +29,7 @@ padding: 6px 12px;
 </style>
 </head>
 <body>
-<div class="sidenav" style= "background-image : url(./resources/homeBoot/assets/img/bg-regi.jpg);">
+<div class="sidenav" style= "background-image : url(./resources/homeBoot/assets/img/solo_regi.jpg); background-size : cover;">
          <div class="login-main-text">
             <h2>PLAN/16<br>동료가 되어주세요!</h2>
             <p>register from here to access.</p>

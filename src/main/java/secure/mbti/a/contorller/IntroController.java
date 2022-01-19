@@ -62,7 +62,7 @@ public class IntroController {
 
 	@RequestMapping(value = "introMBTI.do", method = RequestMethod.GET)
 	public String introMBTI(Model model){ 
-		System.out.println("IntroController introMBTI() " + new Date());
+
 		/* MBTI 종류(16종) 전달 */
 		List<String> str = service.mbtilist();
 		model.addAttribute("mbtilist", str);
@@ -72,10 +72,6 @@ public class IntroController {
 	
 	@RequestMapping(value = "detailMBTI.do", method = RequestMethod.POST)
 	public String detailMBTI(Model model, String selectMbti){ 
-		System.out.println("IntroController detailMBTI() " + new Date());
-		
-		
-		
 		
 		/* 정보전달 */
 		/* 0번째 정보: introMBTI에서 선택한 MBTI */
@@ -113,7 +109,6 @@ public class IntroController {
 	@ResponseBody
 	@RequestMapping(value ="mbtiContent.do", method=RequestMethod.POST)
 	public Map<String, Object> mbtiContent(String selectMenu) {
-		System.out.println("MemberController mbtiContent()" + new Date());
 		
 		/* 조회수 관련 */
 		accessHistory(selectMenu);
@@ -150,21 +145,19 @@ public class IntroController {
 			MemberDto mem = (MemberDto)request.getSession().getAttribute("login");
 			type = mem.getMbti();
 		}
-		System.out.println("IntroController board_type() " + new Date());
 		return "redirect:/board_"+type+".do?page=0";
 	}
 	
 	
 	
-	/*리뷰*/
+	/*리뷰 관련*/
 	@RequestMapping(value = "mbtiReview.do", method = RequestMethod.GET)
 	public String mbtiReview(Model model, MbtiReviewDto dto){ 
-		System.out.println("IntroController mbtiReview() " + new Date());
 		
 		if(dto.getTargetmbti()!=null) {
 			targetmbti = dto.getTargetmbti();
 		}
-		System.out.println(targetmbti.toString());
+		
 		/* 정보전달 */
 		/* 정보(0): detailMBTI에서 선택한 MBTI*/
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -179,20 +172,16 @@ public class IntroController {
 		
 		return "mbtiReview";
 	}
-	//대댓글관련
+	/* 리뷰 작성 */
 	@RequestMapping(value = "reviewWriteAf.do", method = RequestMethod.POST)
 	public String reviewWriteAf(MbtiReviewDto dto){
-		System.out.println("IntroController reviewWriteAf() " + new Date());
-		System.out.println(dto.toString());
 		review.reviewwrite(dto);
 		return "redirect:/mbtiReview.do";
 	}
 	
-
+	/* 리뷰 삭제 */
 	@RequestMapping(value = "reviewModify.do", method = RequestMethod.POST)
 	public String reviewModify(MbtiReviewDto dto){
-		System.out.println("IntroController reviewModify() " + new Date());
-		System.out.println(dto.toString());
 		if(dto.getReview()==null) {
 			review.reviewdelete(dto);
 		} else {
