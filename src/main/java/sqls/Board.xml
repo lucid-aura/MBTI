@@ -57,6 +57,7 @@
 	WHERE BOARDSEQ=#{ boardseq }
 </update>
 
+<!-- 관리자(admin)의 글(공지사항)을 확인하고 게시판의 쿼리 결과를 반환하는 함수 -->
 <select id="listPage" resultType="secure.mbti.a.dto.BoardDto"
 parameterType="secure.mbti.a.dto.BoardParam">
 			select BOARDSEQ, BOARDTYPE, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT,COMMENTCOUNT
@@ -102,36 +103,4 @@ parameterType="secure.mbti.a.dto.BoardParam">
 	WHERE BOARDSEQ=#{ boardseq }
 </update>
 
-
-<!--  
-select BOARDSEQ, BOARDTYPE, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT,COMMENTCOUNT,RNUM
-from (
-    select RNUM, BOARDSEQ, BOARDTYPE, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT, COMMENTCOUNT 
-        
-    from (  SELECT row_number() over(order by BOARDSEQ desc) as RNUM, BOARDSEQ, BOARDTYPE, ID, TITLE, CONTENT, 
-    WDATE, DEL, READCOUNT,COMMENTCOUNT
-            FROM BOARDALL
-            
-            	<if test="choice != null and choice != ''  and search != null and search != '' ">
-						<if test="choice == 'title'">
-							WHERE TITLE LIKE '%' || #{search} || '%' AND BOARDTYPE=#{boardtype}
-						</if>
-						<if test="choice == 'content'">
-							WHERE CONTENT LIKE '%' || #{search} || '%' AND BOARDTYPE=#{boardtype}
-							
-						</if>
-						<if test="choice == 'writer'">
-							WHERE ID=#{search} AND BOARDTYPE=#{boardtype}
-						</if>
-					
-					</if> 
-					<if test="choice == null and search == null ">	
-						WHERE BOARDTYPE=#{boardtype}
-					</if>
-            	  
-            ) 
-    where RNUM BETWEEN  #{criteria.rowStart} and #{criteria.rowEnd} )
-	order by BOARDSEQ desc
-
--->
 </mapper>

@@ -82,6 +82,7 @@ $(document).ready(function () {
 	}
 	%>
 
+	/* 이미지의 크기가 점점 커지는 애니메이션 function */
 	$("#left").click(function () {
 		$("#round_tag").hide();
 		$("#right").hide();
@@ -116,6 +117,7 @@ $(document).ready(function () {
 	});
 });
 
+/* 이미지가 선택 되었을 때 이미지와 list를 갱신하여 최신화하는 함수 */
 function select(i) {
 	idx_list.push(idx+i);
 

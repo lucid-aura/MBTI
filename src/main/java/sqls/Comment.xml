@@ -44,6 +44,7 @@
 	)
 </insert>
 
+<!-- 대댓글의 경우 위치가 depth가 작거나 같은 step의 최소값-1,  앞의 경우가 없을 경우 가장 큰 Step+1 로 설정하여 insert -->
 <insert id="commentreply" parameterType= "secure.mbti.a.dto.CommentDto">
 	INSERT INTO COMMENTMBTI( COMMENTSEQ,ALIAS,REF, STEP, DEPTH,BOARDSEQ,CONTENT,WDATE,DEL)
 	VALUES(
@@ -68,6 +69,7 @@
 	)
 </insert>
 
+<!-- 대댓글의 경우 위치가 depth가 작거나 같은 step의 최소값부터,  앞의 경우가 없을 경우 가장 큰 Step+1부터 Step을 1을 올려 update -->
 <update id="commentreplyupdate" parameterType="secure.mbti.a.dto.CommentDto" >
 	UPDATE COMMENTMBTI
 	SET

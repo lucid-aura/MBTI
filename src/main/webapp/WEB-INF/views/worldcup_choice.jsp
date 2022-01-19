@@ -113,6 +113,8 @@
 	</footer>
 </div>
 <script type="text/javascript">
+
+/* 선택 완료시 해당 토픽을 query로 하여 창 이동 */
 function choice(topic) {
 	location.href = "worldcup.do?topic=" + topic;
 }

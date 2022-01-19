@@ -25,10 +25,6 @@ import secure.mbti.a.service.CommentService;
 @Controller
 public class BoardController {
 	private static Logger logger = LoggerFactory.getLogger(BoardController.class);
-	
-
-//	+board_update
-//	+comment
 
 	@Autowired
 	BoardService service;
