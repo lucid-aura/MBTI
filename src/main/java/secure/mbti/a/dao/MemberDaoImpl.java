@@ -41,4 +41,12 @@ public class MemberDaoImpl implements MemberDao {
 		return session.selectOne(ns+"getAlias", alias);
 	}
 
+	@Override
+	public int getIdpwdcheck(MemberDto mem) {
+
+		return session.selectOne(ns+"getIdpwdcheck", mem);
+	}
+
+
+
 }

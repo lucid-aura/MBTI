@@ -50,7 +50,7 @@ CommentDto commentDto = (CommentDto) request.getAttribute("comment_update");  //
 		<nav>
 			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
 				<a href="#test" class="text-light distance">유형소개</a> <a href="#test"
-					class="text-light distance">유형별게시판</a> <a href="board_free.do?page=1"
+					class="text-light distance">유형별게시판</a> <a href="board_FREE.do?page=1"
 					class="text-light distance">자유게시판</a> <a href="worldcup_choice.do"
 					class="text-light distance">월드컵</a>
 				<button>로그아웃</button>
@@ -118,7 +118,7 @@ CommentDto commentDto = (CommentDto) request.getAttribute("comment_update");  //
 			<!-- 아래에 있는 함수 이름 : board_delete -->
 			<button type="button" class="btn btn-danger" onclick="board_delete(<%=board.getBoardseq()%>)">삭제</button>
 			
-			<button type="button" class="btn btn-dark" onclick="board_free(<%=board.getBoardseq()%>)">목록</button>
+			<button type="button" class="btn btn-dark" onclick="location.href='board_backlist.do?boardtype=<%=board.getBoardtype()%>'">목록</button>
 
 			<%
 			}
@@ -184,9 +184,9 @@ CommentDto commentDto = (CommentDto) request.getAttribute("comment_update");  //
 			function board_delete( boardseq ){
 				location.href = "board_delete.do?boardseq=" + boardseq;
 			}
-			function board_free( boardseq ){
+/* 			function board_free( boardseq ){
 				location.href = "board_free.do?boardseq=" + boardseq + "&page=1";
-			}
+			} */
 			
 			
 			

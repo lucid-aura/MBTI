@@ -31,7 +31,12 @@ public interface BoardDao {
 	void board_delete(int boardseq);
 	
 	
+	
 	//페이징
 	List<BoardDto> board_list_page(BoardParam param);
+	void board_commentcountup(int boardseq);
+	
+	void board_commentcountdown(int boardseq);
+	
 	
 }

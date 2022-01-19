@@ -14,4 +14,6 @@ public interface MemberService {
 	 int getEmail(String email);
 	 
 	 int getAlias(String alias);
+	 
+	 int getIdpwdcheck(MemberDto mem);
 }

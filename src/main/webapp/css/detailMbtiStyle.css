@@ -6,6 +6,8 @@
 	--buttonOff-color: rgba(30,63,79,0.2);
 	--sideButtonOn-color: rgb(30,63,79);
 	--sideButtonOff-color: rgb(226,224,223);
+	--bestrelation-color: rgba(146,208,80,0.2);
+	--worstrelation-color:rgba(255,55,55,0.2);
 }
 
 /* 그리드적용(왼쪽: 사이드메뉴/오른쪽: 메인내용) */
@@ -33,12 +35,14 @@
 /* 콘텐츠 영역 */
 #wrapContent{
 	display: grid;
-	grid-template-columns: repeat(2, 1fr) repeat(3, 2fr);
+	grid-template-columns: repeat(3, 1fr) 3fr repeat(1, 1fr);
 	grid-template-rows: repeat(11, minmax(10px, auto));
 	gap: 30px 10px;
 }
 
-
+/* article{
+	border: 1px solid black !important;
+} */
 /* 콘텐츠 영역(이미지) */
 #wrapContent article:nth-child(1){
 	grid-column: 1 / 3; grid-row: 1 / span 3; display: flex; align-items: center;}
@@ -46,18 +50,25 @@
 /* 콘텐츠 영역(MBTI 제목) */
 #wrapContent article:nth-child(2){grid-column: 3 / 5; grid-row: 1 / 3; text-align: left; font-size:150px;}
 /* 콘텐츠 영역(MBTI 구분) */
-#wrapContent article:nth-child(3){grid-column: 3 / 5; grid-row: 3 / 4; text-align: left; align-self: center; font-size:40px;}
+#wrapContent article:nth-child(3){grid-column: 3 / 4; grid-row: 3 / 4; text-align: left; align-self: center; font-size:40px;}
 /* 콘텐츠 영역(설명1) */
-#wrapContent article:nth-child(4){grid-column: 1 / 6; grid-row: 4 / 6; text-align: left; font-size:15px; line-height:150%;}
+#wrapContent article:nth-child(4){grid-column: 1 / 6; grid-row: 4 / 6; margin: 0 auto;  padding-left: 60px; text-align: left; font-size:15px; line-height:200%;}
 /* 콘텐츠 영역(이미지_가로바) */
 #wrapContent article:nth-child(5){grid-column: 1 / 6; grid-row: 6 / 8; align-self: center;}
 #barImg{width: 100% !important; margin:0px auto !important; filter: saturate(10%);}
 /* 콘텐츠 영역(MBTI 서브타이틀) */
 #wrapContent article:nth-child(6){grid-column: 1 / 6; grid-row: 8 / 9; text-align: left; align-self: center; font-size:50px;}        
 /* 콘텐츠 영역(MBTI 설명) */
-#wrapContent article:nth-child(7){grid-column: 1 / 6; grid-row: 9 / 12;text-align: left; font-size:15px; line-height:150%;}
+#wrapContent article:nth-child(7){grid-column: 1 / 4; grid-row: 9 / 12;text-align: left; font-size:15px; line-height:200%;}
+/* 콘텐츠 영역(MBTI 궁합) */
+#wrapContent article:nth-child(8){grid-column: 4 / 5; grid-row: 3 / 4; align-self: end;}
+/* 콘텐츠 영역(조회수, 비율) */
+#wrapContent article:nth-child(9){grid-column: 5 / 6; grid-row: 3 / 4; font-size:15px; align-self: end;}
+
+
+
 /* 콘텐츠 제목 텍스트 상하단 표시 */
-#wrapContent article:nth-child(2) div{display: inline; position: relative;}
+#wrapContent article:nth-child(2) div{display: inline; position: relative; color:var(--buttonOn-color);}
 #wrapContent article:nth-child(2) div::after{
 	content: "";
     position: absolute;
@@ -65,7 +76,7 @@
     left: 0px;
     display: block;
     width: 100%;
-    height: 5px;
+    height: 2px;
     background-color: var(--sideButtonOff-color);
     border-radius: 10px;
 }
@@ -76,7 +87,7 @@
     left: 0px;
     display: block;
     width: 100%;
-    height: 5px;
+    height: 2px;
     background-color: var(--sideButtonOff-color);
     border-radius: 10px;
 } 
@@ -91,7 +102,22 @@
     height: 3px;
     background-color: var(--text-color);
     border-radius: 10px;
-}  
+}
+
+#wrapContent article:nth-child(8) div{display: flex;}
+#wrapContent article:nth-child(8) div div{
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-basis: 100px;
+	flex-grow: 1;
+	justify-content: space-evenly;
+    align-items: center;}
+#wrapContent article:nth-child(8) div div:nth-child(1){background-color: var(--bestrelation-color);}
+#wrapContent article:nth-child(8) div div:nth-child(5){background-color: var(--worstrelation-color);}
+#wrapContent article:nth-child(9) div{display: flex; justify-content: flex-end; margin: 0 5%;}
+#wrapContent article:nth-child(9) div img{width: 10%}
+  
 /* 왼쪽메뉴 기본 초기화 */
 ul{list-style: none !important; padding:0px; margin:0px;}
 a {text-decoration: none !important;}
@@ -115,7 +141,7 @@ a {text-decoration: none !important;}
 	line-height:30px;
 	border-radius: 20px;
 	text-align: center;
-	transition: all 0.5s;
+	/* transition: all 0.5s; */
 	color: var(--text-color);
 	background-color: var(--sideButtonOff-color);
 }
@@ -125,6 +151,55 @@ a {text-decoration: none !important;}
 .listSelectHover{
 	background: var(--sideButtonOn-color) !important;
 	color: #fff !important;}
+	
+/* 궁합 버튼 */
+.bestrelation{
+	cursor: pointer;
+	border: 1px solid var(--bestrelation-color);
+}
+.bestrelationHover{
+	cursor: pointer;
+	background-color: var(--bestrelation-color);
+	font-size: 1.2em;
+}
+.worstrelation{
+	cursor: pointer;
+	border: 1px solid var(--worstrelation-color);
+	height: auto;
+}
+.worstrelationHover{
+	cursor: pointer;
+	background-color: var(--worstrelation-color);
+	font-size: 1.2em;
+}
+.lationHoverOff{
+	cursor: default;
+	background-color: transparent;
+}
+	
+#tooltip{
+	width: 100px;
+	background:url(../image/icon_tooltip.png);
+	background-size: 50%;
+	background-repeat:no-repeat;
+	color: #E62200;
+	max-width: 100px;
+	padding-top: 30px;
+	margin-left: 20% !important;
+	margin-right: 0px;
+	animation: upDown 0.3s infinite ease-in-out alternate;
+}
+
+
+@keyframes upDown {
+	from{
+	  transform: translatey(0px);
+	}
+	to{
+	  transform: translatey(-8px);
+	}
+}
+	
 /* 게시판 이동 버튼 */
 button:focus{outline:0px !important;}	/* 부트스트랩 속성 초기화 */
 .wrapButton{

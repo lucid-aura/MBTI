@@ -137,4 +137,21 @@ public class MemberController {
 		return  "redirect:/login.do";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "idpwdcheck.do", method = RequestMethod.POST)
+	public String idpwdcheck(MemberDto dto) {
+		logger.info("MemberController idpwdcheck() " + new Date());	
+		System.out.println("id : "+dto.getId());
+		System.out.println("id : "+dto.getPwd());
+		int count = service.getIdpwdcheck(dto);
+		
+		if(count > 0) {
+			return "YES";
+		}
+		else {
+			return "NO";
+		}
+		
+	}
+	
 }
