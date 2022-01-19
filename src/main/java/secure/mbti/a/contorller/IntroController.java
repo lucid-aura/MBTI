@@ -145,7 +145,11 @@ public class IntroController {
 	
 	/* 본인의 MBTI게시판으로 이동 */
 	@RequestMapping(value = "board_type.do", method = RequestMethod.GET)
-	public String board_type(String type){ 
+	public String board_type(String type, HttpServletRequest request){ 
+		if (type == null || type.isBlank()) {
+			MemberDto mem = (MemberDto)request.getSession().getAttribute("login");
+			type = mem.getMbti();
+		}
 		System.out.println("IntroController board_type() " + new Date());
 		return "redirect:/board_"+type+".do?page=0";
 	}

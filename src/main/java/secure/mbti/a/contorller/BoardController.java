@@ -9,8 +9,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import secure.mbti.a.dto.BoardDto;
 import secure.mbti.a.dto.BoardParam;
@@ -433,7 +435,7 @@ public class BoardController {
 				"free",
 				}; 
 		MemberDto mem = (MemberDto)request.getSession().getAttribute("login");
-		String Type =mem.getMbti().toLowerCase();
+		String Type = mbtiType[dto.getBoardtype()].toLowerCase(); //mem.getMbti().toLowerCase();
 		
 		int index = -1;
 		for (int i=0;i<mbtiType.length;i++) {
@@ -612,25 +614,21 @@ public class BoardController {
 	
 	
 	//대댓글 컨트롤러
+	@ResponseBody
 	@RequestMapping(value = "comment_replydetailAf.do", method = RequestMethod.POST)
 	public String comment_replydetailAf(CommentDto dto) {
 		logger.info("BoardController comment_replydetailAf() " + new Date());
 		System.out.println("7777777");
 		System.out.println(dto.toString());
 		
-		
-		
+
 		commentService.comment_reply_update(dto);
 		commentService.comment_reply(dto);
 		
-		List<CommentDto> commentdto = commentService.comment_list(dto.getBoardseq());
-		// BoardDto board = service.get_board(dto.getBoardseq()); // 게시글 가져오기
-		
 		service.board_commentcountup(dto.getBoardseq()); //db의 게시판 댓글개수 하나 늘린것 db에 알려줌
 		
-		
-		
-		return "redirect:/board_detail.do?boardseq="+dto.getBoardseq();
+
+		return "commit";
 	}
 	
 

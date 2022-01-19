@@ -35,5 +35,10 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return dao.getAlias(alias);
 	}
+	@Override
+	public int getIdpwdcheck(MemberDto mem) {
+		
+		return dao.getIdpwdcheck(mem);
+	}
 
 }

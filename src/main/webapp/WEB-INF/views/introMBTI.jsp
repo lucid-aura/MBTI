@@ -9,6 +9,9 @@
 	MemberDto mem =(MemberDto)request.getSession().getAttribute("login");
 	List<String> mbtilist = (List<String>)request.getAttribute("mbtilist");
 %>
+
+
+
 <!DOCTYPE html>
 
 <html>
@@ -17,6 +20,7 @@
 	<!-- 기본 설정 -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/introMbtiStyle.css">
+	<link rel="stylesheet" href="css/style.css?version=3">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -26,16 +30,16 @@
 	<!-- 상단 영역 (기본) -->
 	<header>
 		<nav>
-			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
+			<div class="fixed-top py-3 px-3 text-center deepblue"  id="nav">
+				<a><img class="nav_bar_logo" src='image/PLAN16_LOGO.png' /></a>
 				<a href="introMBTI.do" class="text-light distance">유형소개</a>
 				<a href="board_type.do?page=1" class="text-light distance">유형별게시판</a>
 				<a href="board_FREE.do?page=1" class="text-light distance">자유게시판</a>
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
-				<button type="button" onclick="outbtn()">로그아웃</button>
+				<button onclick="location.href='logout.do'">로그아웃</button>
 			</div>
 		</nav>
 	</header>
-	
 	<!-- 작업영역 -->
     <%
 	/* MBTI 유형 분류 준비 */
@@ -147,17 +151,18 @@
             			$(this).parents().children("img").css("filter","saturate(0.1)");	
             		});
             
+
             /* 상단 메뉴 클릭시 이동불가 */
-            $("nav a").click(function(e){e.preventDefault();});
+            /* $("nav a").click(function(e){e.preventDefault();}); */
             
             /* 상단 메뉴 효과 관련 */
-            $("nav a").mouseover(
+/*             $("nav a").mouseover(
             	function(){
             		$(this).css("cursor","default");
             		$(this).css("color","#f8f9fa");
             		$(this).css("text-decoration-color","#343a40");
-            	});
-		    
+            	}); */
+
 		});
 	    
 	</script>

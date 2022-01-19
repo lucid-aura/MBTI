@@ -52,14 +52,14 @@
 /* 콘텐츠 영역(MBTI 구분) */
 #wrapContent article:nth-child(3){grid-column: 3 / 4; grid-row: 3 / 4; text-align: left; align-self: center; font-size:40px;}
 /* 콘텐츠 영역(설명1) */
-#wrapContent article:nth-child(4){grid-column: 1 / 6; grid-row: 4 / 6; margin: 0 auto;  padding-left: 60px; text-align: left; font-size:15px; line-height:150%;}
+#wrapContent article:nth-child(4){grid-column: 1 / 6; grid-row: 4 / 6; margin: 0 auto;  padding-left: 60px; text-align: left; font-size:15px; line-height:200%;}
 /* 콘텐츠 영역(이미지_가로바) */
 #wrapContent article:nth-child(5){grid-column: 1 / 6; grid-row: 6 / 8; align-self: center;}
 #barImg{width: 100% !important; margin:0px auto !important; filter: saturate(10%);}
 /* 콘텐츠 영역(MBTI 서브타이틀) */
 #wrapContent article:nth-child(6){grid-column: 1 / 6; grid-row: 8 / 9; text-align: left; align-self: center; font-size:50px;}        
 /* 콘텐츠 영역(MBTI 설명) */
-#wrapContent article:nth-child(7){grid-column: 1 / 4; grid-row: 9 / 12;text-align: left; font-size:15px; line-height:150%;}
+#wrapContent article:nth-child(7){grid-column: 1 / 4; grid-row: 9 / 12;text-align: left; font-size:15px; line-height:200%;}
 /* 콘텐츠 영역(MBTI 궁합) */
 #wrapContent article:nth-child(8){grid-column: 4 / 5; grid-row: 3 / 4; align-self: end;}
 /* 콘텐츠 영역(조회수, 비율) */
@@ -68,7 +68,7 @@
 
 
 /* 콘텐츠 제목 텍스트 상하단 표시 */
-#wrapContent article:nth-child(2) div{display: inline; position: relative;}
+#wrapContent article:nth-child(2) div{display: inline; position: relative; color:var(--buttonOn-color);}
 #wrapContent article:nth-child(2) div::after{
 	content: "";
     position: absolute;
@@ -76,7 +76,7 @@
     left: 0px;
     display: block;
     width: 100%;
-    height: 5px;
+    height: 2px;
     background-color: var(--sideButtonOff-color);
     border-radius: 10px;
 }
@@ -87,7 +87,7 @@
     left: 0px;
     display: block;
     width: 100%;
-    height: 5px;
+    height: 2px;
     background-color: var(--sideButtonOff-color);
     border-radius: 10px;
 } 
@@ -117,7 +117,6 @@
 #wrapContent article:nth-child(8) div div:nth-child(5){background-color: var(--worstrelation-color);}
 #wrapContent article:nth-child(9) div{display: flex; justify-content: flex-end; margin: 0 5%;}
 #wrapContent article:nth-child(9) div img{width: 10%}
-
   
 /* 왼쪽메뉴 기본 초기화 */
 ul{list-style: none !important; padding:0px; margin:0px;}

@@ -49,12 +49,9 @@ MemberDto dto = (MemberDto) request.getSession().getAttribute("login");
 						<ul class="list-group list-group-flush">
 							<li class="list-group-item" align="center">
 								<div class="form-inline mb-2">
-
 								</div> <textarea class="form-control" id="commentcontentform" name="content"
 									rows="3"></textarea><br>
-									
 								<button type="button" onclick="replyclose()" class="btn btn-danger">답글 등록</button><!-- onClick="javascript:addReply();" --> <!--onClick="comment_check()"  -->
-
 							</li>
 						</ul>
 					</div>
@@ -64,21 +61,44 @@ MemberDto dto = (MemberDto) request.getSession().getAttribute("login");
 		</form>
 		<script type="text/javascript">
 		function replyclose(){
-			/* window.opener.name = "parentPage"; // 부모창의 이름 설정 */
 			
-			var replycommentwindow=document.getElementById('replywindow');
-			
-			replycommentwindow.submit();
-			
- 			<%-- opener.window.location.href='board_detail.do?boardseq=<%=comment.getBoardseq()%>'; --%>  //부모창에 호출될 url 
- 		 	opener.window.location.reload();
+			// form에서의 name은 json으로 따로 넣어줘야하기 때문에 key, value로 묶어주는(Jsonify) 함수
+			$.fn.serializeObject = function() { 
+				  "use strict"
+				  var result = {}
+				  var extend = function(i, element) {
+				    var node = result[element.name]
+				    if ("undefined" !== typeof node && node !== null) {
+				      if ($.isArray(node)) {
+				        node.push(element.value)
+				      } else {
+				        result[element.name] = [node, element.value]
+				      }
+				    } else {
+				      result[element.name] = element.value
+				    }
+				  }
+				  $.each(this.serializeArray(), extend)
+				  return result
+				}
+				var serializeObject = $('#replywindow').serializeObject();
 
-			
-		   
-
-		    //self.close();
-
+			$.ajax({
+	            url : "comment_replydetailAf.do", // 컨트롤러에 ajax 요청
+	            type : 'POST', 
+	            data : serializeObject, 
+	            success : function(res) {
+	                if (res == "commit"){
+	                	opener.window.location.reload();
+	                	self.close();
+	                }
+	            }, // error 
+	            error : function(xhr, status) {
+	                alert(xhr + " : " + status);
+	            }
+	        })
 		}
+		
 		</script>
 </body>
 
