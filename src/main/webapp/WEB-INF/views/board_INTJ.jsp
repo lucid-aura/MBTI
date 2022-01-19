@@ -49,7 +49,7 @@
 				<a href="board_INTJ.do?page=1" class="text-light distance">유형별게시판</a> <!-- 바꿔야함 -->
 				<a href="board_FREE.do?page=1" class="text-light distance">자유게시판</a>
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
-				<button>로그아웃</button>
+				<button type="button" class="btn btn-light btn-default btn-sm" onclick="location.href='logout.do'">로그아웃</button>
 			</div>
 		</nav>
 	</header>

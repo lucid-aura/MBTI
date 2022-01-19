@@ -48,45 +48,44 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css?version=3">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
 </head>
 <body onunload="close_popup()">
 	<header>
 		<nav>
-			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
+			<div class="fixed-top py-3 px-3 text-center deepblue"  id="nav">
+				<a href="introMBTI.do" ><img style="width:80px; heigth:20px;"class="nav_bar_logo" src='image/PLAN16_LOGO.png' /></a>
 				<a href="introMBTI.do" class="text-light distance">유형소개</a>
 				<a href="board_type.do?page=1" class="text-light distance">유형별게시판</a>
 				<a href="board_FREE.do?page=1" class="text-light distance">자유게시판</a>
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
-				<button>로그아웃</button>
+				<button type="button" class="btn btn-light btn-default btn-sm" onclick="location.href='logout.do'">로그아웃</button>
 			</div>
 		</nav>
 	</header>
 	<br>
-	<hr>
 	<br>
 	<br>
 	<br>
 	<br>
 	<br>
+	
+
+
 
 	
 	<!-- 본문 글 디테일 부분(댓글부분 제외) -->
 	<section>
-		<div class="wrapper" align="center">
+		<div align="center">
+		<div>
 			<!--    attribute property -->
-			<table id="table_detail" class="table " style="width: 1000px">
+			<table id="table_detail" class="table table-bordered"  border="0" style="width: 1000px">
 				<!-- <col width="30"><col width="200"><col width="80"> -->
 				<%
 				if (board == null) {
@@ -122,6 +121,8 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 				}
 				%>
 			</table>
+			</div>
+			<div align="center">
 			<%
 			MemberDto mem = (MemberDto) request.getSession().getAttribute("login");
 			%>
@@ -140,7 +141,7 @@ int comment_count = (Integer)request.getAttribute("comment_count");
 			<%
 			}
 			%>
-			
+			</div>
 
 		</div>
 	</section>
