@@ -69,24 +69,24 @@ parameterType="secure.mbti.a.dto.BoardParam">
 
           		 <if test="choice != null and choice != ''  and search != null and search != '' ">
 			<if test="choice == 'title'">
-			WHERE TITLE LIKE '%' || #{search} || '%' AND BOARDTYPE=#{boardtype}
+			WHERE (TITLE LIKE '%' || #{search} || '%' AND BOARDTYPE=#{boardtype}) OR BOARDTYPE=18
 		</if>
 		<if test="choice == 'content'">
-			WHERE CONTENT LIKE '%' || #{search} || '%' AND BOARDTYPE=#{boardtype}
+			WHERE (CONTENT LIKE '%' || #{search} || '%' AND BOARDTYPE=#{boardtype}) OR BOARDTYPE=18
 							
 		</if>
 		<if test="choice == 'writer'">
-			WHERE ID=#{search} AND BOARDTYPE=#{boardtype}
+			WHERE (ID=#{search} AND BOARDTYPE=#{boardtype}) OR BOARDTYPE=18
 		</if>
 					
 		</if> 
 					<if test="choice == null and search == null ">	
-						WHERE BOARDTYPE=#{boardtype}
+						WHERE BOARDTYPE=#{boardtype} OR BOARDTYPE=18
 					</if> 
             
             ) 
     where RNUM BETWEEN #{criteria.rowStart} and #{criteria.rowEnd})
-	order by BOARDSEQ desc
+	order by BOARDTYPE DESC, BOARDSEQ desc
 </select>
 
 <!-- 220118댓글카운트수정 -->

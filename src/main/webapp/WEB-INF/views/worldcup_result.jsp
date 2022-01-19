@@ -67,7 +67,7 @@ MemberDto member = (MemberDto)request.getSession().getAttribute("login");
 
 					</div>
 					<div  class="worldcup_result_left">
-						<img src='image/<%=worldcupresult.getWorldcupname()%>.jpg' class="choice" />
+						<img src='image/<%=worldcupresult.getTopic()%>/<%=worldcupresult.getWorldcupname()%>.jpg' class="choice" />
 					</div>
 					<div class="worldcup_result_right">
 						<table class="table table-hover">

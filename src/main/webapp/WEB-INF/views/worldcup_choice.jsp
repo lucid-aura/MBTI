@@ -28,6 +28,12 @@
 	<section>
 		<article>
 		<div class="container">
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
 		    <div id="carouselSample" class="carousel slide" data-ride="carousel">
 		    
 		      <!-- 인디케이터(바로 이동할수 있는 바) -->       
@@ -41,30 +47,39 @@
 		      <div class="carousel-inner">
 		        <!-- First slide -->
 		        <div class="carousel-item active">
-		          <img class="d-block w-100" alt="slide" src="./image/food.jpg">
+		          <img onclick="choice('food')" style="cursor: pointer; width:1260px; heigth:720px;"class="d-block w-100" alt="slide" src="./image/food.jpg">
 		          <!-- 캡션 -->
 		          <div class="carousel-caption d-none d-md-block">
+					<!-- 		          
 		            <h5>음식</h5>
 		            <p>좋아하는 음식 월드컵</p>
+		            -->
 		          </div>
-		        </div>
+		       		</div>
 		        <!-- Second slide -->
 		        <div class="carousel-item">          
-		          <img class="d-block w-100" alt="slide" src="https://images.pexels.com/photos/213399/pexels-photo-213399.jpeg?auto=compress&cs=tinysrgb&h=650&w=940">
+		          <img onclick="choice('celebrity')" style="cursor: pointer; width:1260px; heigth:720px;" class="d-block w-100" alt="slide" src="./image/celebrity.jpg">
 		          <!-- 캡션 -->
+	          
 		          <div class="carousel-caption d-none d-md-block">
-		            <h5>슬라이드 제목</h5>
-		            <p>슬라이드의 캡션 글</p>
-		          </div>
+					<!-- 	
+		            <h5>인물</h5>
+		            <p>좋아하는 인물 월드컵</p>
+		           -->
+		            </div>
 		        </div>
 		        <!-- Third slide -->
 		        <div class="carousel-item">
-		          <img class="d-block w-100" alt="slide" src="./Park.jpg">          
+		          <img onclick="choice('color')" style="cursor: pointer; width:1260px; heigth:720px;" class="d-block w-100" alt="slide" src="./image/color.jpg">          
 		          <!-- 캡션 -->
-		          <div class="carousel-caption d-none d-md-block">
-		            <h5>슬라이드 제목</h5>
-		            <p>슬라이드의 캡션 글</p>
-		          </div>
+	          
+					<div class="carousel-caption d-none d-md-block">
+										<!-- 	
+		            <h5>색상</h5>
+		            <p>좋아하는 색상 월드컵</p>
+		             -->
+		          </div> 
+
 		        </div>
 		      </div>
 		      
@@ -83,7 +98,14 @@
 		    </div>
 		  </div>
 		  
-			<button type="button" onclick="choice()">음식</button>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			
 		</article>
 	</section>
 	<footer>
@@ -91,8 +113,8 @@
 	</footer>
 </div>
 <script type="text/javascript">
-function choice(/* topic */) {
-	location.href = "worldcup.do";
+function choice(topic) {
+	location.href = "worldcup.do?topic=" + topic;
 }
 </script>
 </body>

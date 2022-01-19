@@ -22,7 +22,7 @@ Collections.shuffle(worldcuplist);
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 </head>
-<body style="background-color:rgba(0, 28, 51, 1)">
+<body style="background-color:rgba(0, 28, 51, 1)" >
 
 <div class="wrapper">
 	<header>
@@ -38,18 +38,18 @@ Collections.shuffle(worldcuplist);
 			</nav>
 	</header>
 	<section>
-		<article>
-			<div class="content">
-			<table style="text-align:center">
+		<article style="display: flex;"class="content">
+			<div style="margin:0 auto">
+			<table>
 			<tr>
 				<td  id="round_tag" colspan="3" align='center'>
 					<span id="round" style="color:white">8강</span>
 				</td>
 			</tr>
 			<tr>
-				<td><img src='image/<%=worldcuplist.get(0).getWorldcupname() %>.jpg'  id="left" class=" choice" onclick="left"/></td>
+				<td><img src='image/<%=topic%>/<%=worldcuplist.get(0).getWorldcupname() %>.jpg'  id="left" class=" choice" onclick="left"/></td>
 				<td id="vs" style="color:white">vs</td>
-				<td><img src='image/<%=worldcuplist.get(1).getWorldcupname() %>.jpg'  id="right"  class="choice" onclick="right"/></td>
+				<td><img src='image/<%=topic%>/<%=worldcuplist.get(1).getWorldcupname() %>.jpg'  id="right"  class="choice" onclick="right"/></td>
 			</tr>
 			</table>
 			</div>
@@ -59,14 +59,19 @@ Collections.shuffle(worldcuplist);
 	<footer>
 	
 	</footer>
-
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
 </div>
   
 <script type="text/javascript">
 var idx = 0;
 var idx_list = [];
 var temp_list = [];
-var topic = 
+var topic = '<%=topic%>';
 $(document).ready(function () {
 	<%
 	for (int i=0; i < worldcuplist.size(); i++){
@@ -136,8 +141,8 @@ function select(i) {
 			temp_list = new_temp_list;
 		}
 	}
-	$('#left').attr('src', 'image/'+temp_list[idx][1] + '.jpg');
-	$('#right').attr('src', 'image/'+temp_list[idx+1][1] + '.jpg');		
+	$('#left').attr('src', 'image/'+ topic + '/' + temp_list[idx][1] + '.jpg');
+	$('#right').attr('src', 'image/'+ topic + '/' + temp_list[idx+1][1] + '.jpg');		
 	$("#round_tag").show();
 	$("#left").show();
 	$("#vs").show();

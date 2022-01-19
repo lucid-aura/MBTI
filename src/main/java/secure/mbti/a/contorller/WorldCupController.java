@@ -35,10 +35,9 @@ public class WorldCupController {
 	}
 
 	@RequestMapping(value = "worldcup.do", method = RequestMethod.GET)
-	public String worldcup(Model model /* , String topic */){ 
+	public String worldcup(Model model , String topic){ 
 		logger.info("WorldCupController worldcup() " + new Date());
-		List<WorldCupDto> list = worldcupservice.worldcuplist("food");
-		/* List<WorldCupDto> list = worldcupservice.worldcuplist("topic"); */
+		List<WorldCupDto> list = worldcupservice.worldcuplist(topic);
 		model.addAttribute("worldcuplist", list);
 		return "worldcup";
 	}

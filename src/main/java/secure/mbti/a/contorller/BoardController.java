@@ -422,32 +422,37 @@ public class BoardController {
 	//글쓰기 후 다시 자유게시판 시작점으로
 	@RequestMapping(value = "board_writeAf.do", method = RequestMethod.POST)
 	public String board_writeAf(Model model, BoardDto dto ,HttpServletRequest request) {
-		logger.info("BoardController board_writeAf()" + new Date());
-		System.out.println(dto.toString()+"ASASAXA");
-		
-		int result = service.board_write(dto);
-		model.addAttribute("result",result);		
-		String mbtiType[] = {
-				"istj", "isfj", "istp", "isfp",
-				"infj", "intj", "infp", "intp",
-				"estp", "esfp", "estj", "esfj",
-				"enfp", "entp", "enfj", "entj",
-				"free",
-				}; 
 		MemberDto mem = (MemberDto)request.getSession().getAttribute("login");
-		String Type = mbtiType[dto.getBoardtype()].toLowerCase(); //mem.getMbti().toLowerCase();
-		
-		int index = -1;
-		for (int i=0;i<mbtiType.length;i++) {
-		    if (mbtiType[i].equals(Type)) {
-		        index = i;
-		        break;
-		    }
-		}	
-		dto.setBoardtype(index);
-		System.out.println(dto.toString());
-		String type = mbtiType[dto.getBoardtype()].toUpperCase();
-		return "redirect:/board_"+type+".do?page=1";
+	      String mbtiType[] = {
+	            "istj", "isfj", "istp", "isfp",
+	            "infj", "intj", "infp", "intp",
+	            "estp", "esfp", "estj", "esfj",
+	            "enfp", "entp", "enfj", "entj",
+	            "free",
+	            }; 
+	      String Type = mbtiType[dto.getBoardtype()].toLowerCase();
+	      
+	      if(mem.getId().equals("admin")) {
+	         dto.setBoardtype(18);
+	      }
+	      service.board_write(dto);
+//	      model.addAttribute("result",result);      
+
+	      
+	       //mem.getMbti().toLowerCase();
+	      
+	      int index = -1;
+	      for (int i=0;i<mbtiType.length;i++) {
+	          if (mbtiType[i].equals(Type)) {
+	              index = i;
+	              break;
+	          }
+	      }   
+	      dto.setBoardtype(index);
+	      System.out.println(dto.toString());
+	      String type = mbtiType[dto.getBoardtype()].toUpperCase();
+	      return "redirect:/board_"+type+".do?page=1";
+
 		
 	}
 	@RequestMapping(value = "board_cancle.do", method = RequestMethod.GET)
