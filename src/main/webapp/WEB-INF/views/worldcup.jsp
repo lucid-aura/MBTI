@@ -26,7 +26,7 @@ Collections.shuffle(worldcuplist);
 
 <div class="wrapper">
 	<header>
-		<nav>
+			<nav>
 			<div class="fixed-top py-3 px-3 text-center deepblue"  id="nav">
 				<a href="introMBTI.do" ><img style="width:80px; heigth:20px;"class="nav_bar_logo" src='image/PLAN16_LOGO.png' /></a>
 				<a href="introMBTI.do" class="text-light distance">유형소개</a>
