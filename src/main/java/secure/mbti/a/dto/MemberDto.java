@@ -10,12 +10,14 @@ public class MemberDto implements Serializable {
 	private String email;
 	private String mbti;
 	private int auth;
+	private String salt;
 	
 	public MemberDto() {
 
 	}
 
-	public MemberDto(String id, String pwd, String name, String alias, String email, String mbti, int auth) {
+	public MemberDto(String id, String pwd, String name, String alias, String email, String mbti, int auth,
+			String salt) {
 		super();
 		this.id = id;
 		this.pwd = pwd;
@@ -24,7 +26,10 @@ public class MemberDto implements Serializable {
 		this.email = email;
 		this.mbti = mbti;
 		this.auth = auth;
+		this.salt = salt;
 	}
+
+
 
 
 	public String getId() {
@@ -83,11 +88,21 @@ public class MemberDto implements Serializable {
 		this.auth = auth;
 	}
 
+	public String getSalt() {
+		return salt;
+	}
 
-	
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
 	@Override
 	public String toString() {
 		return "MemberDto [id=" + id + ", pwd=" + pwd + ", name=" + name + ", alias=" + alias + ", email=" + email
-				+ ", mbti=" + mbti + ", auth=" + auth + "]";
+				+ ", mbti=" + mbti + ", auth=" + auth + ", salt=" + salt + "]";
 	}
+
+
+	
+
 }

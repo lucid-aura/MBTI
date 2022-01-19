@@ -16,4 +16,6 @@ public interface MemberService {
 	 int getAlias(String alias);
 	 
 	 int getIdpwdcheck(MemberDto mem);
+	 
+	 String getSalt(String id);
 }
