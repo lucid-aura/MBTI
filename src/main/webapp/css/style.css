@@ -3,67 +3,67 @@
 a {text-decoration: none !important;}
 
 .box {
-	height: 1000px;
-	background-color: #eee;
+   height: 1000px;
+   background-color: #eee;
 }
 
 #test {
-	margin-top: -56px; /* 고정 요소의 높이의 여백을 설정 */
-	padding-top: 56px; /* 패딩 */
+   margin-top: -56px; /* 고정 요소의 높이의 여백을 설정 */
+   padding-top: 56px; /* 패딩 */
 }
 
 .distance {
-	margin-left: 10px;
-	margin-right: 10px;
+   margin-left: 10px;
+   margin-right: 10px;
 }
 
 .wrapper {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   min-height: 100vh;
 }
 
 .content {
-	font-family: system-ui, serif;
-	font-size: 2rem;
-	padding: 3rem;
-	margin: 0 auto;
-	border-radius: 1rem;
-	background: rgba(0, 28, 51, 1);
-	width: 1800px;
-	height:720px;
+   font-family: system-ui, serif;
+   font-size: 2rem;
+   padding: 3rem;
+   margin: 0 auto;
+   border-radius: 1rem;
+   background: rgba(0, 28, 51, 1);
+   width: 1800px;
+   height:720px;
 }
 
 .deepblue {
-	background-color: rgba(0, 28, 51, 1);
+   background-color: rgba(0, 28, 51, 1);
 }
 
 .choice {
-	width: 100%;
-	height: 100%;
+   width: 100%;
+   height: 100%;
 }
 
 .worldcup_result{
-	font-family: system-ui, serif;
-	font-size: 14px;
-	padding: 3rem;
-	margin: 0 auto;
-	border-radius: 1rem;
-	width: 100%;
+   font-family: system-ui, serif;
+   font-size: 14px;
+   padding: 3rem;
+   margin: 0 auto;
+   border-radius: 1rem;
+   width: 100%;
 }
 
 .worldcup_result_left{
-	width: 650px;
-	height: 480px;
-	margin:10px;
-	float: left;
+   width: 650px;
+   height: 480px;
+   margin:10px;
+   float: left;
 }
 .worldcup_result_right{
-	width: 680px;
-	height: 480px;
-	margin:10px;
-	float: right;
+   width: 680px;
+   height: 480px;
+   margin:10px;
+   float: right;
 }
 
 .worldcup_result_table {
@@ -72,8 +72,8 @@ a {text-decoration: none !important;}
 }
 
 .nav_bar_logo{
-	cursor:pointer;
-	position:absolute;margin-left:-680px;
-	margin-top:2px;
-	width:85px; height:30px;
+   cursor:pointer;
+   position:absolute;margin-left:-680px;
+   margin-top:2px;
+   width:80px; height:30px;
 }
