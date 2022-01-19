@@ -2,9 +2,6 @@
 <%@page import="secure.mbti.a.dto.BoardDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-
-    
 <%
 	List<BoardDto> board_list = (List<BoardDto>)request.getAttribute("board_list"); // list 가져오기
 %>
@@ -27,13 +24,25 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
+<style>
+.pagination{
+	display: block;
+	text-align: center;
+}
+
+.search-box {
+    margin: 100px auto;
+}
+.search-box .btn-light {
+    border: 1px solid #ced4da;
+}
+</style>
 <title>Insert title here</title>
 </head>
 <body>
-<div class="wrapper">
+<div >
 	<header>
-		<nav>
-			<nav>
+				<nav>
 			<div class="fixed-top py-3 px-3 text-center deepblue"  id="nav">
 				<a href="introMBTI.do" ><img style="width:80px; heigth:20px;"class="nav_bar_logo" src='image/PLAN16_LOGO.png' /></a>
 				<a href="introMBTI.do" class="text-light distance">유형소개</a>
@@ -42,13 +51,10 @@
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
 				<button onclick="location.href='logout.do'">로그아웃</button>
 			</div>
-			</nav>
-
 		</nav>
-
-
 	</header>
-</div>
+
+<h1>게시판</h1>
 <br><br>
 
 <h1>자유게시판</h1> <!-- 바꿔야함 -->
@@ -152,6 +158,7 @@ else{
 <div align="center">
 	<a href="board_write.do?boardtype=16" class="btn btn-primary pull-right">글쓰기</a>	<!-- 각자의 넘버로 바꾸기 -->
 </div>
+</div>
 <!--  117 131 제목 바꾸기-->
 <!-- 
 <script type="text/javascript">
@@ -179,6 +186,7 @@ function searchBoard(){
 	
 	location.href="board_FREE.do?page=1&choice=" + choice + "&search=" + search; //각자의 컨트롤러로 바꾸기
 }
+
 </script>
 
 </body>

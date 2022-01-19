@@ -40,8 +40,8 @@
 </head>
 <body>
 
-<h1>게시판</h1>
-<div class="wrapper">
+
+<div>
 	<header>
 		<nav>
 			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
@@ -55,6 +55,7 @@
 	</header>
 </div>
 <br><br>
+<h1>게시판</h1>
 <h1>ENFP게시판</h1> <!-- 바꿔야함 -->
 
 <div>
@@ -155,12 +156,7 @@ else{
 <div align="center">
 	<a href="board_write.do?boardtype=12" class="btn btn-primary pull-right">글쓰기</a>	<!-- 각자의 넘버로 바꾸기 -->
 </div>
-<!--  117 131 제목 바꾸기-->
-<!-- 
-<script type="text/javascript">
-location.href = "bbslist.do"; -> GET
-</script>
- -->
+</div>
 <script type="text/javascript">
 function func(num) {	
 	var ti ="";

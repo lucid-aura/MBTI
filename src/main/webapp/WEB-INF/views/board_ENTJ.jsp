@@ -41,7 +41,7 @@
 <body>
 
 <h1>게시판</h1>
-<div class="wrapper">
+<div >
 	<header>
 		<nav>
 			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">

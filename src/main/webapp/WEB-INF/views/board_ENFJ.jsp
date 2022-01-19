@@ -40,9 +40,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<h1>게시판</h1>
-<div class="wrapper">
+<div >
 	<header>
 				<nav>
 			<div class="fixed-top py-3 px-3 text-center deepblue"  id="nav">
@@ -55,8 +53,10 @@
 			</div>
 		</nav>
 	</header>
-</div>
+
+<h1>게시판</h1>
 <br><br>
+
 <h1>ENFJ게시판</h1> <!-- 바꿔야함 -->
 
 <div>
@@ -121,7 +121,8 @@ else{
 					<td>
 						
 						<a href="board_detail.do?boardseq=<%=board.getBoardseq() %>"> 
-							<%=board.getTitle() %><span style="color: red">(<%=board.getCommentcount() %>)</span>
+							<%=board.getTitle() %><%if(board.getCommentcount() > 0){ %><span style="color: red">(<%=board.getCommentcount() %>)</span>
+							<%} %>
 						</a>
 					</td>
 					
@@ -157,6 +158,7 @@ else{
 <div align="center">
 	<a href="board_write.do?boardtype=14" class="btn btn-primary pull-right">글쓰기</a>	<!-- 각자의 넘버로 바꾸기 -->
 </div>
+</div>
 <!--  117 131 제목 바꾸기-->
 <!-- 
 <script type="text/javascript">
@@ -184,6 +186,7 @@ function searchBoard(){
 	
 	location.href="board_ENFJ.do?page=1&choice=" + choice + "&search=" + search; //각자의 컨트롤러로 바꾸기
 }
+
 </script>
 
 </body>
