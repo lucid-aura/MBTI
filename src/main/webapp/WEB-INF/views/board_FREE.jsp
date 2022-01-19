@@ -57,7 +57,7 @@
 <h1>게시판</h1>
 <br><br>
 
-<h1>자유게시판</h1> <!-- 바꿔야함 -->
+<h1>자유게시판</h1> 
 
 <div>
 <hr>
@@ -66,7 +66,7 @@
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown" 
-            aria-haspopup="true" aria-expanded="false" id="choice" value="">제목</button>                        
+            aria-haspopup="true" aria-expanded="false" id="choice" value="title">제목</button>                        
             <div class="dropdown-menu">
               <a href="javascript:void(0);" class="dropdown-item" onclick="func('title')">제목</a>
               <a href="javascript:void(0);" class="dropdown-item" onclick="func('content')">내용</a>
@@ -75,7 +75,8 @@
         </div>
         <input type="text" class="form-control" aria-label="Search input with dropdown button" id="search" value="">
         <div class="input-group-append">
-            <button class="btn btn-success" type="button"  onclick="searchBoard()" >Search</button>
+            <button class="btn btn-success" type="button"  onclick="searchBoard()" style="background-color: #004176;"
+            >Search</button>
         </div>
     </div>
 </div>
@@ -159,12 +160,6 @@ else{
 	<a href="board_write.do?boardtype=16" class="btn btn-primary pull-right">글쓰기</a>	<!-- 각자의 넘버로 바꾸기 -->
 </div>
 </div>
-<!--  117 131 제목 바꾸기-->
-<!-- 
-<script type="text/javascript">
-location.href = "bbslist.do"; -> GET
-</script>
- -->
 <script type="text/javascript">
 function func(num) {	
 	var ti ="";
@@ -184,7 +179,7 @@ function searchBoard(){
 	let choice = document.getElementById("choice").value;
 	let search = document.getElementById("search").value;
 	
-	location.href="board_FREE.do?page=1&choice=" + choice + "&search=" + search; //각자의 컨트롤러로 바꾸기
+	location.href="board_FREE.do?page=1&choice=" + choice + "&search=" + search;
 }
 
 </script>

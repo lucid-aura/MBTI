@@ -18,6 +18,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css?version=3">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -39,23 +40,23 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-
-<div>
+<div >
 	<header>
-		<nav>
-			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
+				<nav>
+			<div class="fixed-top py-3 px-3 text-center deepblue"  id="nav">
+				<a href="introMBTI.do" ><img style="width:80px; heigth:20px;"class="nav_bar_logo" src='image/PLAN16_LOGO.png' /></a>
 				<a href="introMBTI.do" class="text-light distance">유형소개</a>
-				<a href="board_ENFP.do?page=1" class="text-light distance">유형별게시판</a> <!-- 바꿔야함 -->
+				<a href="board_type.do?page=1" class="text-light distance">유형별게시판</a>
 				<a href="board_FREE.do?page=1" class="text-light distance">자유게시판</a>
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
-				<button>로그아웃</button>
+				<button onclick="location.href='logout.do'">로그아웃</button>
 			</div>
 		</nav>
 	</header>
-</div>
-<br><br>
+
 <h1>게시판</h1>
+<br><br>
+
 <h1>ENFP게시판</h1> <!-- 바꿔야함 -->
 
 <div>
@@ -74,7 +75,8 @@
         </div>
         <input type="text" class="form-control" aria-label="Search input with dropdown button" id="search" value="">
         <div class="input-group-append">
-            <button class="btn btn-success" type="button"  onclick="searchBoard()" >Search</button>
+            <button class="btn btn-success" type="button"  onclick="searchBoard()" style="background-color: #004176;"
+            >Search</button>
         </div>
     </div>
 </div>
@@ -120,14 +122,15 @@ else{
 					<td>
 						
 						<a href="board_detail.do?boardseq=<%=board.getBoardseq() %>"> 
-							<%=board.getTitle() %><span style="color: red">(<%=board.getCommentcount() %>)</span>
+							<%=board.getTitle() %><%if(board.getCommentcount() > 0){ %><span style="color: red">(<%=board.getCommentcount() %>)</span>
+							<%} %>
 						</a>
 					</td>
 					
 					<td ><%=board.getId() %></td>
 					
 					
-					<td ><%=board.getWdate() %></td>					
+					<td ><%=board.getWdate().substring(0, board.getWdate().length() - 2) %></td>					
 					
 					<td ><%=board.getReadcount() %></td>
 										
@@ -157,6 +160,7 @@ else{
 	<a href="board_write.do?boardtype=12" class="btn btn-primary pull-right">글쓰기</a>	<!-- 각자의 넘버로 바꾸기 -->
 </div>
 </div>
+
 <script type="text/javascript">
 function func(num) {	
 	var ti ="";
@@ -178,6 +182,7 @@ function searchBoard(){
 	
 	location.href="board_ENFP.do?page=1&choice=" + choice + "&search=" + search; //각자의 컨트롤러로 바꾸기
 }
+
 </script>
 
 </body>
