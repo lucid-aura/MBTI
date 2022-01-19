@@ -5,9 +5,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<link rel="stylesheet" href="/css/bootstrap.css"> <!--지워도됨 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+<link rel="stylesheet" href="css/style.css?version=3">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -33,12 +32,13 @@ MemberDto dto = (MemberDto) request.getAttribute("dto");
 <!-- 고정바 -->
 	<header>
 		<nav>
-			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
+			<div class="fixed-top py-3 px-3 text-center deepblue"  id="nav">
+				<a href="introMBTI.do" ><img style="width:80px; heigth:20px;"class="nav_bar_logo" src='image/PLAN16_LOGO.png' /></a>
 				<a href="introMBTI.do" class="text-light distance">유형소개</a>
 				<a href="board_type.do?page=1" class="text-light distance">유형별게시판</a>
 				<a href="board_FREE.do?page=1" class="text-light distance">자유게시판</a>
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
-				<button>로그아웃</button>
+				<button onclick="location.href='logout.do'">로그아웃</button>
 			</div>
 		</nav>
 	</header>
@@ -48,8 +48,7 @@ MemberDto dto = (MemberDto) request.getAttribute("dto");
 
 	<section>
 		<article style="margin: 250px" padding="50px">
-			<div id="containerAll"> 
-			<p>수정 페이지</p>
+			<div id="containerAll">
 			<form action="board_updateAf.do" method="post">
 			<input type="hidden" name="boardseq" value="<%=board.getBoardseq()%>"> <!-- name 컨트롤러 키값, value value값 -->
 				<input type="text" name="id" class="form-control mt-4 mb-2" size="70px" value=<%=board.getId()%> readonly>	
@@ -60,19 +59,15 @@ MemberDto dto = (MemberDto) request.getAttribute("dto");
 						placeholder="내용을 입력해주세요" required><%=board.getContent()%></textarea>
 				</div>
 				<input type="submit" class="btn btn-dark" value="수정">
+				<button type="button" class="btn btn-dark" onclick="location.href='board_detail.do?boardseq=<%=board.getBoardseq()%>'">취소</button>
 			</form>
-			
-			<form action="board_free.do" method="post">
-				<button type="button" class="btn btn-dark" onclick="location.href='board_free.do'">취소</button>
-			</form>
+
 			
 			
 			</div>
 		</article>
 	</section>
-	<footer>
-	<p>저작권표시</p>
-	</footer>
+
 	</div>
 	
 	<script type="text/javascript">

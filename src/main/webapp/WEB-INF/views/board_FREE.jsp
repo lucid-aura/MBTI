@@ -29,7 +29,6 @@
 	display: block;
 	text-align: center;
 }
-
 .search-box {
     margin: 100px auto;
 }
@@ -49,7 +48,7 @@
 				<a href="board_type.do?page=1" class="text-light distance">유형별게시판</a>
 				<a href="board_FREE.do?page=1" class="text-light distance">자유게시판</a>
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
-				<button onclick="location.href='logout.do'">로그아웃</button>
+				<button type="button" class="btn btn-light btn-default btn-sm" onclick="location.href='logout.do'">로그아웃</button>
 			</div>
 		</nav>
 	</header>
@@ -57,7 +56,7 @@
 <h1>게시판</h1>
 <br><br>
 
-<h1 align="center">자유 게시판</h1> 
+<h1 align="center">자유게시판</h1> <!-- 바꿔야함 -->
 
 <div>
 <hr>
@@ -75,8 +74,7 @@
         </div>
         <input type="text" class="form-control" aria-label="Search input with dropdown button" id="search" value="">
         <div class="input-group-append">
-            <button class="btn btn-success" type="button"  onclick="searchBoard()" style="background-color: #004176;"
-            >Search</button>
+            <button class="btn btn-success" type="button"  onclick="searchBoard()" style="background-color: #004176;">Search</button>
         </div>
     </div>
 </div>
@@ -118,9 +116,9 @@ else{
 		}
 			else{			
 				%>
-				<tr>
-					<th class="text-center"><%=(board_page-1)*20+1+i%></th>
-					<td >
+				<tr align="center">
+					<th><%=(board_page-1)*20+1+i%></th>
+					<td align="left">
 						
 						<a href="board_detail.do?boardseq=<%=board.getBoardseq() %>" > 
 							<%=board.getTitle() %><%if(board.getCommentcount() > 0){ %><span style="color: red">(<%=board.getCommentcount() %>)</span>
@@ -128,14 +126,14 @@ else{
 						</a>
 					</td>
 					
-					<td align="center"><%=board.getId() %></td>
+					<td><%=board.getId() %></td>
 					
 					
-					<td align="center" ><%=board.getWdate().substring(0, board.getWdate().length() - 2) %></td>					
+					<td><%=board.getWdate().substring(0, board.getWdate().length()-2) %></td>					
 					
-					<td align="center" ><%=board.getReadcount() %></td>
+					<td><%=board.getReadcount() %></td>
 										
-					<td align="center" ><%=board.getCommentcount() %></td>
+					<td><%=board.getCommentcount() %></td>
 				</tr>
 
 		<%
@@ -170,7 +168,7 @@ function func(num) {
 	else if(num =="content"){
 		ti="내용";
 	}else{
-		ti="작성자"
+		ti="작성자";
 	}
 	document.getElementById("choice").innerText = ti + "";	
 	document.getElementById("choice").value = num + "";	
@@ -180,11 +178,11 @@ function searchBoard(){
 	let choice = document.getElementById("choice").value;
 	let search = document.getElementById("search").value;
 	
-	location.href="board_FREE.do?page=1&choice=" + choice + "&search=" + search;
+	location.href="board_FREE.do?page=1&choice=" + choice + "&search=" + search;  //각자의 컨트롤러로 바꾸기
 }
+
 
 </script>
 
 </body>
 </html>
-
