@@ -57,7 +57,7 @@
 <h1>게시판</h1>
 <br><br>
 
-<h1>ESFP게시판</h1> 
+<h1 align="center">ESFP 게시판</h1> 
 
 <div>
 <hr>
@@ -86,11 +86,12 @@
 
 
 <!--    attribute property -->
-	<table class="table table-hover" style="width:1200px" align="center">
+	<table id="board_width" class="table table-hover" style="width:1200px" align="center">
 	<!-- <col width="30"><col width="200"><col width="80"> -->
-	<thead>
+	<thead align="center">
 	<tr>
-	<th width="100px">번호</th><th width="330px">제목</th><th width="150px">글쓴이</th><th width="200px">작성날짜</th><th width="150px">조회횟수</th><th width="100px">댓글개수</th>
+	<!-- <th width="100px">번호</th><th width="330px">제목</th><th width="150px">작성자</th><th width="200px">작성날짜</th><th width="150px">조회횟수</th><th width="100px">댓글개수</th> -->
+	<th width="80px" align="center">번호</th><th width="480px">제목</th><th width="70px">작성자</th><th width="130px" >작성날짜</th><th width="70">조회횟수</th><th width="70">댓글개수</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -111,30 +112,30 @@ else{
 			if (board.getDel() == 1) {
 		%>
 		<tr>
-			<td colspan="6">삭제된 글입니다.</td>
+			<td colspan="6">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 삭제된 글입니다.</td>
 		</tr>
 		<%
 		}
 			else{			
 				%>
 				<tr>
-					<th><%=(board_page-1)*20+1+i%></th>
-					<td>
+					<th class="text-center"><%=(board_page-1)*20+1+i%></th>
+					<td >
 						
-						<a href="board_detail.do?boardseq=<%=board.getBoardseq() %>"> 
+						<a href="board_detail.do?boardseq=<%=board.getBoardseq() %>" > 
 							<%=board.getTitle() %><%if(board.getCommentcount() > 0){ %><span style="color: red">(<%=board.getCommentcount() %>)</span>
 							<%} %>
 						</a>
 					</td>
 					
-					<td ><%=board.getId() %></td>
+					<td align="center"><%=board.getId() %></td>
 					
 					
-					<td ><%=board.getWdate().substring(0, board.getWdate().length() - 2) %></td>					
+					<td align="center" ><%=board.getWdate().substring(0, board.getWdate().length() - 2) %></td>					
 					
-					<td ><%=board.getReadcount() %></td>
+					<td align="center" ><%=board.getReadcount() %></td>
 										
-					<td ><%=board.getCommentcount() %></td>
+					<td align="center" ><%=board.getCommentcount() %></td>
 				</tr>
 
 		<%
