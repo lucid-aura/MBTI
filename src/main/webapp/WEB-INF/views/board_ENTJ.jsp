@@ -3,13 +3,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	List<BoardDto> board_list = (List<BoardDto>)request.getAttribute("board_list"); // list 가져오기
+	List<BoardDto> board_list = (List<BoardDto>)request.getAttribute("board_list"); 
 %>
 <%
-	int board_size = (int)request.getAttribute("board_size"); //int 가져오기
+	int board_size = (int)request.getAttribute("board_size"); 
 %>
 <%
-	int board_page = (int)request.getAttribute("board_page"); //페이지 가져오기
+	int board_page = (int)request.getAttribute("board_page"); 
 %>
 
 <!DOCTYPE html>
@@ -57,7 +57,7 @@
 <h1>게시판</h1>
 <br><br>
 
-<h1 align="center">ENTJ 게시판</h1> <!-- 바꿔야함 -->
+<h1 align="center">ENTJ 게시판</h1> 
 
 <div>
 <hr>
@@ -87,10 +87,8 @@
 
 <!--    attribute property -->
 	<table id="board_width" class="table table-hover" style="width:1200px" align="center">
-	<!-- <col width="30"><col width="200"><col width="80"> -->
 	<thead align="center">
 	<tr>
-	<!-- <th width="100px">번호</th><th width="330px">제목</th><th width="150px">작성자</th><th width="200px">작성날짜</th><th width="150px">조회횟수</th><th width="100px">댓글개수</th> -->
 	<th width="80px" align="center">번호</th><th width="480px">제목</th><th width="70px">작성자</th><th width="130px" >작성날짜</th><th width="70">조회횟수</th><th width="70">댓글개수</th>
 	</tr>
 	</thead>
