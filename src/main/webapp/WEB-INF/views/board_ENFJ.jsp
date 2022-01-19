@@ -18,6 +18,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css?version=3">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -39,23 +40,24 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<h1>게시판</h1>
-<div class="wrapper">
+<div >
 	<header>
-		<nav>
-			<div class="fixed-top py-3 px-3 bg-dark text-center" id="nav">
+				<nav>
+			<div class="fixed-top py-3 px-3 text-center deepblue"  id="nav">
+				<a href="introMBTI.do" ><img style="width:80px; heigth:20px;"class="nav_bar_logo" src='image/PLAN16_LOGO.png' /></a>
 				<a href="introMBTI.do" class="text-light distance">유형소개</a>
-				<a href="board_ENFJ.do?page=1" class="text-light distance">유형별게시판</a> <!-- 바꿔야함 -->
+				<a href="board_type.do?page=1" class="text-light distance">유형별게시판</a>
 				<a href="board_FREE.do?page=1" class="text-light distance">자유게시판</a>
 				<a href="worldcup_choice.do" class="text-light distance">월드컵</a>
 				<button type="button" class="btn btn-light btn-default btn-sm" onclick="location.href='logout.do'">로그아웃</button>
 			</div>
 		</nav>
 	</header>
-</div>
+
+<h1>게시판</h1>
 <br><br>
-<h1>ENFJ게시판</h1> <!-- 바꿔야함 -->
+
+<h1 align="center" >ENFJ 게시판</h1> 
 
 <div>
 <hr>
@@ -64,7 +66,7 @@
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown" 
-            aria-haspopup="true" aria-expanded="false" id="choice" value="">제목</button>                        
+            aria-haspopup="true" aria-expanded="false" id="choice" value="title">제목</button>                        
             <div class="dropdown-menu">
               <a href="javascript:void(0);" class="dropdown-item" onclick="func('title')">제목</a>
               <a href="javascript:void(0);" class="dropdown-item" onclick="func('content')">내용</a>
@@ -73,7 +75,8 @@
         </div>
         <input type="text" class="form-control" aria-label="Search input with dropdown button" id="search" value="">
         <div class="input-group-append">
-            <button class="btn btn-success" type="button"  onclick="searchBoard()" >Search</button>
+            <button class="btn btn-success" type="button"  onclick="searchBoard()" style="background-color: #004176;"
+            >Search</button>
         </div>
     </div>
 </div>
@@ -83,11 +86,12 @@
 
 
 <!--    attribute property -->
-	<table class="table table-hover" style="width:1200px" align="center">
+	<table id="board_width" class="table table-hover" style="width:1200px" align="center">
 	<!-- <col width="30"><col width="200"><col width="80"> -->
-	<thead>
+	<thead align="center">
 	<tr>
-	<th width="100px">번호</th><th width="330px">제목</th><th width="150px">글쓴이</th><th width="200px">작성날짜</th><th width="150px">조회횟수</th><th width="100px">댓글개수</th>
+	<!-- <th width="100px">번호</th><th width="330px">제목</th><th width="150px">작성자</th><th width="200px">작성날짜</th><th width="150px">조회횟수</th><th width="100px">댓글개수</th> -->
+	<th width="80px" align="center">번호</th><th width="480px">제목</th><th width="70px">작성자</th><th width="130px" >작성날짜</th><th width="70">조회횟수</th><th width="70">댓글개수</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -108,29 +112,30 @@ else{
 			if (board.getDel() == 1) {
 		%>
 		<tr>
-			<td colspan="6">삭제된 글입니다.</td>
+			<td colspan="6">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp삭제된 글입니다.</td>
 		</tr>
 		<%
 		}
 			else{			
 				%>
 				<tr>
-					<th><%=(board_page-1)*20+1+i%></th>
-					<td>
+					<th class="text-center"><%=(board_page-1)*20+1+i%></th>
+					<td >
 						
-						<a href="board_detail.do?boardseq=<%=board.getBoardseq() %>"> 
-							<%=board.getTitle() %><span style="color: red">(<%=board.getCommentcount() %>)</span>
+						<a href="board_detail.do?boardseq=<%=board.getBoardseq() %>" > 
+							<%=board.getTitle() %><%if(board.getCommentcount() > 0){ %><span style="color: red">(<%=board.getCommentcount() %>)</span>
+							<%} %>
 						</a>
 					</td>
 					
-					<td ><%=board.getId() %></td>
+					<td align="center"><%=board.getId() %></td>
 					
 					
-					<td ><%=board.getWdate() %></td>					
+					<td align="center" ><%=board.getWdate().substring(0, board.getWdate().length() - 2) %></td>					
 					
-					<td ><%=board.getReadcount() %></td>
+					<td align="center" ><%=board.getReadcount() %></td>
 										
-					<td ><%=board.getCommentcount() %></td>
+					<td align="center" ><%=board.getCommentcount() %></td>
 				</tr>
 
 		<%
@@ -144,7 +149,7 @@ else{
 <div align="center">
 <% for(int i=0; i< (int)((board_size-1)/20)+1; i++){
 	%>	
-<a href="board_ENFJ.do?page=<%=i+1%>"><%=i+1%></a> <!-- 바꿔야함 EX)board_free.do?page -->
+<a href="board_ENFJ.do?page=<%=i+1%>"><%=i+1%></a> 
 <%
 }
 %>
@@ -153,14 +158,9 @@ else{
 
 <br>
 <div align="center">
-	<a href="board_write.do?boardtype=14" class="btn btn-primary pull-right">글쓰기</a>	<!-- 각자의 넘버로 바꾸기 -->
+	<a href="board_write.do?boardtype=14" class="btn btn-primary pull-right">글쓰기</a>	
 </div>
-<!--  117 131 제목 바꾸기-->
-<!-- 
-<script type="text/javascript">
-location.href = "bbslist.do"; -> GET
-</script>
- -->
+</div>
 <script type="text/javascript">
 function func(num) {	
 	var ti ="";
@@ -180,8 +180,9 @@ function searchBoard(){
 	let choice = document.getElementById("choice").value;
 	let search = document.getElementById("search").value;
 	
-	location.href="board_ENFJ.do?page=1&choice=" + choice + "&search=" + search; //각자의 컨트롤러로 바꾸기
+	location.href="board_ENFJ.do?page=1&choice=" + choice + "&search=" + search;
 }
+
 </script>
 
 </body>

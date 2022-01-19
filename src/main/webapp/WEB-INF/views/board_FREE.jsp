@@ -120,7 +120,7 @@ else{
 					<th><%=(board_page-1)*20+1+i%></th>
 					<td align="left">
 						
-						<a href="board_detail.do?boardseq=<%=board.getBoardseq() %>"> 
+						<a href="board_detail.do?boardseq=<%=board.getBoardseq() %>" > 
 							<%=board.getTitle() %><%if(board.getCommentcount() > 0){ %><span style="color: red">(<%=board.getCommentcount() %>)</span>
 							<%} %>
 						</a>
@@ -159,16 +159,6 @@ else{
 	<a href="board_write.do?boardtype=16" class="btn btn-primary pull-right">글쓰기</a>	<!-- 각자의 넘버로 바꾸기 -->
 </div>
 </div>
-<!--  117 131 제목 바꾸기-->
-<!-- 
-<script type="text/javascript">
-location.href = "bbslist.do"; -> GET
-</script>
- -->
- <footer>
- <div align="left" >©️ 2022 plan16.Team, plan16.TEAM Inc. All Rights Reserved.
- </div>
- </footer>
 <script type="text/javascript">
 function func(num) {	
 	var ti ="";
