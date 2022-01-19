@@ -22,20 +22,24 @@
         .deepblue {color:#004176 !important;}      
         </style>
     </head>
+    
     <body id="page-top">
         <img alt="" src="">
         <!-- Masthead-->
         <header class="masthead"  style="background:url(./resources/homeBoot/assets/img/MBTI_BACK.jpg); background-size : cover;">
-            <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
-                <div class="d-flex justify-content-center">
-                    <div class="text-center">
-                    <!--  중가 -->
-                        <h1 class="bg-deepblue mx-auto my-0 text-uppercase" >PLAN 16</h1>	
-                        <h2 class="text-black-50 mx-auto mt-2 mb-5">인생을 살아가는 16가지 방법들,<br> 다같이 모여 서로의 이야기를 들려주세요!</h2>
-                        <a class="btn btn-yellow" href="login.do">Get Started</a>
-                    </div>
-                </div>
-            </div>
+        
+        <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+        <div class="d-flex justify-content-center">
+        <div class="text-center">
+        <!--  중가 -->
+            <h1 class="bg-deepblue mx-auto my-0 text-uppercase" >PLAN 16</h1>	
+            <h2 class="text-black-50 mx-auto mt-2 mb-5">인생을 살아가는 16가지 방법들,<br> 다같이 모여 서로의 이야기를 들려주세요!</h2>
+            <a class="btn btn-yellow" href="login.do">Get Started</a>
+        </div>
+        </div>
+        </div>
+        
         </header>
+        
     </body>
 </html>

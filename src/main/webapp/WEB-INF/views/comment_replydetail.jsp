@@ -61,7 +61,6 @@ MemberDto dto = (MemberDto) request.getSession().getAttribute("login");
 		</form>
 		<script type="text/javascript">
 		function replyclose(){
-			
 			// form에서의 name은 json으로 따로 넣어줘야하기 때문에 key, value로 묶어주는(Jsonify) 함수
 			$.fn.serializeObject = function() { 
 				  "use strict"

@@ -3,13 +3,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	List<BoardDto> board_list = (List<BoardDto>)request.getAttribute("board_list"); // list 가져오기
+	List<BoardDto> board_list = (List<BoardDto>)request.getAttribute("board_list"); 
 %>
 <%
-	int board_size = (int)request.getAttribute("board_size"); //int 가져오기
+	int board_size = (int)request.getAttribute("board_size");
 %>
 <%
-	int board_page = (int)request.getAttribute("board_page"); //페이지 가져오기
+	int board_page = (int)request.getAttribute("board_page"); 
 %>
 
 <!DOCTYPE html>
@@ -85,10 +85,8 @@
 
 <!--    attribute property -->
 	<table id="board_width" class="table table-hover" style="width:1200px" align="center">
-	<!-- <col width="30"><col width="200"><col width="80"> -->
 	<thead align="center">
 	<tr>
-	<!-- <th width="100px">번호</th><th width="330px">제목</th><th width="150px">작성자</th><th width="200px">작성날짜</th><th width="150px">조회횟수</th><th width="100px">댓글개수</th> -->
 	<th width="80px" align="center">번호</th><th width="480px">제목</th><th width="70px">작성자</th><th width="130px" >작성날짜</th><th width="70">조회횟수</th><th width="70">댓글개수</th>
 	</tr>
 	</thead>
@@ -147,7 +145,7 @@ else{
 <div align="center">
 <% for(int i=0; i< (int)((board_size-1)/20)+1; i++){
 	%>	
-<a href="board_FREE.do?page=<%=i+1%>"><%=i+1%></a> <!-- 바꿔야함 EX)board_free.do?page -->
+<a href="board_FREE.do?page=<%=i+1%>"><%=i+1%></a> 
 <%
 }
 %>
@@ -157,9 +155,13 @@ else{
 <br>
 <div align="center">
 	<a href="board_write.do?boardtype=16" class="btn btn-primary pull-right">글쓰기</a>	<!-- 각자의 넘버로 바꾸기 -->
+	
 </div>
 </div>
+<br><br><br><br>
 <script type="text/javascript">
+
+
 function func(num) {	
 	var ti ="";
 	if(num =="title"){ 
@@ -174,6 +176,7 @@ function func(num) {
 	document.getElementById("choice").value = num + "";	
 }
 
+// 게시판 리스트에 게시물 찾기와 '제목, 작성자, 내용'
 function searchBoard(){
 	let choice = document.getElementById("choice").value;
 	let search = document.getElementById("search").value;

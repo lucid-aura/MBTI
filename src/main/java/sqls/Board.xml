@@ -60,47 +60,48 @@
 <!-- 관리자(admin)의 글(공지사항)을 확인하고 게시판의 쿼리 결과를 반환하는 함수 -->
 <select id="listPage" resultType="secure.mbti.a.dto.BoardDto"
 parameterType="secure.mbti.a.dto.BoardParam">
-			select BOARDSEQ, BOARDTYPE, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT,COMMENTCOUNT
-			from (
-		 select RNUM, BOARDSEQ, BOARDTYPE, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT, COMMENTCOUNT 
-		        
-		 from (  SELECT row_number() over(order by BOARDSEQ desc) as RNUM, BOARDSEQ, BOARDTYPE, ID, TITLE, 
-		CONTENT, WDATE, DEL, READCOUNT,COMMENTCOUNT
-		FROM BOARDALL
+         select BOARDSEQ, BOARDTYPE, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT,COMMENTCOUNT
+         from (
+       select RNUM, BOARDSEQ, BOARDTYPE, ID, TITLE, CONTENT, WDATE, DEL, READCOUNT, COMMENTCOUNT 
+              
+       from (  SELECT row_number() over(order by BOARDSEQ desc) as RNUM, BOARDSEQ, BOARDTYPE, ID, TITLE, 
+      CONTENT, WDATE, DEL, READCOUNT,COMMENTCOUNT
+      FROM BOARDALL
 
-          		 <if test="choice != null and choice != ''  and search != null and search != '' ">
-			<if test="choice == 'title'">
-			WHERE (TITLE LIKE '%' || #{search} || '%' AND BOARDTYPE=#{boardtype}) OR BOARDTYPE=18
-		</if>
-		<if test="choice == 'content'">
-			WHERE (CONTENT LIKE '%' || #{search} || '%' AND BOARDTYPE=#{boardtype}) OR BOARDTYPE=18
-							
-		</if>
-		<if test="choice == 'writer'">
-			WHERE (ID=#{search} AND BOARDTYPE=#{boardtype}) OR BOARDTYPE=18
-		</if>
-					
-		</if> 
-					<if test="choice == null and search == null ">	
-						WHERE BOARDTYPE=#{boardtype} OR BOARDTYPE=18
-					</if> 
+                 <if test="choice != null and choice != ''  and search != null and search != '' ">
+         <if test="choice == 'title'">
+         WHERE (TITLE LIKE '%' || #{search} || '%' AND BOARDTYPE=#{boardtype}) OR (BOARDTYPE=18 AND ID='admin')
+      </if>
+      <if test="choice == 'content'">
+         WHERE (CONTENT LIKE '%' || #{search} || '%' AND BOARDTYPE=#{boardtype}) OR (BOARDTYPE=18 AND ID='admin')
+                     
+      </if>
+      <if test="choice == 'writer'">
+         WHERE (ID=#{search} AND BOARDTYPE=#{boardtype}) OR (BOARDTYPE=18 AND ID='admin')
+      </if>
+               
+      </if> 
+               <if test="choice == null and search == null ">   
+                  WHERE BOARDTYPE=#{boardtype} OR (BOARDTYPE=18 AND ID='admin')
+               </if> 
             
             ) 
     where RNUM BETWEEN #{criteria.rowStart} and #{criteria.rowEnd})
-	order by BOARDTYPE DESC, BOARDSEQ desc
+   order by BOARDTYPE DESC, BOARDSEQ desc
+	
 </select>
 
-<!-- 220118댓글카운트수정 -->
+<!-- 등록된 댓글이 댓글갯수로 반영 -->
 <update id="boardcommentcountup" parameterType="Integer">
 	UPDATE BOARDALL
 	SET COMMENTCOUNT = COMMENTCOUNT + 1
 	WHERE BOARDSEQ=#{ boardseq }
 </update>
 
+<!-- 삭제된 댓글을 댓글갯수에 반영 -1 -->
 <update id="boardcommentcountdown" parameterType="Integer">
 	UPDATE BOARDALL
 	SET COMMENTCOUNT = COMMENTCOUNT -1
 	WHERE BOARDSEQ=#{ boardseq }
 </update>
-
 </mapper>
