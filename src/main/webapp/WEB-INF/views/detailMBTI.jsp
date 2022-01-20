@@ -199,7 +199,7 @@
 							$("#wrapContent article:nth-child(4)").html(content.content);
 							$("#barImg").attr("src","image/mbti_"+content.mbti.toLowerCase()+"_bar.png");
 							$("#wrapContent article:nth-child(6) div").text(content.subtitle);
-							$("#wrapContent article:nth-child(7)").html(repdata.summary);
+							$("#wrapContent article:nth-child(7)").html(content.summary);
 							$("#wrapContent article:nth-child(9) div:nth-child(2) a").text(asterion);
 							$("#wrapContent article:nth-child(9) div:nth-child(4)").text(content.viewcount);
 							$("#wrapContent article:nth-child(9) div:nth-child(6)").text(ratio);
