@@ -38,6 +38,14 @@ padding: 6px 12px;
     background-color: #6c757d;
     border-color: #6c757d;
 }
+.form-group > dropdown.bootstrap-select{
+padding : 10px 32px;
+}
+
+.form-group button{
+background-color:#f0f0f0;
+padding : 10px 32px;
+}
 </style>
 
 </head>
@@ -59,12 +67,9 @@ padding: 6px 12px;
                <form id="frm" action="regiAf.do" method = "post">     
                   <!-- MBTI SELECT -->       
                   <div class="form-group">    
-                  
-                  
-                  
-                               
+                                                
                     <label>MBTI</label><br>
-                    <select name="mbti" id ="mbti" class="selectpicker" aria-label="Default select example" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+                    <select name="mbti" id ="mbti" class="selectpicker" style="border: 1px solid #ced4da; padding:10px 32px;" aria-label="Default select example" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
                     
                     <option value="ENFJ">ENFJ</option>
                     <option value="ENFP">ENFP</option>
