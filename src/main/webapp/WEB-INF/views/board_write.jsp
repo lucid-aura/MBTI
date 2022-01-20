@@ -52,7 +52,7 @@ MemberDto mem = (MemberDto)request.getSession().getAttribute("login");
 <!-- 고정바 -->
 
 
-
+<!-- 댓글 입력창 -->
 	<section>
 		<article style="margin: 250px" padding="50px">
 			<div id="containerAll"> 
@@ -72,9 +72,9 @@ MemberDto mem = (MemberDto)request.getSession().getAttribute("login");
 			</div>
 		</article>
 	</section>
+	<!-- 댓글 입력창 -->
 
 	</div>
-	
 	<script type="text/javascript">
 
 

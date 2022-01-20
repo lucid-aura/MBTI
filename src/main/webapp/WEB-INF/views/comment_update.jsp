@@ -64,7 +64,7 @@ CommentDto commentDto = (CommentDto) request.getAttribute("comment_update");  //
 
 	<!-- 본문 글 디테일 부분(댓글부분 제외) -->
 	<section>
-		<div class="wrapper" align="center">
+		<div align="center">
 			<!--    attribute property -->
 			<table class="table table-bordered" border="0" style="width: 1000px">
 				<!-- <col width="30"><col width="200"><col width="80"> -->
@@ -171,31 +171,13 @@ CommentDto commentDto = (CommentDto) request.getAttribute("comment_update");  //
 
 <script type="text/javascript">
 
-/* 		답글	일단 제외
-			function answer( boardseq ){
-				location.href = "answer.do?seq=" + seq;
-			} */
 			function board_update( boardseq ){
 				location.href = "board_update.do?boardseq=" + boardseq;
 			}
 			function board_delete( boardseq ){
 				location.href = "board_delete.do?boardseq=" + boardseq;
 			}
-/* 			function board_free( boardseq ){
-				location.href = "board_free.do?boardseq=" + boardseq + "&page=1";
-			} */
 			
-			
-			
-			/*
-			function comment_update( boardseq ){
-				location.href = "board_detail.do?boardseq=" + boardseq;
-			}*/
-			
-
-			
-			
-
 </script>
 </body>
 </html>

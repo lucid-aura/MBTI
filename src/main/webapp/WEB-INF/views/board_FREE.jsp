@@ -154,10 +154,14 @@ else{
 
 <br>
 <div align="center">
-	<a href="board_write.do?boardtype=16" class="btn btn-primary pull-right">글쓰기</a>	
+	<a href="board_write.do?boardtype=16" class="btn btn-primary pull-right">글쓰기</a>	<!-- 각자의 넘버로 바꾸기 -->
+	
 </div>
 </div>
+<br><br><br><br>
 <script type="text/javascript">
+
+
 function func(num) {	
 	var ti ="";
 	if(num =="title"){ 
@@ -172,6 +176,7 @@ function func(num) {
 	document.getElementById("choice").value = num + "";	
 }
 
+// 게시판 리스트에 게시물 찾기와 '제목, 작성자, 내용'
 function searchBoard(){
 	let choice = document.getElementById("choice").value;
 	let search = document.getElementById("search").value;
