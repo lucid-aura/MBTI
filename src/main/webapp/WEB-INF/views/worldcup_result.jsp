@@ -6,6 +6,7 @@
     pageEncoding="UTF-8"%>
 
 <%!
+/* 댓글을 위해 공백과 화살표 이미지를 추가하는 함수 */
 public String arrow(int depth){
 	String res = "<img src='image/arrow.png' width='20px' height='20px' />";
 	String nbsp = "&nbsp;&nbsp;&nbsp;&nbsp;"; // 여백
@@ -66,9 +67,11 @@ MemberDto member = (MemberDto)request.getSession().getAttribute("login");
 						전체 선택 횟수 : <%=worldcupresult.getChoicecount()%></h4>
 
 					</div>
+					<!-- 왼쪽 결과 이미지와 topic, 1등 횟수 출력 -->
 					<div  class="worldcup_result_left">
-						<img src='image/<%=worldcupresult.getWorldcupname()%>.jpg' class="choice" />
+						<img src='image/<%=worldcupresult.getTopic()%>/<%=worldcupresult.getWorldcupname()%>.jpg' class="choice" />
 					</div>
+					<!-- 오른쪽 결과의 게시판 출력 -->
 					<div class="worldcup_result_right">
 						<table class="table table-hover">
 							<thead>
@@ -92,30 +95,36 @@ MemberDto member = (MemberDto)request.getSession().getAttribute("login");
 								<td width="100px" ><%=comments.get(i).getAlias()%></td>
 								
 								<%
-									// member에서 alias를 받아와서 비교
+									/* 닉네임이 일치할 시 (글 작성자 일 시) 수정, 삭제 아이콘을 보여줌 */
 									if (comments.get(i).getAlias().equals(member.getAlias())){
 								%>
 										<td width="320px" style="word-break:break-all" >
+										<!-- 해당 댓글을 보여주고 클릭 시 대댓창을 여는 함수 호출 -->
 											<div style="cursor:pointer"title="대댓창 열기" onclick="toggle_reply(<%=i%>)"><%=arrow(comments.get(i).getDepth()) %><%=comments.get(i).getContent()%></div>
+											<!-- 해당 댓글 클릭 시 대댓창을 위해 열리는 input  태그와 댓글 입력 아이콘  -->
 											<div style="display:none; width:320px "><hr>
 												<input type="text" size="33px" value="">&nbsp;
 												<button type="button" onclick="worldcup_reply_comment(<%=i%>)" class="btn btn-success"><i class="bi bi-check-circle"   style="float:right;"></i></button>
 											</div>
 										</td>
-										<td><%=comments.get(i).getWdate().substring(0, comments.get(i).getWdate().length() - 2)%></td>
-										<td><i class="bi bi-pencil-square" style="cursor:pointer" aria-hidden="true" onclick="update_worldcup_comment(<%=comments.get(i).getCommentseq()%>, <%=i%>)"></i></td>
-										<td><button type="button" class="btn-close" onclick="delete_worldcup_comment(<%=comments.get(i).getCommentseq()%>, <%=(int)i/8 %>)"></button></td>
+										<td width="100px"><%=comments.get(i).getWdate().substring(0, comments.get(i).getWdate().length() - 2)%></td>
+										<td width="50px"><i class="bi bi-pencil-square" style="cursor:pointer" aria-hidden="true" onclick="update_worldcup_comment(<%=comments.get(i).getCommentseq()%>, <%=i%>)"></i></td>
+										<td width="50px"><button type="button" class="btn-close" onclick="delete_worldcup_comment(<%=comments.get(i).getCommentseq()%>, <%=(int)i/8 %>)"></button></td>
 								<%
 									}
 									else{
+									/* 닉네임이 일치하지 않을 시(글 작정자가 아닐 시) 수정, 삭제 아이콘을 가림*/
 								%>
 										<td width="320px" style="word-break:break-all">
+											<!-- 해당 댓글을 보여주고 클릭 시 대댓창을 여는 함수 호출 -->
 											<div style="cursor:pointer"title="대댓창 열기" onclick="toggle_reply(<%=i%>)"><%=arrow(comments.get(i).getDepth()) %><%=comments.get(i).getContent()%></div>
+											<!-- 해당 댓글 클릭 시 대댓창을 위해 열리는 input  태그와 댓글 입력 아이콘  -->
 											<div style="display:none; width:320px"><hr>
 												<input type="text" size="33px" value="">&nbsp;
 												<button type="button" onclick="worldcup_reply_comment(<%=i%>)" class="btn btn-success"><i class="bi bi-check-circle"   style="float:right;"></i></button>
 											</div>
 										</td>
+										<!-- 작성 날짜, 수정(display:none), 삭제버튼(display:none) -->
 										<td width="100px"><%=comments.get(i).getWdate().substring(0, comments.get(i).getWdate().length() - 2)%></td>
 										<td width="50px"><i  style="display: none;" class="bi bi-pencil-square"></i></td>
 										<td width="50px"><button type="button" style="display: none;" class="btn-close"></button></td>
@@ -129,13 +138,15 @@ MemberDto member = (MemberDto)request.getSession().getAttribute("login");
 							%>
 							</tbody>
 						</table>
+						<!-- 페이징을 위한 부분 (숫자로 된 링크) -->
 						<div id="worldcup_page">
 						<% for (int i = 0; i<(int)(comments.size()-1)/8+1; i++) {%>
 						<a href="javascript:void(0);" onclick="comment_page(<%=i%>)">[<%=i+1 %>]</a>
 						<%} %>
 						</div>
+						<!-- 새로운 댓글을 작성하는 input, worldcup_submit btn 클릭시 댓글 작성-->
 						<div>
-						<input type="text" id="worldcup_input" size="78%" style="vertical-align:middle;"><button type="button" id="worldcup_submit" class="btn btn-dark float-right" >댓글달기</button>
+							<input type="text" id="worldcup_input" size="78%" style="vertical-align:middle;"><button type="button" id="worldcup_submit" class="btn btn-dark float-right" >댓글달기</button>
 						</div>
 
 					</div>
@@ -148,9 +159,11 @@ MemberDto member = (MemberDto)request.getSession().getAttribute("login");
 
 	</div>
 <script type="text/javascript">
+/* 댓글을 저장할 javascript array 변수 comment_list 선언, 사이트 로딩 완료 시 넣음 */
 var comment_list = [];
 $(document).ready(function () {
 	<%
+	/* for문으로 댓글을 하나씩 넣음 */
 	for (int i=0; i < comments.size(); i++){	
 	%>
 	comment_list.push({
@@ -168,12 +181,12 @@ $(document).ready(function () {
 	}
 	%>	
 
+	/* ajax로 댓글을 DB에 insert요청 후 갱신된 댓글 목록을 새로 받아 넣음 */
 	$("#worldcup_submit").click(function() {
 		$.ajax({
 			url:"worldcup_result.do",
 			type: "POST",
-			data: { // ----------- 보낼 데이터 세팅 alias 변경 필요
-				/* alias: member.getAlias()*/
+			data: { 
 				alias: "<%=member.getAlias()%>",
 				boardseq : "<%=worldcupresult.getBoardseq()%>",
 				content : $("#worldcup_input").val()
@@ -190,7 +203,7 @@ $(document).ready(function () {
 	});	
 });
 
-
+/* 댓글 갱신 요청이 들어왔을 시 해당 글을 수정모드로 innerHTML을 이용해 재 작성 */
 function update_worldcup_comment(seq, idx){
 	var index = parseInt(idx%8) + 1;
 	var query = "tbody tr:nth-child(" + index + ") td:nth-child(3)";
@@ -205,6 +218,7 @@ function update_worldcup_comment(seq, idx){
 				'<i class="bi bi-check-circle" font-size="1.1em"  style="float:right;"></i></button></td>'
 }
 
+/* 댓글 갱신 취소 요청이 들어왔을 시 해당 글을 기본모드로 innerHTML을 이용해 재 작성 */
 function undo_change(i, query, before){
 	document.querySelector(query).innerHTML =
 		'<td width="350px" style="word-break:break-all">' + 
@@ -214,6 +228,7 @@ function undo_change(i, query, before){
 				'<i class="bi bi-check-circle"   style="float:right;"></i></button></div></td>';
 }
 
+/* 댓글 갱신 완료 요청이 들어왔을 시 해당 글을 서버에 ajax로 요청하여 갱신된 댓글 list를 받아와 저장 후 table 갱신 함수(comment_page) 호출*/
 function update_change(idx){
 	var index = parseInt(idx%8) + 1;
  	var update_comment  = comment_list[idx];
@@ -240,6 +255,7 @@ function update_change(idx){
 	
 }
 
+/* 댓글 삭제 요청이 들어왔을 경우 해당 글을 서버에 ajax로 요청하여 삭제된(Del=1) 이후 갱신된 댓글 list를 받아와 table 갱신 함수(comment_page) 호출*/
 function delete_worldcup_comment(seq, list_idx){
 	$.ajax({
 		url:"worldcup_delete_comment.do",
@@ -259,6 +275,7 @@ function delete_worldcup_comment(seq, list_idx){
 	});
 }
 
+/* 댓글 페이지를 javascript의 댓글 list(comment_list)의 개수에 따라 페이지를 나누고 최신 글페이지로 이동하여 보여주는 함수 */
 function comment_page(index) {
 	var table = document.getElementById('worldcup_table');
 	table.innerHTML = '';
@@ -284,6 +301,7 @@ function comment_page(index) {
 				show_update = '<td width="50px"><i  style="display: none;" class="bi bi-pencil-square"></i></td>'
 				show_delete = '<td width="50px"><button type="button"  style="display: none;" class="btn-close"></button></td>';
 			}
+			// 각 td에 해당하는 문자열이 +로 들어간다.
 			var row = 
 			'<tr>'+
 				'<td width="50px">'+ (i+1) +'</td>' +
@@ -296,6 +314,7 @@ function comment_page(index) {
 			table.innerHTML += row;
 		}
 	}
+	// innerHTML로 갱신
 	var worldcup_page = document.getElementById('worldcup_page');
 	worldcup_page.innerHTML = "";
 	for (var i = 0; i<parseInt((comment_list.length-1)/8) + 1; i++) {
@@ -303,6 +322,7 @@ function comment_page(index) {
 	}
 }
 
+/* 대댓글을 작성하기 위해 댓글을 눌렀을 시 켜져있는 다른 대댓글 창을 닫고 해당 대댓글 창만 켜지고 꺼지는 역할을 하는 함수 */
 function toggle_reply(index) {
 	
 	// 일단 전부 닫기 (여러개 댓글창 열림 방지)
@@ -331,6 +351,7 @@ function toggle_reply(index) {
 
 }
 
+/* 대댓글 요청이 들어왔을 시 ajax로 서버에게 댓글 insert 요청 후 최신화 된 댓글 list를 받아와 table 갱신 함수(comment_page) 호출*/
 function worldcup_reply_comment(idx){
 	var reply = comment_list[idx];
 	var index = parseInt(idx%8);
@@ -362,6 +383,7 @@ function worldcup_reply_comment(idx){
 	}); 
 }
 
+/* 댓글을 위해 공백과 화살표 이미지를 추가하는 함수 */
 function arrow(depth){
 	var res = "<img src='image/arrow.png' width='20px' height='20px' />";
 	var nbsp = "&nbsp;&nbsp;&nbsp;&nbsp;"; // 여백

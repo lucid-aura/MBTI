@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>board_type</title>
+<title>오류페이지</title>
 </head>
-<body>
-	<h1>board_type</h1>
+<body style="background-color: rgba(0, 28, 51, 1); text-align: center">
+	<img src="image/errorimage.png" />
+
 </body>
 </html>
