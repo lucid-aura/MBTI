@@ -160,7 +160,7 @@
 	  					$(".mbtiMenuBtn:eq("+index+")").removeClass("listSelectHover");
 	  				}
 				});
-			}
+			} 
 
 			/* 게시판 이동버튼 활성화/비활성화 */
 			function buttonCheck(str){
